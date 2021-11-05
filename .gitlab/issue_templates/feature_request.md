@@ -3,7 +3,6 @@
 - Part
   - [ ] Front-End
   - [ ] Back-End
-  - [ ] Data Processiong
   - [ ] AI
   <br>
 - 기능 상세 설명
