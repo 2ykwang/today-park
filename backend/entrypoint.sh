@@ -6,5 +6,5 @@ python manage.py migrate
 # collect static
 python manage.py collectstatic --noinput
 
-# TODO: 나중에 wsgi 사용 (gunicorn or uwsgi)
-python manage.py runserver 0.0.0.0:8000
+# gunicorn config 파일을 통한 실행
+gunicorn -c config/gunicorn.conf.py
