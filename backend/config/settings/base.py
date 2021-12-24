@@ -15,9 +15,15 @@ from pathlib import Path
 
 env = os.environ
 
+
+
+
+# ---------------------------------------------------------------------
+# path 설정
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
 APPS_DIR = os.path.join(BASE_DIR, "blog")
 TEMPLATES_DIR = os.path.join(APPS_DIR, "templates")
 
@@ -26,16 +32,12 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, ".media")
 
 # static
-STATIC_URL = "/staticfiles/"
-# STATIC_DIR = os.path.join(BASE_DIR, "static")
-# STATICFILES_DIRS = [
-#     STATIC_DIR,
-# ]
-
 # django-admin collectstatic 생성 파일 저장 경로
+STATIC_URL = "/staticfiles/"
 STATIC_ROOT = os.path.join(BASE_DIR, ".static")
 
 
+# ---------------------------------------------------------------------
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -48,18 +50,27 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# Application definition
+# ---------------------------------------------------------------------
+# APPS
 
-INSTALLED_APPS = [
+DJANGO_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+]
+
+THIRD_PARTY_APPS = []
+
+LOCAL_APPS = [
     "apps.user",
     "apps.core",
 ]
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+# ---------------------------------------------------------------------
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
