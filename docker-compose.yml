@@ -10,7 +10,7 @@ services:
       context: ./backend
     volumes:
       - static_volume:/srv/app/.static
-      - media_volume:/srv/app/.media
+      - ./backend/.media:/srv/app/.media
     # command: >
     #   bash -c "
     #     python3 manage.py collectstatic &&
@@ -38,7 +38,7 @@ services:
     volumes:
       - client_volume:/srv/client
       - static_volume:/srv/app/.static
-      - media_volume:/srv/app/.media
+      - ./backend/.media:/srv/app/.media
     expose:
       - "80"
       - "443"
