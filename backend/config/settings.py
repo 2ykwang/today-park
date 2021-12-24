@@ -17,6 +17,21 @@ env = os.environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+APPS_DIR = os.path.join(BASE_DIR, "blog")
+TEMPLATES_DIR = os.path.join(APPS_DIR, "templates")
+
+# media
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, ".media")
+
+# static
+# STATIC_URL = "/static/"
+# STATIC_DIR = os.path.join(BASE_DIR, "static")
+# STATICFILES_DIRS = [
+#     STATIC_DIR,
+# ]
+# STATIC_ROOT = os.path.join(BASE_DIR, ".static")
 
 
 # Quick-start development settings - unsuitable for production
@@ -40,6 +55,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "apps.user",
+    "apps.core",
 ]
 
 MIDDLEWARE = [
@@ -106,9 +123,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "ko"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/seoul"
 
 USE_I18N = True
 
@@ -119,6 +136,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = "static/"
+AUTH_USER_MODEL = "user.User"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
