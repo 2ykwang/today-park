@@ -1,14 +1,14 @@
 import os
 import uuid
 
+from apps.core.models import BaseModel
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
-from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
 
 from .validators import UserNameValidator
 
 
-class User(AbstractBaseUser, PermissionsMixin):
+class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     """
     username, email, profile_image
 
