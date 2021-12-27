@@ -4,7 +4,7 @@ from django.core import validators
 from django.utils.translation import gettext_lazy as _
 
 
-class NickNameValidator(validators.RegexValidator):
+class UserNameValidator(validators.RegexValidator):
     # 한글,영문,숫자 조합만 가능
     regex = r"^[가-힣\w]+\Z"
 
