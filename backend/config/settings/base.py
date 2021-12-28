@@ -16,8 +16,6 @@ from pathlib import Path
 env = os.environ
 
 
-
-
 # ---------------------------------------------------------------------
 # path 설정
 
@@ -67,6 +65,7 @@ THIRD_PARTY_APPS = []
 LOCAL_APPS = [
     "apps.user",
     "apps.core",
+    "apps.park",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -136,7 +135,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = "ko"
+LANGUAGE_CODE = "ko-kr"
 
 TIME_ZONE = "Asia/Seoul"
 
@@ -147,7 +146,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
- 
+
 AUTH_USER_MODEL = "user.User"
 
 # Default primary key field type
