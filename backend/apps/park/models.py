@@ -3,11 +3,11 @@ from django.db import models
 
 # Create your models here.
 class Park(models.Model):
-    park_name = models.CharField(
-        max_length=50,
-    )
+    park_name = models.CharField(max_length=50)
     gu_id = models.IntegerField()
     full_address = models.TextField()
+    si_address = models.CharField(max_length=50)
+    gu_address = models.CharField(max_length=50)
     dong_address = models.CharField(max_length=50)
     latitude = models.DecimalField(
         verbose_name="위도(lat)",

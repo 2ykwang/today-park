@@ -8,20 +8,38 @@ class ParkAdmin(admin.ModelAdmin):
         "park_name",
         "gu_id",
         "full_address",
+        "si_address",
+        "gu_address",
         "dong_address",
         "latitude",
         "longitude",
     )
-    fields = [
-        "park_name",
-        "gu_id",
-        "full_address",
-        "dong_address",
+
+    fieldsets = (
         (
-            "latitude",
-            "longitude",
+            None,
+            {
+                "fields": (
+                    "park_name",
+                    "gu_id",
+                    "park_image",
+                )
+            },
         ),
-    ]
+        (
+            "Address",
+            {
+                "fields": (
+                    "full_address",
+                    "si_address",
+                    "gu_address",
+                    "dong_address",
+                    "latitude",
+                    "longitude",
+                )
+            },
+        ),
+    )
     list_filter = ("dong_address",)
 
 
