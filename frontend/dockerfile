@@ -12,6 +12,3 @@ RUN npm install
 
 # add app
 COPY . ./
-
-# react 빌드
-RUN npm run build
