@@ -64,6 +64,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework_simplejwt.token_blacklist",  # token blacklist
+    "drf_yasg",
 ]
 
 LOCAL_APPS = [
