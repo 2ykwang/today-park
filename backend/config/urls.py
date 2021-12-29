@@ -18,6 +18,7 @@ from django.urls import include, path
 
 app_urls = [
     path("", include("apps.user.urls")),
+    path("park/", include("apps.park.urls")),
 ]
 
 # url prefix ()
