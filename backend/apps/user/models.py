@@ -74,12 +74,10 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
 
     # admin 페이지 프로필 사진 미리보기
     def _profile_image(self, size=50):
-        return (
-            mark_safe(
-                f'<img src="{self.profile_image.url}" width="auto" height="{size}" />'
-            )  # noqa
+        return mark_safe(
+            f'<img src="{self.profile_image.url}" width="auto" height="{size}" />'
             if self.profile_image
-            else ""
+            else f'<img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACwAAAAAAQABAAACAkQBADs=" width="auto" height="{size}" />'  # noqa
         )
 
     def profile_image_tag(self):
