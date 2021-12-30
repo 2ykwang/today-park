@@ -1,11 +1,11 @@
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.serializers import Serializer
 from rest_framework.views import APIView
 
-from .models import Park
+from .models import Equipment, Park, ParkEquipment
 from .serializers import ParkSerializer
 
 
@@ -17,13 +17,7 @@ class ParkList(APIView):
 
 
 class ParkDetail(APIView):
-    def get_object(self, pk):
-        try:
-            return Park.objects.get(pk=pk)
-        except Park.DoesNotExist:
-            raise Http404
-
     def get(self, request, pk, format=None):
-        park = self.get_object(pk)
+        park = get_object_or_404(Park, pk=pk)
         serializer = ParkSerializer(park)
         return Response(serializer.data)
