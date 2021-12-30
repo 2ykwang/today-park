@@ -54,7 +54,7 @@ export function SignUp() {
         <p className="text">닉네임</p>
         <input type="text" placeholder="닉네임을 입력해주세요" value={nickname} onChange={getNickname}/>
       </div>
-      <p className="caution" style={{fontSize: '12px'}}>{nickname != "" && !(regExpNickname.test(nickname)) ? "특수문자 제외 영어, 숫자, 한글로 2자 이상 20자 미만 입력해주세요." : undefined}</p>
+      <p className="caution" style={{fontSize: '12px'}}>{nickname !== "" && !(regExpNickname.test(nickname)) ? "특수문자 제외 영어, 숫자, 한글로 2자 이상 20자 미만 입력해주세요." : undefined}</p>
 
 
       <div className="signUpItem">

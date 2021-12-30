@@ -35,17 +35,46 @@ const ModalContainer = styled.div`
   background-color: #fff
 `;
 
+  // 이슈 발생 
+  // 방안 1) form 태그에 아래 함수 만들어서 받아오기 
+  // function submitHandler(e){
+  //   context['id'] = e.target.loginId.value;
+  //   context['password'] = e.target.loginPw.value;
+  // }
+  
+function LoginModal(props){
+  return (<>
+  <div className="ModalContainer">
+    <Background>
+        <ModalContainer>
+            <h2>산스장</h2>
+            <CloseButton className="closeBtn" onClick={props.handleClose} />
+            <form>
+              <input type='text' placeholder="아이디" id="loginId" onInput={props.getId}/><br/>
+              <input type='password' placeholder="비밀번호" id="loginPw" onChange={props.getPassword} /><br/>
+              <button type='submit' >로그인</button><br/>
+              <LoginLink to='#'>아이디 찾기</LoginLink>
+              <LoginLink to='#'>비밀번호 찾기</LoginLink>
+              <LoginLink to='/signUp'>회원가입</LoginLink>
+            </form>
+        </ModalContainer>
+      </Background>
+  </div>
+  </>)
+}
+
 function LoginHeader(){
-  const context = useContext(LoginInfoContext)
+  const context = useContext(LoginInfoContext);
   const [showModal, setShowModal] = useState(false);
+
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
 
-  // useEffect(() => {
-  //   context['id'] = id;
-  //   context['password'] = password;
-  //   console.log(context['id'],context['password'])
-  // }, [id, password])
+  useEffect(() => {
+    context['id'] = id;
+    context['password'] = password;
+    console.log(context['id'])
+  }, [id, password])
 
   function handleLogin(){
     setShowModal(true);
@@ -54,34 +83,12 @@ function LoginHeader(){
     setShowModal(false);
   }
   function getId(e){
-    console.log(e.target.value);
     setId(e.target.value);
   }
   function getPassword(e){
     setPassword(e.target.value);
   }
 
-  function LoginModal(){
-      return (<>
-      <div className="ModalContainer">
-        <Background>
-            <ModalContainer>
-                <h2>산스장</h2>
-                <CloseButton className="closeBtn" onClick={handleClose} />
-                <form>
-                  <input type='text' placeholder="아이디" onChange={getId} /><br/>
-                  <input type='password' placeholder="비밀번호" value={password} onChange={getPassword} /><br/>
-                  <button type='submit' >로그인</button><br/>
-                  <LoginLink to='#'>아이디 찾기</LoginLink>
-                  <LoginLink to='#'>비밀번호 찾기</LoginLink>
-                  <LoginLink to='/signUp'>회원가입</LoginLink>
-                </form>
-            </ModalContainer>
-          </Background>
-      </div>
-      </>)
-  }
-  
 
   return (<>
     <header className="mainHeader">
@@ -100,7 +107,7 @@ function LoginHeader(){
         </nav>
       </div>
     </header>
-    {showModal ? <LoginModal  showModal={showModal}/> : undefined}
+    {showModal ? <LoginModal handleClose={handleClose} getId={getId} getPassword={getPassword} showModal={showModal}/> : undefined}
       </>);
 }
 
@@ -133,7 +140,7 @@ function LogoutHeader(){
 
 
 export function Header() {
-  const context = useContext(LoginInfoContext)
+  // const context = useContext(LoginInfoContext)
   return (<>
   {/* {context['id'] !== '' && context['password'] !== '' ? <LogoutHeader /> : <LoginHeader />} */}
   <LoginHeader />
