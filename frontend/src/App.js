@@ -7,6 +7,7 @@ import "./css/reset.css";
 import "./css/app.css";
 import "./css/header.css";
 import "./css/signUp.css";
+import "./css/mypage.css";
 import Map from "./components/Map";
 import { Home } from "./components/Home";
 import { Mypage } from "./components/Mypage";
