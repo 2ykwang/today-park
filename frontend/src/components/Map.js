@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Header } from './Header';
+import { Header } from "./Header";
 import {
   ComposableMap,
   Geographies,
@@ -39,77 +39,84 @@ const Map = ({ setTooltipContent }) => {
   // 지도 중심 좌표
   const [center, setCenter] = useState(DEFAULT_COORDINATION);
 
-  return (<>
-  <Header />
-    <div className="jido">
-      <Spring from={{ zoom: 1 }} to={{ zoom: zoomLevel }} config={config.slow}>
-        {(styles) => (
-          <ComposableMap
-            width={mapWidth}
-            height={mapHeight}
-            projection="geoMercator"
-            projectionConfig={{ rotate: [-60, 0, 5], scale: 35000 }}
-            data-tip=""
-          >
-            <ZoomableGroup center={center} zoom={styles.zoom}>
-              <Geographies geography={map}>
-                {({ geographies }) =>
-                  geographies.map((geo, i) => {
-                    return (
-                      <Geography
-                        key={geo.rsmKey}
-                        geography={geo}
-                        style={{
-                          default: {
-                            fill: "#fff",
-                            stroke: "#aaa",
-                            strokeWidth: 0.15,
-                            outline: "none",
-                          },
-                          hover: {
-                            fill: "#B1D6AE",
-                            outline: "none",
-                          },
-                          pressed: {
-                            fill: "fff",
-                            outline: "#333",
-                          },
-                        }}
-                        onMouseEnter={() => {
-                          const { name, code } = geo.properties;
-                          setTooltipContent(`${name} : ${code}`);
-                        }}
-                        onMouseLeave={() => {
-                          setTooltipContent("");
-                        }}
-                        onClick={() => {
-                          // 관악 code
-                          if (!isZoom && geo.properties.code!=="11210") return;
+  return (
+    <>
+      <Header />
+      <div className="jido">
+        <Spring
+          from={{ zoom: 1 }}
+          to={{ zoom: zoomLevel }}
+          config={config.slow}
+        >
+          {(styles) => (
+            <ComposableMap
+              width={mapWidth}
+              height={mapHeight}
+              projection="geoMercator"
+              projectionConfig={{ rotate: [-60, 0, 5], scale: 35000 }}
+              data-tip=""
+            >
+              <ZoomableGroup center={center} zoom={styles.zoom}>
+                <Geographies geography={map}>
+                  {({ geographies }) =>
+                    geographies.map((geo, i) => {
+                      return (
+                        <Geography
+                          key={geo.rsmKey}
+                          geography={geo}
+                          style={{
+                            default: {
+                              fill: "#fff",
+                              stroke: "#aaa",
+                              strokeWidth: 0.15,
+                              outline: "none",
+                            },
+                            hover: {
+                              fill: "#B1D6AE",
+                              outline: "none",
+                            },
+                            pressed: {
+                              fill: "fff",
+                              outline: "#333",
+                            },
+                          }}
+                          onMouseEnter={() => {
+                            const { name, code } = geo.properties;
+                            setTooltipContent(`${name} : ${code}`);
+                          }}
+                          onMouseLeave={() => {
+                            setTooltipContent("");
+                          }}
+                          onClick={() => {
+                            // 관악 code
+                            if (!isZoom && geo.properties.code !== "11210")
+                              return;
 
-                          if (!isZoom) {
-                            const centroid = geoCentroid(geo);
-                            setMap(GwanakMap);
-                            setCenter(centroid);
-                            setIsZoom(!isZoom);
-                            setZoomLevel(MAX_ZOOM);
-                          } else {
-                            setIsZoom(!isZoom);
-                            setMap(SeoulMap);
-                            setCenter(DEFAULT_COORDINATION);
-                            setZoomLevel(1);
-                          }
-                        }}
-                      />
-                    );
-                  })
-                }
-              </Geographies>
-            </ZoomableGroup>
-          </ComposableMap>
-        )}
-      </Spring>
-    </div>
-  </>);
+                            if (!isZoom) {
+                              const centroid = geoCentroid(geo);
+                              setMap(GwanakMap);
+                              setCenter(centroid);
+                              setIsZoom(!isZoom);
+                              setZoomLevel(MAX_ZOOM);
+                            } else {
+                              setIsZoom(!isZoom);
+                              setMap(SeoulMap);
+                              setCenter(DEFAULT_COORDINATION);
+                              setZoomLevel(1);
+                            }
+                          }}
+                        />
+                      );
+                    })
+                  }
+                </Geographies>
+              </ZoomableGroup>
+            </ComposableMap>
+          )}
+        </Spring>
+      </div>
+    </>
+  );
 };
 
 export default Map;
