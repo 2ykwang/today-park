@@ -5,9 +5,9 @@ export const LoginInfoContext = createContext();
 
 const LoginInfoStore = (props) => {
     const users = {
-        "id": "",
-        "nickname": "",
-        "login": false
+        "id": "elice@test.com",
+        "nickname": "엘리스",
+        "password": ""
 }
 
     return (<LoginInfoContext.Provider value={users}>{props.children}</LoginInfoContext.Provider>

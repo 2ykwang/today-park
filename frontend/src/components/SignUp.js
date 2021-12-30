@@ -43,6 +43,7 @@ export function SignUp() {
         <div className="list"></div>
         <p className="text">아이디</p>
         <input type='text' placeholder='이메일을 입력해주세요' value={id} onChange={getId}/>
+        {/* 버튼 온클릭 사용할려면 preventDefault 해주기. 리랜더링 방지 */}
         <button className="checkBtn" >중복 확인</button>
       </div>
       <p className="caution" style={{fontSize: '12px'}}>{id !== "" && !(regExpId.test(id)) ? "이메일 형식으로 입력해주세요." : undefined }</p>
