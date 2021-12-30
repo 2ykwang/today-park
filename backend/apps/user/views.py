@@ -1,13 +1,12 @@
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework import generics, permissions, status
-from rest_framework.decorators import parser_classes
-from rest_framework.parsers import FormParser
+from rest_framework import generics, parsers, permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import User
 from .serializers import (
+    UserImageUploadSerializer,
     UserRegisterSerializer,
     UserResetPasswordSerializer,
     UserSerializer,
@@ -17,7 +16,9 @@ from .serializers import (
 # TODO: APIVIEW
 class UserRegisterView(generics.CreateAPIView):
     """
-    POST - 유저를 생성합니다.
+    유저 생성
+
+    입력받은 데이터를 통해 유저를 생성합니다.
     """
 
     queryset = User.objects.all()
@@ -25,7 +26,44 @@ class UserRegisterView(generics.CreateAPIView):
     serializer_class = UserRegisterSerializer
 
 
-class UserAPIView(APIView):
+class UserImageUploadView(generics.CreateAPIView):
+
+    """
+    유저 프로필 이미지 업로드
+
+    유저 프로필 이미지를 업로드한 뒤 요청이 유효할 경우 이미지 주소를 반환 합니다.
+    """
+
+    queryset = User.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = UserImageUploadSerializer
+    parser_classes = (
+        parsers.MultiPartParser,
+        parsers.FormParser,
+    )
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    @swagger_auto_schema(
+        request_body=UserImageUploadSerializer,
+        responses={
+            status.HTTP_201_CREATED: UserImageUploadSerializer,
+            status.HTTP_400_BAD_REQUEST: "잘못된 요청",
+            status.HTTP_401_UNAUTHORIZED: "인증 필요",
+        },
+    )
+    def post(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=True)
+
+        serializer.is_valid(raise_exception=True)
+
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+class UserView(APIView):
 
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = UserSerializer
@@ -78,7 +116,7 @@ class UserAPIView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class UserResetPasswordAPIView(APIView):
+class UserResetPasswordView(APIView):
 
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = UserResetPasswordSerializer

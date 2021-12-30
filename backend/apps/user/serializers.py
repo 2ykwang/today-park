@@ -56,6 +56,17 @@ class UserSerializer(serializers.ModelSerializer):
         }
 
 
+class UserImageUploadSerializer(serializers.ModelSerializer):
+    """
+    유저 프로필 이미지 업로드
+    """
+
+    class Meta:
+        model = get_user_model()
+        fields = ["username", "profile_image"]
+        read_only_fields = ("username",)
+
+
 class UserResetPasswordSerializer(serializers.Serializer):
     """
     유저 비밀번호 변경
