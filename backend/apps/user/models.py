@@ -52,23 +52,24 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
 
     def save(self, *args, **kwargs):
 
-        temp_image = Image.open(self.profile_image)
+        if self.profile_image:
+            temp_image = Image.open(self.profile_image)
 
-        outputIoStream = BytesIO()
+            outputIoStream = BytesIO()
 
-        resized_image = temp_image.resize((500, 500))
-        resized_image.save(outputIoStream, format="JPEG", quality=100)
+            resized_image = temp_image.resize((500, 500))
+            resized_image.save(outputIoStream, format="JPEG", quality=100)
 
-        outputIoStream.seek(0)
+            outputIoStream.seek(0)
 
-        self.profile_image = InMemoryUploadedFile(
-            outputIoStream,
-            "ImageField",
-            "%s.jpg" % self.profile_image.name.split(".")[0],
-            "image/jpeg",
-            sys.getsizeof(outputIoStream),
-            None,
-        )
+            self.profile_image = InMemoryUploadedFile(
+                outputIoStream,
+                "ImageField",
+                "%s.jpg" % self.profile_image.name.split(".")[0],
+                "image/jpeg",
+                sys.getsizeof(outputIoStream),
+                None,
+            )
         super().save(*args, **kwargs)
 
     # admin 페이지 프로필 사진 미리보기
