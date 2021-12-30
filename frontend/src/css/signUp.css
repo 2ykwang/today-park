@@ -1,0 +1,61 @@
+.SignUpContainer{
+    width: 540px;
+    height: 540px;
+    border: 1px solid #e0e0e0;
+    box-sizing: border-box;
+}
+.SignUpContainer button{
+    height: 40px;
+    background-color: #47C690;
+    border: none;
+    border-radius: 9999px;
+    color: #fff;
+}
+.SignUpContainer h1{
+    font-size: 20px;
+    font-weight: bold;
+    padding: 40px 0 40px 40px;
+    /* border: 2px solid blue; */
+}
+.SignUpContainer form{
+    /* border: 2px solid orange; */
+    margin: 0 40px 0 40px;
+}
+.SignUpContainer .signUpItem .checkBtn{
+    width: 90px;
+    margin-left: 12px;
+    cursor: pointer;
+}
+.SignUpContainer .signUpItem{
+    display: flex;
+    /* border: 2px solid cyan; */
+    align-items: center;
+}
+.SignUpContainer .list{
+    width: 6px;
+    height: 6px;
+    background-color: #e0e0e0;
+    margin-right: 8px;
+    border-radius: 9999px;
+}
+.SignUpContainer .text{
+    width: 100px;
+}
+.SignUpContainer input{
+    width: 220px;
+    height: 44px;
+    border: 1px solid #e0e0e0;
+}
+.SignUpContainer .caution{
+    margin: 12px 0 28px 115px;
+    color: #757575;
+}
+.SignUpContainer .signUpBtn-container{
+    text-align: center;
+    margin-top: 28px;
+}
+.SignUpContainer .signUpBtn{
+    width: 120px;
+    height: 48px;
+    font-size: 16px;
+}
