@@ -37,7 +37,7 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
         return new_path
 
     profile_image = models.ImageField(
-        verbose_name="사용자 이미지", upload_to=_get_uuid_path, blank=True
+        verbose_name="유저 이미지", upload_to=_get_uuid_path, blank=True
     )
 
     objects = UserManager()
