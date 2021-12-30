@@ -41,7 +41,7 @@ const ModalContainer = styled.div`
   //   context['id'] = e.target.loginId.value;
   //   context['password'] = e.target.loginPw.value;
   // }
-  
+
 function LoginModal(props){
   return (<>
   <div className="ModalContainer">
@@ -50,9 +50,9 @@ function LoginModal(props){
             <h2>산스장</h2>
             <CloseButton className="closeBtn" onClick={props.handleClose} />
             <form>
-              <input type='text' placeholder="아이디" id="loginId" onInput={props.getId}/><br/>
+              <input type='text' placeholder="이메일" id="loginId" onInput={props.getId}/><br/>
               <input type='password' placeholder="비밀번호" id="loginPw" onChange={props.getPassword} /><br/>
-              <button type='submit' >로그인</button><br/>
+              <button type='submit' onClick={(e)=>{e.preventDefault()}} >로그인</button><br/>
               <LoginLink to='#'>아이디 찾기</LoginLink>
               <LoginLink to='#'>비밀번호 찾기</LoginLink>
               <LoginLink to='/signUp'>회원가입</LoginLink>
@@ -73,7 +73,6 @@ function LoginHeader(){
   useEffect(() => {
     context['id'] = id;
     context['password'] = password;
-    console.log(context['id'])
   }, [id, password])
 
   function handleLogin(){
@@ -140,10 +139,11 @@ function LogoutHeader(){
 
 
 export function Header() {
-  // const context = useContext(LoginInfoContext)
+  const context = useContext(LoginInfoContext)
   return (<>
-  {/* {context['id'] !== '' && context['password'] !== '' ? <LogoutHeader /> : <LoginHeader />} */}
-  <LoginHeader />
-  {/* <LogoutHeader /> */}
+  {/* 로그인 성공하면  */}
+  {context['id'] !== '' && context['password'] !== '' ? <LogoutHeader /> : <LoginHeader />}
+  {/* <LoginHeader />
+  <LogoutHeader /> */}
   </>);
 }
