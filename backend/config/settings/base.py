@@ -14,7 +14,15 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
-env = os.environ
+from django.core.exceptions import ImproperlyConfigured
+
+
+def get_env(key_name):
+    try:
+        return os.environ[key_name]
+    except KeyError:
+        error_message = f"환경변수 {key_name}이 설정되어 있지 않습니다."
+        raise ImproperlyConfigured(error_message)
 
 
 # ---------------------------------------------------------------------
@@ -41,7 +49,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, ".static")
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env.get("SECRET_KEY", "Secret-Key-Here")
+SECRET_KEY = get_env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -112,8 +120,12 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": get_env("MYSQL_DATABASE"),
+        "USER": get_env("MYSQL_USER"),
+        "PASSWORD": get_env("MYSQL_PASSWORD"),
+        "HOST": get_env("MYSQL_HOST"),
+        "PORT": get_env("MYSQL_PORT"),
     }
 }
 
