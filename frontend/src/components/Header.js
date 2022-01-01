@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { LoginInfoContext } from "../store/loginInfo";
 import styled from "styled-components";
-import { ReactComponent as CloseButton } from "../image/closebutton.svg";
+import { ReactComponent as CloseButton } from "../image/closeButton.svg";
 
 const BasicLink = styled(Link)`
   text-decoration: none;
