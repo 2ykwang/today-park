@@ -6,12 +6,8 @@ from django.db.models import Avg, Sum
 class Park(models.Model):
     @property
     def average_rating(self):
-        cnt = self.review_park.count()
-        if cnt == 0:
-            return 0
-        else:
-            avg_score = self.review_park.aggregate(Avg("score"))["score__avg"]
-            return avg_score
+        avg_score = self.review_park.aggregate(Avg("score"))["score__avg"]
+        return avg_score if avg_score else 0
 
     park_name = models.CharField(max_length=50, unique=True, verbose_name="공원이름")
     gu_id = models.IntegerField(verbose_name="구ID")
