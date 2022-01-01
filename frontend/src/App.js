@@ -6,7 +6,7 @@ import "./css/reset.css";
 import "./css/app.css";
 import "./css/header.css";
 import "./css/signUp.css";
-// import "./css/mypage.css";
+import "./css/mypage.css";
 import "./css/search.css";
 import Mapchart from "./components/Mapchart";
 import SidebarSearch, { SidebarBookmark } from "./components/Search";

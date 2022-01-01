@@ -88,7 +88,6 @@ function LoginHeader() {
   useEffect(() => {
     context["id"] = id;
     context["password"] = password;
-    console.log(context["id"], context["password"]);
   }, [id, password]);
 
   function handleLogin() {
@@ -187,6 +186,7 @@ export function Header() {
   const context = useContext(LoginInfoContext);
   return (
     <>
+      {/* 로그인 성공하면  */}
       {context["id"] !== "" && context["password"] !== "" ? (
         <LogoutHeader />
       ) : (

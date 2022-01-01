@@ -5,8 +5,8 @@ export const LoginInfoContext = createContext();
 
 const LoginInfoStore = (props) => {
   const users = {
-    id: "",
-    nickname: "",
+    id: "elice@test.com",
+    nickname: "엘리스",
     password: "",
   };
 
