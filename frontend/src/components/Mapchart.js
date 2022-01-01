@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Header } from "./Header";
 import {
   ComposableMap,
   ZoomableGroup,
@@ -7,13 +8,15 @@ import {
 } from "react-simple-maps";
 import GwanakMap from "../json/gwanak.json";
 import SeoulMap from "../json/seoul.json";
+import MapchartOrigin from "./Mapchart(origin)";
 
 //const geoUrl ="https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
-const geoUrl = GwanakMap;
+const geoUrl = SeoulMap;
 
-const Map = ({ setTooltipContent }) => {
+const Mapchart = ({ setTooltipContent }) => {
   return (
     <div>
+      <Header />
       {/*
       width, height = 캔버스 사이즈
       projection
@@ -32,8 +35,8 @@ const Map = ({ setTooltipContent }) => {
             zoom = 확대
           */}
         <ZoomableGroup
-          center={[126.93213889807498, 37.46122474964353]}
-          zoom={7}
+          center={[126.98820917938465, 37.55105648528907]}
+          zoom={1.5}
         >
           <Geographies geography={geoUrl}>
             {({ geographies }) =>
@@ -52,7 +55,7 @@ const Map = ({ setTooltipContent }) => {
                     default: {
                       fill: "#fff",
                       stroke: "#aaa",
-                      strokeWidth: 0.15,
+                      strokeWidth: 0.5,
                       outline: "none",
                     },
                     hover: {
@@ -74,4 +77,4 @@ const Map = ({ setTooltipContent }) => {
   );
 };
 
-export default Map;
+export default Mapchart;
