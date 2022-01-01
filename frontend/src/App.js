@@ -13,6 +13,7 @@ import SidebarSearch, { SidebarBookmark } from "./components/Search";
 import { Home } from "./components/Home";
 import { Mypage } from "./components/Mypage";
 import { SignUp } from "./components/SignUp";
+import { SidebarSearchDetail } from "./components/SidebarSearchDetail";
 import ReactTooltip from "react-tooltip";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path="signUp" element={<SignUp />} />
             <Route path="mypage" element={<Mypage />} />
             <Route path="search" element={<SidebarSearch />} />
+            <Route path="search/:id" element={<SidebarSearchDetail />} />
             <Route path="search/bookmark" element={<SidebarBookmark />} />
             <Route
               path="intro"

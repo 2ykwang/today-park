@@ -29,9 +29,6 @@
 .search .sidebar-menu.item:nth-child(2) {
   top: 80px;
 }
-.search .sidebar-menu.item:nth-child(3) {
-  top: 160px;
-}
 .search .sidebar-menu .icon {
   fill: #757575;
 }
@@ -48,4 +45,74 @@
   top: 0;
   left: 0;
   box-sizing: border-box;
+  overflow: hidden;
+}
+.search .sidebar form {
+  border-bottom: 1px solid #e0e0e0;
+}
+.search .sidebar .searchIcon {
+  position: absolute;
+  top: 40px;
+  left: 144px;
+  z-index: 2;
+  fill: #5bc691;
+}
+.search .sidebar input[type="text"] {
+  width: 340px;
+  height: 48px;
+  border: 2px solid #5bc691;
+  border-radius: 9999px;
+  margin: 28px 0 28px 120px;
+  font-size: 16px;
+  padding-left: 60px;
+  box-sizing: border-box;
+}
+.search .selectContainer {
+  margin-left: 80px;
+}
+.search .selectContainer select {
+  width: 50%;
+  height: 56px;
+  border-bottom: 1px solid #e0e0e0;
+  color: #757575;
+  padding-left: 16px;
+}
+.search .selectContainer select:nth-child(2) {
+  border-left: 1px solid #e0e0e0;
+}
+.search .reviewContainer {
+  margin-left: 80px;
+}
+.search .reviewContainer .review {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 28px 0 28px 48px;
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+}
+.search .reviewContainer .review h3 {
+  font-weight: bold;
+  margin-bottom: 8px;
+  position: relative;
+}
+.search .reviewContainer .review p {
+  margin-bottom: 5px;
+}
+.search .reviewContainer .review h3 .rate {
+  display: inline-block;
+  margin-left: 34px;
+  position: relative;
+}
+.search .reviewContainer .review h3 .rate .star {
+  position: absolute;
+  top: -5px;
+  left: -24px;
+  fill: #ffd464;
+}
+.search .reviewContainer .review .bookmark {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  fill: #3a3a3a;
+  cursor: pointer;
 }
