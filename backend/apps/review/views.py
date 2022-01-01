@@ -10,8 +10,11 @@ from .serializers import ParkReviewSerializer, UserReviewSerializer
 
 # 공원별 리뷰
 class ParkReviewList(APIView):
-    def get(self, pk, request, format=None):
-        review = Review.objects.filter(park_id=pk)
+    def get(self, request, format=None):
+        park_id = request.GET.get("park_id", None)
+        if request.GET.get("park_id") is not None:
+            review = Review.objects.filter(park_id=park_id)
+
         serializer = ParkReviewSerializer(review, many=True)
         return Response(serializer.data)
 

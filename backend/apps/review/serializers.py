@@ -6,10 +6,10 @@ from .models import Review
 
 
 class ParkReviewSerializer(serializers.ModelSerializer):
-    park_reviews = serializers.SerializerMethodField()
+    # park_reviews = serializers.SerializerMethodField()
 
-    def get_park_reviews():
-        return
+    # def get_park_reviews():
+    #     pass
 
     class Meta:
         model = Review
