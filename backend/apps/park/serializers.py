@@ -10,6 +10,7 @@ class EquipmentSerializer(serializers.ModelSerializer):
         fields = ["equipment_name", "equipment_type"]
 
 
+# TODO: 코드 리팩토링 가능할지
 class ParkSerializer(serializers.ModelSerializer):
     total_equipments = serializers.SerializerMethodField()
     equipments = serializers.SerializerMethodField()
