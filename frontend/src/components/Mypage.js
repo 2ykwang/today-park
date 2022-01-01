@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { LoginInfoContext } from "../store/loginInfo";
 import { Header } from "./Header";
@@ -22,7 +21,7 @@ export function Mypage() {
   useEffect(() => {
     context["id"] = id;
     context["nickname"] = nickname;
-  }, [id, nickname]);
+  }, [id, nickname, context]);
 
   function handleIdChange(e) {
     setId(e.target.value);
@@ -40,7 +39,7 @@ export function Mypage() {
   return (
     <>
       <Header />
-      <section class="mypage">
+      <section className="mypage">
         <h2>마이 페이지</h2>
         <div className="mypageContainer">
           <div className="mainSide">
