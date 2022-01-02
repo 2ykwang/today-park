@@ -25,8 +25,9 @@ export function SidebarBookmark() {
   );
 }
 
-const dummyreview = [
+const dummypark = [
   {
+    id: 1,
     parkName: "엘리스 공원",
     rate: "4.5",
     address: "서울시 관악구 토끼동 12-34 엘리스공원",
@@ -34,6 +35,7 @@ const dummyreview = [
     review: "20",
   },
   {
+    id: 2,
     parkName: "엘리스 공원",
     rate: "4.5",
     address: "서울시 관악구 토끼동 12-34 엘리스공원",
@@ -41,6 +43,7 @@ const dummyreview = [
     review: "20",
   },
   {
+    id: 3,
     parkName: "엘리스 공원",
     rate: "4.5",
     address: "서울시 관악구 토끼동 12-34 엘리스공원",
@@ -48,6 +51,7 @@ const dummyreview = [
     review: "20",
   },
   {
+    id: 4,
     parkName: "엘리스 공원",
     rate: "4.5",
     address: "서울시 관악구 토끼동 12-34 엘리스공원",
@@ -59,14 +63,18 @@ const dummyreview = [
 function SidebarSearch() {
   const [content, setContent] = useState("");
   const [clicked, setClicked] = useState(true);
+
+  // TO DO
+  // 1. useParams로 상세페이지 구현하기
   const { id } = useParams();
   console.log(id);
 
-  const reviewlist = [];
-  dummyreview.map((item) => {
-    reviewlist.push(
+  const parklist = [];
+  dummypark.map((item) => {
+    let park_id = item.id;
+    parklist.push(
       <>
-        <BasicLink to={"/search/" + id} className="review">
+        <BasicLink to={"/search/" + park_id} className="park">
           <h3>
             {item.parkName}
             <div class="rate">
@@ -109,7 +117,7 @@ function SidebarSearch() {
               <option value="가나다순">가나다순</option>
             </select>
           </div>
-          <div className="reviewContainer">{reviewlist}</div>
+          <div className="parklistContainer">{parklist}</div>
         </div>
         <Map setTooltipContent={setContent} />
         <ReactTooltip>{content}</ReactTooltip>

@@ -37,7 +37,7 @@
   background-color: #5bc691;
 }
 .search .sidebar {
-  width: 520px;
+  width: 560px;
   height: 100%;
   background-color: #fff;
   border: 1px solid #e0e0e0;
@@ -58,7 +58,7 @@
   fill: #5bc691;
 }
 .search .sidebar input[type="text"] {
-  width: 340px;
+  width: 400px;
   height: 48px;
   border: 2px solid #5bc691;
   border-radius: 9999px;
@@ -80,36 +80,36 @@
 .search .selectContainer select:nth-child(2) {
   border-left: 1px solid #e0e0e0;
 }
-.search .reviewContainer {
+.search .parklistContainer {
   margin-left: 80px;
 }
-.search .reviewContainer .review {
+.search .parklistContainer .park {
   border-bottom: 1px solid #e0e0e0;
   padding: 28px 0 28px 48px;
   box-sizing: border-box;
   position: relative;
   display: block;
 }
-.search .reviewContainer .review h3 {
+.search .parklistContainer .park h3 {
   font-weight: bold;
   margin-bottom: 8px;
   position: relative;
 }
-.search .reviewContainer .review p {
+.search .parklistContainer .park p {
   margin-bottom: 5px;
 }
-.search .reviewContainer .review h3 .rate {
+.search .parklistContainer .park h3 .rate {
   display: inline-block;
   margin-left: 34px;
   position: relative;
 }
-.search .reviewContainer .review h3 .rate .star {
+.search .parklistContainer .park h3 .rate .star {
   position: absolute;
   top: -5px;
   left: -24px;
   fill: #ffd464;
 }
-.search .reviewContainer .review .bookmark {
+.search .parklistContainer .park .bookmark {
   position: absolute;
   top: 20px;
   right: 40px;

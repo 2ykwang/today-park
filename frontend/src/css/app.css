@@ -68,3 +68,9 @@ select {
   padding: 12px;
   box-sizing: border-box;
 }
+textarea {
+  font-family: "Elice Digital Baeum", sans-serif;
+  padding: 12px;
+  box-sizing: border-box;
+  font-size: 15px;
+}
