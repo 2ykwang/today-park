@@ -1,5 +1,5 @@
 from apps.review.models import Review
-from django.db.models import Count, Q
+from django.db.models import Avg, Count, Q
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render
 from drf_yasg import openapi
@@ -56,9 +56,13 @@ class ParkList(APIView):
         # TODO: count_reviews average_rating 순으로 정렬되는 부분 코드 다시 짜야함
         def sort_type(sort, park):
             if sort == "score_asc":
-                park = park.order_by("average_rating")
+                park = park.annotate(avg_rating=Avg("review_park__score")).order_by(
+                    "avg_rating"
+                )
             elif sort == "score_desc":
-                park = park.order_by("-average_rating")
+                park = park.annotate(avg_rating=Avg("review_park__score")).order_by(
+                    "-avg_rating"
+                )
             elif sort == "review_more":
                 park = park.annotate(cnt_reviews=Count("review_park")).order_by(
                     "-cnt_reviews"
