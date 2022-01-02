@@ -1,7 +1,6 @@
-from apps.park import views
 from django.urls import path
 
-from . import views
+from .views import BookmarkListView, BookmarkView
 
 # EndPoints
 """
@@ -11,7 +10,7 @@ from . import views
 """
 
 urlpatterns = [
-    path("bookmarks/", views.BookmarkListView.as_view()),
-    path("bookmark/", views.BookmarkView.as_view()),
-    path("bookmark/<int:bookmark_id>", views.BookmarkView.as_view()),
+    path("bookmarks/", BookmarkListView.as_view()),
+    path("bookmark/", BookmarkView.as_view()),
+    path("bookmark/<int:bookmark_id>", BookmarkView.as_view()),
 ]
