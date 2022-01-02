@@ -15,14 +15,9 @@ class Park(models.Model):
     si_address = models.CharField(max_length=50, verbose_name="시")
     gu_address = models.CharField(max_length=50, verbose_name="구")
     dong_address = models.CharField(max_length=50, verbose_name="동")
-    latitude = models.DecimalField(
-        max_digits=10,
-        decimal_places=8,
-        verbose_name="위도(lat)",
-    )
-    longitude = models.DecimalField(
-        max_digits=11,
-        decimal_places=8,
+    latitude = models.CharField(max_length=50, verbose_name="위도(lat)")
+    longitude = models.CharField(
+        max_length=50,
         verbose_name="경도(long)",
     )
     park_image = models.ImageField(blank=True, verbose_name="공원사진")
