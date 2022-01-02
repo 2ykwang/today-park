@@ -1,5 +1,5 @@
 from apps.review.models import Review
-from django.db.models import Q
+from django.db.models import Count, Q
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render
 from drf_yasg import openapi
@@ -60,9 +60,13 @@ class ParkList(APIView):
             elif sort == "score_desc":
                 park = park.order_by("-average_rating")
             elif sort == "review_more":
-                park = park.order_by("count_reviews")
+                park = park.annotate(cnt_reviews=Count("review_park")).order_by(
+                    "-cnt_reviews"
+                )
             elif sort == "review_less":
-                park = park.order_by("-count_reviews")
+                park = park.annotate(cnt_reviews=Count("review_park")).order_by(
+                    "cnt_reviews"
+                )
             elif sort == "dict_asc":
                 park = park.order_by("park_name")
             elif sort == "dict_desc":
