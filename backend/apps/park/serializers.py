@@ -16,6 +16,7 @@ class ParkSerializer(serializers.ModelSerializer):
     equipments = serializers.SerializerMethodField()
     eq_list = EquipmentSerializer(many=True, read_only=True)
     avg_score = serializers.SerializerMethodField()
+    total_reviews = serializers.SerializerMethodField()
 
     def get_total_equipments(self, obj):
         parkequipment = ParkEquipment.objects.filter(park_id=obj.id).aggregate(
@@ -38,6 +39,9 @@ class ParkSerializer(serializers.ModelSerializer):
     def get_avg_score(self, obj):
         return obj.average_rating
 
+    def get_total_reviews(self, obj):
+        return obj.count_reviews
+
     class Meta:
         model = Park
         fields = [
@@ -54,5 +58,22 @@ class ParkSerializer(serializers.ModelSerializer):
             "total_equipments",
             "equipments",
             "eq_list",
+            "total_reviews",
             "avg_score",
         ]
+
+
+class ParkRequestSerializer(serializers.Serializer):
+    guId = serializers.CharField(help_text="구 이름(required)")
+    keyword = serializers.CharField(help_text="검색어(optional)")
+    sort = serializers.ChoiceField(
+        help_text="정렬방식(optional)",
+        choices=(
+            "score_asc",
+            "score_desc",
+            "review_more",
+            "review_less",
+            "dict_asc",
+            "dict_desc",
+        ),
+    )

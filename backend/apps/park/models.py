@@ -9,6 +9,10 @@ class Park(models.Model):
         avg_score = self.review_park.aggregate(Avg("score"))["score__avg"]
         return avg_score if avg_score else 0
 
+    @property
+    def count_reviews(self):
+        return self.review_park.count()
+
     park_name = models.CharField(max_length=50, unique=True, verbose_name="공원이름")
     gu_id = models.IntegerField(verbose_name="구ID")
     full_address = models.TextField(verbose_name="주소")
