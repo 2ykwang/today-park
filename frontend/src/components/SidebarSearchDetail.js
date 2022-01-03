@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Component } from "react";
 import { Link } from "react-router-dom";
 import { Header } from "./Header";
 import Map from "./Map";
@@ -9,6 +9,33 @@ import { ReactComponent as BookmarkIconEmpty } from "../image/bookmark-empty.svg
 import { ReactComponent as BookmarkIcon } from "../image/bookmark-maked.svg";
 import { SidebarMenu } from "./SidebarMenu";
 import { BasicLink } from "./BasicLink";
+import { GOOGLE_KEY } from "../gitignore/googleKey";
+import GoogleMapReact from "google-map-react";
+
+class SimpleMap extends Component {
+  static defaultProps = {
+    center: {
+      lat: 59.95,
+      lng: 30.33,
+    },
+    zoom: 11,
+  };
+
+  render() {
+    return (
+      // Important! Always set the container height explicitly
+      <div style={{ height: "100%", width: "100%" }}>
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: GOOGLE_KEY }}
+          defaultCenter={this.props.center}
+          defaultZoom={this.props.zoom}
+        ></GoogleMapReact>
+      </div>
+    );
+  }
+}
+
+export default SimpleMap;
 
 const dummyparkdetail = [
   {
@@ -38,21 +65,15 @@ const dummyparkdetail = [
   },
 ];
 
-const dummyreview = [
-  {
-    id: "elice@test.com",
-    nickname: "토끼",
-  },
-];
-
 export function SidebarSearchDetail() {
   const [content, setContent] = useState("");
   const detailList = [];
+
   dummyparkdetail.forEach((item) => {
     detailList.push(
       <>
         <div className="park">
-          <div class="title">
+          <div className="title">
             <h3>
               {item.park_name}
               <div className="rate">
@@ -91,8 +112,13 @@ export function SidebarSearchDetail() {
           <Link to="/search">
             <BackIcon width="24" height="24" className="backIcon" />
           </Link>
-          <div className="mapAPI"></div>
-          <div class="parkDetailContainer">
+          <div className="mapAPI">
+            <SimpleMap
+              center={{ lat: 37.46934341547775, lng: 126.97010784 }}
+              zoom={15}
+            />
+          </div>
+          <div className="parkDetailContainer">
             <div className="parkDetail">{detailList}</div>
             <form className="createReview">
               <textarea placeholder="내용을 입력해주세요." />

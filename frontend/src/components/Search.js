@@ -28,35 +28,103 @@ export function SidebarBookmark() {
 const dummypark = [
   {
     id: 1,
-    parkName: "엘리스 공원",
-    rate: "4.5",
-    address: "서울시 관악구 토끼동 12-34 엘리스공원",
-    item: "8",
-    review: "20",
+    park_name: "봉천11배수지공원(놀이터부근)",
+    gu_id: 135,
+    full_address: "서울특별시 관악구 인헌동 산3-8",
+    si_address: "서울특별시",
+    gu_address: "관악구",
+    dong_address: "인헌동",
+    latitude: "374,691,872,300,000.00",
+    longitude: "37.46918723",
+    park_image: null,
+    total_equipments: 3,
+    equipments: [
+      {
+        equipment_name: "역기내리기",
+        quantity: 1,
+      },
+      {
+        equipment_name: "다리들어올리기",
+        quantity: 2,
+      },
+    ],
+    total_reviews: 2,
+    avg_score: 3.5,
   },
   {
     id: 2,
-    parkName: "엘리스 공원",
-    rate: "4.5",
-    address: "서울시 관악구 토끼동 12-34 엘리스공원",
-    item: "8",
-    review: "20",
+    park_name: "봉천11배수지공원(놀이터부근)",
+    gu_id: 135,
+    full_address: "서울특별시 관악구 인헌동 산3-8",
+    si_address: "서울특별시",
+    gu_address: "관악구",
+    dong_address: "인헌동",
+    latitude: "374,691,872,300,000.00",
+    longitude: "37.46918723",
+    park_image: null,
+    total_equipments: 3,
+    equipments: [
+      {
+        equipment_name: "역기내리기",
+        quantity: 1,
+      },
+      {
+        equipment_name: "다리들어올리기",
+        quantity: 2,
+      },
+    ],
+    total_reviews: 2,
+    avg_score: 3.5,
   },
   {
     id: 3,
-    parkName: "엘리스 공원",
-    rate: "4.5",
-    address: "서울시 관악구 토끼동 12-34 엘리스공원",
-    item: "8",
-    review: "20",
+    park_name: "봉천11배수지공원(놀이터부근)",
+    gu_id: 135,
+    full_address: "서울특별시 관악구 인헌동 산3-8",
+    si_address: "서울특별시",
+    gu_address: "관악구",
+    dong_address: "인헌동",
+    latitude: "374,691,872,300,000.00",
+    longitude: "37.46918723",
+    park_image: null,
+    total_equipments: 3,
+    equipments: [
+      {
+        equipment_name: "역기내리기",
+        quantity: 1,
+      },
+      {
+        equipment_name: "다리들어올리기",
+        quantity: 2,
+      },
+    ],
+    total_reviews: 2,
+    avg_score: 3.5,
   },
   {
     id: 4,
-    parkName: "엘리스 공원",
-    rate: "4.5",
-    address: "서울시 관악구 토끼동 12-34 엘리스공원",
-    item: "8",
-    review: "20",
+    park_name: "봉천11배수지공원(놀이터부근)",
+    gu_id: 135,
+    full_address: "서울특별시 관악구 인헌동 산3-8",
+    si_address: "서울특별시",
+    gu_address: "관악구",
+    dong_address: "인헌동",
+    latitude: "374,691,872,300,000.00",
+    longitude: "37.46918723",
+    park_image: null,
+    total_equipments: 3,
+    equipments: [
+      {
+        equipment_name: "역기내리기",
+        quantity: 1,
+      },
+      {
+        equipment_name: "다리들어올리기",
+        quantity: 2,
+      },
+    ],
+    total_reviews: 2,
+    avg_score: 3.5,
   },
 ];
 
@@ -64,10 +132,7 @@ function SidebarSearch() {
   const [content, setContent] = useState("");
   const [clicked, setClicked] = useState(true);
 
-  // TO DO
-  // 1. useParams로 상세페이지 구현하기
   const { id } = useParams();
-  console.log(id);
 
   const parklist = [];
   dummypark.map((item) => {
@@ -76,15 +141,15 @@ function SidebarSearch() {
       <>
         <BasicLink to={"/search/" + park_id} className="park">
           <h3>
-            {item.parkName}
+            {item.park_name}
             <div class="rate">
               <StarIcon className="star" width="24" height="24" />
-              {item.rate}
+              {item.avg_score}
             </div>
           </h3>
-          <p>{item.address}</p>
+          <p>{item.full_address}</p>
           <p>
-            운동기구:{item.item} 리뷰:{item.review}
+            운동기구: {item.total_equipments} / 리뷰: {item.total_reviews}
           </p>
           {clicked ? (
             <BookmarkIconEmpty className="bookmark" width="24" height="24" />
@@ -105,18 +170,16 @@ function SidebarSearch() {
           <form>
             <SearchIcon width="24" height="24" className="searchIcon" />
             <input type="text" />
-          </form>
-          <div className="selectContainer">
-            <select name="filter">
-              <option value="공원이름">공원이름</option>
-              <option value="동이름">동이름</option>
-            </select>
             <select name="sort">
-              <option value="평점순">평점순</option>
-              <option value="리뷰순">리뷰개수순</option>
-              <option value="가나다순">가나다순</option>
+              <option value="score_asc">평점 높은 순</option>
+              <option value="score_desc">평점 낮은 순</option>
+              <option value="review_more">리뷰 많은 순</option>
+              <option value="review_less">리뷰 적은 순</option>
+              <option value="dict_asc">가나다 순</option>
+              <option value="dict_desc">가나다 역순</option>
             </select>
-          </div>
+          </form>
+          {/* <div className="selectContainer"></div> */}
           <div className="parklistContainer">{parklist}</div>
         </div>
         <Map setTooltipContent={setContent} />

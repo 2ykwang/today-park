@@ -12,6 +12,11 @@
   margin-top: 60px;
   background-color: #f5f5f5;
   border-radius: 20px;
+  position: relative;
+}
+#map {
+  height: 100%;
+  border: 2px solid red;
 }
 .search .parkDetailContainer {
   margin-top: 20px;

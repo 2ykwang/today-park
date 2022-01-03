@@ -53,32 +53,32 @@
 .search .sidebar .searchIcon {
   position: absolute;
   top: 40px;
-  left: 144px;
+  left: 134px;
   z-index: 2;
   fill: #5bc691;
 }
 .search .sidebar input[type="text"] {
-  width: 400px;
+  width: 320px;
   height: 48px;
   border: 2px solid #5bc691;
   border-radius: 9999px;
-  margin: 28px 0 28px 120px;
+  margin: 28px 0 28px 110px;
   font-size: 16px;
   padding-left: 60px;
   box-sizing: border-box;
 }
 .search .selectContainer {
-  margin-left: 80px;
+  /* margin-left: 80px; */
 }
-.search .selectContainer select {
-  width: 50%;
-  height: 56px;
-  border-bottom: 1px solid #e0e0e0;
+.search form select {
+  /* width: %; */
+  height: 48px;
+  /* border-bottom: 2px solid #5bc691; */
   color: #757575;
-  padding-left: 16px;
-}
-.search .selectContainer select:nth-child(2) {
-  border-left: 1px solid #e0e0e0;
+  padding-right: 10px;
+  box-sizing: border-box;
+  font-size: 15px;
+  cursor: pointer;
 }
 .search .parklistContainer {
   margin-left: 80px;
