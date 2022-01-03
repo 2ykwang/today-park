@@ -5,6 +5,10 @@ from .models import Equipment, Park, ParkEquipment, Review
 
 
 class EquipmentSerializer(serializers.ModelSerializer):
+    """
+    공원 시설
+    """
+
     class Meta:
         model = Equipment
         fields = ["equipment_name", "equipment_type"]
@@ -18,11 +22,13 @@ class ParkEquipmentSerializer(serializers.ModelSerializer):
         fields = ["equipment_name", "quantity"]
 
 
-# TODO: 코드 리팩토링 가능할지
 class ParkSerializer(serializers.ModelSerializer):
+    """
+    공원 정보
+    """
+
     total_equipments = serializers.SerializerMethodField()
-    equipments = serializers.SerializerMethodField()
-    eq_list = EquipmentSerializer(many=True, read_only=True)
+    equipments = ParkEquipmentSerializer(source="park_equipments", many=True)
     avg_score = serializers.SerializerMethodField()
     total_reviews = serializers.SerializerMethodField()
 
@@ -32,11 +38,6 @@ class ParkSerializer(serializers.ModelSerializer):
             Sum("quantity", default=0)
         )["quantity__sum"]
         return sum_of_quantity
-
-    def get_equipments(self, obj):
-        # 참고: https://gaussian37.github.io/python-rest-nested-serializer/
-        park_equipment = ParkEquipment.objects.filter(park_id=obj.id)
-        return ParkEquipmentSerializer(park_equipment, many=True).data
 
     def get_avg_score(self, obj):
         return obj.average_rating
@@ -59,40 +60,51 @@ class ParkSerializer(serializers.ModelSerializer):
             "park_image",
             "total_equipments",
             "equipments",
-            "eq_list",
             "total_reviews",
             "avg_score",
         ]
 
 
 class ParkReviewSerializer(serializers.ModelSerializer):
+
+    """
+    공원 리뷰 조회, 생성, 수정
+    """
+
+    username = serializers.CharField(source="user_id.username", read_only=True)
+
     class Meta:
         model = Review
         fields = [
             "id",
             "score",
             "content",
-            "user_id",
-            "park_id",
+            "username",
             "created_at",
-            "modified_at",
-            "is_deleted",
+            # "user_id",
+            # "park_id",
         ]
+        read_only_fields = ("id",)
+        extra_kwargs = {
+            # "user_id": {"write_only": True},
+            # "park_id": {"write_only": True},
+        }
 
 
-class UserReviewSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Review
-        fields = [
-            "id",
-            "score",
-            "content",
-            "user_id",
-            "park_id",
-            "created_at",
-            "modified_at",
-            "is_deleted",
-        ]
+# class UserReviewSerializer(serializers.ModelSerializer):
+#     """
+
+#     """
+#     class Meta:
+#         model = Review
+#         fields = [
+#             "id",
+#             "score",
+#             "content",
+#             "user_id",
+#             "park_id",
+#             "created_at",
+#         ]
 
 
 class ParkRequestSerializer(serializers.Serializer):

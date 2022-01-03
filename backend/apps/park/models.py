@@ -53,15 +53,15 @@ class ParkEquipment(models.Model):
     park_id = models.ForeignKey(
         Park,
         on_delete=models.CASCADE,
-        related_name="park",
+        related_name="park_equipments",
         db_column="park_id",
         verbose_name="공원 ID",
     )
     equipment_id = models.ForeignKey(
         Equipment,
         on_delete=models.CASCADE,
-        related_name="equipment",
-        db_column="equipment_id",
+        related_name="park",
+        db_column="equipment_parks",
         verbose_name="운동시설 ID",
     )
     quantity = models.IntegerField(default=0, verbose_name="수량")

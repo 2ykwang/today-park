@@ -1,5 +1,12 @@
+from datetime import datetime
+
 from django.db import models
 from django.utils import timezone
+
+
+class DeletedManager(models.Manager):
+    def get_queryset(self):
+        return super(DeletedManager, self).get_queryset().filter(is_deleted=False)
 
 
 class TimeStampModel(models.Model):
@@ -22,7 +29,16 @@ class DeletableModel(models.Model):
     """
 
     is_deleted = models.BooleanField(verbose_name="삭제 여부", default=False)
-    deleted_at = models.DateTimeField(verbose_name="삭제된 날짜", null=True)
+    deleted_at = models.DateTimeField(verbose_name="삭제된 날짜", null=True, blank=True)
+
+    objects = DeletedManager
+
+    # 오버라이딩해서 실제로 삭제되는게 아닌 is_deleted=True 해줌.
+
+    def delete(self, using=None, keep_parents=True):
+        self.is_deleted = True
+        self.deleted_at = timezone.now()
+        self.save()
 
     class Meta:
         abstract = True

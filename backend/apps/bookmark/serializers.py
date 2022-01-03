@@ -20,7 +20,6 @@ class BookmarkListSerializer(serializers.ModelSerializer):
         # User ID 를 굳이 내보낼 필요 없을 거 같음
         fields = [
             "id",
-            "user_id",
             "park",
             "created_at",
         ]
@@ -46,6 +45,7 @@ class BookmarkSerializer(serializers.ModelSerializer):
             "created_at",
         ]
         extra_kwargs = {"park_id": {"write_only": True}}
+        # MEMO: meta read_only_fields 는 명시적으로 정의되어 있지 않는 fields 만 적용된다.
         read_only_fields = ("created_at", "park")
 
     def create(self, validated_data):

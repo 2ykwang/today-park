@@ -4,8 +4,8 @@ from .views import BookmarDeletekView, BookmarkView
 
 # EndPoints
 """
-    GET, POST /api/bookmark
-    DELETE /api/bookmark/<int:bookmark_id>
+    GET, POST /api/bookmarks
+    DELETE /api/bookmarks/<int:bookmark_id>
 """
 
 urlpatterns = [
