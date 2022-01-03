@@ -121,13 +121,13 @@ class ParkDetail(APIView):
 
 
 class ParkReviewList(APIView):
-    def get(self, request, id, format=None):
+    def get(self, request, park_id, review_id, format=None):
         """
         공원별 리뷰 요청
 
         공원(id)에 대한 리뷰 요청
         """
-        review = Review.objects.filter(park_id=id)
+        review = Review.objects.filter(park_id=park_id)
         serializer = ParkReviewSerializer(review, many=True)
         return Response(serializer.data)
 
@@ -143,7 +143,7 @@ class ParkReviewList(APIView):
             status.HTTP_400_BAD_REQUEST: "잘못된 요청",
         },
     )
-    def post(self, request, id, format=None):
+    def post(self, request, park_id, review_id, format=None):
         """
         공원 리뷰 등록
 
@@ -151,17 +151,18 @@ class ParkReviewList(APIView):
         """
         # permission_classes = [permissions.IsAuthenticated]
 
-    def delete(self, request, id, format=None):
+    def delete(self, request, park_id, review_id, format=None):
         """
         공원 리뷰 삭제
 
         공원(id) 리뷰 삭제
         """
-        review_id = request.GET.get("reviewId")
-        print(review_id)
         review = Review.objects.get(id=review_id)
         if len(review) == 0:
             return Response(status=status.HTTP_204_NO_CONTENT)
+
+        if review.user_id != AccessToken["user_id"]:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
 
         review.is_deleted = True
         review.save()
