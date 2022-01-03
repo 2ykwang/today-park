@@ -3,8 +3,7 @@ import datetime
 from apps.park.models import Park
 from apps.user.models import User
 from django.db import models
-from django.db.models.base import Model
-from django.db.models.deletion import CASCADE
+from django.db.models.deletion import CASCADE, DO_NOTHING, SET_DEFAULT
 from django.db.models.fields.related import ForeignKey
 
 
@@ -12,7 +11,7 @@ from django.db.models.fields.related import ForeignKey
 class Review(models.Model):
     user_id = ForeignKey(
         User,
-        on_delete=CASCADE,
+        on_delete=DO_NOTHING,
         related_name="review_user",
         db_column="user_id",
         verbose_name="유저ID",

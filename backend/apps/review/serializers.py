@@ -6,17 +6,30 @@ from .models import Review
 
 
 class ParkReviewSerializer(serializers.ModelSerializer):
-    # park_reviews = serializers.SerializerMethodField()
-
-    # def get_park_reviews():
-    #     pass
-
     class Meta:
         model = Review
-        fields = "__all__"
+        fields = [
+            "id",
+            "score",
+            "content",
+            "user_id",
+            "park_id",
+            "created_at",
+            "modified_at",
+            "is_deleted",
+        ]
 
 
 class UserReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = "__all__"
+        fields = [
+            "id",
+            "score",
+            "content",
+            "user_id",
+            "park_id",
+            "created_at",
+            "modified_at",
+            "is_deleted",
+        ]
