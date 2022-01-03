@@ -1,4 +1,4 @@
-from django.db.models import Sum
+from django.db.models import Sum, fields
 from rest_framework import serializers
 
 from .models import Equipment, Park, ParkEquipment
@@ -10,6 +10,14 @@ class EquipmentSerializer(serializers.ModelSerializer):
         fields = ["equipment_name", "equipment_type"]
 
 
+class ParkEquipmentSerializer(serializers.ModelSerializer):
+    equipment_name = serializers.CharField(source="equipment_id.equipment_name")
+
+    class Meta:
+        model = ParkEquipment
+        fields = ["equipment_name", "quantity"]
+
+
 # TODO: 코드 리팩토링 가능할지
 class ParkSerializer(serializers.ModelSerializer):
     total_equipments = serializers.SerializerMethodField()
@@ -19,22 +27,16 @@ class ParkSerializer(serializers.ModelSerializer):
     total_reviews = serializers.SerializerMethodField()
 
     def get_total_equipments(self, obj):
-        parkequipment = ParkEquipment.objects.filter(park_id=obj.id).aggregate(
-            Sum("quantity")
-        )
-        if parkequipment["quantity__sum"] is None:
-            return 0
-        return parkequipment["quantity__sum"]
+        # 참고: https://docs.djangoproject.com/en/4.0/ref/models/database-functions/#coalesce
+        sum_of_quantity = ParkEquipment.objects.filter(park_id=obj.id).aggregate(
+            Sum("quantity", default=0)
+        )["quantity__sum"]
+        return sum_of_quantity
 
     def get_equipments(self, obj):
-        parkequipment = ParkEquipment.objects.filter(park_id=obj.id)
-        result = []
-        for p in parkequipment:
-            equipment = Equipment.objects.get(id=p.equipment_id.id)
-            result.append(
-                {"equipment_name": equipment.equipment_name, "quantity": p.quantity}
-            )
-        return result
+        # 참고: https://gaussian37.github.io/python-rest-nested-serializer/
+        park_equipment = ParkEquipment.objects.filter(park_id=obj.id)
+        return ParkEquipmentSerializer(park_equipment, many=True).data
 
     def get_avg_score(self, obj):
         return obj.average_rating
