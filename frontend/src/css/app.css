@@ -1,24 +1,24 @@
 @import url(//font.elice.io/EliceDigitalBaeum.css);
 
-
 /* COMMON */
-html, body {
-  font-family: "Elice Digital Baeum",sans-serif;
+html,
+body {
+  font-family: "Elice Digital Baeum", sans-serif;
   color: #293845;
   font-size: 16px;
 }
 
 /* SECTION */
-/* section{
+section {
   position: relative;
 }
-section .inner{
+section .inner {
   border: 2px solid red;
   width: 980px;
   margin: 0 auto;
   position: relative;
   box-sizing: border-box;
-} */
+}
 
 /* BTN */
 /* .btn{
@@ -46,7 +46,12 @@ section .inner{
 
 /* ACTIVATE BUTTON */
 .disabledBtn {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
+  opacity: 0.6;
+  cursor: not-allowed;
+}
 
+input[type="text"] {
+  height: 40px;
+  border: 1px solid #e0e0e0;
+  margin-left: 4px;
+}

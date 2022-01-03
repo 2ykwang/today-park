@@ -4,14 +4,15 @@ import React, { createContext } from "react";
 export const UserContext = createContext();
 
 const UserStore = (props) => {
-    const users = {
-        "id": "",
-        "nickname": "",
-        "login": false
-}
+  const users = {
+    id: "",
+    nickname: "",
+    login: false,
+  };
 
-    return (<UserContext.Provider value={users}>{props.children}</UserContext.Provider>
-    );
+  return (
+    <UserContext.Provider value={users}>{props.children}</UserContext.Provider>
+  );
 };
 
 export default UserStore;

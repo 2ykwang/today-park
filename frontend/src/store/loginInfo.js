@@ -4,14 +4,17 @@ import React, { createContext } from "react";
 export const LoginInfoContext = createContext();
 
 const LoginInfoStore = (props) => {
-    const users = {
-        "id": "",
-        "nickname": "",
-        "login": false
-}
+  const users = {
+    id: "elice@test.com",
+    nickname: "엘리스",
+    password: "",
+  };
 
-    return (<LoginInfoContext.Provider value={users}>{props.children}</LoginInfoContext.Provider>
-    );
+  return (
+    <LoginInfoContext.Provider value={users}>
+      {props.children}
+    </LoginInfoContext.Provider>
+  );
 };
 
 export default LoginInfoStore;

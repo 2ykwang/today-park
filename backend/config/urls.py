@@ -37,6 +37,7 @@ schema_view = get_schema_view(
 
 app_urls = [
     path("", include("apps.user.urls")),
+    path("bookmark/", include("apps.bookmark.urls")),
     path("park/", include("apps.park.urls")),
 ]
 
