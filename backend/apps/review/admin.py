@@ -5,6 +5,7 @@ from django.contrib import admin
 # Register your models here.
 class ReviewAdmin(admin.ModelAdmin):
     list_display = (
+        "id",
         "user_id",
         "park_id",
         "content",
