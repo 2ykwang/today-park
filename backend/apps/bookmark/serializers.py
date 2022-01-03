@@ -12,6 +12,9 @@ class BookmarkListSerializer(serializers.ModelSerializer):
 
     park = serializers.SerializerMethodField()
 
+    def get_park(self, instance):
+        return ParkSerializer(instance.park_id).data
+
     class Meta:
         model = Bookmark
         # User ID 를 굳이 내보낼 필요 없을 거 같음
@@ -23,24 +26,27 @@ class BookmarkListSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ("created_at",)
 
-    # TODO: park를 nested 로 처리할지 or park id만 뿌려줄지
-    def get_park(self, instance):
-        return ParkSerializer(instance.park_id).data
-
 
 class BookmarkSerializer(serializers.ModelSerializer):
     """
     북마크 생성, 삭제
     """
 
+    park = serializers.SerializerMethodField()
+
+    def get_park(self, instance):
+        return ParkSerializer(instance.park_id).data
+
     class Meta:
         model = Bookmark
         fields = [
             "id",
             "park_id",
+            "park",
             "created_at",
         ]
-        read_only_fields = ("created_at",)
+        extra_kwargs = {"park_id": {"write_only": True}}
+        read_only_fields = ("created_at", "park")
 
     def create(self, validated_data):
 

@@ -1,16 +1,14 @@
 from django.urls import path
 
-from .views import BookmarkListView, BookmarkView
+from .views import BookmarDeletekView, BookmarkView
 
 # EndPoints
 """
-    GET /api/bookmarks
-    POST /api/bookmark
+    GET, POST /api/bookmark
     DELETE /api/bookmark/<int:bookmark_id>
 """
 
 urlpatterns = [
-    path("bookmarks/", BookmarkListView.as_view()),
-    path("bookmark/", BookmarkView.as_view()),
-    path("bookmark/<int:bookmark_id>", BookmarkView.as_view()),
+    path("", BookmarkView.as_view()),
+    path("<int:bookmark_id>", BookmarDeletekView.as_view()),
 ]
