@@ -10,7 +10,7 @@ class ReviewAdmin(admin.ModelAdmin):
         "content",
         "score",
         "created_at",
-        "modified_at",
+        "updated_at",
         "is_deleted",
     )
     list_filter = (
@@ -18,7 +18,7 @@ class ReviewAdmin(admin.ModelAdmin):
         "park_id",
         "score",
         "created_at",
-        "modified_at",
+        "updated_at",
         "is_deleted",
     )
 

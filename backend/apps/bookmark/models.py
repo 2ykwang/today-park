@@ -1,10 +1,10 @@
-from apps.core.models import BaseModel
+from apps.core.models import TimeStampModel
 from apps.park.models import Park
 from apps.user.models import User
 from django.db import models
 
 
-class Bookmark(BaseModel):
+class Bookmark(TimeStampModel):
     user_id = models.ForeignKey(
         User,
         on_delete=models.CASCADE,

@@ -3,7 +3,7 @@ import sys
 import uuid
 from io import BytesIO
 
-from apps.core.models import BaseModel
+from apps.core.models import TimeStampModel
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.db import models
@@ -13,7 +13,7 @@ from PIL import Image
 from .validators import UserNameValidator
 
 
-class User(BaseModel, AbstractBaseUser, PermissionsMixin):
+class User(TimeStampModel, AbstractBaseUser, PermissionsMixin):
     """
     username, email, profile_image
 
