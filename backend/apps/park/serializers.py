@@ -1,7 +1,7 @@
 from django.db.models import Sum
 from rest_framework import serializers
 
-from .models import Equipment, Park, ParkEquipment
+from .models import Equipment, Park, ParkEquipment, Review
 
 
 class EquipmentSerializer(serializers.ModelSerializer):
@@ -60,6 +60,36 @@ class ParkSerializer(serializers.ModelSerializer):
             "eq_list",
             "total_reviews",
             "avg_score",
+        ]
+
+
+class ParkReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = [
+            "id",
+            "score",
+            "content",
+            "user_id",
+            "park_id",
+            "created_at",
+            "modified_at",
+            "is_deleted",
+        ]
+
+
+class UserReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = [
+            "id",
+            "score",
+            "content",
+            "user_id",
+            "park_id",
+            "created_at",
+            "modified_at",
+            "is_deleted",
         ]
 
 

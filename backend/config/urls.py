@@ -38,7 +38,6 @@ schema_view = get_schema_view(
 app_urls = [
     path("", include("apps.user.urls")),
     path("park/", include("apps.park.urls")),
-    path("review/", include("apps.review.urls")),
 ]
 
 # url prefix ()
