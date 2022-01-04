@@ -134,7 +134,7 @@ class ParkReviewListView(APIView):
 
         공원(id)에 대한 리뷰 요청
         """
-        review = Review.objects.filter(park_id=park_id)
+        review = Review.objects.filter(Q(park_id=park_id) & Q(is_deleted=False))
         serializer = ParkReviewSerializer(review, many=True)
         return Response(serializer.data)
 
