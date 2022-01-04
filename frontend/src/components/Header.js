@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { LoginInfoContext } from "../store/loginInfo";
 import styled from "styled-components";
 import { ReactComponent as CloseButton } from "../image/closeButton.svg";
+import Logo from "../image/logo.png";
 
 const BasicLink = styled(Link)`
   text-decoration: none;
@@ -41,7 +42,9 @@ function LoginModal(props) {
       <div className="ModalContainer">
         <Background>
           <ModalContainer>
-            <h2>산스장</h2>
+            <h2>
+              <img src={Logo} alt="logo" width="200" />
+            </h2>
             <CloseButton className="closeBtn" onClick={props.handleClose} />
             <form>
               <input
@@ -107,7 +110,7 @@ function LoginHeader() {
     <>
       <header className="mainHeader">
         <div className="logo">
-          <BasicLink to="/">산스장</BasicLink>
+          <BasicLink to="/">오늘의 공원</BasicLink>
         </div>
         <div className="menuContainer">
           <nav className="mainMenu">
@@ -115,7 +118,7 @@ function LoginHeader() {
               프롤로그
             </BasicLink>
             <BasicLink to="/search" className="menu">
-              산스장 찾아보기
+              공원 찾아보기
             </BasicLink>
             <BasicLink to="#" className="menu">
               팀 소개
@@ -154,7 +157,7 @@ function LogoutHeader() {
     <>
       <header className="mainHeader">
         <div className="logo">
-          <BasicLink to="/">산스장</BasicLink>
+          <BasicLink to="/">오늘의 공원</BasicLink>
         </div>
         <div className="menuContainer">
           <nav className="mainMenu">
@@ -162,7 +165,7 @@ function LogoutHeader() {
               프롤로그
             </BasicLink>
             <BasicLink to="/search" className="menu">
-              산스장 찾아보기
+              공원 찾아보기
             </BasicLink>
             <BasicLink to="#" className="menu">
               팀 소개
