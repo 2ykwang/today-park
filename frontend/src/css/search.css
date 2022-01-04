@@ -46,6 +46,7 @@
   left: 0;
   box-sizing: border-box;
   overflow: hidden;
+  overflow-y: scroll;
 }
 .search .sidebar form {
   border-bottom: 1px solid #e0e0e0;

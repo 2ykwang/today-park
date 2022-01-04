@@ -65,9 +65,36 @@ const dummyparkdetail = [
   },
 ];
 
+const dummyreview = [
+  {
+    id: 1,
+    score: 3.5,
+    content: "너무 좋은거 같아여~! 자주 이용할게요~!",
+    user_id: "test@test.com",
+    park_id: "봉천11배수지공원(놀이터부근)",
+    username: "토끼랑",
+    created_at: "",
+    modified_at: "",
+    is_deleted: "",
+  },
+  {
+    id: 2,
+    score: 4.5,
+    content:
+      "여기 산스장은 운동기구가 참 많네요! 자주 이용하고 있어요~ 추천해요~!",
+    user_id: "test2@test.com",
+    park_id: "봉천11배수지공원(놀이터부근)",
+    username: "거북이",
+    created_at: "",
+    modified_at: "",
+    is_deleted: "",
+  },
+];
+
 export function SidebarSearchDetail() {
   const [content, setContent] = useState("");
   const detailList = [];
+  const reviewList = [];
 
   dummyparkdetail.forEach((item) => {
     detailList.push(
@@ -89,11 +116,9 @@ export function SidebarSearchDetail() {
             <ul>
               {item.equipments.map((item) => {
                 return (
-                  <>
-                    <li>
-                      {item.equipment_name}({item.quantity})
-                    </li>
-                  </>
+                  <li>
+                    {item.equipment_name}({item.quantity})
+                  </li>
                 );
               })}
             </ul>
@@ -103,6 +128,22 @@ export function SidebarSearchDetail() {
       </>
     );
   });
+
+  dummyreview.forEach((item) => {
+    reviewList.push(
+      <div className="review">
+        <h5>
+          {item.username}
+          <div className="rate">
+            <StarIcon width="24" height="24" fill="#FFB800" className="star" />
+            <p>{item.score}</p>
+          </div>
+        </h5>
+        <p>{item.content}</p>
+      </div>
+    );
+  });
+
   return (
     <>
       <Header />
@@ -125,7 +166,7 @@ export function SidebarSearchDetail() {
               <br />
               <button type="submit">등록하기</button>
             </form>
-            {/* <div className="reviews">리뷰 목록</div> */}
+            <div className="reviews">{reviewList}</div>
           </div>
         </div>
         <Map setTooltipContent={setContent} />

@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as SearchBtn } from "../image/search.svg";
-import { ReactComponent as MenuBtn } from "../image/menu.svg";
 import { ReactComponent as BookmarkBtnFilled } from "../image/bookmark-maked.svg";
 
 export function SidebarMenu(props) {
