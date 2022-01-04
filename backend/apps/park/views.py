@@ -191,19 +191,11 @@ class ParkReviewView(APIView):
         """
         공원 리뷰 삭제
 
-        공원(id) 리뷰 삭제
+        공원 리뷰(review_id) 삭제
         """
-        # review = Review.objects.get(id=review_id)
-        # if len(review) == 0:
-        #     return Response(status=status.HTTP_204_NO_CONTENT)
-
         review = get_object_or_404(Review, pk=review_id)
-
-        # 아래 로직은 permission_classes 사용하면 됩니다!
-        # if review.user_id != AccessToken["user_id"]:
-        #     return Response(status=status.HTTP_401_UNAUTHORIZED)
-
-        review.delete()
+        review.is_deleted = True
+        review.save()
         return Response({"detail": "댓글이 삭제되었습니다."}, status=status.HTTP_202_ACCEPTED)
 
     # TODO: 리뷰 수정
