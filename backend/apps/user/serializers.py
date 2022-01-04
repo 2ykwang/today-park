@@ -95,3 +95,43 @@ class UserResetPasswordSerializer(serializers.Serializer):
         # password 형식 체크
         validate_password(data["password"])
         return data
+
+
+# simplejwt drf-yasg integration
+
+
+class TokenObtainPairResponseSerializer(serializers.Serializer):
+    access = serializers.CharField()
+    refresh = serializers.CharField()
+
+    def create(self, validated_data):
+        raise NotImplementedError()
+
+    def update(self, instance, validated_data):
+        raise NotImplementedError()
+
+
+class TokenRefreshResponseSerializer(serializers.Serializer):
+    access = serializers.CharField()
+
+    def create(self, validated_data):
+        raise NotImplementedError()
+
+    def update(self, instance, validated_data):
+        raise NotImplementedError()
+
+
+class TokenVerifyResponseSerializer(serializers.Serializer):
+    def create(self, validated_data):
+        raise NotImplementedError()
+
+    def update(self, instance, validated_data):
+        raise NotImplementedError()
+
+
+class TokenBlacklistResponseSerializer(serializers.Serializer):
+    def create(self, validated_data):
+        raise NotImplementedError()
+
+    def update(self, instance, validated_data):
+        raise NotImplementedError()

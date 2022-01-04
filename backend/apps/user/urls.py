@@ -1,10 +1,4 @@
 from django.urls import path
-from rest_framework_simplejwt.views import (
-    TokenBlacklistView,
-    TokenObtainPairView,
-    TokenRefreshView,
-    TokenVerifyView,
-)
 
 from . import views
 
@@ -21,13 +15,21 @@ from . import views
 """
 
 urlpatterns = [
-    path("register/", views.UserRegisterView.as_view(), name="register"),
-    path("login/", TokenObtainPairView.as_view(), name="login"),
-    path("logout/", TokenBlacklistView.as_view(), name="logout"),
-    path("token/refresh", TokenRefreshView.as_view(), name="token_refresh"),
-    path("token/verify", TokenVerifyView.as_view(), name="token_verify"),
+    path("user/register", views.UserRegisterView.as_view(), name="register"),
+    path("user/login", views.DecoratedTokenObtainPairView.as_view(), name="login"),
+    path("user/logout", views.DecoratedTokenBlacklistView.as_view(), name="logout"),
     path(
-        "user/",
+        "user/token/refresh",
+        views.DecoratedTokenRefreshView.as_view(),
+        name="token_refresh",
+    ),
+    path(
+        "user/token/verify",
+        views.DecoratedTokenVerifyView.as_view(),
+        name="token_verify",
+    ),
+    path(
+        "user",
         views.UserView.as_view(),
         name="user",
     ),
@@ -37,7 +39,7 @@ urlpatterns = [
         name="user_upload_image",
     ),
     path(
-        "user/change-password",
+        "user/password",
         views.UserResetPasswordView.as_view(),
         name="change_password",
     ),

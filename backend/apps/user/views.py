@@ -3,9 +3,19 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework import generics, parsers, permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_simplejwt.views import (
+    TokenBlacklistView,
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView,
+)
 
 from .models import User
 from .serializers import (
+    TokenBlacklistResponseSerializer,
+    TokenObtainPairResponseSerializer,
+    TokenRefreshResponseSerializer,
+    TokenVerifyResponseSerializer,
     UserImageUploadSerializer,
     UserRegisterSerializer,
     UserResetPasswordSerializer,
@@ -155,3 +165,50 @@ class UserResetPasswordView(APIView):
         self.user.save()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+# simplejwt drf-yasg integration
+
+
+class DecoratedTokenObtainPairView(TokenObtainPairView):
+    @swagger_auto_schema(
+        responses={
+            status.HTTP_200_OK: TokenObtainPairResponseSerializer,
+            status.HTTP_401_UNAUTHORIZED: "만료되거나 유효하지 않은 토큰",
+        }
+    )
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
+
+
+class DecoratedTokenBlacklistView(TokenBlacklistView):
+    @swagger_auto_schema(
+        responses={
+            status.HTTP_200_OK: TokenBlacklistResponseSerializer,
+            status.HTTP_401_UNAUTHORIZED: "만료되거나 유효하지 않은 토큰",
+        }
+    )
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
+
+
+class DecoratedTokenRefreshView(TokenRefreshView):
+    @swagger_auto_schema(
+        responses={
+            status.HTTP_200_OK: TokenRefreshResponseSerializer,
+            status.HTTP_401_UNAUTHORIZED: "만료되거나 유효하지 않은 토큰",
+        }
+    )
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
+
+
+class DecoratedTokenVerifyView(TokenVerifyView):
+    @swagger_auto_schema(
+        responses={
+            status.HTTP_200_OK: TokenVerifyResponseSerializer,
+            status.HTTP_401_UNAUTHORIZED: "만료되거나 유효하지 않은 토큰",
+        }
+    )
+    def post(self, request, *args, **kwargs):
+        return super().post(request, *args, **kwargs)
