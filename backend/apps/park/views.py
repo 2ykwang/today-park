@@ -1,19 +1,18 @@
-from apps.review.models import Review
+from apps.core.permissions import IsOwner
 from django.db.models import Avg, Count, Q
-from django.http import Http404
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework import status
+from rest_framework import permissions, status
 from rest_framework.response import Response
-from rest_framework.serializers import Serializer
 from rest_framework.views import APIView
+from rest_framework_simplejwt.tokens import AccessToken
 
-from .models import Equipment, Park, ParkEquipment
-from .serializers import ParkRequestSerializer, ParkSerializer
+from .models import Park, Review
+from .serializers import ParkReviewSerializer, ParkSerializer
 
 
-class ParkList(APIView):
+class ParkListView(APIView):
     """
     공원 검색
 
@@ -96,7 +95,7 @@ class ParkList(APIView):
         return Response(serializer.data)
 
 
-class ParkDetail(APIView):
+class ParkDetailView(APIView):
     """
     공원 상세 정보
 
@@ -109,7 +108,112 @@ class ParkDetail(APIView):
             status.HTTP_404_NOT_FOUND: "잘못된 요청",
         },
     )
-    def get(self, request, pk, format=None):
-        park = get_object_or_404(Park, pk=pk)
+    def get(self, request, park_id, format=None):
+        park = get_object_or_404(Park, pk=park_id)
         serializer = ParkSerializer(park)
+        return Response(serializer.data)
+
+
+class ParkReviewListView(APIView):
+    # 인증 없으면 읽기만해라.
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    @swagger_auto_schema(
+        responses={
+            status.HTTP_200_OK: ParkReviewSerializer,
+            status.HTTP_404_NOT_FOUND: "잘못된 요청",
+        },
+    )
+    def get_user(self):
+        return self.request.user
+
+    # TODO: is_deleted 값이 True 일 경우 반환하지 않게 해야함.
+    def get(self, request, park_id, format=None):
+        """
+        공원별 리뷰 요청
+
+        공원(id)에 대한 리뷰 요청
+        """
+        review = Review.objects.filter(Q(park_id=park_id) & Q(is_deleted=False))
+        serializer = ParkReviewSerializer(review, many=True)
+        return Response(serializer.data)
+
+    # TODO: drf_yasg response scheme 실제 반환 되는 값과 다른 문제가 있음.
+    @swagger_auto_schema(
+        responses={
+            status.HTTP_200_OK: ParkReviewSerializer,
+            status.HTTP_404_NOT_FOUND: "잘못된 요청",
+        },
+    )
+    def post(self, request, park_id, format=None):
+        """
+        공원 리뷰 등록
+
+        공원(id) 리뷰 등록
+        """
+        user = self.get_user()
+        park = get_object_or_404(Park, pk=park_id)
+
+        serializer = ParkReviewSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        validated_data = serializer.validated_data
+
+        review = Review()
+        review.user_id = user
+        review.park_id = park
+        review.content = validated_data["content"]
+        review.score = validated_data["score"]
+
+        review.save()
+
+        return Response({"detail": "리뷰가 생성되었습니다."}, status=status.HTTP_201_CREATED)
+        # permission_classes = [permissions.IsAuthenticated]
+
+
+class ParkReviewView(APIView):
+
+    permission_classes = [IsOwner]
+
+    review_id = openapi.Parameter(
+        "review_id", openapi.IN_QUERY, description="리뷰ID", type=openapi.TYPE_STRING
+    )
+
+    @swagger_auto_schema(
+        manual_parameters=[review_id],
+        responses={
+            status.HTTP_200_OK: "성공",
+            status.HTTP_204_NO_CONTENT: "리뷰가 존재하지 않음",
+            status.HTTP_400_BAD_REQUEST: "잘못된 요청",
+        },
+    )
+    def delete(self, request, park_id, review_id, format=None):
+        """
+        공원 리뷰 삭제
+
+        공원(id) 리뷰 삭제
+        """
+        # review = Review.objects.get(id=review_id)
+        # if len(review) == 0:
+        #     return Response(status=status.HTTP_204_NO_CONTENT)
+
+        review = get_object_or_404(Review, pk=review_id)
+
+        # 아래 로직은 permission_classes 사용하면 됩니다!
+        # if review.user_id != AccessToken["user_id"]:
+        #     return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+        review.delete()
+        return Response({"detail": "댓글이 삭제되었습니다."}, status=status.HTTP_202_ACCEPTED)
+
+    # TODO: 리뷰 수정
+    def put(self, request, park_id, review_id, format=None):
+        pass
+
+
+# 유저별 리뷰
+class UserReviewList(APIView):
+    def get(self, request, format=None):
+        review = Review.objects.filter(user_id=AccessToken["user_id"])
+        serializer = ParkReviewSerializer(review, many=True)
         return Response(serializer.data)
