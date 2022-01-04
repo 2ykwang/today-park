@@ -21,8 +21,7 @@ class Bookmark(TimeStampModel):
     )
 
     class Meta:
-        verbose_name = "북마크"
-        verbose_name_plural = "공원 북마크"
+        pass
 
     def __str__(self):
         return f"{self.user_id.username} -> {self.park_id.park_name}"
