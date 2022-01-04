@@ -14,7 +14,7 @@ header .logo {
 header .menuContainer {
   font-size: 18px;
   margin-right: 40px;
-  /* border: 2px solid pink; */
+  /* border: 2px solid blue; */
   display: flex;
   position: absolute;
   top: 50;
@@ -22,7 +22,7 @@ header .menuContainer {
 }
 header nav.mainMenu {
   /* border: 2px solid orange; */
-  margin-right: 100px;
+  margin-right: 220px;
 }
 header nav .menu {
   margin-left: 16px;
@@ -35,43 +35,9 @@ header nav.user {
 header nav .userMenu {
   margin-left: 20px;
 }
-
-.ModalContainer {
-  position: relative;
-  z-index: 9999;
-}
-.ModalContainer .closeBtn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
+header .menuContainer button {
+  background-color: #fff;
+  border: 0.5px solid #3a3a3a;
   border-radius: 9999px;
-  cursor: pointer;
-}
-.ModalContainer h2 {
-  font-size: 32px;
-  text-align: center;
-  margin-top: 60px;
-  font-weight: bold;
-}
-.ModalContainer form {
-  text-align: center;
-  margin-top: 24px;
-}
-.ModalContainer input,
-.ModalContainer button {
-  width: 360px;
-  height: 48px;
-  margin-bottom: 20px;
-}
-.ModalContainer input {
-  border: 1px solid #e0e0e0;
-  font-size: 16px;
-  padding-left: 16px;
-}
-.ModalContainer button {
-  border: none;
-  border-radius: 9999px;
-  background-color: #47c690;
-  color: #fff;
-  font-size: 18px;
+  padding: 3px 12px;
 }

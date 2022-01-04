@@ -1,85 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { LoginInfoContext } from "../store/loginInfo";
-import styled from "styled-components";
-import { ReactComponent as CloseButton } from "../image/closeButton.svg";
 import Logo from "../image/logo.png";
-
-const BasicLink = styled(Link)`
-  text-decoration: none;
-  color: #000;
-  cursor: pointer;
-`;
-const LoginLink = styled(Link)`
-  text-decoration: none;
-  color: #757575;
-  cursor: pointer;
-  padding: 0 6px;
-`;
-
-const Background = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 0;
-`;
-const ModalContainer = styled.div`
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  min-width: 480px;
-  height: 540px;
-  background-color: #fff;
-`;
-
-function LoginModal(props) {
-  return (
-    <>
-      <div className="ModalContainer">
-        <Background>
-          <ModalContainer>
-            <h2>
-              <img src={Logo} alt="logo" width="200" />
-            </h2>
-            <CloseButton className="closeBtn" onClick={props.handleClose} />
-            <form>
-              <input
-                type="text"
-                placeholder="이메일"
-                id="loginId"
-                onInput={props.getId}
-              />
-              <br />
-              <input
-                type="password"
-                placeholder="비밀번호"
-                id="loginPw"
-                onChange={props.getPassword}
-              />
-              <br />
-              <button
-                type="submit"
-                onClick={(e) => {
-                  e.preventDefault();
-                }}
-              >
-                로그인
-              </button>
-              <br />
-              <LoginLink to="#">아이디 찾기</LoginLink>
-              <LoginLink to="#">비밀번호 찾기</LoginLink>
-              <LoginLink to="/signUp">회원가입</LoginLink>
-            </form>
-          </ModalContainer>
-        </Background>
-      </div>
-    </>
-  );
-}
+import { BasicLink, LoginModal } from "./LoginModal";
 
 function LoginHeader() {
   const context = useContext(LoginInfoContext);
@@ -108,42 +30,24 @@ function LoginHeader() {
 
   return (
     <>
-      <header className="mainHeader">
-        <div className="logo">
-          <BasicLink to="/">
-            <img src={Logo} alt="오늘의 공원 로고" width={110} />
+      <div className="menuContainer">
+        <nav className="user">
+          <BasicLink to="#" className="userMenu" onClick={handleLogin}>
+            로그인
           </BasicLink>
-        </div>
-        <div className="menuContainer">
-          <nav className="mainMenu">
-            <BasicLink to="/intro" className="menu">
-              프롤로그
-            </BasicLink>
-            <BasicLink to="/search" className="menu">
-              공원 찾아보기
-            </BasicLink>
-            <BasicLink to="#" className="menu">
-              팀 소개
-            </BasicLink>
-          </nav>
-          <nav className="user">
-            <BasicLink to="#" className="userMenu" onClick={handleLogin}>
-              로그인
-            </BasicLink>
-            <BasicLink to="/signUp" className="userMenu">
-              회원 가입
-            </BasicLink>
-          </nav>
-        </div>
-      </header>
-      {showModal ? (
+          <BasicLink to="/signUp" className="userMenu">
+            회원 가입
+          </BasicLink>
+        </nav>
+      </div>
+      {showModal && (
         <LoginModal
           handleClose={handleClose}
           getId={getId}
           getPassword={getPassword}
           showModal={showModal}
         />
-      ) : undefined}
+      )}
     </>
   );
 }
@@ -154,13 +58,33 @@ function LogoutHeader() {
     context["id"] = "";
     context["password"] = "";
   }
+  return (
+    <>
+      <div class="menuContainer">
+        <nav className="user">
+          <BasicLink to="/mypage" className="userMenu">
+            {context["nickname"]}님
+          </BasicLink>
+          <button type="button" className="userMenu" onClick={handleLogout}>
+            로그아웃
+          </button>
+        </nav>
+      </div>
+    </>
+  );
+}
 
+export function Header() {
+  const context = useContext(LoginInfoContext);
   return (
     <>
       <header className="mainHeader">
         <div className="logo">
-          <BasicLink to="/">오늘의 공원</BasicLink>
+          <BasicLink to="/">
+            <img src={Logo} alt="오늘의 공원 로고" width="110" />
+          </BasicLink>
         </div>
+
         <div className="menuContainer">
           <nav className="mainMenu">
             <BasicLink to="/intro" className="menu">
@@ -173,30 +97,14 @@ function LogoutHeader() {
               팀 소개
             </BasicLink>
           </nav>
-          <nav className="user">
-            <BasicLink to="/mypage" className="userMenu">
-              {context["nickname"]}님
-            </BasicLink>
-            <button type="button" className="userMenu" onClick={handleLogout}>
-              로그아웃
-            </button>
-          </nav>
         </div>
+        {/* 로그인 성공하면  */}
+        {context["id"] !== "" && context["password"] !== "" ? (
+          <LogoutHeader />
+        ) : (
+          <LoginHeader />
+        )}
       </header>
-    </>
-  );
-}
-
-export function Header() {
-  const context = useContext(LoginInfoContext);
-  return (
-    <>
-      {/* 로그인 성공하면  */}
-      {context["id"] !== "" && context["password"] !== "" ? (
-        <LogoutHeader />
-      ) : (
-        <LoginHeader />
-      )}
     </>
   );
 }

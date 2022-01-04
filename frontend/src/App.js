@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import "./css/reset.css";
 import "./css/app.css";
 import "./css/header.css";
+import "./css/loginModal.css";
 import "./css/signUp.css";
 import "./css/mypage.css";
 import "./css/search.css";
