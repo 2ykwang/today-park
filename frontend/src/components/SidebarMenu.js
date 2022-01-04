@@ -16,20 +16,10 @@ export function SidebarMenu(props) {
         >
           <SearchBtn
             width="28"
+            height="28"
             className={"icon " + (clicked === "search" && "clicked-icon")}
           />
         </Link>
-        {/* <Link
-          to="/search/list"
-          className={
-            "sidebar-menu item " + (clicked === "list" && "clicked-item")
-          }
-        >
-          <MenuBtn
-            width="28"
-            className={"icon " + (clicked === "list" && "clicked-icon")}
-          />
-        </Link> */}
         <Link
           to="/search/bookmark"
           className={
@@ -38,6 +28,7 @@ export function SidebarMenu(props) {
         >
           <BookmarkBtnFilled
             width="28"
+            height="28"
             className={"icon " + (clicked === "bookmark" && "clicked-icon")}
           />
         </Link>

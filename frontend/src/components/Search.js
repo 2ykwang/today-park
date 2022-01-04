@@ -135,14 +135,14 @@ function SidebarSearch() {
   const { id } = useParams();
 
   const parklist = [];
-  dummypark.map((item) => {
+  dummypark.forEach((item, idx) => {
     let park_id = item.id;
     parklist.push(
-      <>
+      <div key={idx}>
         <BasicLink to={"/search/" + park_id} className="park">
           <h3>
             {item.park_name}
-            <div class="rate">
+            <div className="rate">
               <StarIcon className="star" width="24" height="24" />
               {item.avg_score}
             </div>
@@ -157,7 +157,7 @@ function SidebarSearch() {
             <BookmarkIcon className="bookmark" width="24" height="24" />
           )}
         </BasicLink>
-      </>
+      </div>
     );
   });
 
@@ -179,7 +179,6 @@ function SidebarSearch() {
               <option value="dict_desc">가나다 역순</option>
             </select>
           </form>
-          {/* <div className="selectContainer"></div> */}
           <div className="parklistContainer">{parklist}</div>
         </div>
         <Map setTooltipContent={setContent} />

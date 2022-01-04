@@ -114,9 +114,9 @@ export function SidebarSearchDetail() {
   const detailList = [];
   const reviewList = [];
 
-  dummyparkdetail.forEach((item) => {
+  dummyparkdetail.forEach((item, idx) => {
     detailList.push(
-      <>
+      <div key={idx}>
         <div className="park">
           <div className="title">
             <h3>
@@ -143,13 +143,13 @@ export function SidebarSearchDetail() {
           </div>
           <h4 className="totalReviews">리뷰({item.total_reviews})</h4>
         </div>
-      </>
+      </div>
     );
   });
 
-  dummyreview.forEach((item) => {
+  dummyreview.forEach((item, idx) => {
     reviewList.push(
-      <div className="review">
+      <div className="review" key={idx}>
         <h5>
           {item.username}
           <div className="rate">
