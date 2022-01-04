@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
+import { LoginInfoContext } from "../store/loginInfo";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { ReactComponent as CloseButton } from "../image/closeButton.svg";
+import { ReactComponent as CloseButton } from "../image/closebutton.svg";
+import { userLogin, getUserInfo } from "../api/index";
 import Logo from "../image/logo.png";
 
 export const BasicLink = styled(Link)`
@@ -9,12 +12,14 @@ export const BasicLink = styled(Link)`
   color: #000;
   cursor: pointer;
 `;
+
 const LoginLink = styled(Link)`
   text-decoration: none;
   color: #757575;
   cursor: pointer;
   padding: 0 6px;
 `;
+
 const Background = styled.div`
   position: fixed;
   top: 0;
@@ -24,6 +29,7 @@ const Background = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 0;
 `;
+
 const ModalContainer = styled.div`
   position: fixed;
   left: 50%;
@@ -33,7 +39,9 @@ const ModalContainer = styled.div`
   height: 540px;
   background-color: #fff;
 `;
+
 export function LoginModal(props) {
+  const context = useContext(LoginInfoContext);
   return (
     <>
       <div className="ModalContainer">
@@ -60,8 +68,14 @@ export function LoginModal(props) {
               <br />
               <button
                 type="submit"
-                onClick={(e) => {
+                onClick={async (e) => {
                   e.preventDefault();
+                  let response = await userLogin(context.id, context.password);
+                  console.log(response);
+                  // 로그인이 성공한다면? -> 로컬 스토리지에 토큰이 저장됨.
+                  // makeheaders() -> 헤더를 만들어줌.
+                  response = await getUserInfo();
+                  console.log(response);
                 }}
               >
                 로그인

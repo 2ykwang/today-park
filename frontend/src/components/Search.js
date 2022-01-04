@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Header } from "./Header";
 import Map from "./Map";
 import ReactTooltip from "react-tooltip";
+import axios from "axios";
 import { ReactComponent as SearchIcon } from "../image/search.svg";
 import { ReactComponent as StarIcon } from "../image/star.svg";
 import { ReactComponent as BookmarkIconEmpty } from "../image/bookmark-empty.svg";
@@ -10,114 +11,54 @@ import { SidebarMenu } from "./SidebarMenu";
 import { BasicLink } from "./BasicLink";
 import { useParams } from "react-router-dom";
 
-const dummypark = [
-  {
-    id: 1,
-    park_name: "봉천11배수지공원(놀이터부근)",
-    gu_id: 135,
-    full_address: "서울특별시 관악구 인헌동 산3-8",
-    si_address: "서울특별시",
-    gu_address: "관악구",
-    dong_address: "인헌동",
-    latitude: "374,691,872,300,000.00",
-    longitude: "37.46918723",
-    park_image: null,
-    total_equipments: 3,
-    equipments: [
-      {
-        equipment_name: "역기내리기",
-        quantity: 1,
-      },
-      {
-        equipment_name: "다리들어올리기",
-        quantity: 2,
-      },
-    ],
-    total_reviews: 2,
-    avg_score: 3.5,
-  },
-  {
-    id: 2,
-    park_name: "봉천11배수지공원(놀이터부근)",
-    gu_id: 135,
-    full_address: "서울특별시 관악구 인헌동 산3-8",
-    si_address: "서울특별시",
-    gu_address: "관악구",
-    dong_address: "인헌동",
-    latitude: "374,691,872,300,000.00",
-    longitude: "37.46918723",
-    park_image: null,
-    total_equipments: 3,
-    equipments: [
-      {
-        equipment_name: "역기내리기",
-        quantity: 1,
-      },
-      {
-        equipment_name: "다리들어올리기",
-        quantity: 2,
-      },
-    ],
-    total_reviews: 2,
-    avg_score: 3.5,
-  },
-  {
-    id: 3,
-    park_name: "봉천11배수지공원(놀이터부근)",
-    gu_id: 135,
-    full_address: "서울특별시 관악구 인헌동 산3-8",
-    si_address: "서울특별시",
-    gu_address: "관악구",
-    dong_address: "인헌동",
-    latitude: "374,691,872,300,000.00",
-    longitude: "37.46918723",
-    park_image: null,
-    total_equipments: 3,
-    equipments: [
-      {
-        equipment_name: "역기내리기",
-        quantity: 1,
-      },
-      {
-        equipment_name: "다리들어올리기",
-        quantity: 2,
-      },
-    ],
-    total_reviews: 2,
-    avg_score: 3.5,
-  },
-  {
-    id: 4,
-    park_name: "봉천11배수지공원(놀이터부근)",
-    gu_id: 135,
-    full_address: "서울특별시 관악구 인헌동 산3-8",
-    si_address: "서울특별시",
-    gu_address: "관악구",
-    dong_address: "인헌동",
-    latitude: "374,691,872,300,000.00",
-    longitude: "37.46918723",
-    park_image: null,
-    total_equipments: 3,
-    equipments: [
-      {
-        equipment_name: "역기내리기",
-        quantity: 1,
-      },
-      {
-        equipment_name: "다리들어올리기",
-        quantity: 2,
-      },
-    ],
-    total_reviews: 2,
-    avg_score: 3.5,
-  },
-];
+
+  /*
+function makeHeaders(){ 
+     const token = localstorage getItem ('token')
+     const config = {
+        headers: {
+          'Authorization': `Bearer {token}`
+        }
+     }
+     return config; 
+}
+
+
+
+*/
+
+
+
+async function getParks(guId, keyword) {
+  var config = {
+    headers: {},
+  };  
+  const host = "http://localhost"; // < - 이건 환경변수로 뺴주세요.
+  const response = await axios.get(
+    `${host}/api/parks/search/?guId=${guId}&keyword=${keyword}`,
+  );
+  return response.data;
+}
 
 function SidebarSearch() {
   const [content, setContent] = useState("");
+  const [parks, setParks] = useState([]);
   const { id } = useParams();
 
-  const parklist = dummypark.map((item, idx) => {
+  useEffect(() => {
+    async function getParkData() {
+      const response = await getParks("", "");
+
+      //response 에는 공원 정보가 리스트로 들어감
+      setParks(response);
+    }
+    getParkData();
+  }, []);
+
+  // parks 라는 상태변수를 만들어서
+  // api call 해서 응답받은 data 를 parks 에 넣어준다. 그 후 map 함수로 뿌려준다.
+  //api
+  const parklist = parks.map((item, idx) => {
     let park_id = item.id;
     return (
       <div key={idx} className="park">

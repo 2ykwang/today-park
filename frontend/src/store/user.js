@@ -5,9 +5,9 @@ export const UserContext = createContext();
 
 const UserStore = (props) => {
   const users = {
-    id: "",
-    nickname: "",
-    login: false,
+    username: "",
+    email: "",
+    password: "",
   };
 
   return (
