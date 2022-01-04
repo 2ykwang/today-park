@@ -110,7 +110,9 @@ function LoginHeader() {
     <>
       <header className="mainHeader">
         <div className="logo">
-          <BasicLink to="/">오늘의 공원</BasicLink>
+          <BasicLink to="/">
+            <img src={Logo} alt="오늘의 공원 로고" width={110} />
+          </BasicLink>
         </div>
         <div className="menuContainer">
           <nav className="mainMenu">
