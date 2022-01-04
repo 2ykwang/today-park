@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Header } from "./Header";
 import Map from "./Map";
 import ReactTooltip from "react-tooltip";
-import { ReactComponent as SearchIcon } from "../image/search.svg";
+import { SidebarMenu } from "./SidebarMenu";
 import { ReactComponent as StarIcon } from "../image/star.svg";
 import { ReactComponent as BookmarkIconEmpty } from "../image/bookmark-empty.svg";
 import { ReactComponent as BookmarkIcon } from "../image/bookmark-maked.svg";
-import { SidebarMenu } from "./SidebarMenu";
+import { ReactComponent as FlagIcon } from "../image/flag.svg";
 import { BasicLink } from "./BasicLink";
-import { useParams } from "react-router-dom";
 
-const dummypark = [
+const dummybookmark = [
   {
     id: 1,
     park_name: "봉천11배수지공원(놀이터부근)",
@@ -113,11 +112,16 @@ const dummypark = [
   },
 ];
 
-function SidebarSearch() {
+export function SidebarBookmark() {
   const [content, setContent] = useState("");
-  const { id } = useParams();
+  const [clicked, setClicked] = useState(true);
 
-  const parklist = dummypark.map((item, idx) => {
+  function clickBookmark() {
+    if (clicked) setClicked(false);
+    else setClicked(true);
+  }
+
+  const bookmarkList = dummybookmark.map((item, idx) => {
     let park_id = item.id;
     return (
       <div key={idx} className="park">
@@ -134,19 +138,19 @@ function SidebarSearch() {
             운동기구: {item.total_equipments} / 리뷰: {item.total_reviews}
           </p>
         </BasicLink>
-        {true ? (
+        {clicked ? (
           <BookmarkIconEmpty
-            className={`bookmark id-${idx + 1}`}
+            className="bookmark"
             width="24"
             height="24"
-            checked={true}
+            onClick={clickBookmark}
           />
         ) : (
           <BookmarkIcon
-            className={`bookmark id-${idx + 1}`}
+            className="bookmark"
             width="24"
             height="24"
-            checked={false}
+            onClick={clickBookmark}
           />
         )}
       </div>
@@ -157,22 +161,19 @@ function SidebarSearch() {
     <>
       <Header />
       <section className="search">
-        <SidebarMenu item={"search"} />
+        <SidebarMenu item={"bookmark"} />
         <div className="sidebar">
-          <div className="searchContainer">
-            <form>
-              <SearchIcon width="24" height="24" className="searchIcon" />
-              <input type="text" />
-              <select name="sort">
-                <option value="score_asc">평점 높은 순</option>
-                <option value="score_desc">평점 낮은 순</option>
-                <option value="review_more">리뷰 많은 순</option>
-                <option value="review_less">리뷰 적은 순</option>
-                <option value="dict_asc">가나다 순</option>
-                <option value="dict_desc">가나다 역순</option>
-              </select>
-            </form>
-            <div>{parklist}</div>
+          <div className="bookmarkContainer">
+            <h2>
+              즐겨찾는 공원
+              <FlagIcon
+                width="28"
+                height="28"
+                fill="#3a3a3a"
+                className="flagIcon"
+              />
+            </h2>
+            <div>{bookmarkList}</div>
           </div>
         </div>
         <Map setTooltipContent={setContent} />
@@ -181,5 +182,3 @@ function SidebarSearch() {
     </>
   );
 }
-
-export default SidebarSearch;

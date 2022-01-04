@@ -14,47 +14,6 @@ import GoogleMapReact from "google-map-react";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { IconContext } from "react-icons";
 
-const MyMarker = (props) => {
-  return (
-    <IconContext.Provider value={{ color: "red", size: "3em" }}>
-      <div>
-        <FaMapMarkerAlt />
-      </div>
-    </IconContext.Provider>
-  );
-};
-
-class SimpleMap extends Component {
-  static defaultProps = {
-    center: {
-      lat: 59.95,
-      lng: 30.33,
-    },
-    zoom: 11,
-  };
-
-  render() {
-    return (
-      // Important! Always set the container height explicitly
-      <div style={{ height: "100%", width: "100%" }}>
-        <GoogleMapReact
-          bootstrapURLKeys={{ key: GOOGLE_KEY }}
-          defaultCenter={this.props.center}
-          defaultZoom={this.props.zoom}
-        >
-          <MyMarker
-            lat={this.props.lat}
-            lng={this.props.lng}
-            string={this.props.name}
-          />
-        </GoogleMapReact>
-      </div>
-    );
-  }
-}
-
-export default SimpleMap;
-
 const dummyparkdetail = [
   {
     id: 4,
@@ -64,8 +23,8 @@ const dummyparkdetail = [
     si_address: "서울특별시",
     gu_address: "관악구",
     dong_address: "인헌동",
-    latitude: "374,691,872,300,000.00",
-    longitude: "37.46918723",
+    latitude: 37.46934341547775,
+    longitude: 126.97010784,
     park_image: null,
     total_equipments: 3,
     equipments: [
@@ -108,6 +67,43 @@ const dummyreview = [
     is_deleted: "",
   },
 ];
+
+const MyMarker = (props) => {
+  return (
+    <IconContext.Provider value={{ color: "red", size: "3em" }}>
+      <div>
+        <FaMapMarkerAlt />
+      </div>
+    </IconContext.Provider>
+  );
+};
+
+class SimpleMap extends Component {
+  static defaultProps = {
+    center: {
+      lat: 37.55105648528907,
+      lng: 126.98820917938465,
+    },
+    zoom: 11,
+  };
+
+  render() {
+    return (
+      // Important! Always set the container height explicitly
+      <div style={{ height: "100%", width: "100%" }}>
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: GOOGLE_KEY }}
+          defaultCenter={this.props.center}
+          defaultZoom={this.props.zoom}
+        >
+          <MyMarker lat={this.props.lat} lng={this.props.lng} />
+        </GoogleMapReact>
+      </div>
+    );
+  }
+}
+
+export default SimpleMap;
 
 export function SidebarSearchDetail() {
   const [content, setContent] = useState("");
@@ -161,7 +157,6 @@ export function SidebarSearchDetail() {
       </div>
     );
   });
-
   return (
     <>
       <Header />
@@ -173,7 +168,10 @@ export function SidebarSearchDetail() {
           </Link>
           <div className="mapAPI">
             <SimpleMap
-              center={{ lat: 37.46934341547775, lng: 126.97010784 }}
+              center={{
+                lat: dummyparkdetail[0].latitude,
+                lng: dummyparkdetail[0].longitude,
+              }}
               zoom={15}
             />
           </div>

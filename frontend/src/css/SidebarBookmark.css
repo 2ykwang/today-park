@@ -1,0 +1,15 @@
+.search .sidebar .bookmarkContainer {
+  margin-left: 80px;
+}
+.search .sidebar .bookmarkContainer h2 {
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 32px 40px;
+  position: relative;
+}
+.search .sidebar .bookmarkContainer h2 .flagIcon {
+  position: absolute;
+  top: 28px;
+  left: 152px;
+}

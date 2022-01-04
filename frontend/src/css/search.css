@@ -63,57 +63,55 @@
   height: 48px;
   border: 2px solid #5bc691;
   border-radius: 9999px;
-  margin: 28px 0 28px 110px;
+  margin: 28px 0 28px 28px;
   font-size: 16px;
   padding-left: 60px;
   box-sizing: border-box;
 }
-.search .selectContainer {
-  /* margin-left: 80px; */
-}
 .search form select {
-  /* width: %; */
   height: 48px;
-  /* border-bottom: 2px solid #5bc691; */
   color: #757575;
   padding-right: 10px;
   box-sizing: border-box;
   font-size: 15px;
   cursor: pointer;
 }
-.search .parklistContainer {
+.search .searchContainer {
   margin-left: 80px;
 }
-.search .parklistContainer .park {
+.search .park {
   border-bottom: 1px solid #e0e0e0;
-  padding: 28px 0 28px 48px;
   box-sizing: border-box;
   position: relative;
   display: block;
 }
-.search .parklistContainer .park h3 {
+.search .park .parklink {
+  padding: 28px 0 28px 48px;
+  display: block;
+}
+.search .park h3 {
   font-weight: bold;
   margin-bottom: 8px;
   position: relative;
 }
-.search .parklistContainer .park p {
+.search .park p {
   margin-bottom: 5px;
 }
-.search .parklistContainer .park h3 .rate {
+.search .park h3 .rate {
   display: inline-block;
   margin-left: 34px;
   position: relative;
 }
-.search .parklistContainer .park h3 .rate .star {
+.search .park h3 .rate .star {
   position: absolute;
   top: -5px;
   left: -24px;
   fill: #ffd464;
 }
-.search .parklistContainer .park .bookmark {
+.search .bookmark {
   position: absolute;
-  top: 20px;
-  right: 40px;
+  top: 28px;
+  right: 60px;
   fill: #3a3a3a;
   cursor: pointer;
 }
