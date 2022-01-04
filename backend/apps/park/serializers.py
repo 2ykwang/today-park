@@ -80,44 +80,9 @@ class ParkReviewSerializer(serializers.ModelSerializer):
             "score",
             "content",
             "username",
-            "created_at",
-            # "user_id",
-            # "park_id",
         ]
         read_only_fields = ("id",)
         extra_kwargs = {
             # "user_id": {"write_only": True},
             # "park_id": {"write_only": True},
         }
-
-
-# class UserReviewSerializer(serializers.ModelSerializer):
-#     """
-
-#     """
-#     class Meta:
-#         model = Review
-#         fields = [
-#             "id",
-#             "score",
-#             "content",
-#             "user_id",
-#             "park_id",
-#             "created_at",
-#         ]
-
-
-class ParkRequestSerializer(serializers.Serializer):
-    guId = serializers.CharField(help_text="구 이름(required)")
-    keyword = serializers.CharField(help_text="검색어(optional)")
-    sort = serializers.ChoiceField(
-        help_text="정렬방식(optional)",
-        choices=(
-            "score_asc",
-            "score_desc",
-            "review_more",
-            "review_less",
-            "dict_asc",
-            "dict_desc",
-        ),
-    )
