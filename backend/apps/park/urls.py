@@ -16,4 +16,6 @@ urlpatterns = [
     path("detail/<int:park_id>", views.ParkDetailView.as_view()),
     path("<int:park_id>/reviews", views.ParkReviewListView.as_view()),
     path("<int:park_id>/reviews/<int:review_id>", views.ParkReviewView.as_view()),
+    # TODO: 마이페이지 리뷰 리스트 엔드포인트 고민
+    path("user-reviews/", views.UserReviewListView.as_view()),
 ]

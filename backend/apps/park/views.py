@@ -143,7 +143,7 @@ class ParkReviewListView(APIView):
     @swagger_auto_schema(
         request_body=ParkReviewSerializer,
         responses={
-            status.HTTP_200_OK: ParkReviewSerializer,
+            status.HTTP_201_CREATED: ParkReviewSerializer,
             status.HTTP_404_NOT_FOUND: "잘못된 요청",
         },
     )
@@ -176,12 +176,23 @@ class ParkReviewView(APIView):
 
     permission_classes = [IsOwner]
 
+    park_id = openapi.Parameter(
+        "park_id",
+        openapi.IN_QUERY,
+        description="공원ID",
+        required=True,
+        type=openapi.TYPE_STRING,
+    )
     review_id = openapi.Parameter(
-        "review_id", openapi.IN_QUERY, description="리뷰ID", type=openapi.TYPE_STRING
+        "review_id",
+        openapi.IN_QUERY,
+        description="리뷰ID",
+        required=True,
+        type=openapi.TYPE_STRING,
     )
 
     @swagger_auto_schema(
-        manual_parameters=[review_id],
+        manual_parameters=[park_id, review_id],
         responses={
             status.HTTP_202_ACCEPTED: "성공",
             status.HTTP_404_NOT_FOUND: "리뷰가 존재하지 않음",
@@ -198,14 +209,33 @@ class ParkReviewView(APIView):
         review.save()
         return Response({"detail": "댓글이 삭제되었습니다."}, status=status.HTTP_202_ACCEPTED)
 
-    # TODO: 리뷰 수정
+    @swagger_auto_schema(
+        request_body=ParkReviewSerializer,
+        responses={
+            status.HTTP_201_CREATED: "성공",
+            status.HTTP_404_NOT_FOUND: "리뷰가 존재하지 않음",
+        },
+    )
     def put(self, request, park_id, review_id, format=None):
-        pass
+        review = get_object_or_404(Review, pk=review_id)
+        serializer = ParkReviewSerializer(review, data=request.data)
+
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+
+        validated_data = serializer.validated_data
+
+        review.content = validated_data["content"]
+        review.score = validated_data["score"]
+
+        review.save()
+
+        return Response(serializer.data)
 
 
-# 유저별 리뷰
-class UserReviewList(APIView):
+# TODO: 유저별 리뷰
+class UserReviewListView(APIView):
     def get(self, request, format=None):
-        review = Review.objects.filter(user_id=AccessToken["user_id"])
+        review = Review.objects.filter(user_id=request.user.id)
         serializer = ParkReviewSerializer(review, many=True)
         return Response(serializer.data)
