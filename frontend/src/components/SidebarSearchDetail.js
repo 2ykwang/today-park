@@ -11,6 +11,18 @@ import { SidebarMenu } from "./SidebarMenu";
 import { BasicLink } from "./BasicLink";
 import { GOOGLE_KEY } from "../gitignore/googleKey";
 import GoogleMapReact from "google-map-react";
+import { FaMapMarkerAlt } from "react-icons/fa";
+import { IconContext } from "react-icons";
+
+const MyMarker = (props) => {
+  return (
+    <IconContext.Provider value={{ color: "red", size: "3em" }}>
+      <div>
+        <FaMapMarkerAlt />
+      </div>
+    </IconContext.Provider>
+  );
+};
 
 class SimpleMap extends Component {
   static defaultProps = {
@@ -29,7 +41,13 @@ class SimpleMap extends Component {
           bootstrapURLKeys={{ key: GOOGLE_KEY }}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
-        ></GoogleMapReact>
+        >
+          <MyMarker
+            lat={this.props.lat}
+            lng={this.props.lng}
+            string={this.props.name}
+          />
+        </GoogleMapReact>
       </div>
     );
   }
@@ -114,9 +132,9 @@ export function SidebarSearchDetail() {
           <div className="equipments">
             <h4>운동기구 종류</h4>
             <ul>
-              {item.equipments.map((item) => {
+              {item.equipments.map((item, idx) => {
                 return (
-                  <li>
+                  <li key={idx}>
                     {item.equipment_name}({item.quantity})
                   </li>
                 );
