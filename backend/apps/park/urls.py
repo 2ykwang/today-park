@@ -7,14 +7,13 @@ from . import views
 """
     GET /api/parks/search
     GET /api/parks/detail/<int:park_id>
-    
     GET, POST /api/parks/<int:park_id>/reviews
+    PUT, DELETE /api/parks/<int:park_id>/reviews/<int:review_id>
 """
 
 urlpatterns = [
     path("search/", views.ParkListView.as_view()),
     path("detail/<int:park_id>", views.ParkDetailView.as_view()),
-    # TODO: get, post
     path("<int:park_id>/reviews", views.ParkReviewListView.as_view()),
     path("<int:park_id>/reviews/<int:review_id>", views.ParkReviewView.as_view()),
 ]
