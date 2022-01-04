@@ -1,0 +1,44 @@
+version: "3"
+
+# 개발 환경
+
+services:
+  # BACKEND
+  app:
+    command: sh -c "python3 manage.py migrate --noinput && python manage.py
+      collectstatic --noinput && python3 manage.py runserver 0:8000"
+    depends_on:
+      - database
+
+  # FRONTEND
+  client:
+    command: "npm run start"
+    environment: 
+      CHOKIDAR_USEPOLLING: "true"
+
+  # WEB SERVER
+  nginx:
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./backend/.media:/srv/app/.media
+      - static_volume:/srv/app/.static
+
+  # DATABASE ( 개발 환경에서만 사용)
+  database:
+    image: mysql:8.0
+    container_name: mysql
+    restart: unless-stopped
+    ports:
+      - "13306:3306"
+    environment:
+      MYSQL_DATABASE: "emptycart"
+      MYSQL_ROOT_PASSWORD: "1234"
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./.mysql/:/var/lib/mysql/
+
+volumes:
+  static_volume: null
+  client_volume: null

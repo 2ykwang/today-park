@@ -9,7 +9,18 @@ from .models import User
 class CustomUserAdmin(UserAdmin):
     # Edit
     fieldsets = (
-        (_("Personal info"), {"fields": ("username", "email", "password")}),
+        (
+            _("Personal info"),
+            {
+                "fields": (
+                    "username",
+                    "email",
+                    "password",
+                    "profile_image",
+                    "profile_image_tag_large",
+                )
+            },
+        ),
         (
             _("Permissions"),
             {
@@ -28,16 +39,21 @@ class CustomUserAdmin(UserAdmin):
             None,
             {
                 "classes": ("wide",),
-                "fields": ("email", "username", "password1", "password2"),
+                "fields": (
+                    "email",
+                    "username",
+                    "password1",
+                    "password2",
+                ),
             },
         ),
     )
 
     # 읽기 전용 필드
-    readonly_fields = ("created_at", "updated_at")
+    readonly_fields = ("created_at", "updated_at", "profile_image_tag_large")
 
     # List
-    list_display = ("username", "email", "is_staff", "last_login")
+    list_display = ("profile_image_tag", "username", "email", "is_staff", "last_login")
     list_filter = ("is_staff", "is_superuser", "groups")
     search_fields = ("username", "username", "email")
     ordering = ("username",)

@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path, re_path
 from drf_yasg import openapi
@@ -36,6 +37,9 @@ schema_view = get_schema_view(
 
 app_urls = [
     path("", include("apps.user.urls")),
+    path("bookmark/", include("apps.bookmark.urls")),
+    path("park/", include("apps.park.urls")),
+    path("review/", include("apps.review.urls")),
 ]
 
 # url prefix ()
@@ -63,3 +67,4 @@ if settings.DEBUG:
             name="schema-redoc",
         ),
     ]
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
