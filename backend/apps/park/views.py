@@ -22,7 +22,7 @@ class ParkListView(APIView):
     guId = openapi.Parameter(
         "guId",
         openapi.IN_QUERY,
-        description="구ID",
+        description="구 이름",
         required=True,
         type=openapi.TYPE_STRING,
     )
@@ -43,8 +43,8 @@ class ParkListView(APIView):
     )
     def get(self, request, format=None):
         guId = request.GET.get("guId", None)
-        keyword = request.GET.get("keyword", None)  # 공원이름, 동이름
-        sort = request.GET.get("sort", None)  # 평점, 리뷰많은순, 가나다
+        keyword = request.GET.get("keyword", None)
+        sort = request.GET.get("sort", None)
 
         def key_filter():
             park = Park.objects.filter(
@@ -52,7 +52,6 @@ class ParkListView(APIView):
             )
             return park
 
-        # TODO: count_reviews average_rating 순으로 정렬되는 부분 코드 다시 짜야함
         def sort_type(sort, park):
             if sort == "score_asc":
                 park = park.annotate(avg_rating=Avg("review_park__score")).order_by(
@@ -77,15 +76,19 @@ class ParkListView(APIView):
             return park
 
         if guId is None:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-
-        if keyword is not None:  # 검색어o
-            park = key_filter()
-        else:  # 검색어x
-            park = Park.objects.filter(gu_address=guId)
-
-        if not len(park):  # 공원이 없을때
-            return Response(status=status.HTTP_204_NO_CONTENT)
+            return Response(
+                {"detail": "구ID를 입력해 주세요."}, status=status.HTTP_400_BAD_REQUEST
+            )
+        else:
+            park = (
+                Park.objects.filter(gu_address=guId)
+                if keyword is None
+                else key_filter()
+            )
+            if len(park) == 0:
+                return Response(
+                    {"detail": "일치하는 공원이 없습니다."}, status=status.HTTP_204_NO_CONTENT
+                )
 
         if sort is not None:  # 정렬o
             park = sort_type(sort, park)
@@ -115,7 +118,6 @@ class ParkDetailView(APIView):
 
 
 class ParkReviewListView(APIView):
-    # 인증 없으면 읽기만해라.
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     @swagger_auto_schema(
@@ -127,12 +129,11 @@ class ParkReviewListView(APIView):
     def get_user(self):
         return self.request.user
 
-    # TODO: is_deleted 값이 True 일 경우 반환하지 않게 해야함.
     def get(self, request, park_id, format=None):
         """
         공원별 리뷰 요청
 
-        공원(id)에 대한 리뷰 요청
+        공원(id)에 대한 리뷰 요청 - 삭제된 리뷰 제외
         """
         review = Review.objects.filter(Q(park_id=park_id) & Q(is_deleted=False))
         serializer = ParkReviewSerializer(review, many=True)
@@ -140,6 +141,7 @@ class ParkReviewListView(APIView):
 
     # TODO: drf_yasg response scheme 실제 반환 되는 값과 다른 문제가 있음.
     @swagger_auto_schema(
+        request_body=ParkReviewSerializer,
         responses={
             status.HTTP_200_OK: ParkReviewSerializer,
             status.HTTP_404_NOT_FOUND: "잘못된 요청",
@@ -168,7 +170,6 @@ class ParkReviewListView(APIView):
         review.save()
 
         return Response({"detail": "리뷰가 생성되었습니다."}, status=status.HTTP_201_CREATED)
-        # permission_classes = [permissions.IsAuthenticated]
 
 
 class ParkReviewView(APIView):
@@ -182,9 +183,8 @@ class ParkReviewView(APIView):
     @swagger_auto_schema(
         manual_parameters=[review_id],
         responses={
-            status.HTTP_200_OK: "성공",
-            status.HTTP_204_NO_CONTENT: "리뷰가 존재하지 않음",
-            status.HTTP_400_BAD_REQUEST: "잘못된 요청",
+            status.HTTP_202_ACCEPTED: "성공",
+            status.HTTP_404_NOT_FOUND: "리뷰가 존재하지 않음",
         },
     )
     def delete(self, request, park_id, review_id, format=None):
