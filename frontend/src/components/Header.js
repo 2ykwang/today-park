@@ -15,7 +15,6 @@ function LoginHeader() {
 
   useEffect(() => {
     dispatch(getLoginData({ email: email, username: "", password: password }));
-    console.log(loginStore);
   }, [email, password, dispatch, loginStore]);
 
   function handleLogin() {
