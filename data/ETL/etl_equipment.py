@@ -82,7 +82,7 @@ class Equipment_Gwanak() :
         df_equip = df_equip.drop_duplicates('equipment_name').reset_index(drop=True)
 
         # DB 처리
-        return load_data(self.engine, 'equipment','equipment_name', df_equip)
+        return load_data(self.engine, 'park_equipment','equipment_name', df_equip)
         
         # try :
         #     conn = self.engine.connect()
