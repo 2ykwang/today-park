@@ -1,4 +1,4 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, password_validation
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 
@@ -13,6 +13,10 @@ class UserRegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
         required=True, style={"input_type": "password"}, label="비밀번호", write_only=True
     )
+
+    def validate_password(self, value):
+        password_validation.validate_password(value, self.instance)
+        return value
 
     def create(self, validated_data):
         password = validated_data["password"]
