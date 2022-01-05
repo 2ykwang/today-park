@@ -40,7 +40,7 @@ const ModalContainer = styled.div`
 `;
 
 export function LoginModal(props) {
-  const context = useContext(LoginInfoContext);
+  const loginInfo = useContext(LoginInfoContext);
   return (
     <>
       <div className="ModalContainer">
@@ -69,12 +69,15 @@ export function LoginModal(props) {
                 type="submit"
                 onClick={async (e) => {
                   e.preventDefault();
-                  let response = await userLogin(context.id, context.password);
+                  let response = await userLogin(
+                    loginInfo.id,
+                    loginInfo.password
+                  );
                   // 로그인이 성공한다면? -> 로컬 스토리지에 토큰이 저장됨.
                   // makeheaders() -> 헤더를 만들어줌.
                   response = await getUserInfo();
                   console.log(response);
-                  context.nickname = response.username;
+                  loginInfo.nickname = response.username;
                 }}
               >
                 로그인
