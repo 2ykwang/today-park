@@ -5,6 +5,7 @@ from io import BytesIO
 
 from apps.core.models import TimeStampModel
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
+from django.core import validators
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.db import models
 from django.utils.html import mark_safe
@@ -25,15 +26,27 @@ class User(TimeStampModel, AbstractBaseUser, PermissionsMixin):
             is_superuser, groups, user_permissions
     """  # noqa
 
-    username_validator = UserNameValidator()
-
     username = models.CharField(
         verbose_name="닉네임",
         max_length=30,
         unique=True,
-        validators=[username_validator],
+        error_messages={
+            "unique": "이미 사용중인 닉네임 입니다.",
+        },
+        validators=[
+            UserNameValidator(),
+            validators.MinLengthValidator(2),
+        ],
     )
-    email = models.EmailField(verbose_name="이메일", max_length=128, unique=True)
+    email = models.EmailField(
+        verbose_name="이메일",
+        validators=[validators.MinLengthValidator(8)],
+        error_messages={
+            "unique": "이미 사용중인 이메일 입니다.",
+        },
+        max_length=60,
+        unique=True,
+    )
     is_staff = models.BooleanField(verbose_name="is staff", default=False)
 
     def _get_uuid_path(instance, filename):
@@ -94,3 +107,11 @@ class User(TimeStampModel, AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+
+
+class UserKeyword(models.Model):
+    user_id = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    keyword = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f"{self.user_id} {self.keyword}"

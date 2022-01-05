@@ -81,12 +81,12 @@ class Park_Equipment_Gwanak() :
 
         #공원id, 운동기기id 붙이기
         #etl을 구 단위로 하고 있기 때문에 그냥 공원이름으로만 찾아도 되겠다
-        df_serach_park, ex = search_table(self.engine, 'park', False, ["gu_address='관악구'"])
+        df_serach_park, ex = search_table(self.engine, 'park_park', False, ["gu_address='관악구'"])
 
         if ex is not None :
             pass
         
-        df_serach_equip, ex = search_table(self.engine, 'equipment', False)
+        df_serach_equip, ex = search_table(self.engine, 'park_equipment', False)
 
         if ex is not None :
             pass
@@ -100,4 +100,4 @@ class Park_Equipment_Gwanak() :
         #중복 체크도 중복체크지만.. 수량이 변경되서 올경우에는 어떻게 해야하나???
         #수량이 바뀌어있는 data, 새로운 데이터로 나눈다 일단 새로운 데이터는 기존 method 불러오자
         #수량 update는 추후 
-        return load_data(self.engine, 'park_equipment',['park_id','equipment_id'], df_park_equip)
+        return load_data(self.engine, 'park_park_equipment',['park_id','equipment_id'], df_park_equip)
