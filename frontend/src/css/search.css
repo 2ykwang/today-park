@@ -78,6 +78,10 @@
 }
 .search .searchContainer {
   margin-left: 80px;
+  margin-bottom: 60px;
+}
+.search .parkContainer {
+  position: relative;
 }
 .search .park {
   border-bottom: 1px solid #e0e0e0;
@@ -114,4 +118,18 @@
   right: 60px;
   fill: #3a3a3a;
   cursor: pointer;
+}
+.search .pagination {
+  width: 144px;
+  font-size: 15px;
+  text-align: center;
+  position: absolute;
+  bottom: -36px;
+  right: 170px;
+}
+.search .pagination button {
+  border: none;
+  background-color: #fff;
+  margin-right: 4px;
+  color: #757575;
 }
