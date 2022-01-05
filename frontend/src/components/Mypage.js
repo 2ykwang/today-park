@@ -1,7 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { LoginInfoContext } from "../store/loginInfo";
 import { Header } from "./Header";
+import { useSelector, useDispatch } from "react-redux";
+import { getLoginData } from "../store/loginSlice";
 
 const ProfileImage = styled.div`
   background-color: #e0e0e0;
@@ -12,28 +13,32 @@ const ProfileImage = styled.div`
 `;
 
 export function Mypage() {
-  const context = useContext(LoginInfoContext);
-  const [id, setId] = useState(context["id"]);
-  const [nickname, setNickname] = useState(context["nickname"]);
-  const [editId, setEditId] = useState(false);
-  const [editNickname, setEditNickname] = useState(false);
+  const dispatch = useDispatch();
+  const loginStore = useSelector((state) => state.login);
+
+  const [email, setEmail] = useState(loginStore.email);
+  const [username, setUsername] = useState(loginStore.username);
+  const [password, setPassword] = useState(loginStore.password);
+  const [editEmail, setEditEmail] = useState(false);
+  const [editUsername, setEditUsername] = useState(false);
 
   useEffect(() => {
-    context["id"] = id;
-    context["username"] = nickname;
-  }, [id, nickname, context]);
+    dispatch(
+      getLoginData({ email: email, username: username, password: password })
+    );
+  }, [email, username, dispatch]);
 
   function handleIdChange(e) {
-    setId(e.target.value);
+    setEmail(e.target.value);
   }
   function handleNicknameChange(e) {
-    setNickname(e.target.value);
+    setUsername(e.target.value);
   }
   function handleEditId() {
-    setEditId(false);
+    setEditEmail(false);
   }
   function handleEditNickname() {
-    setEditNickname(false);
+    setEditUsername(false);
   }
 
   return (
@@ -52,19 +57,19 @@ export function Mypage() {
             <div className="content">
               <p>
                 아이디 :
-                {editId ? (
-                  <input type="text" value={id} onChange={handleIdChange} />
+                {editEmail ? (
+                  <input type="text" value={email} onChange={handleIdChange} />
                 ) : (
-                  id
+                  email
                 )}
-                {editId ? (
+                {editEmail ? (
                   <button className="edit" onClick={handleEditId}>
                     확정
                   </button>
                 ) : (
                   <button
                     onClick={() => {
-                      setEditId(true);
+                      setEditEmail(true);
                     }}
                     className="edit"
                   >
@@ -74,23 +79,23 @@ export function Mypage() {
               </p>
               <p>
                 닉네임 :
-                {editNickname ? (
+                {editUsername ? (
                   <input
                     type="text"
-                    value={nickname}
+                    value={username}
                     onChange={handleNicknameChange}
                   />
                 ) : (
-                  nickname
+                  username
                 )}
-                {editNickname ? (
+                {editUsername ? (
                   <button className="edit" onClick={handleEditNickname}>
                     확정
                   </button>
                 ) : (
                   <button
                     onClick={() => {
-                      setEditNickname(true);
+                      setEditUsername(true);
                     }}
                     className="edit"
                   >

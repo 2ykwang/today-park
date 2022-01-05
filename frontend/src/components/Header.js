@@ -1,22 +1,22 @@
-import React, { useContext, useState, useEffect } from "react";
-import { LoginInfoContext } from "../store/loginInfo";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { getLoginData } from "../store/loginSlice";
 import Logo from "../image/logo.png";
 import { BasicLink, LoginModal } from "./LoginModal";
 
 function LoginHeader() {
   const [showModal, setShowModal] = useState(false);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   // Redux
   const dispatch = useDispatch();
+  const loginStore = useSelector((state) => state.login);
 
   useEffect(() => {
-    dispatch(getLoginData({ email: email, password: password }));
-  }, [email, password]);
+    dispatch(getLoginData({ email: email, username: "", password: password }));
+    console.log(loginStore);
+  }, [email, password, dispatch, loginStore]);
 
   function handleLogin() {
     setShowModal(true);
@@ -24,10 +24,10 @@ function LoginHeader() {
   function handleClose() {
     setShowModal(false);
   }
-  function getEmail(e) {
+  function handleEmail(e) {
     setEmail(e.target.value);
   }
-  function getPassword(e) {
+  function handlePassword(e) {
     setPassword(e.target.value);
   }
 
@@ -46,8 +46,8 @@ function LoginHeader() {
       {showModal && (
         <LoginModal
           handleClose={handleClose}
-          getId={getEmail}
-          getPassword={getPassword}
+          handleEmail={handleEmail}
+          handlePassword={handlePassword}
           showModal={showModal}
         />
       )}
@@ -56,17 +56,17 @@ function LoginHeader() {
 }
 
 function LogoutHeader() {
-  const context = useContext(LoginInfoContext);
+  const dispatch = useDispatch();
+  const loginStore = useSelector((state) => state.login);
   function handleLogout() {
-    context["id"] = "";
-    context["password"] = "";
+    dispatch(getLoginData({ email: "", password: "" }));
   }
   return (
     <>
       <div class="menuContainer">
         <nav className="user">
           <BasicLink to="/mypage" className="userMenu">
-            {context["nickname"]}님
+            {loginStore.username}님
           </BasicLink>
           <button type="button" className="userMenu" onClick={handleLogout}>
             로그아웃
@@ -78,7 +78,7 @@ function LogoutHeader() {
 }
 
 export function Header() {
-  const context = useContext(LoginInfoContext);
+  const loginStore = useSelector((state) => state.login);
   return (
     <>
       <header className="mainHeader">
@@ -102,7 +102,9 @@ export function Header() {
           </nav>
         </div>
         {/* 로그인 성공하면  */}
-        {context["id"] !== "" && context["password"] !== "" ? (
+        {loginStore.email !== "" &&
+        loginStore.password !== "" &&
+        loginStore.username !== "" ? (
           <LogoutHeader />
         ) : (
           <LoginHeader />

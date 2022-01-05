@@ -5,7 +5,7 @@ import { ReactComponent as CloseButton } from "../image/closebutton.svg";
 import { userLogin, getUserInfo } from "../api/index";
 import Logo from "../image/logo.png";
 import { useSelector, useDispatch } from "react-redux";
-import { getUsername } from "../store/loginSlice";
+import { getLoginData } from "../store/loginSlice";
 
 export const BasicLink = styled(Link)`
   text-decoration: none;
@@ -40,7 +40,12 @@ const ModalContainer = styled.div`
   background-color: #fff;
 `;
 
-export function LoginModal(props) {
+export function LoginModal({
+  handleClose,
+  handleEmail,
+  handlePassword,
+  showModal,
+}) {
   const loginStore = useSelector((state) => state.login);
   const dispatch = useDispatch();
 
@@ -52,20 +57,20 @@ export function LoginModal(props) {
             <h2>
               <img src={Logo} alt="logo" width="200" />
             </h2>
-            <CloseButton className="closeBtn" onClick={props.handleClose} />
+            <CloseButton className="closeBtn" onClick={handleClose} />
             <form>
               <input
                 type="text"
                 placeholder="이메일"
                 id="loginId"
-                onInput={props.getId}
+                onInput={handleEmail}
               />
               <br />
               <input
                 type="password"
                 placeholder="비밀번호"
                 id="loginPw"
-                onChange={props.getPassword}
+                onChange={handlePassword}
               />
               <br />
               <button
@@ -81,7 +86,13 @@ export function LoginModal(props) {
                   response = await getUserInfo();
                   console.log(response);
                   const username = response.username;
-                  dispatch(await getUsername(username));
+                  dispatch(
+                    await getLoginData({
+                      email: loginStore.email,
+                      username: username,
+                      password: loginStore.password,
+                    })
+                  );
                   console.log(loginStore);
                 }}
               >
