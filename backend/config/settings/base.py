@@ -176,6 +176,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
+    "EXCEPTION_HANDLER": "apps.core.exceptions.custom_exception_handler",
 }
 # 후행 슬래시 비활성화
 APPEND_SLASH = False
