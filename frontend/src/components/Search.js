@@ -12,21 +12,6 @@ import { BasicLink } from "./BasicLink";
 import { useParams } from "react-router-dom";
 import { getParks } from "../api/index";
 
-/*
-function makeHeaders(){ 
-     const token = localstorage getItem ('token')
-     const config = {
-        headers: {
-          'Authorization': `Bearer {token}`
-        }
-     }
-     return config; 
-}
-
-
-
-*/
-
 function SidebarSearch() {
   const [content, setContent] = useState("");
   const [parks, setParks] = useState([]);
@@ -34,9 +19,10 @@ function SidebarSearch() {
 
   useEffect(() => {
     async function getParkData() {
-      const response = await getParks("", "");
+      const response = await getParks("", "", "", 1, 2);
       if (response) {
-        setParks(response);
+        setParks(response.results);
+        console.log(response);
       } else {
         setParks([]);
       }

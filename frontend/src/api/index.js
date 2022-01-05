@@ -13,11 +13,11 @@ function makeHeaders() {
   return config;
 }
 
-export async function getParks(guId, keyword) {
+export async function getParks(guId, keyword, sort, page, size) {
   const config = makeHeaders();
 
   const response = await axios.get(
-    `${baseUrl}/parks/search/?guId=${guId}&keyword=${keyword}`,
+    `${baseUrl}/parks/search?guId=${guId}&keyword=${keyword}&sort=${sort}&page=${page}&size=${size}`,
     config
   );
 
@@ -27,7 +27,7 @@ export async function getParks(guId, keyword) {
 export async function getUserInfo() {
   const config = makeHeaders();
 
-  const response = await axios.get(`${baseUrl}/user/`, config);
+  const response = await axios.get(`${baseUrl}/user`, config);
 
   return response.data;
 }
@@ -35,7 +35,7 @@ export async function getUserInfo() {
 export async function userLogin(email, password) {
   const config = makeHeaders();
   const data = { email: email, password: password };
-  const response = await axios.post(`${baseUrl}/login/`, data, config);
+  const response = await axios.post(`${baseUrl}/user/login`, data, config);
   if (response.status === 200) {
     // 성공
     // 쿠키에 refresh token 이랑 access token 을 저장해준다.
@@ -52,11 +52,16 @@ export async function userLogin(email, password) {
 
 export async function registerUser(username, email, password) {
   // const config = makeHeaders();
-  const data = { username: username, email: email, password: password };
-  const response = await axios.post(`${baseUrl}/register/`, data);
-  if (response.status === 200) {
+  try {
+    const data = { username: username, email: email, password: password };
+    const response = await axios.post(`${baseUrl}/user/register`, data);
     console.log(response);
-  } else {
-    // 로그인 실패
+    if (response.status === 201) {
+      console.log("회원가입 성공");
+    } else {
+      // 로그인 실패
+    }
+  } catch (error) {
+    console.log(error.response.data);
   }
 }
