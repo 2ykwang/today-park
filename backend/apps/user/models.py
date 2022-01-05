@@ -94,3 +94,11 @@ class User(TimeStampModel, AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+
+
+class UserKeyword(models.Model):
+    user_id = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    keyword = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f"{self.user_id} {self.keyword}"

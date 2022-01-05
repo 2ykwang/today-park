@@ -3,9 +3,19 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework import generics, parsers, permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_simplejwt.views import (
+    TokenBlacklistView,
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView,
+)
 
 from .models import User
 from .serializers import (
+    TokenBlacklistResponseSerializer,
+    TokenObtainPairResponseSerializer,
+    TokenRefreshResponseSerializer,
+    TokenVerifyResponseSerializer,
     UserImageUploadSerializer,
     UserRegisterSerializer,
     UserResetPasswordSerializer,
@@ -96,7 +106,6 @@ class UserView(APIView):
         },
     )
     def put(self, request, *args, **kwargs):
-
         """
         유저 정보 수정
 
@@ -155,3 +164,70 @@ class UserResetPasswordView(APIView):
         self.user.save()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+# simplejwt drf-yasg integration
+
+
+class DecoratedTokenObtainPairView(TokenObtainPairView):
+    @swagger_auto_schema(
+        responses={
+            status.HTTP_200_OK: TokenObtainPairResponseSerializer,
+            status.HTTP_401_UNAUTHORIZED: "만료되거나 유효하지 않은 토큰",
+        }
+    )
+    def post(self, request, *args, **kwargs):
+        """
+        로그인
+
+        이메일과 비밀번호를 전송하고 refresh, access 토큰값을 요청합니다.
+        """
+        return super().post(request, *args, **kwargs)
+
+
+class DecoratedTokenBlacklistView(TokenBlacklistView):
+    @swagger_auto_schema(
+        responses={
+            status.HTTP_200_OK: TokenBlacklistResponseSerializer,
+            status.HTTP_401_UNAUTHORIZED: "만료되거나 유효하지 않은 토큰",
+        }
+    )
+    def post(self, request, *args, **kwargs):
+        """
+        로그아웃
+
+        refresh 토큰을 전송하고 token 을 블랙리스트에 추가합니다 (토큰 만료)
+        """
+        return super().post(request, *args, **kwargs)
+
+
+class DecoratedTokenRefreshView(TokenRefreshView):
+    @swagger_auto_schema(
+        responses={
+            status.HTTP_200_OK: TokenRefreshResponseSerializer,
+            status.HTTP_401_UNAUTHORIZED: "만료되거나 유효하지 않은 토큰",
+        }
+    )
+    def post(self, request, *args, **kwargs):
+        """
+        토큰 갱신
+
+        refresh 토큰을 전송하고 새로운 access 토큰값을 발급받습니다.
+        """
+        return super().post(request, *args, **kwargs)
+
+
+class DecoratedTokenVerifyView(TokenVerifyView):
+    @swagger_auto_schema(
+        responses={
+            status.HTTP_200_OK: TokenVerifyResponseSerializer,
+            status.HTTP_401_UNAUTHORIZED: "만료되거나 유효하지 않은 토큰",
+        }
+    )
+    def post(self, request, *args, **kwargs):
+        """
+        토큰 유효성 검사
+
+        access 토큰을 전송하여 토큰이 유효한지 체크합니다.
+        """
+        return super().post(request, *args, **kwargs)

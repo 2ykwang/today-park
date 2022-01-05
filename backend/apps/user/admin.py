@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext_lazy as _
 
-from .models import User
+from .models import User, UserKeyword
 
 
 @admin.register(User)
@@ -57,3 +57,15 @@ class CustomUserAdmin(UserAdmin):
     list_filter = ("is_staff", "is_superuser", "groups")
     search_fields = ("username", "username", "email")
     ordering = ("username",)
+
+
+@admin.register(UserKeyword)
+class UserKeywordAdmin(admin.ModelAdmin):
+    list_display = (
+        "user_id",
+        "keyword",
+    )
+    list_filter = (
+        "user_id",
+        "keyword",
+    )
