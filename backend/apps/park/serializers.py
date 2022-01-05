@@ -32,17 +32,18 @@ class ParkSerializer(serializers.ModelSerializer):
     avg_score = serializers.SerializerMethodField()
     total_reviews = serializers.SerializerMethodField()
 
-    def get_total_equipments(self, obj):
-        # 참고: https://docs.djangoproject.com/en/4.0/ref/models/database-functions/#coalesce
+    # MEMO: SerializerMethodField를 구현한 경우 메소드에
+    # 반환 타입힌트를 명시해야 swagger 에서 정상적으로 타입이 표시됩니다
+    def get_total_equipments(self, obj) -> int:
         sum_of_quantity = ParkEquipment.objects.filter(park_id=obj.id).aggregate(
             Sum("quantity", default=0)
         )["quantity__sum"]
         return sum_of_quantity
 
-    def get_avg_score(self, obj):
+    def get_avg_score(self, obj) -> float:
         return obj.average_rating
 
-    def get_total_reviews(self, obj):
+    def get_total_reviews(self, obj) -> float:
         return obj.count_reviews
 
     class Meta:
