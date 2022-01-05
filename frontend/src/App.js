@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { store } from "./store/store";
 import { Provider } from "react-redux";
-import UserStore from "./store/user";
-import LoginInfoStore from "./store/loginInfo";
 import { Route, Routes } from "react-router-dom";
 import "./css/reset.css";
 import "./css/app.css";
@@ -28,23 +26,19 @@ function App() {
   return (
     <>
       <Provider store={store}>
-        <UserStore>
-          <LoginInfoStore>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="signUp" element={<SignUp />} />
-              <Route path="mypage" element={<Mypage />} />
-              <Route path="search" element={<SidebarSearch />} />
-              <Route path="search/:id" element={<SidebarSearchDetail />} />
-              <Route path="search/bookmark" element={<SidebarBookmark />} />
-              <Route
-                path="intro"
-                element={<Mapchart setTooltipContent={setContent} />}
-              />
-            </Routes>
-            <ReactTooltip>{content}</ReactTooltip>
-          </LoginInfoStore>
-        </UserStore>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="signUp" element={<SignUp />} />
+          <Route path="mypage" element={<Mypage />} />
+          <Route path="search" element={<SidebarSearch />} />
+          <Route path="search/:id" element={<SidebarSearchDetail />} />
+          <Route path="search/bookmark" element={<SidebarBookmark />} />
+          <Route
+            path="intro"
+            element={<Mapchart setTooltipContent={setContent} />}
+          />
+        </Routes>
+        <ReactTooltip>{content}</ReactTooltip>
       </Provider>
     </>
   );

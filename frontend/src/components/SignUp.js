@@ -1,8 +1,8 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Header } from "./Header";
-import { UserContext } from "../store/user";
-import { LoginInfoContext } from "../store/loginInfo";
 import { registerUser } from "../api/index";
+import { useSelector, useDispatch } from "react-redux";
+import { getSignUpData } from "../store/signupSlice";
 
 // 아이디, 닉네임, 비밀번호 거르는 정규식
 const regExpId =
@@ -17,8 +17,8 @@ export function SignUp() {
   const [password, setPassword] = useState("");
   const [pwCheck, setPwCheck] = useState("");
 
-  const signUpInfo = useContext(UserContext);
-  const loginInfo = useContext(LoginInfoContext);
+  const dispatch = useDispatch();
+  const signUpStore = useSelector((state) => state.signup);
 
   const handleId = (e) => {
     setEmail(e.target.value);
@@ -34,10 +34,10 @@ export function SignUp() {
   };
 
   useEffect(() => {
-    signUpInfo["email"] = email;
-    signUpInfo["username"] = username;
-    signUpInfo["password"] = password;
-  }, [email, username, password, signUpInfo]);
+    dispatch(
+      getSignUpData({ email: email, username: username, password: password })
+    );
+  }, [email, username, password, dispatch]);
 
   return (
     <>
@@ -115,9 +115,9 @@ export function SignUp() {
               onClick={async (e) => {
                 e.preventDefault();
                 let response = await registerUser(
-                  signUpInfo.username,
-                  signUpInfo.email,
-                  signUpInfo.password
+                  signUpStore.username,
+                  signUpStore.email,
+                  signUpStore.password
                 );
                 console.log(response);
               }}
