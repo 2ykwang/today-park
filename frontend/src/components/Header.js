@@ -1,19 +1,22 @@
 import React, { useContext, useState, useEffect } from "react";
 import { LoginInfoContext } from "../store/loginInfo";
+import { useDispatch } from "react-redux";
+import { getLoginData } from "../store/loginSlice";
 import Logo from "../image/logo.png";
 import { BasicLink, LoginModal } from "./LoginModal";
 
 function LoginHeader() {
-  const context = useContext(LoginInfoContext);
   const [showModal, setShowModal] = useState(false);
 
-  const [id, setId] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // Redux
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    context["id"] = id;
-    context["password"] = password;
-  }, [id, password]);
+    dispatch(getLoginData({ email: email, password: password }));
+  }, [email, password]);
 
   function handleLogin() {
     setShowModal(true);
@@ -21,8 +24,8 @@ function LoginHeader() {
   function handleClose() {
     setShowModal(false);
   }
-  function getId(e) {
-    setId(e.target.value);
+  function getEmail(e) {
+    setEmail(e.target.value);
   }
   function getPassword(e) {
     setPassword(e.target.value);
@@ -43,7 +46,7 @@ function LoginHeader() {
       {showModal && (
         <LoginModal
           handleClose={handleClose}
-          getId={getId}
+          getId={getEmail}
           getPassword={getPassword}
           showModal={showModal}
         />

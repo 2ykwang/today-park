@@ -1,10 +1,11 @@
-import React, { useEffect, useContext } from "react";
-import { LoginInfoContext } from "../store/loginInfo";
+import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ReactComponent as CloseButton } from "../image/closebutton.svg";
 import { userLogin, getUserInfo } from "../api/index";
 import Logo from "../image/logo.png";
+import { useSelector, useDispatch } from "react-redux";
+import { getUsername } from "../store/loginSlice";
 
 export const BasicLink = styled(Link)`
   text-decoration: none;
@@ -40,7 +41,9 @@ const ModalContainer = styled.div`
 `;
 
 export function LoginModal(props) {
-  const loginInfo = useContext(LoginInfoContext);
+  const loginStore = useSelector((state) => state.login);
+  const dispatch = useDispatch();
+
   return (
     <>
       <div className="ModalContainer">
@@ -70,14 +73,16 @@ export function LoginModal(props) {
                 onClick={async (e) => {
                   e.preventDefault();
                   let response = await userLogin(
-                    loginInfo.id,
-                    loginInfo.password
+                    loginStore.email,
+                    loginStore.password
                   );
                   // 로그인이 성공한다면? -> 로컬 스토리지에 토큰이 저장됨.
                   // makeheaders() -> 헤더를 만들어줌.
                   response = await getUserInfo();
                   console.log(response);
-                  loginInfo.nickname = response.username;
+                  const username = response.username;
+                  dispatch(await getUsername(username));
+                  console.log(loginStore);
                 }}
               >
                 로그인
