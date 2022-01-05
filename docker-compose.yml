@@ -6,39 +6,35 @@ version: '3'
  
 services:
   app:
+    container_name: "backend"
     build:
       context: ./backend
     volumes:
       - static_volume:/srv/app/.static
-      - media_volume:/srv/app/.media
-    # command: >
-    #   bash -c "
-    #     python3 manage.py collectstatic &&
-    #     gunicorn -c gunicorn.conf.py
-    #   "
-    # networks:
-    #   - app
+      - ./backend/.media:/srv/app/.media
+      - ./backend:/srv/app/
+    restart: always
     expose:
       - "8000"
 
   client:
+    container_name: "client"
     build:
       context: ./frontend
     volumes:
-      - client_volume:/srv/client
+      - ./frontend:/srv/client/
+      - "/srv/client/node_modules"
     depends_on:
       - app
     expose:
-      - "8000" 
-  
+      - "3000"
+
   nginx:
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
+    container_name: "nginx"
+    image: nginx:latest
     volumes:
-      - client_volume:/srv/client
       - static_volume:/srv/app/.static
-      - media_volume:/srv/app/.media
+      - ./backend/.media:/srv/app/.media 
     expose:
       - "80"
       - "443"
@@ -49,9 +45,9 @@ services:
     #   - app
     depends_on:
       - app
+      - client
 
 volumes:
   static_volume:
-  media_volume:
   client_volume:
   

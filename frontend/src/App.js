@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import ReactTooltip from "react-tooltip";
+import UserStore from "./store/user";
+import LoginInfoStore from "./store/loginInfo";
+import { Route, Routes } from "react-router-dom";
+import "./css/reset.css";
+import "./css/app.css";
+import "./css/header.css";
+import "./css/signUp.css";
+import "./css/mypage.css";
+import Map from "./components/Map";
+import { Home } from "./components/Home";
+import { Mypage } from "./components/Mypage";
+import { SignUp } from "./components/SignUp";
 
 function App() {
+  const [content, setContent] = useState("");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <UserStore>
+        <LoginInfoStore>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="signUp" element={<SignUp />} />
+            <Route path="mypage" element={<Mypage />} />
+            <Route
+              path="map"
+              element={<Map setTooltipContent={setContent} />}
+            />
+          </Routes>
+          <ReactTooltip>{content}</ReactTooltip>
+        </LoginInfoStore>
+      </UserStore>
+    </>
   );
 }
 

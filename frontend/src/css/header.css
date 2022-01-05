@@ -1,0 +1,81 @@
+header.mainHeader{
+    border: 2px solid #757575;
+    margin-bottom: 40px;
+    position: relative;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+header .logo{
+    /* border: 2px solid red; */
+    margin-left: 40px;
+    font-size: 24px;
+    font-weight: bold;
+}
+header .menuContainer{
+    font-size: 18px;
+    margin-right: 40px;
+    /* border: 2px solid pink; */
+    display: flex;
+    position: absolute;
+    top: 50;
+    right: 0;
+}
+header nav.mainMenu{
+    /* border: 2px solid orange; */
+    margin-right: 100px;
+}
+header nav .menu{
+    margin-left: 16px;
+    /* border: 2px solid red; */
+}
+header nav.user{
+    margin: 0px;
+    /* border: 2px solid cyan; */
+}
+header nav .userMenu{
+    margin-left: 20px;
+}
+
+
+
+
+.ModalContainer{
+    position: relative;
+}
+.ModalContainer .closeBtn{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border-radius: 9999px;
+    cursor: pointer;
+    
+}
+.ModalContainer h2{
+    font-size: 32px;
+    text-align: center;
+    margin-top: 110px;
+    font-weight: bold;
+}
+.ModalContainer form{
+    text-align: center;
+    margin-top: 32px;
+}
+.ModalContainer input,
+.ModalContainer button{
+    width: 360px;
+    height: 48px;
+    margin-bottom: 20px;
+}
+.ModalContainer input{
+    border: 1px solid #e0e0e0;
+    font-size: 16px;
+    padding-left: 16px;
+}
+.ModalContainer button{
+    border: none;
+    border-radius: 9999px;
+    background-color: #47C690;
+    color: #fff;
+    font-size: 18px;
+}
