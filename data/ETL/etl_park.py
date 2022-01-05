@@ -7,10 +7,10 @@ from utill import *
 import pandas as pd
 import re
 
-import os
-from sqlalchemy import create_engine
-dir = os.path.dirname(os.path.realpath(__file__))
-engine = create_engine('mysql+pymysql://root:root@127.0.0.1:3306/test_db')
+# import os
+# from sqlalchemy import create_engine
+# dir = os.path.dirname(os.path.realpath(__file__))
+# engine = create_engine('mysql+pymysql://root:root@127.0.0.1:3306/test_db')
 
 class Park_Gwanak() :
     def __init__(self, engine, filePath) :
@@ -28,7 +28,7 @@ class Park_Gwanak() :
 
     def etl_data(self) :
         #관악구 공원 데이터 불러오기
-        df = pd.read_csv(f'{dir}/etl_files/Gwanak.csv', encoding='cp949')
+        df = pd.read_csv(self.filePath, encoding='cp949')
 
         df_park = df[['명칭','위치','동이름','위도','경도']]
 
