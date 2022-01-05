@@ -16,6 +16,7 @@ from .serializers import (
     TokenObtainPairResponseSerializer,
     TokenRefreshResponseSerializer,
     TokenVerifyResponseSerializer,
+    UserCheckAvailableSerializer,
     UserImageUploadSerializer,
     UserRegisterSerializer,
     UserResetPasswordSerializer,
@@ -164,6 +165,58 @@ class UserResetPasswordView(APIView):
         self.user.save()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class UserCheckAvailableView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    valid_schema = {
+        "valid": openapi.Schema(type=openapi.TYPE_BOOLEAN, description="올바른 값인지"),
+        "detail": openapi.Schema(type=openapi.TYPE_STRING, description="필드 응답 메세지"),
+    }
+
+    @swagger_auto_schema(
+        request_body=UserCheckAvailableSerializer,
+        responses={
+            status.HTTP_200_OK: openapi.Schema(
+                title="검사 결과",
+                type=openapi.TYPE_OBJECT,
+                properties={
+                    "username": openapi.Schema(
+                        type=openapi.TYPE_OBJECT,
+                        properties=valid_schema,
+                        description="username 유효성 검사",
+                    ),
+                    "email": openapi.Schema(
+                        type=openapi.TYPE_OBJECT,
+                        properties=valid_schema,
+                        description="email 유효성 검사",
+                    ),
+                },
+            ),
+            status.HTTP_400_BAD_REQUEST: "잘못된 요청",
+        },
+    )
+    def post(self, request, *args, **kwargs):
+        """
+        가입 필드 유효성 검사
+
+        아이디, 닉네임이 가입가능한 값인지 유효성을 체크합니다.
+        """
+        serializer = UserCheckAvailableSerializer(data=request.data)
+        serializer.is_valid(raise_exception=False)
+
+        response = {}
+
+        errors = serializer.errors
+        # 입력받은 필드를 가져온다
+        for key in request.data.keys():
+            response[key] = {"valid": True, "detail": "사용가능한 값 입니다."}
+            # validation check 에러가 발생한 필드일경우
+            if key in errors and errors[key]:
+                response[key] = {"valid": False, "detail": errors[key][0]}
+
+        return Response(response, status=status.HTTP_200_OK)
 
 
 # simplejwt drf-yasg integration

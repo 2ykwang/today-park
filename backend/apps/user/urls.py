@@ -11,7 +11,9 @@ from . import views
     POST        /api/user/token/verify
     GET, PUT    /api/user
     POST        /api/user/upload-image
-    PUT         /api/user/change-password
+    PUT         /api/user/password
+    
+    POST         /api/user/check
 """
 
 urlpatterns = [
@@ -42,5 +44,10 @@ urlpatterns = [
         "/password",
         views.UserResetPasswordView.as_view(),
         name="change_password",
+    ),
+    path(
+        "/check",
+        views.UserCheckAvailableView.as_view(),
+        name="check",
     ),
 ]
