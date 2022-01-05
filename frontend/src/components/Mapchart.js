@@ -8,7 +8,7 @@ import {
 } from "react-simple-maps";
 import GwanakMap from "../json/gwanak.json";
 import SeoulMap from "../json/seoul.json";
-import MapchartOrigin from "./Mapchart(origin)";
+import MapchartOrigin from "./SeoulMapchart";
 
 //const geoUrl ="https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 const geoUrl = SeoulMap;
