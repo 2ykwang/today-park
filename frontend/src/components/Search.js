@@ -10,9 +10,9 @@ import { ReactComponent as BookmarkIcon } from "../image/bookmark-maked.svg";
 import { SidebarMenu } from "./SidebarMenu";
 import { BasicLink } from "./BasicLink";
 import { useParams } from "react-router-dom";
+import { getParks } from "../api/index";
 
-
-  /*
+/*
 function makeHeaders(){ 
      const token = localstorage getItem ('token')
      const config = {
@@ -27,19 +27,6 @@ function makeHeaders(){
 
 */
 
-
-
-async function getParks(guId, keyword) {
-  var config = {
-    headers: {},
-  };  
-  const host = "http://localhost"; // < - 이건 환경변수로 뺴주세요.
-  const response = await axios.get(
-    `${host}/api/parks/search/?guId=${guId}&keyword=${keyword}`,
-  );
-  return response.data;
-}
-
 function SidebarSearch() {
   const [content, setContent] = useState("");
   const [parks, setParks] = useState([]);
@@ -48,9 +35,11 @@ function SidebarSearch() {
   useEffect(() => {
     async function getParkData() {
       const response = await getParks("", "");
-
-      //response 에는 공원 정보가 리스트로 들어감
-      setParks(response);
+      if (response) {
+        setParks(response);
+      } else {
+        setParks([]);
+      }
     }
     getParkData();
   }, []);
@@ -113,7 +102,7 @@ function SidebarSearch() {
                 <option value="dict_desc">가나다 역순</option>
               </select>
             </form>
-            <div>{parklist}</div>
+            <div>{parks && parklist}</div>
           </div>
         </div>
         <Map setTooltipContent={setContent} />
