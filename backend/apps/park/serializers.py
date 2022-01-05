@@ -1,4 +1,4 @@
-from django.db.models import Sum, fields
+from django.db.models import Sum
 from rest_framework import serializers
 
 from .models import Equipment, Park, ParkEquipment, Review
@@ -32,17 +32,18 @@ class ParkSerializer(serializers.ModelSerializer):
     avg_score = serializers.SerializerMethodField()
     total_reviews = serializers.SerializerMethodField()
 
-    def get_total_equipments(self, obj):
-        # 참고: https://docs.djangoproject.com/en/4.0/ref/models/database-functions/#coalesce
+    # MEMO: SerializerMethodField를 구현한 경우 메소드에
+    # 반환 타입힌트를 명시해야 swagger 에서 정상적으로 타입이 표시됩니다
+    def get_total_equipments(self, obj) -> int:
         sum_of_quantity = ParkEquipment.objects.filter(park_id=obj.id).aggregate(
             Sum("quantity", default=0)
         )["quantity__sum"]
         return sum_of_quantity
 
-    def get_avg_score(self, obj):
+    def get_avg_score(self, obj) -> float:
         return obj.average_rating
 
-    def get_total_reviews(self, obj):
+    def get_total_reviews(self, obj) -> float:
         return obj.count_reviews
 
     class Meta:
@@ -80,44 +81,9 @@ class ParkReviewSerializer(serializers.ModelSerializer):
             "score",
             "content",
             "username",
-            "created_at",
-            # "user_id",
-            # "park_id",
         ]
         read_only_fields = ("id",)
         extra_kwargs = {
             # "user_id": {"write_only": True},
             # "park_id": {"write_only": True},
         }
-
-
-# class UserReviewSerializer(serializers.ModelSerializer):
-#     """
-
-#     """
-#     class Meta:
-#         model = Review
-#         fields = [
-#             "id",
-#             "score",
-#             "content",
-#             "user_id",
-#             "park_id",
-#             "created_at",
-#         ]
-
-
-class ParkRequestSerializer(serializers.Serializer):
-    guId = serializers.CharField(help_text="구 이름(required)")
-    keyword = serializers.CharField(help_text="검색어(optional)")
-    sort = serializers.ChoiceField(
-        help_text="정렬방식(optional)",
-        choices=(
-            "score_asc",
-            "score_desc",
-            "review_more",
-            "review_less",
-            "dict_asc",
-            "dict_desc",
-        ),
-    )

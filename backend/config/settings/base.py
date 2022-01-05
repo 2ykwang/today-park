@@ -173,11 +173,15 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # ---------------------------------------------------------------------
 # Third-Party Settings
 
+# DJANGO_REST_FRAMEWORK 설정
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
+    "EXCEPTION_HANDLER": "apps.core.exceptions.custom_exception_handler",
 }
+# 후행 슬래시 비활성화
+APPEND_SLASH = False
 
 # DRF simplejwt 설정
 # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html

@@ -10,5 +10,5 @@ from .views import BookmarDeletekView, BookmarkView
 
 urlpatterns = [
     path("", BookmarkView.as_view()),
-    path("<int:bookmark_id>", BookmarDeletekView.as_view()),
+    path("/<int:bookmark_id>", BookmarDeletekView.as_view()),
 ]

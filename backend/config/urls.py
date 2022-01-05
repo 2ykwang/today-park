@@ -36,20 +36,20 @@ schema_view = get_schema_view(
 
 
 app_urls = [
-    path("", include("apps.user.urls")),
-    path("bookmarks/", include("apps.bookmark.urls")),
-    path("parks/", include("apps.park.urls")),
+    path("user", include("apps.user.urls")),
+    path("bookmarks", include("apps.bookmark.urls")),
+    path("parks", include("apps.park.urls")),
 ]
 
 # url prefix ()
 urlpatterns = [
     path("api/", include(app_urls)),
-    path("admin/", admin.site.urls),
 ]
 
 # (개발환경) debug 모드 경우에만 라우팅
 if settings.DEBUG:
     urlpatterns += [
+        path("admin/", admin.site.urls),
         re_path(
             r"^swagger(?P<format>\.json|\.yaml)$",
             schema_view.without_ui(cache_timeout=0),
