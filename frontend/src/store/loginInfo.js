@@ -8,6 +8,7 @@ const LoginInfoStore = (props) => {
     id: "elice@test.com",
     nickname: "엘리스",
     password: "",
+    isLogIn: false,
   };
 
   return (

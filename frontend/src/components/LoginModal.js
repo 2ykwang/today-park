@@ -1,6 +1,5 @@
 import React, { useEffect, useContext } from "react";
 import { LoginInfoContext } from "../store/loginInfo";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ReactComponent as CloseButton } from "../image/closebutton.svg";
@@ -71,11 +70,11 @@ export function LoginModal(props) {
                 onClick={async (e) => {
                   e.preventDefault();
                   let response = await userLogin(context.id, context.password);
-                  console.log(response);
                   // 로그인이 성공한다면? -> 로컬 스토리지에 토큰이 저장됨.
                   // makeheaders() -> 헤더를 만들어줌.
                   response = await getUserInfo();
                   console.log(response);
+                  context.nickname = response.username;
                 }}
               >
                 로그인

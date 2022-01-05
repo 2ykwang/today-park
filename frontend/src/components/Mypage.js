@@ -20,7 +20,7 @@ export function Mypage() {
 
   useEffect(() => {
     context["id"] = id;
-    context["nickname"] = nickname;
+    context["username"] = nickname;
   }, [id, nickname, context]);
 
   function handleIdChange(e) {
