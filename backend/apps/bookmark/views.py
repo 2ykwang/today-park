@@ -1,3 +1,4 @@
+from apps.core.exceptions import UserAlreadyBookmarked
 from apps.core.permissions import IsOwner
 from django.shortcuts import get_object_or_404
 from drf_yasg.utils import swagger_auto_schema
@@ -64,9 +65,7 @@ class BookmarkView(APIView):
         if Bookmark.objects.filter(
             user_id=self.user.id, park_id=serializer.validated_data["park_id"]
         ).exists():
-            return Response(
-                {"detail": "이미 북마크 되어있습니다."}, status.HTTP_406_NOT_ACCEPTABLE
-            )
+            raise UserAlreadyBookmarked
 
         serializer.save()
         bookmark = serializer.instance
