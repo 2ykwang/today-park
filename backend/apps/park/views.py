@@ -9,10 +9,11 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import AccessToken
 
 from .models import Park, Review
+from .pagination import ParkListPagination
 from .serializers import ParkReviewSerializer, ParkSerializer
 
 
-class ParkListView(APIView):
+class ParkListView(APIView, ParkListPagination):
     """
     공원 검색
 
@@ -32,12 +33,26 @@ class ParkListView(APIView):
     sort = openapi.Parameter(
         "sort", openapi.IN_QUERY, description="정렬", type=openapi.TYPE_STRING
     )
+    page = openapi.Parameter(
+        "page",
+        openapi.IN_QUERY,
+        description="페이지",
+        type=openapi.TYPE_INTEGER,
+        default=1,
+    )
+    size = openapi.Parameter(
+        "size",
+        openapi.IN_QUERY,
+        description="페이지당 보여줄 갯수",
+        type=openapi.TYPE_INTEGER,
+        default=ParkListPagination.page_size,
+    )
 
     @swagger_auto_schema(
-        manual_parameters=[guId, keyword, sort],
+        manual_parameters=[guId, keyword, sort, page, size],
         responses={
-            status.HTTP_200_OK: ParkSerializer,
-            status.HTTP_204_NO_CONTENT: "공원 정보가 존재하지 않음",
+            status.HTTP_200_OK: ParkSerializer(many=True),
+            status.HTTP_404_NOT_FOUND: "공원 정보가 존재하지 않음",
             status.HTTP_400_BAD_REQUEST: "잘못된 요청",
         },
     )
@@ -93,9 +108,9 @@ class ParkListView(APIView):
         if sort is not None:  # 정렬o
             park = sort_type(sort, park)
 
-        serializer = ParkSerializer(park, many=True)
-
-        return Response(serializer.data)
+        parks = self.paginate_queryset(park, request, view=self)
+        serializer = ParkSerializer(parks, many=True)
+        return self.get_paginated_response(serializer.data)
 
 
 class ParkDetailView(APIView):
