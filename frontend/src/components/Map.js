@@ -4,14 +4,22 @@ import {
   ZoomableGroup,
   Geographies,
   Geography,
+  Marker,
+  Markers
 } from "react-simple-maps";
-import GwanakMap from "../json/gwanak.json";
-import SeoulMap from "../json/seoul.json";
+import GwanakMap from "./json/gwanak.json";
 
 //const geoUrl ="https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 const geoUrl = GwanakMap;
-
-const Map = ({ setTooltipContent }) => {
+const markerOff =2
+const markers = [
+  { markerOffset: markerOff, name: "도림천", coordinates: [126.9474365000000,37.4592205600000] },
+  { markerOffset: markerOff, name: "관악산 야외식물원", coordinates: [126.9482240000000, 37.4611753200000] },
+  { markerOffset: markerOff, name: "관악산 샘말공원", coordinates: [126.9384872000000, 37.4649003200000] },
+  { markerOffset: markerOff, name: "맨발공원", coordinates: [126.9443508155040, 37.4665302234076] },
+  { markerOffset: markerOff, name: "제2구민운동장", coordinates: [126.9336537740990, 37.4581915973847] },
+];
+const SeoulChart = ({ setTooltipContent }) => {
   return (
     <div>
       {/*
@@ -68,10 +76,34 @@ const Map = ({ setTooltipContent }) => {
               ))
             }
           </Geographies>
+          {markers.map(({ name, coordinates, markerOffset, i }) => (
+        <Marker key={i} coordinates={coordinates} >
+        <g
+          fill="none"
+          stroke="#5BC691"
+          strokeWidth="1"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          transform="translate(-12, 5)"
+        >
+          <circle cx="15" cy="-2" r={3/35000} scale="0.001"/>
+          <svg viewBox="0 0 645.698 136.753"><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z" /></svg>
+        </g>
+        <text
+          textAnchor="middle"
+          y={markerOffset}
+          x={markerOff}
+          style={{ fontFamily: "system-ui", fill: "#5D5A6D", fontSize:1}}
+        >
+          {name}
+        </text>
+      </Marker>
+      ))}
         </ZoomableGroup>
       </ComposableMap>
+      
     </div>
   );
 };
 
-export default Map;
+export default SeoulChart;
