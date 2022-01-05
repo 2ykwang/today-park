@@ -1,16 +1,6 @@
 // /src/api/index.js
 import axios from "axios";
 
-// const apiClient = axios.create({
-//       baseURL: process.env.REACT_APP_BASE_URL;    // 환경변수로 지정한 BASE_URL을 사용
-// });
-
-// // interceptor처리도 작성한다.
-
-// //export apiClient;
-// const { get, post, put, delete: destroy } = apiClient;
-// export { get, post, put, destroy };
-
 const baseUrl = `${process.env.REACT_APP_BASE_URL}/api`;
 
 function makeHeaders() {
@@ -22,6 +12,7 @@ function makeHeaders() {
   };
   return config;
 }
+
 export async function getParks(guId, keyword) {
   const config = makeHeaders();
 
@@ -32,6 +23,7 @@ export async function getParks(guId, keyword) {
 
   return response.data;
 }
+
 export async function getUserInfo() {
   const config = makeHeaders();
 
@@ -39,6 +31,7 @@ export async function getUserInfo() {
 
   return response.data;
 }
+
 export async function userLogin(email, password) {
   const config = makeHeaders();
   const data = { email: email, password: password };
@@ -52,6 +45,17 @@ export async function userLogin(email, password) {
     localStorage.setItem("access_token", accessToken);
     localStorage.setItem("refresh_token", refreshToken);
     console.log(accessToken, refreshToken);
+  } else {
+    // 로그인 실패
+  }
+}
+
+export async function registerUser(username, email, password) {
+  // const config = makeHeaders();
+  const data = { username: username, email: email, password: password };
+  const response = await axios.post(`${baseUrl}/register/`, data);
+  if (response.status === 200) {
+    console.log(response);
   } else {
     // 로그인 실패
   }
