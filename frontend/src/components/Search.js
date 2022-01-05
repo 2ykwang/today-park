@@ -53,7 +53,7 @@ function SidebarSearch() {
   const [parklist, setParklist] = useState([]);
   const { id } = useParams();
 
-  // 마운트시, 공원 정보를 가져오고 1페이지에 있는 공원 리스트 가져오기
+  // 마운트시, 공원 정보 GET 요청 1페이지에 있는 공원 리스트 가져오기
   useEffect(() => {
     async function getParkData() {
       const response = await getParks("", "", "", 1, 5);

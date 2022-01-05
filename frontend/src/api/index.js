@@ -13,23 +13,6 @@ function makeHeaders() {
   return config;
 }
 
-export async function getParks(guId, keyword, sort, page, size) {
-  const config = makeHeaders();
-  const response = await axios.get(
-    `${baseUrl}/parks/search?guId=${guId}&keyword=${keyword}&sort=${sort}&page=${page}&size=${size}`,
-    config
-  );
-
-  return response.data;
-}
-
-export async function getParkDetail(parkId) {
-  const config = makeHeaders();
-  const response = await axios.get(`${baseUrl}/parks/detail/${parkId}`, config);
-
-  return response.data;
-}
-
 export async function getUserInfo() {
   const config = makeHeaders();
   const response = await axios.get(`${baseUrl}/user`, config);
@@ -69,4 +52,31 @@ export async function registerUser(username, email, password) {
   } catch (error) {
     console.log(error.response.data);
   }
+}
+
+export async function getParks(guId, keyword, sort, page, size) {
+  const config = makeHeaders();
+  const response = await axios.get(
+    `${baseUrl}/parks/search?guId=${guId}&keyword=${keyword}&sort=${sort}&page=${page}&size=${size}`,
+    config
+  );
+
+  return response.data;
+}
+
+export async function getParkDetail(parkId) {
+  const config = makeHeaders();
+  const response = await axios.get(`${baseUrl}/parks/detail/${parkId}`, config);
+
+  return response.data;
+}
+
+export async function getReviews(parkId) {
+  const config = makeHeaders();
+  const response = await axios.get(
+    `${baseUrl}/parks/${parkId}/reviews`,
+    config
+  );
+  console.log(response.data);
+  return response.data;
 }
