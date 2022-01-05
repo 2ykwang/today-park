@@ -120,16 +120,16 @@ class ParkDetailView(APIView):
 class ParkReviewListView(APIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-    @swagger_auto_schema(
-        responses={
-            status.HTTP_200_OK: ParkReviewSerializer,
-            status.HTTP_404_NOT_FOUND: "잘못된 요청",
-        },
-    )
     def get_user(self):
         return self.request.user
 
-    def get(self, request, park_id, format=None):
+    @swagger_auto_schema(
+        responses={
+            status.HTTP_200_OK: ParkReviewSerializer(many=True),
+            status.HTTP_404_NOT_FOUND: "잘못된 요청",
+        },
+    )
+    def get(self, request, park_id: int, format=None):
         """
         공원별 리뷰 요청
 
@@ -144,7 +144,9 @@ class ParkReviewListView(APIView):
         request_body=ParkReviewSerializer,
         responses={
             status.HTTP_201_CREATED: ParkReviewSerializer,
-            status.HTTP_404_NOT_FOUND: "잘못된 요청",
+            status.HTTP_401_UNAUTHORIZED: "권한 없음",
+            status.HTTP_400_BAD_REQUEST: "잘못된 요청",
+            status.HTTP_404_NOT_FOUND: "존재하지 않는 공원 ID",
         },
     )
     def post(self, request, park_id, format=None):
@@ -194,7 +196,8 @@ class ParkReviewView(APIView):
     @swagger_auto_schema(
         manual_parameters=[park_id, review_id],
         responses={
-            status.HTTP_202_ACCEPTED: "성공",
+            status.HTTP_200_OK: "성공",
+            status.HTTP_401_UNAUTHORIZED: "권한 없음",
             status.HTTP_404_NOT_FOUND: "리뷰가 존재하지 않음",
         },
     )
@@ -207,16 +210,22 @@ class ParkReviewView(APIView):
         review = get_object_or_404(Review, pk=review_id)
         review.is_deleted = True
         review.save()
-        return Response({"detail": "댓글이 삭제되었습니다."}, status=status.HTTP_202_ACCEPTED)
+        return Response({"detail": "댓글이 삭제되었습니다."}, status=status.HTTP_200_OK)
 
     @swagger_auto_schema(
         request_body=ParkReviewSerializer,
         responses={
-            status.HTTP_201_CREATED: "성공",
+            status.HTTP_200_OK: ParkReviewSerializer,
+            status.HTTP_401_UNAUTHORIZED: "권한 없음",
             status.HTTP_404_NOT_FOUND: "리뷰가 존재하지 않음",
         },
     )
     def put(self, request, park_id, review_id, format=None):
+        """
+        공원 리뷰 수정
+
+        공원 리뷰를 수정합니다.
+        """
         review = get_object_or_404(Review, pk=review_id)
         serializer = ParkReviewSerializer(review, data=request.data)
 
@@ -230,12 +239,24 @@ class ParkReviewView(APIView):
 
         review.save()
 
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 # TODO: 유저별 리뷰
 class UserReviewListView(APIView):
+    @swagger_auto_schema(
+        responses={
+            status.HTTP_200_OK: ParkReviewSerializer(many=True),
+            status.HTTP_401_UNAUTHORIZED: "권한 없음",
+            status.HTTP_404_NOT_FOUND: "잘못된 요청",
+        },
+    )
     def get(self, request, format=None):
+        """
+        사용자 공원 리뷰 목록
+
+        사용자가 작성한 공원 리뷰 목록을 반환합니다.
+        """
         review = Review.objects.filter(user_id=request.user.id)
         serializer = ParkReviewSerializer(review, many=True)
         return Response(serializer.data)
