@@ -15,7 +15,6 @@ function makeHeaders() {
 
 export async function getParks(guId, keyword, sort, page, size) {
   const config = makeHeaders();
-
   const response = await axios.get(
     `${baseUrl}/parks/search?guId=${guId}&keyword=${keyword}&sort=${sort}&page=${page}&size=${size}`,
     config
@@ -24,9 +23,15 @@ export async function getParks(guId, keyword, sort, page, size) {
   return response.data;
 }
 
+export async function getParkDetail(parkId) {
+  const config = makeHeaders();
+  const response = await axios.get(`${baseUrl}/parks/detail/${parkId}`, config);
+
+  return response.data;
+}
+
 export async function getUserInfo() {
   const config = makeHeaders();
-
   const response = await axios.get(`${baseUrl}/user`, config);
 
   return response.data;
