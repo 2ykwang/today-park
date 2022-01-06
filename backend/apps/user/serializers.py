@@ -101,9 +101,23 @@ class UserResetPasswordSerializer(serializers.Serializer):
         return data
 
 
+class UserCheckAvailableSerializer(serializers.ModelSerializer):
+    """
+    유저 유효성 체크
+
+    아이디, 닉네임이 가입가능한 값인지 유효성을 체크합니다.
+    """
+
+    class Meta:
+        model = get_user_model()
+        fields = ["username", "email"]
+        extra_kwargs = {
+            "username": {"required": False, "write_only": True},
+            "email": {"required": False, "write_only": True},
+        }
+
+
 # simplejwt drf-yasg integration
-
-
 class TokenObtainPairResponseSerializer(serializers.Serializer):
     access = serializers.CharField()
     refresh = serializers.CharField()
