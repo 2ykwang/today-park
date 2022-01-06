@@ -1,9 +1,14 @@
 header.mainHeader {
   /* border: 2px solid #757575; */
-  position: relative;
+  position: fixed;
+  z-index: 99999;
   height: 80px;
+  width: 100%;
   display: flex;
   align-items: center;
+  background-color: white;
+  top: 0;
+  left: 0;
 }
 header .logo {
   /* border: 2px solid red; */
