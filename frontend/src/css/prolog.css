@@ -1,0 +1,44 @@
+#prolog {
+  display: flex;
+}
+#prolog .greenBar {
+  position: fixed;
+  z-index: 1000;
+  width: 5px;
+  height: 120px;
+  background-color: #47c690;
+  margin-left: 10px;
+  margin-top: 120px;
+}
+#prolog .leftIndexBar {
+  width: 200px;
+  height: 100%;
+  position: fixed;
+  z-index: 999;
+  margin-top: 120px;
+}
+#prolog .leftIndexBar li {
+  line-height: 30px;
+  font-size: large;
+  padding-left: 25px;
+  cursor: pointer;
+}
+#prolog .leftIndexBar li a {
+  text-decoration: none;
+  color: black;
+}
+#prolog .leftIndexBar #list-1 {
+  font-weight: bold;
+}
+
+#prolog #fullpage {
+  /* margin-left: 200px; */
+  z-index: 1;
+}
+#prolog .contents {
+  padding-left: 220px;
+}
+
+#fp-nav ul li .fp-right {
+  color: black;
+}

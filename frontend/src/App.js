@@ -18,6 +18,8 @@ import "./css/search.css";
 import "./css/SidebarSearchDetail.css";
 import "./css/SidebarBookmark.css";
 import "./css/teamIntro.css";
+import "./css/home.css";
+import "./css/prolog.css";
 
 function App() {
   return (

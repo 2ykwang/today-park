@@ -14,16 +14,7 @@ RUN apk update \
 # ENV ALLOWED_HOSTS 127.0.0.1
 ENV PORT 8000
 
-# poetry 설치 & 의존성 설치
+# 의존성 설치
 RUN pip install --upgrade pip
 RUN pip install mysqlclient
 RUN pip install -r requirements.txt
-
-# RUN poetry config virtualenvs.create false \
-#   && poetry install --no-interaction --no-ansi
-
-# entrypoint 권한 (실행) 부여
-# RUN ["chmod", "+x", "/srv/app/entrypoint.sh"]
-# # entrypoint 
-# ENTRYPOINT ["/srv/app/entrypoint.sh"] 
-# CMD python3 manage.py runserver 0:8000
