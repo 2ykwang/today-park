@@ -19,7 +19,7 @@
     "react-router": "^6.2.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
-    "react-simple-maps": "^2.3.0", 
+    "react-simple-maps": "^2.3.0",
     "react-tooltip": "^4.2.21",
     "start": "^5.1.0",
     "styled-components": "^5.3.3",
