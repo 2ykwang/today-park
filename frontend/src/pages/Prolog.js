@@ -1,14 +1,24 @@
-import React from "react";
+import { React, useState } from "react";
 import { Header } from "../components/Header";
-import SeoulMap from "../json/seoul.json";
 import ReactFullpage from "@fullpage/react-fullpage";
 
-const geoUrl = SeoulMap;
-const anchors = ["코로나와 배달", "배달과 건강", "건강과 운동"];
+const anchors = [
+  "코로나와배달",
+  "배달과건강",
+  "건강과운동",
+  "'관악구'인-이유?",
+];
 
-const Prolog = ({ setTooltipContent }) => {
-  function moveToPage(page) {
+const Prolog = () => {
+  const [currentClick, setCurrentClick] = useState("list-1");
+
+  function clickHandler(page, e) {
+    let prev = document.getElementById(`${currentClick}`);
+    prev.style.fontWeight = "normal";
+    let cur = document.getElementById(e.target.id);
+    cur.style.fontWeight = "bold";
     window.fullpage_api.moveTo(page);
+    setCurrentClick(e.target.id);
   }
   return (
     <>
@@ -17,45 +27,37 @@ const Prolog = ({ setTooltipContent }) => {
         <div className="greenBar"></div>
         <div className="leftIndexBar">
           <ul>
-            <li>
-              <a
-                href="#"
-                onClick={() => {
-                  moveToPage(1);
-                }}
-              >
-                코로나와 배달
-              </a>
+            <li
+              id="list-1"
+              onClick={(e) => {
+                clickHandler(1, e);
+              }}
+            >
+              코로나와 배달
             </li>
-            <li>
-              <a
-                href="#"
-                onClick={() => {
-                  moveToPage(2);
-                }}
-              >
-                배달과 건강
-              </a>
+            <li
+              id="list-2"
+              onClick={(e) => {
+                clickHandler(2, e);
+              }}
+            >
+              배달과 건강
             </li>
-            <li>
-              <a
-                href="#"
-                onClick={() => {
-                  moveToPage(3);
-                }}
-              >
-                건강과 운동
-              </a>
+            <li
+              id="list-3"
+              onClick={(e) => {
+                clickHandler(3, e);
+              }}
+            >
+              건강과 운동
             </li>
-            <li>
-              <a
-                href="#"
-                onClick={() => {
-                  moveToPage(4);
-                }}
-              >
-                '관악구'인 이유?
-              </a>
+            <li
+              id="list-4"
+              onClick={(e) => {
+                clickHandler(4, e);
+              }}
+            >
+              '관악구'인 이유?
             </li>
           </ul>
         </div>
@@ -63,7 +65,7 @@ const Prolog = ({ setTooltipContent }) => {
           anchors={anchors}
           navigation
           navigationTooltips={anchors}
-          sectionsColor={["red", "white", "white", "white"]}
+          sectionsColor={["white", "white", "white", "white"]}
           onLeave={(origin, destination, direction) => {
             console.log("onLeave event", { origin, destination, direction });
           }}
