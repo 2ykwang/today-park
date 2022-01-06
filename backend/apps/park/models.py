@@ -11,9 +11,9 @@ from django.db.models.fields.related import ForeignKey
 # Create your models here.
 class Park(models.Model):
     @property
-    def average_rating(self):
+    def average_rating(self) -> float:
         avg_score = self.review_park.aggregate(Avg("score"))["score__avg"]
-        return avg_score if avg_score else 0
+        return round(avg_score, 1) if avg_score else 0.0
 
     @property
     def count_reviews(self):
