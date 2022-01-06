@@ -91,6 +91,7 @@
   margin-bottom: 20px;
   border-radius: 16px;
   padding: 20px 20px;
+  position: relative;
 }
 .mypage .reviewSide .review h4 {
   font-size: 17px;
@@ -99,4 +100,16 @@
 }
 .mypage .reviewSide .review p {
   margin-bottom: 6px;
+}
+.mypage .review .btns {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+}
+.mypage .review .btns button {
+  border: none;
+  text-decoration: underline;
+  margin-left: 1px;
+  background-color: #fff;
+  color: #757575;
 }

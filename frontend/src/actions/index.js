@@ -95,3 +95,34 @@ export async function postReviews(parkId, score, content) {
     return response.data;
   } catch (error) {}
 }
+
+export async function updateReview(parkId, reviewId, score, content) {
+  try {
+    const config = makeHeaders();
+    const data = { score: score, content: content };
+    const response = await axios.put(
+      `${baseUrl}/parks/${parkId}/reviews/${reviewId}`,
+      data,
+      config
+    );
+    return response.data;
+  } catch (error) {}
+}
+
+export async function deleteReview(parkId, reviewId) {
+  try {
+    const config = makeHeaders();
+    await axios.delete(
+      `${baseUrl}/parks/${parkId}/reviews/${reviewId}`,
+      config
+    );
+  } catch (error) {}
+}
+
+export async function onlyUserReview() {
+  try {
+    const config = makeHeaders();
+    const response = await axios.get(`${baseUrl}/parks/user-reviews`, config);
+    return response.data;
+  } catch (error) {}
+}
