@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Header } from "../components/Header";
-import { registerUser } from "../actions/index";
+import { checkAvailableUserFields, registerUser } from "../actions/auth";
 import { useSelector, useDispatch } from "react-redux";
 import { getSignUpData } from "../store/signupSlice";
 
@@ -12,12 +12,12 @@ const regExpPw =
   /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
 function SignUp() {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [pwCheck, setPwCheck] = useState("");
-
-  const dispatch = useDispatch();
+  const [validResponse, setValidResponse] = useState({});
   const signUpStore = useSelector((state) => state.signup);
 
   const handleId = (e) => {
@@ -39,6 +39,57 @@ function SignUp() {
     );
   }, [email, username, password, dispatch]);
 
+  const validSignupFields = async () => {
+    const data = {
+      username: username,
+      email: email,
+    };
+    const response = await checkAvailableUserFields(data);
+    setValidResponse(response.data);
+
+    return (
+      response.data.username.valid &&
+      response.data.email.valid &&
+      regExpId.test(email) &&
+      regExpNickname.test(username) &&
+      regExpPw.test(password) &&
+      regExpPw.test(password) &&
+      password === pwCheck
+    );
+  };
+
+  const handleClickSignup = async (e) => {
+    e.preventDefault();
+
+    // 프론트에서 validation
+    const valid = await validSignupFields();
+    if (valid) {
+      return;
+    }
+
+    const response = await registerUser(
+      signUpStore.username,
+      signUpStore.email,
+      signUpStore.password
+    );
+    if (response.status < 400) {
+      //가입 성공 했을 때
+    } else {
+      //가입 실패 했을 때
+    }
+    console.log(response);
+  };
+
+  const checkDuplicateEmailMessage = () =>
+    typeof validResponse.email !== "undefined"
+      ? validResponse.email.detail
+      : undefined;
+
+  const checkDuplicateUsernameMessage = () =>
+    typeof validResponse.username !== "undefined"
+      ? validResponse.username.detail
+      : undefined;
+
   return (
     <>
       <Header />
@@ -53,14 +104,14 @@ function SignUp() {
               placeholder="이메일을 입력해주세요"
               value={email}
               onChange={handleId}
+              onBlur={validSignupFields}
             />
             {/* 버튼 온클릭 사용할려면 preventDefault 해주기. 리랜더링 방지 */}
-            <button className="checkBtn">중복 확인</button>
           </div>
           <p className="caution" style={{ fontSize: "12px" }}>
             {email !== "" && !regExpId.test(email)
               ? "이메일 형식으로 입력해주세요."
-              : undefined}
+              : checkDuplicateEmailMessage()}
           </p>
 
           <div className="signUpItem">
@@ -71,12 +122,13 @@ function SignUp() {
               placeholder="닉네임을 입력해주세요"
               value={username}
               onChange={handleNickname}
+              onBlur={validSignupFields}
             />
           </div>
           <p className="caution" style={{ fontSize: "12px" }}>
             {username !== "" && !regExpNickname.test(username)
               ? "특수문자 제외 영어, 숫자, 한글로 2자 이상 20자 미만 입력해주세요."
-              : undefined}
+              : checkDuplicateUsernameMessage()}
           </p>
 
           <div className="signUpItem">
@@ -112,15 +164,7 @@ function SignUp() {
             <button
               type="submit"
               className="signUpBtn"
-              onClick={async (e) => {
-                e.preventDefault();
-                let response = await registerUser(
-                  signUpStore.username,
-                  signUpStore.email,
-                  signUpStore.password
-                );
-                console.log(response);
-              }}
+              onClick={handleClickSignup}
             >
               가입하기
             </button>

@@ -8,6 +8,7 @@ import SignUp from "./pages/SignUp";
 import Mypage from "./pages/Mypage";
 import { SidebarBookmark } from "./components/SidebarBookmark";
 import { SidebarSearchDetail } from "./components/SidebarSearchDetail";
+import { axiosConfig } from "./actions/auth";
 import "./css/reset.css";
 import "./css/app.css";
 import "./css/header.css";
@@ -22,6 +23,10 @@ import "./css/home.css";
 import "./css/prolog.css";
 
 function App() {
+  axiosConfig();
+
+  console.log(process.env.REACT_APP_GOOGLE_SECRET_KEY);
+
   return (
     <>
       <Routes>
