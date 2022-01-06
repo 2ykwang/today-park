@@ -16,3 +16,4 @@ if get_env("USE_SQLITE3") == "1":
             "NAME": BASE_DIR / "db.sqlite3",
         }
     }
+  

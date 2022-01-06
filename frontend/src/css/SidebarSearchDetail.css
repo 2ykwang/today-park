@@ -1,0 +1,124 @@
+.search .sidebar .backIcon {
+  position: absolute;
+  top: 20px;
+  left: 100px;
+  fill: #757575;
+  z-index: 3;
+}
+.search .mapAPI {
+  width: 360px;
+  height: 180px;
+  margin-left: 140px;
+  margin-top: 60px;
+  background-color: #f5f5f5;
+  border-radius: 20px;
+  position: relative;
+}
+.search .parkDetailContainer {
+  margin-top: 20px;
+  margin-left: 80px;
+  /* border: 2px solid red; */
+}
+.search .sidebar .parkDetailContainer .parkDetail .park {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  border-bottom: none;
+  padding: 0;
+}
+.search .parkDetailContainer .park .title {
+  padding: 28px 0 28px 60px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.search .parkDetailContainer .park h3 {
+  font-weight: bold;
+  margin-bottom: 12px;
+  position: relative;
+}
+.search .parkDetailContainer .park p {
+  margin-bottom: 5px;
+}
+.search .parkDetailContainer h3 .rate,
+.search .parkDetailContainer h5 .rate {
+  display: inline-block;
+  margin-left: 34px;
+  position: relative;
+}
+.search .parkDetailContainer h3 .rate .star,
+.search .parkDetailContainer h5 .rate .star {
+  position: absolute;
+  top: -5px;
+  left: -24px;
+  fill: #ffd464;
+}
+.search .parkDetailContainer .park .bookmark {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  fill: #3a3a3a;
+  cursor: pointer;
+}
+.search .parkDetailContainer .park .equipments {
+  padding: 28px 0 28px 60px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.search .parkDetailContainer .park h4 {
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+.search .parkDetailContainer .park .equipments li {
+  margin-bottom: 8px;
+}
+.search .totalReviews {
+  padding: 28px 0 20px 60px;
+}
+.search .parkDetailContainer form.createReview {
+  margin-left: 60px;
+  border-bottom: none;
+}
+.search .createReview textarea {
+  width: 360px;
+  height: 100px;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+.search .createReview button {
+  width: 84px;
+  height: 28px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  background-color: #5bc691;
+  color: #fff;
+}
+.search .createReview .reviews {
+  border: 2px solid;
+}
+.search .parkDetailContainer .reviews {
+  margin-top: 40px;
+  /* border: 2px solid red; */
+  color: #3a3a3a;
+}
+.search .parkDetailContainer .reviews .review {
+  width: 360px;
+  background-color: #f5f5f5;
+  border-radius: 12px;
+  border: 2px solid #e0e0e0;
+  padding: 20px;
+  margin: 0 auto;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+}
+.search .parkDetailContainer .reviews .review h5 {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+.search .parkDetailContainer .reviews .review p {
+  line-height: 22px;
+}
+.search .parkDetailContainer h5 .rate .star {
+  position: absolute;
+  top: -1px;
+  left: -25px;
+}
