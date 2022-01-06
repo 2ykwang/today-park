@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { GOOGLE_KEY } from "../gitignore/googleKey";
 import GoogleMapReact from "google-map-react";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { IconContext } from "react-icons";
@@ -27,7 +26,7 @@ export class SimpleMap extends Component {
       // Important! Always set the container height explicitly
       <div style={{ height: "100%", width: "100%" }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: GOOGLE_KEY }}
+          bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_SECRET_KEY }}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >

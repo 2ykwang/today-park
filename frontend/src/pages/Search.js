@@ -1,52 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Header } from "./Header";
-import Map from "./Map";
+import { Header } from "../components/Header";
+import Map from "../components/Map";
 import ReactTooltip from "react-tooltip";
 import { ReactComponent as SearchIcon } from "../image/search.svg";
-import { ReactComponent as StarIcon } from "../image/star.svg";
-import { ReactComponent as BookmarkIconEmpty } from "../image/bookmark-empty.svg";
-import { ReactComponent as BookmarkIcon } from "../image/bookmark-maked.svg";
-import { SidebarMenu } from "./SidebarMenu";
-import { BasicLink } from "./BasicLink";
+import { SidebarMenu } from "../components/SidebarMenu";
 import { useParams } from "react-router-dom";
-import { getParks } from "../api/index";
+import { getParks } from "../actions/index";
+import { ParkList } from "../components/ParkList";
 
-function ParkList({ item, idx, park_id }) {
-  return (
-    <div key={idx} className="park">
-      <BasicLink to={"/search/" + park_id} className="parklink">
-        <h3>
-          {item.park_name}
-          <div className="rate">
-            <StarIcon className="star" width="24" height="24" />
-            {item.avg_score}
-          </div>
-        </h3>
-        <p>{item.full_address}</p>
-        <p>
-          운동기구: {item.total_equipments} / 리뷰: {item.total_reviews}
-        </p>
-      </BasicLink>
-      {true ? (
-        <BookmarkIconEmpty
-          className={`bookmark id-${idx + 1}`}
-          width="24"
-          height="24"
-          checked={true}
-        />
-      ) : (
-        <BookmarkIcon
-          className={`bookmark id-${idx + 1}`}
-          width="24"
-          height="24"
-          checked={false}
-        />
-      )}
-    </div>
-  );
-}
-
-function SidebarSearch() {
+function Search() {
   const [content, setContent] = useState("");
   const [parksResponse, setparksResponse] = useState({});
   const [parks, setParks] = useState([]);
@@ -72,7 +34,9 @@ function SidebarSearch() {
     setParklist(
       parks.map((item, idx) => {
         let park_id = item.id;
-        return <ParkList item={item} idx={idx} park_id={park_id} />;
+        return (
+          <ParkList key={park_id} item={item} idx={idx} park_id={park_id} />
+        );
       })
     );
   }, [parks]);
@@ -126,4 +90,4 @@ function SidebarSearch() {
   );
 }
 
-export default SidebarSearch;
+export default Search;

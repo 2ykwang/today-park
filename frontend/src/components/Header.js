@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getLoginData } from "../store/loginSlice";
 import Logo from "../image/logo.png";
-import { BasicLink, LoginModal } from "./LoginModal";
+import { BasicLink, LoginModal } from "../pages/LoginModal";
 
 function LoginHeader() {
   const [showModal, setShowModal] = useState(false);
@@ -62,7 +62,7 @@ function LogoutHeader() {
   }
   return (
     <>
-      <div class="menuContainer">
+      <div className="menuContainer">
         <nav className="user">
           <BasicLink to="/mypage" className="userMenu">
             {loginStore.username}님
@@ -89,13 +89,13 @@ export function Header() {
 
         <div className="menuContainer">
           <nav className="mainMenu">
-            <BasicLink to="/intro" className="menu">
+            <BasicLink to="/prolog" className="menu">
               프롤로그
             </BasicLink>
             <BasicLink to="/search" className="menu">
               공원 찾아보기
             </BasicLink>
-            <BasicLink to="#" className="menu">
+            <BasicLink to="/teamIntro" className="menu">
               팀 소개
             </BasicLink>
           </nav>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Header } from "./Header";
+import { Header } from "../components/Header";
 import { useSelector, useDispatch } from "react-redux";
 import { getLoginData } from "../store/loginSlice";
 
@@ -12,7 +12,7 @@ const ProfileImage = styled.div`
   margin: 0 auto 24px auto;
 `;
 
-export function Mypage() {
+function Mypage() {
   const dispatch = useDispatch();
   const loginStore = useSelector((state) => state.login);
 
@@ -131,3 +131,5 @@ export function Mypage() {
     </>
   );
 }
+
+export default Mypage;

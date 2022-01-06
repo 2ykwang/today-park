@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Header } from "./Header";
-import { registerUser } from "../api/index";
+import { Header } from "../components/Header";
+import { registerUser } from "../actions/index";
 import { useSelector, useDispatch } from "react-redux";
 import { getSignUpData } from "../store/signupSlice";
 
@@ -11,7 +11,7 @@ const regExpNickname = /^[가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9]{2,20}$/;
 const regExpPw =
   /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
-export function SignUp() {
+function SignUp() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -130,3 +130,5 @@ export function SignUp() {
     </>
   );
 }
+
+export default SignUp;

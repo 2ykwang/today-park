@@ -39,7 +39,7 @@ const markers = [
     coordinates: [126.933653774099, 37.4581915973847],
   },
 ];
-const SeoulChart = ({ setTooltipContent }) => {
+const Map = ({ setTooltipContent }) => {
   return (
     <div>
       {/*
@@ -96,39 +96,41 @@ const SeoulChart = ({ setTooltipContent }) => {
               ))
             }
           </Geographies>
-          {markers.map(({ name, coordinates, markerOffset, i }) => (
-            <Marker key={i} coordinates={coordinates}>
-              <g
-                fill="none"
-                stroke="#5BC691"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                transform="translate(-12, 5)"
-              >
-                <circle cx="15" cy="-2" r={3 / 35000} scale="0.001" />
-                <svg viewBox="0 0 645.698 136.753">
-                  <path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z" />
-                </svg>
-              </g>
-              <text
-                textAnchor="middle"
-                y={markerOffset}
-                x={markerOff}
-                style={{
-                  fontFamily: "system-ui",
-                  fill: "#5D5A6D",
-                  fontSize: 1,
-                }}
-              >
-                {name}
-              </text>
-            </Marker>
-          ))}
+          {markers.map(({ name, coordinates, markerOffset }, i) => {
+            return (
+              <Marker key={i} coordinates={coordinates}>
+                <g
+                  fill="none"
+                  stroke="#5BC691"
+                  strokeWidth="1"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  transform="translate(-12, 5)"
+                >
+                  <circle cx="15" cy="-2" r={3 / 35000} scale="0.001" />
+                  <svg viewBox="0 0 645.698 136.753">
+                    <path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z" />
+                  </svg>
+                </g>
+                <text
+                  textAnchor="middle"
+                  y={markerOffset}
+                  x={markerOff}
+                  style={{
+                    fontFamily: "system-ui",
+                    fill: "#5D5A6D",
+                    fontSize: 1,
+                  }}
+                >
+                  {name}
+                </text>
+              </Marker>
+            );
+          })}
         </ZoomableGroup>
       </ComposableMap>
     </div>
   );
 };
 
-export default SeoulChart;
+export default Map;

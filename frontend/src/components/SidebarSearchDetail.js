@@ -6,7 +6,7 @@ import ReactTooltip from "react-tooltip";
 import { ReactComponent as BackIcon } from "../image/back.svg";
 import { ReactComponent as BookmarkIcon } from "../image/bookmark-maked.svg";
 import { SidebarMenu } from "./SidebarMenu";
-import { getParkDetail, getReviews } from "../api/index";
+import { getParkDetail, getReviews } from "../actions/index";
 import { DetailList } from "./DetailList";
 import { SimpleMap } from "./GoolgleMap";
 import { Review } from "./Review";
@@ -62,8 +62,6 @@ export function SidebarSearchDetail() {
       );
   }, [detailData, equitments]);
 
-  console.log(reviewList);
-
   return (
     <>
       <Header />
@@ -76,6 +74,7 @@ export function SidebarSearchDetail() {
           <div className="mapAPI">{detailData && simplemap}</div>
           <div className="parkDetailContainer">
             <div className="parkDetail">{detailData && detailList}</div>
+
             <form className="createReview">
               <textarea placeholder="내용을 입력해주세요." />
               <br />
@@ -84,7 +83,7 @@ export function SidebarSearchDetail() {
             <div className="reviews">
               {reviewList &&
                 reviewList.map((item, idx) => {
-                  return <Review item={item} idx={idx} />;
+                  return <Review key={idx} item={item} idx={idx} />;
                 })}
             </div>
           </div>

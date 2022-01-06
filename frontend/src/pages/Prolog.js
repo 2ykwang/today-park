@@ -1,19 +1,16 @@
-import React, { useState } from "react";
-import { Header } from "./Header";
+import React from "react";
+import { Header } from "../components/Header";
 import {
   ComposableMap,
   ZoomableGroup,
   Geographies,
   Geography,
 } from "react-simple-maps";
-import GwanakMap from "../json/gwanak.json";
 import SeoulMap from "../json/seoul.json";
-import MapchartOrigin from "./SeoulMapchart";
 
-//const geoUrl ="https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 const geoUrl = SeoulMap;
 
-const Mapchart = ({ setTooltipContent }) => {
+const Prolog = ({ setTooltipContent }) => {
   return (
     <div>
       <Header />
@@ -77,4 +74,4 @@ const Mapchart = ({ setTooltipContent }) => {
   );
 };
 
-export default Mapchart;
+export default Prolog;

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ReactComponent as CloseButton } from "../image/closebutton.svg";
-import { userLogin, getUserInfo } from "../api/index";
+import { userLogin, getUserInfo } from "../actions/index";
 import Logo from "../image/logo.png";
 import { useSelector, useDispatch } from "react-redux";
 import { getLoginData } from "../store/loginSlice";
