@@ -14,9 +14,10 @@ from utill import *
 
 
 class Park_Gwanak:
-    def __init__(self, engine, filePath):
+    def __init__(self, engine, file_path, table_name):
         self.engine = engine
-        self.filePath = filePath
+        self.file_path = file_path
+        self.table_name = table_name
 
     def set_coordinate(self, x):
         tude = x
@@ -29,7 +30,7 @@ class Park_Gwanak:
 
     def etl_data(self):
         # 관악구 공원 데이터 불러오기
-        df = pd.read_csv(self.filePath, encoding="cp949")
+        df = pd.read_csv(self.file_path, encoding="cp949")
 
         df_park = df[["명칭", "위치", "동이름", "위도", "경도"]]
 
@@ -45,7 +46,7 @@ class Park_Gwanak:
         # 각 구청들의 데이터들이 정리가 제대로 되어있지 않아서 regex로 하기에는 한계가 있다..
         df_park["si_address"] = pd.DataFrame(["서울특별시" for _ in range(df_park.shape[0])])
         df_park["gu_address"] = pd.DataFrame(["관악구" for _ in range(df_park.shape[0])])
-
+        df_park["park_image"] = ""
         # 구id : utill.py seoul_code 활용
         df_park["gu_id"] = df_park["gu_address"].apply(lambda x: seoul_code[x])
         # 기존 컬럼 변경
@@ -60,7 +61,7 @@ class Park_Gwanak:
             inplace=True,
         )
 
-        return load_data(self.engine, "park", "park_name", df_park)
+        return load_data(self.engine, self.table_name, "park_name", df_park)
 
 
 # flake8: noqa

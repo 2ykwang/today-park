@@ -17,9 +17,10 @@ from utill import *
 class Equipment_Gwanak:
 
     # connection info, filePath
-    def __init__(self, engine, filePath):
+    def __init__(self, engine, file_path, table_name):
         self.engine = engine
-        self.filePath = filePath
+        self.file_path = file_path
+        self.table_name = table_name
         self.set_equip = set()
 
     # 운동기구 나누기
@@ -62,7 +63,7 @@ class Equipment_Gwanak:
     def etl_data(self):
 
         # 운동기구 master Data 넣기
-        df = pd.read_csv(self.filePath, encoding="cp949")
+        df = pd.read_csv(self.file_path, encoding="cp949")
 
         df_park = df[["설치기구종류", "운동기구 총계"]]
         df_park["설치기구종류"].apply(self.split_re_for_gwanak)
@@ -89,7 +90,7 @@ class Equipment_Gwanak:
         df_equip = df_equip.drop_duplicates("equipment_name").reset_index(drop=True)
 
         # DB 처리
-        return load_data(self.engine, "park_equipment", "equipment_name", df_equip)
+        return load_data(self.engine, self.table_name, "equipment_name", df_equip)
 
         # try :
         #     conn = self.engine.connect()
