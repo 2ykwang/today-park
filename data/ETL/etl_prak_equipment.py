@@ -15,10 +15,11 @@ from utill import *
 
 
 class Park_Equipment_Gwanak:
-    def __init__(self, engine, filePath):
+    def __init__(self, engine, file_path, table_name):
         self.engine = engine
-        self.filePath = filePath
+        self.file_path = file_path
         self.arr_ParkEquip = []
+        self.table_name = table_name
 
     # 운동기구 나누기 <- equipClass와 조금 다르다
     # 전체행을 가지고온다.
@@ -82,7 +83,7 @@ class Park_Equipment_Gwanak:
 
     def etl_data(self):
         # 관악구 공원 데이터 불러오기
-        df = pd.read_csv(self.filePath, encoding="cp949")
+        df = pd.read_csv(self.file_path, encoding="cp949")
         # df = pd.read_csv(f'{dir}/data.csv', encoding='cp949')
 
         # 현재 필요한 건 2개
@@ -119,7 +120,7 @@ class Park_Equipment_Gwanak:
         df_park_equip["park_id"] = df_park_equip["park_name"].apply(
             lambda x: self.attach_park_id(x, df_serach_park)
         )
-        df_park_equip["equipment_id"] = df_park_equip["equipment_name"].apply(
+        df_park_equip["equipment_parks"] = df_park_equip["equipment_name"].apply(
             lambda x: self.attach_equip_id(x, df_serach_equip)
         )
 
@@ -134,8 +135,8 @@ class Park_Equipment_Gwanak:
         # 수량 update는 추후
         return load_data(
             self.engine,
-            "park_park_equipment",
-            ["park_id", "equipment_id"],
+            self.table_name,
+            ["park_id", "equipment_parks"],
             df_park_equip,
         )
 

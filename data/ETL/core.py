@@ -29,7 +29,7 @@ def load_data(engine, table_name, group_column, df_trans):
                 )
 
         except Exception as ex:
-            print("load Exception")
+            print(f"load Exception {ex}")
             conn.close()
             return ex
         finally:
