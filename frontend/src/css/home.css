@@ -1,0 +1,23 @@
+.home .video {
+  /* border: 2px solid red; */
+  width: 100%;
+  display: block;
+  position: relative;
+}
+.home .video::before {
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000;
+  opacity: 0.2;
+  position: absolute;
+}
+.home .findPark {
+  position: absolute;
+  bottom: 280px;
+  right: 80px;
+  font-size: 28px;
+  color: #fff;
+}
