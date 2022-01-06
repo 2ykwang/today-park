@@ -3,7 +3,7 @@
   width: 80vw;
   display: flex;
   flex-direction: column;
-  margin: 4vh auto auto auto;
+  margin: 140px auto auto auto;
 }
 #teamIntro .header {
   border-bottom: 1px solid lightslategray;
@@ -15,7 +15,7 @@
 }
 #teamIntro ul {
   display: flex;
-  margin: 5vh 0;
+  margin: 10vh 0;
 }
 #teamIntro ul li {
   display: block;
