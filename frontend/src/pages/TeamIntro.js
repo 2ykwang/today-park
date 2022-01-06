@@ -10,7 +10,7 @@ function TeamIntro() {
     <>
       <Header />
       <div id="teamIntro">
-        <div class="header">
+        <div className="header">
           <span
             style={{ color: "#47C690", fontSize: "30px", fontWeight: "bold" }}
           >
@@ -18,10 +18,10 @@ function TeamIntro() {
           </span>
           #좋은사람 #좋은시간
         </div>
-        <div class="member">
+        <div className="member">
           <ul>
             <li>
-              <img class="profilePic" src={Martina} alt="profile-pic" />
+              <img className="profilePic" src={Martina} alt="profile-pic" />
               <h2>조병민</h2>
               <p>데이터분석</p>
               <div>
@@ -30,7 +30,7 @@ function TeamIntro() {
               </div>
             </li>
             <li>
-              <img class="profilePic" src={Martina} alt="profile-pic" />
+              <img className="profilePic" src={Martina} alt="profile-pic" />
 
               <h2>강면구</h2>
               <p>데이터분석</p>
@@ -40,7 +40,7 @@ function TeamIntro() {
               </div>
             </li>
             <li>
-              <img class="profilePic" src={Martina} alt="profile-pic" />
+              <img className="profilePic" src={Martina} alt="profile-pic" />
 
               <h2>이민영</h2>
               <p>프론트엔드</p>
@@ -50,7 +50,7 @@ function TeamIntro() {
               </div>
             </li>
             <li>
-              <img class="profilePic" src={Martina} alt="profile-pic" />
+              <img className="profilePic" src={Martina} alt="profile-pic" />
               <h2>양영광</h2>
               <p>백엔드</p>
               <div>
@@ -59,7 +59,7 @@ function TeamIntro() {
               </div>
             </li>
             <li>
-              <img class="profilePic" src={Martina} alt="profile-pic" />
+              <img className="profilePic" src={Martina} alt="profile-pic" />
               <h2>이영숙</h2>
               <p>백엔드(팀장)</p>
               <div>
@@ -69,10 +69,10 @@ function TeamIntro() {
             </li>
           </ul>
         </div>
-        <div class="footer">
-          <img class="heart" src={Heart} alt="heart"></img>
-          <img class="plane" src={Plane} alt="plane"></img>
-          <img class="bubble" src={Bubble} alt="bubble"></img>
+        <div className="footer">
+          <img className="heart" src={Heart} alt="heart"></img>
+          <img className="plane" src={Plane} alt="plane"></img>
+          <img className="bubble" src={Bubble} alt="bubble"></img>
         </div>
       </div>
     </>
