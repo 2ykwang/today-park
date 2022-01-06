@@ -13,9 +13,11 @@ services:
   # FRONTEND
   client:
     command: "yarn start"
-    environment: 
+    environment:
       CHOKIDAR_USEPOLLING: "true"
+      NODE_ENV: "development"
       REACT_APP_BASE_URL: "http://localhost"
+      REACT_APP_USE_SSL: false
     volumes:
       - ./frontend/src:/srv/client/src
       - ./frontend/public:/srv/client/public
