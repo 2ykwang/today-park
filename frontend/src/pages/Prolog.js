@@ -1,76 +1,96 @@
 import React from "react";
 import { Header } from "../components/Header";
-import {
-  ComposableMap,
-  ZoomableGroup,
-  Geographies,
-  Geography,
-} from "react-simple-maps";
 import SeoulMap from "../json/seoul.json";
+import ReactFullpage from "@fullpage/react-fullpage";
 
 const geoUrl = SeoulMap;
+const anchors = ["코로나와 배달", "배달과 건강", "건강과 운동"];
 
 const Prolog = ({ setTooltipContent }) => {
+  function moveToPage(page) {
+    window.fullpage_api.moveTo(page);
+  }
   return (
-    <div>
+    <>
       <Header />
-      {/*
-      width, height = 캔버스 사이즈
-      projection
-      projectionConfig - > 그대로 두면 됨
-      */}
-      <ComposableMap
-        width={800}
-        height={500}
-        projection="geoMercator"
-        projectionConfig={{ rotate: [-60, 0, 5], scale: 35000 }}
-        data-tip=""
-      >
-        {/* 
-            줌 컴포넌트 ( 확대 축소 ) 
-            center = 중심좌표
-            zoom = 확대
-          */}
-        <ZoomableGroup
-          center={[126.98820917938465, 37.55105648528907]}
-          zoom={1.5}
-        >
-          <Geographies geography={geoUrl}>
-            {({ geographies }) =>
-              geographies.map((geo) => (
-                <Geography
-                  onMouseEnter={() => {
-                    const { name, code } = geo.properties;
-                    setTooltipContent(`${name} : ${code}`);
-                  }}
-                  onMouseLeave={() => {
-                    setTooltipContent("");
-                  }}
-                  key={geo.rsmKey}
-                  geography={geo}
-                  style={{
-                    default: {
-                      fill: "#fff",
-                      stroke: "#aaa",
-                      strokeWidth: 0.5,
-                      outline: "none",
-                    },
-                    hover: {
-                      fill: "#B1D6AE",
-                      outline: "none",
-                    },
-                    pressed: {
-                      fill: "fff",
-                      outline: "#333",
-                    },
-                  }}
-                />
-              ))
-            }
-          </Geographies>
-        </ZoomableGroup>
-      </ComposableMap>
-    </div>
+      <div id="prolog">
+        <div className="greenBar"></div>
+        <div className="leftIndexBar">
+          <ul>
+            <li>
+              <a
+                href="#"
+                onClick={() => {
+                  moveToPage(1);
+                }}
+              >
+                코로나와 배달
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                onClick={() => {
+                  moveToPage(2);
+                }}
+              >
+                배달과 건강
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                onClick={() => {
+                  moveToPage(3);
+                }}
+              >
+                건강과 운동
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                onClick={() => {
+                  moveToPage(4);
+                }}
+              >
+                '관악구'인 이유?
+              </a>
+            </li>
+          </ul>
+        </div>
+        <ReactFullpage
+          anchors={anchors}
+          navigation
+          navigationTooltips={anchors}
+          sectionsColor={["red", "white", "white", "white"]}
+          onLeave={(origin, destination, direction) => {
+            console.log("onLeave event", { origin, destination, direction });
+          }}
+          render={({ state, fullpageApi }) => {
+            console.log("render prop change", state, fullpageApi); // eslint-disable-line no-console
+            return (
+              <>
+                <div className="contents">
+                  <div className="section">
+                    <p> 코로나와 배달</p>
+                  </div>
+                  <div className="section">
+                    <p>베달과 건강</p>
+                  </div>
+                  <div className="section">
+                    <p>건강과 운동</p>
+                  </div>
+                  <div className="section">
+                    <p>'관악구'인 이유?</p>
+                  </div>
+                </div>
+              </>
+            );
+          }}
+        />
+      </div>
+    </>
   );
 };
 
