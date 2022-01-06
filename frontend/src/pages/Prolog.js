@@ -2,6 +2,12 @@ import { React, useState } from "react";
 import { Header } from "../components/Header";
 import ReactFullpage from "@fullpage/react-fullpage";
 
+import { ReactComponent as GainWeight } from '../components/Group 70.svg';
+import Chart2030 from '../components/Seoul2030.js'
+import KeywordChart from '../components/CoronaWorkoutKeyword'
+import ChartDeliverPercentByAge from '../components/DeliverPercentByAge';
+import ChartGainWeightByAge from '../components/GainWeightByAge';
+
 const anchors = [
   "코로나와배달",
   "배달과건강",
@@ -78,13 +84,31 @@ const Prolog = () => {
                     <p> 코로나와 배달</p>
                   </div>
                   <div className="section">
-                    <p>베달과 건강</p>
+                    <p>배달과 건강</p>
+                    <div style={{width:'300px', height:'300px'}}>
+                      <GainWeight />
+                    </div>
                   </div>
                   <div className="section">
                     <p>건강과 운동</p>
+                    <div style={{width:'600px', height:'300px'}}>
+                      <KeywordChart />
+                    </div>
                   </div>
                   <div className="section">
                     <p>'관악구'인 이유?</p>
+                    <div style={{width:'300px', height:'200px'}}>
+                      <ChartGainWeightByAge />
+                    </div>
+                    <div style={{width:'300px', height:'300px'}}>
+                      <ChartDeliverPercentByAge />
+                    </div>
+                  </div>
+                  <div className="section">
+                    <p>'관악구'인 이유?</p>
+                    <div style={{width:'300px', height:'300px'}}>
+                      <Chart2030 />
+                    </div>
                   </div>
                 </div>
               </>
