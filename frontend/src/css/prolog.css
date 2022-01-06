@@ -5,7 +5,7 @@
   position: fixed;
   z-index: 1000;
   width: 5px;
-  height: 30px;
+  height: 120px;
   background-color: #47c690;
   margin-left: 10px;
   margin-top: 120px;
@@ -20,11 +20,15 @@
 #prolog .leftIndexBar li {
   line-height: 30px;
   font-size: large;
-  padding-left: 20px;
+  padding-left: 25px;
+  cursor: pointer;
 }
 #prolog .leftIndexBar li a {
   text-decoration: none;
   color: black;
+}
+#prolog .leftIndexBar #list-1 {
+  font-weight: bold;
 }
 
 #prolog #fullpage {
@@ -32,7 +36,7 @@
   z-index: 1;
 }
 #prolog .contents {
-  padding-left: 200px;
+  padding-left: 220px;
 }
 
 #fp-nav ul li .fp-right {
