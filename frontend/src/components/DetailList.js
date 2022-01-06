@@ -29,7 +29,13 @@ export function DetailList({ detailData, equitments }) {
             })}
           </ul>
         </div>
-        <h4 className="totalReviews">리뷰({detailData.total_reviews})</h4>
+        <div className="nearbyParks">
+          <h4>인근 공원</h4>
+          <ul>
+            <li>- 토끼 공원</li>
+            <li>- 거북이 공원</li>
+          </ul>
+        </div>
       </div>
     </div>
   );

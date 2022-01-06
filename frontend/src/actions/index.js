@@ -43,32 +43,35 @@ export async function registerUser(username, email, password) {
   try {
     const data = { username: username, email: email, password: password };
     const response = await axios.post(`${baseUrl}/user/register`, data);
-    console.log(response);
     if (response.status === 201) {
       console.log("회원가입 성공");
     } else {
       // 로그인 실패
     }
-  } catch (error) {
-    console.log(error.response.data);
-  }
+  } catch (error) {}
 }
 
 export async function getParks(guId, keyword, sort, page, size) {
-  const config = makeHeaders();
-  const response = await axios.get(
-    `${baseUrl}/parks/search?guId=${guId}&keyword=${keyword}&sort=${sort}&page=${page}&size=${size}`,
-    config
-  );
-
-  return response.data;
+  try {
+    const config = makeHeaders();
+    const response = await axios.get(
+      `${baseUrl}/parks/search?guId=${guId}&keyword=${keyword}&sort=${sort}&page=${page}&size=${size}`,
+      config
+    );
+    return response.data;
+  } catch (error) {}
 }
 
 export async function getParkDetail(parkId) {
-  const config = makeHeaders();
-  const response = await axios.get(`${baseUrl}/parks/detail/${parkId}`, config);
+  try {
+    const config = makeHeaders();
+    const response = await axios.get(
+      `${baseUrl}/parks/detail/${parkId}`,
+      config
+    );
 
-  return response.data;
+    return response.data;
+  } catch (error) {}
 }
 
 export async function getReviews(parkId) {
@@ -77,6 +80,18 @@ export async function getReviews(parkId) {
     `${baseUrl}/parks/${parkId}/reviews`,
     config
   );
-  console.log(response.data);
   return response.data;
+}
+
+export async function postReviews(parkId, score, content) {
+  try {
+    const config = makeHeaders();
+    const data = { score: score, content: content };
+    const response = await axios.post(
+      `${baseUrl}/parks/${parkId}/reviews`,
+      data,
+      config
+    );
+    return response.data;
+  } catch (error) {}
 }

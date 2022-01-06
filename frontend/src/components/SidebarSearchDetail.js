@@ -3,10 +3,11 @@ import { Link, useParams } from "react-router-dom";
 import { Header } from "./Header";
 import Map from "./Map";
 import ReactTooltip from "react-tooltip";
+import { ReactComponent as StarIcon } from "../image/star.svg";
 import { ReactComponent as BackIcon } from "../image/back.svg";
 import { ReactComponent as BookmarkIcon } from "../image/bookmark-maked.svg";
 import { SidebarMenu } from "./SidebarMenu";
-import { getParkDetail, getReviews } from "../actions/index";
+import { getParkDetail, getReviews, postReviews } from "../actions/index";
 import { DetailList } from "./DetailList";
 import { SimpleMap } from "./GoolgleMap";
 import { Review } from "./Review";
@@ -18,6 +19,9 @@ export function SidebarSearchDetail() {
   const [equitments, setEquitments] = useState([]);
   const [simplemap, setSimplemap] = useState("");
   const [reviewList, setreviewList] = useState("");
+  const [clicked, setClicked] = useState([false, false, false, false, false]);
+  const [rating, setRating] = useState(0);
+  const [reviewContent, setreviewContent] = useState("");
 
   const { id } = useParams();
 
@@ -28,7 +32,6 @@ export function SidebarSearchDetail() {
       try {
         setDetailData(response);
         setEquitments(response.equipments);
-        console.log(response);
       } catch (error) {
         console.log("공원 정보 get요청 실패");
       }
@@ -62,6 +65,24 @@ export function SidebarSearchDetail() {
       );
   }, [detailData, equitments]);
 
+  // 클릭시 별점 등록
+  function handleStarClick(e, idx) {
+    e.preventDefault();
+    let clickStates = [...clicked];
+    for (let i = 1; i < 6; i++) {
+      if (i <= idx) clickStates[i] = true;
+      else clickStates[i] = false;
+    }
+    setClicked(clickStates);
+    setRating(idx);
+  }
+
+  async function handleCreateReview(e) {
+    e.preventDefault();
+    let response = await postReviews(id, rating, reviewContent);
+    console.log(response);
+  }
+
   return (
     <>
       <Header />
@@ -74,12 +95,54 @@ export function SidebarSearchDetail() {
           <div className="mapAPI">{detailData && simplemap}</div>
           <div className="parkDetailContainer">
             <div className="parkDetail">{detailData && detailList}</div>
-
-            <form className="createReview">
-              <textarea placeholder="내용을 입력해주세요." />
-              <br />
-              <button type="submit">등록하기</button>
-            </form>
+            <div className="totalReviews">
+              <h4>리뷰({detailData && detailData.total_reviews})</h4>
+              <form className="createReview">
+                <div className="rating">
+                  <StarIcon
+                    className={"star " + (clicked[1] ? "clicked" : null)}
+                    onClick={(e) => handleStarClick(e, 1)}
+                    width="24"
+                    height="24"
+                  />
+                  <StarIcon
+                    className={"star " + (clicked[2] ? "clicked" : null)}
+                    onClick={(e) => handleStarClick(e, 2)}
+                    width="24"
+                    height="24"
+                  />
+                  <StarIcon
+                    className={"star " + (clicked[3] ? "clicked" : null)}
+                    onClick={(e) => handleStarClick(e, 3)}
+                    width="24"
+                    height="24"
+                  />
+                  <StarIcon
+                    className={"star " + (clicked[4] ? "clicked" : null)}
+                    onClick={(e) => handleStarClick(e, 4)}
+                    width="24"
+                    height="24"
+                  />
+                  <StarIcon
+                    className={"star " + (clicked[5] ? "clicked" : null)}
+                    onClick={(e) => handleStarClick(e, 5)}
+                    width="24"
+                    height="24"
+                  />
+                </div>
+                <textarea
+                  placeholder="내용을 입력해주세요."
+                  value={reviewContent}
+                  onChange={(e) => {
+                    setreviewContent(e.target.value);
+                  }}
+                />
+                <br />
+                <button type="submit" onClick={handleCreateReview}>
+                  등록하기
+                </button>
+              </form>
+            </div>
             <div className="reviews">
               {reviewList &&
                 reviewList.map((item, idx) => {
