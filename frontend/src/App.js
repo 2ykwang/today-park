@@ -17,6 +17,7 @@ import "./css/mypage.css";
 import "./css/search.css";
 import "./css/SidebarSearchDetail.css";
 import "./css/SidebarBookmark.css";
+import "./css/teamIntro.css";
 
 function App() {
   return (

@@ -258,8 +258,27 @@ class ParkReviewView(APIView):
 
 
 # TODO: 유저별 리뷰
-class UserReviewListView(APIView):
+class UserReviewListView(APIView, ParkListPagination):
+    permission_classes = [IsOwner]
+
+    page = openapi.Parameter(
+        "page",
+        openapi.IN_QUERY,
+        description="페이지",
+        type=openapi.TYPE_INTEGER,
+        default=1,
+    )
+
+    size = openapi.Parameter(
+        "size",
+        openapi.IN_QUERY,
+        description="페이지당 보여줄 갯수",
+        type=openapi.TYPE_INTEGER,
+        default=ParkListPagination.page_size,
+    )
+
     @swagger_auto_schema(
+        manual_parameters=[page, size],
         responses={
             status.HTTP_200_OK: ParkReviewSerializer(many=True),
             status.HTTP_401_UNAUTHORIZED: "권한 없음",
@@ -272,6 +291,9 @@ class UserReviewListView(APIView):
 
         사용자가 작성한 공원 리뷰 목록을 반환합니다.
         """
-        review = Review.objects.filter(user_id=request.user.id)
-        serializer = ParkReviewSerializer(review, many=True)
-        return Response(serializer.data)
+
+        review = Review.objects.filter(Q(user_id=request.user.id) & Q(is_deleted=False))
+
+        reviews = self.paginate_queryset(review, request, view=self)
+        serializer = ParkReviewSerializer(reviews, many=True)
+        return self.get_paginated_response(serializer.data)
