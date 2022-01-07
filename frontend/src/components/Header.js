@@ -88,7 +88,7 @@ export function Header() {
       <header className="mainHeader">
         <div className="logo">
           <BasicLink to="/">
-            <img src={Logo} alt="오늘의 공원 로고" width="190" />
+            <img src={Logo} alt="오늘의 공원 로고" height="60" />
           </BasicLink>
         </div>
 
