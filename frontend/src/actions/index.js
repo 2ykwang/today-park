@@ -87,7 +87,6 @@ export async function postBookmark(parkId) {
 
 export async function deleteBookmark(bookmarkId) {
   try {
-    const data = { bookmark_id: bookmarkId };
-    const response = await axios.delete(`/bookmarks/${bookmarkId}`);
+    await axios.delete(`/bookmarks/${bookmarkId}`);
   } catch (error) {}
 }

@@ -1,11 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ReactComponent as StarIcon } from "../image/star.svg";
 import { ReactComponent as BookmarkIcon } from "../image/bookmark-maked.svg";
 import { ReactComponent as BookmarkIconEmpty } from "../image/bookmark-empty.svg";
-import { postBookmark, deleteBookmark } from "../actions/index";
+import { postBookmark, deleteBookmark, getBookmarks } from "../actions/index";
 
-export function DetailList({ detailData, equitments }) {
+export function DetailList({ detailData }) {
   const [click, setClick] = useState(false);
+  const [bookmarkId, setBookmarkId] = useState("");
+
+  const equipmentsList =
+    detailData &&
+    detailData.equipments.map((item, idx) => {
+      return (
+        <li key={idx}>
+          - {item.equipment_name}({item.quantity})
+        </li>
+      );
+    });
+
+  useEffect(() => {
+    async function getbookmarks() {
+      const response = await getBookmarks();
+      detailData &&
+        response.forEach((item) => {
+          if (item.parks.id === detailData.id) {
+            setClick(true);
+            setBookmarkId(item.id);
+          }
+        });
+    }
+    getbookmarks();
+  }, [detailData, click]);
 
   async function addbookmark() {
     const response = await postBookmark(detailData.id);
@@ -13,7 +38,7 @@ export function DetailList({ detailData, equitments }) {
     console.log(response);
   }
   async function deletebookmark() {
-    await deleteBookmark();
+    await deleteBookmark(bookmarkId);
     setClick(false);
   }
   return (
@@ -46,15 +71,7 @@ export function DetailList({ detailData, equitments }) {
         </div>
         <div className="equipments">
           <h4>운동기구 종류</h4>
-          <ul>
-            {equitments.map((item, idx) => {
-              return (
-                <li key={idx}>
-                  - {item.equipment_name}({item.quantity})
-                </li>
-              );
-            })}
-          </ul>
+          <ul>{equipmentsList}</ul>
         </div>
         <div className="nearbyParks">
           <h4>인근 공원</h4>

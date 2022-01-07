@@ -26,7 +26,7 @@ section.home {
   font-size: 28px;
   color: #fff;
   border-bottom: 2px solid white;
-  padding: 10px 20px
+  padding: 10px 20px;
 }
 
 .home .under-scroll {
@@ -56,14 +56,14 @@ section.home {
 }
 
 .intro .intro-background-1 {
-  background-color: #5BC691;
+  background-color: #5bc691;
   width: 50%;
   height: 100%;
   border-bottom-left-radius: 70%;
 }
 
 .intro .intro-background-2 {
-  background-color: #5BC691;
+  background-color: #5bc691;
   width: 50%;
   height: 100%;
 }
@@ -81,11 +81,11 @@ section.home {
 
 .intro .intro-cloud-2 {
   position: absolute;
-  right:310px;
-  top:200px;
+  right: 310px;
+  top: 200px;
 }
 
-.intro .intro-cloud-2 img{
+.intro .intro-cloud-2 img {
   width: 280px;
   height: 150px;
 }
@@ -93,10 +93,10 @@ section.home {
 .intro .intro-cloud-3 {
   position: absolute;
   right: 50px;
-  top:430px;
+  top: 430px;
 }
 
-.intro .intro-cloud-3 img{
+.intro .intro-cloud-3 img {
   width: 230px;
   height: 135px;
 }
@@ -104,18 +104,18 @@ section.home {
 .intro .intro-sun {
   position: absolute;
   left: 250px;
-  top: 80px
+  top: 80px;
 }
 
-.intro .intro-sun img{
+.intro .intro-sun img {
   width: 250px;
 }
 
 .intro .intro-textwrapper {
   position: absolute;
-  left:50%;
+  left: 50%;
   transform: translateX(-50%);
-  top:37%;
+  top: 37%;
   height: 30vh;
   width: 50vw;
   display: flex;
@@ -124,20 +124,19 @@ section.home {
 }
 
 .intro .intro-textwrapper P {
-  padding:10px
+  padding: 10px;
 }
 
 .intro .intro-textwrapper .intro-text-1 {
-  color:white;
+  color: white;
   font-size: 50px;
   font-weight: bold;
 }
 
 .intro .intro-textwrapper .intro-text-2 {
-  color:white;
+  color: white;
   font-size: 30px;
 }
-
 
 .reason .reason1 {
   position: relative;
@@ -152,7 +151,7 @@ section.home {
   bottom: 0;
 }
 
-.reason .reason1 .reason1-background img{
+.reason .reason1 .reason1-background img {
   width: 100%;
   height: 40vh;
   z-index: -1;
@@ -166,7 +165,7 @@ section.home {
   align-items: center;
   padding-top: 5%;
 }
-.reason .reason1 .reason1-textwrapper>div {
+.reason .reason1 .reason1-textwrapper > div {
   margin-top: 20px;
   margin-bottom: 50px;
 }
@@ -175,7 +174,7 @@ section.home {
   font-size: 50px;
 }
 .reason .reason1 .reason1-textwrapper .reason1-text1 span {
-  color:#5BC691
+  color: #5bc691;
 }
 
 .reason .reason1 .reason1-textwrapper .reason1-text2 {
@@ -183,8 +182,8 @@ section.home {
   font-size: 28px;
 }
 
-.reason .reason1 .reason1-textwrapper .reason1-text2>p {
-  padding:3px
+.reason .reason1 .reason1-textwrapper .reason1-text2 > p {
+  padding: 3px;
 }
 .reason .reason1 .reason1-textwrapper .reason1-text2 span {
   font-weight: bold;
@@ -202,13 +201,17 @@ section.home {
 .reason .reason1 .reason1-statisticswrapper .reason1-statistics {
   position: relative;
   box-sizing: border-box;
-  padding:10px;
+  padding: 10px;
   margin: 10px 20px 0 20px;
   width: 20%;
   height: 50vh;
 }
 
-.reason .reason1 .reason1-statisticswrapper .reason1-statistics .reason1-statistics-back {
+.reason
+  .reason1
+  .reason1-statisticswrapper
+  .reason1-statistics
+  .reason1-statistics-back {
   position: absolute;
   opacity: 0.3;
   background-color: yellowgreen;
@@ -217,30 +220,49 @@ section.home {
   border-radius: 5%;
 }
 
-.reason .reason1 .reason1-statisticswrapper .reason1-statistics .reason1-statistics-contents {
+.reason
+  .reason1
+  .reason1-statisticswrapper
+  .reason1-statistics
+  .reason1-statistics-contents {
   position: absolute;
   padding: 10%;
   box-sizing: border-box;
-  top:3%;
+  top: 3%;
   height: 100%;
 }
 
-.reason .reason1 .reason1-statisticswrapper .reason1-statistics .reason1-statistics-contents>p:first-child {
+.reason
+  .reason1
+  .reason1-statisticswrapper
+  .reason1-statistics
+  .reason1-statistics-contents
+  > p:first-child {
   font-size: 2rem;
   text-align: center;
   font-weight: bold;
 }
 
-.reason .reason1 .reason1-statisticswrapper .reason1-statistics .reason1-statistics-contents>p:last-child {
+.reason
+  .reason1
+  .reason1-statisticswrapper
+  .reason1-statistics
+  .reason1-statistics-contents
+  > p:last-child {
   font-size: 0.5rem;
   position: absolute;
   bottom: 3vh;
-  right:1vw;
+  right: 1vw;
   font-size: 0.9rem;
   opacity: 0.8;
 }
 
-.reason .reason1 .reason1-statisticswrapper .reason1-statistics .reason1-statistics-contents .reason1-chart1 {
+.reason
+  .reason1
+  .reason1-statisticswrapper
+  .reason1-statistics
+  .reason1-statistics-contents
+  .reason1-chart1 {
   width: 100%;
   height: 70%;
   margin: 5vh 0 0;
@@ -251,20 +273,38 @@ section.home {
   font-size: 2rem;
 }
 
-.reason .reason1 .reason1-statisticswrapper .reason1-statistics .reason1-statistics-contents .reason1-chart2 .reason1-card-rank {
+.reason
+  .reason1
+  .reason1-statisticswrapper
+  .reason1-statistics
+  .reason1-statistics-contents
+  .reason1-chart2
+  .reason1-card-rank {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 3vh;
 }
 
-.reason .reason1 .reason1-statisticswrapper .reason1-statistics .reason1-statistics-contents .reason1-chart2 .reason1-card-rank p {
+.reason
+  .reason1
+  .reason1-statisticswrapper
+  .reason1-statistics
+  .reason1-statistics-contents
+  .reason1-chart2
+  .reason1-card-rank
+  p {
   padding: 1rem;
   font-size: 2rem;
   font-weight: bold;
 }
 
-.reason .reason1 .reason1-statisticswrapper .reason1-statistics .reason1-statistics-contents .reason1-chart3 {
+.reason
+  .reason1
+  .reason1-statisticswrapper
+  .reason1-statistics
+  .reason1-statistics-contents
+  .reason1-chart3 {
   width: 100%;
   height: 70%;
   margin: 5vh 0 0;

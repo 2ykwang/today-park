@@ -12,7 +12,7 @@ import { getBookmarks } from "../actions/index";
 
 export function SidebarBookmark() {
   const [content, setContent] = useState("");
-  const [clicked, setClicked] = useState(true);
+  // const [clicked, setClicked] = useState(true);
   const [bookmarks, setBookmarks] = useState([]);
 
   useEffect(() => {
@@ -23,15 +23,15 @@ export function SidebarBookmark() {
     getBookmarklist();
   }, []);
 
-  function clickBookmark() {
-    if (clicked) setClicked(false);
-    else setClicked(true);
-  }
+  // function clickBookmark() {
+  //   if (clicked) setClicked(false);
+  //   else setClicked(true);
+  // }
 
   let bookmarkList =
     bookmarks &&
     bookmarks.map((item, idx) => {
-      let park_id = item.id;
+      let park_id = item.parks.id;
       return (
         <div key={idx} className="park">
           <BasicLink to={"/search/" + park_id} className="parklink">

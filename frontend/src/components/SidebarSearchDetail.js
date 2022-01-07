@@ -4,7 +4,6 @@ import { Header } from "./Header";
 import Map from "./Map";
 import ReactTooltip from "react-tooltip";
 import { ReactComponent as BackIcon } from "../image/back.svg";
-import { ReactComponent as BookmarkIcon } from "../image/bookmark-maked.svg";
 import { SidebarMenu } from "./SidebarMenu";
 import { getParkDetail, getReviews } from "../actions/index";
 import { DetailList } from "./DetailList";
@@ -16,7 +15,6 @@ export function SidebarSearchDetail() {
   const [content, setContent] = useState("");
   const [detailData, setDetailData] = useState("");
   const [detailList, setDetailList] = useState("");
-  const [equitments, setEquitments] = useState([]);
   const [simplemap, setSimplemap] = useState("");
   const [reviewList, setreviewList] = useState("");
 
@@ -28,7 +26,6 @@ export function SidebarSearchDetail() {
       const response = await getParkDetail(id);
       try {
         setDetailData(response);
-        setEquitments(response.equipments);
       } catch (error) {
         console.log("공원 정보 get요청 실패");
       }
@@ -47,9 +44,7 @@ export function SidebarSearchDetail() {
 
   // GET 요청 후, 상세 페이지, 구글맵 UI
   useEffect(() => {
-    setDetailList(
-      <DetailList detailData={detailData} equitments={equitments} />
-    );
+    setDetailList(<DetailList detailData={detailData} />);
     detailData &&
       setSimplemap(
         <SimpleMap
@@ -60,7 +55,7 @@ export function SidebarSearchDetail() {
           zoom={15}
         />
       );
-  }, [detailData, equitments]);
+  }, [detailData]);
 
   return (
     <>
