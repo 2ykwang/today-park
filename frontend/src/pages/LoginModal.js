@@ -101,9 +101,9 @@ export function LoginModal({
                 로그인
               </button>
               <br />
-              <LoginLink to="#">아이디 찾기</LoginLink>
-              <LoginLink to="#">비밀번호 찾기</LoginLink>
-              <LoginLink to="/signUp">회원가입</LoginLink>
+              <LoginLink to="/signUp" className="signup">
+                회원가입
+              </LoginLink>
             </form>
           </ModalContainer>
         </Background>
