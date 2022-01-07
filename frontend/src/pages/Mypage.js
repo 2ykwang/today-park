@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Header } from "../components/Header";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getLoginData } from "../store/loginSlice";
-import { onlyUserReview, deleteReview } from "../actions/index";
+import defaultProfile from "../image/defaultProfile.png";
+import {
+  onlyUserReview,
+  deleteReview,
+  uploadUserImage,
+} from "../actions/index";
 import { ReactComponent as StarIcon } from "../image/star.svg";
 import { CreateReview } from "../components/CreateReview";
 import { editUserInfo, editUserPassword, getUserInfo } from "../actions/auth";
@@ -13,6 +18,7 @@ const ProfileImage = styled.img`
   background-color: #e0e0e0;
   width: 120px;
   height: 120px;
+  border: 1px solid #e0e0e0;
   border-radius: 9999px;
   margin: 0 auto 24px auto;
 `;
@@ -35,12 +41,17 @@ function Mypage() {
 
   const [reviewList, setReviewList] = useState([]);
   const [clickedReviewIdx, setClickedReviewIdx] = useState(0);
+  const [profileImage, setProfileImage] = useState("");
+  const fileRef = useRef();
 
   // 내가 쓴 리뷰 불러오기
   useEffect(() => {
     async function getProfileImage() {
       const response = await getUserInfo();
-      console.log(response.data);
+      console.log(response.data.profile_image);
+      if (response.data.profile_image)
+        setProfileImage(response.data.profile_image);
+      else setProfileImage(defaultProfile);
     }
 
     async function getReviews() {
@@ -77,6 +88,12 @@ function Mypage() {
       [name]: editable,
     });
   };
+  const handleProfileUpload = async (e) => {
+    const file = e.target.files[0];
+    const response = await uploadUserImage(file, file.name);
+    if (response.data.profile_image)
+      setProfileImage(response.data.profile_image);
+  };
   return (
     <>
       <Header />
@@ -85,10 +102,21 @@ function Mypage() {
         <div className="mypageContainer">
           <div className="mainSide">
             <div className="image">
-              <ProfileImage></ProfileImage>
+              <ProfileImage
+                onClick={(e) => {
+                  fileRef.current.click();
+                }}
+                src={profileImage}
+              ></ProfileImage>
 
               <form method="post" action="#">
-                <input type="file" accept="image/*" />
+                <input
+                  hidden={true}
+                  ref={fileRef}
+                  type="file"
+                  onChange={handleProfileUpload}
+                  accept="image/*"
+                ></input>
               </form>
             </div>
             <div className="content">
@@ -98,6 +126,7 @@ function Mypage() {
                 {editToggle.username ? (
                   <>
                     <input
+                      hidden={true}
                       type="text"
                       value={fields.username}
                       onChange={handleFieldsChange}

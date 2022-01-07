@@ -117,7 +117,7 @@ export function Header() {
           </nav>
         </div>
         {/* 로그인 성공하면  */}
-        {Cookies.get("accessToken") ? <LogoutHeader /> : <LoginHeader />}
+        {Cookies.get("username") ? <LogoutHeader /> : <LoginHeader />}
       </header>
     </>
   );

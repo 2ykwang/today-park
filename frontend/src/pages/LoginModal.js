@@ -88,6 +88,7 @@ export function LoginModal({
                   response = await getUserInfo();
                   console.log(response.data);
                   const username = response.data.username;
+                  const email = response.data.email;
                   dispatch(
                     await getLoginData({
                       email: loginStore.email,
@@ -96,6 +97,7 @@ export function LoginModal({
                     })
                   );
                   Cookies.set("username", username);
+                  Cookies.set("email", email);
                   window.location.replace("/");
                 }}
               >
