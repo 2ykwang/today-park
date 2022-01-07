@@ -1,11 +1,7 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { BarChart, Bar, Cell, XAxis, Line, ResponsiveContainer, LabelList, Tooltip, Legend, ComposedChart, YAxis } from 'recharts';
-// import { scaleOrdinal } from 'd3-scale';
-// import { schemeCategory20 } from 'd3-scale-chromatic';
+import { Bar, XAxis, ResponsiveContainer, Tooltip, Legend, ComposedChart, } from 'recharts';
 
-// const colors = scaleOrdinal(schemeCategory20).range();
-const colors = ['#EA96A3','#E19153','#B89C49','#98A246','#60AE47','#4AAE8A','#4BABA4','#4FABBC','#6DAEE2','#B6A8EB','#DF8FE7','#E890C6']
+// const colors = ['#EA96A3','#E19153','#B89C49','#98A246','#60AE47','#4AAE8A','#4BABA4','#4FABBC','#6DAEE2','#B6A8EB','#DF8FE7','#E890C6']
 
 const data = [
   {name:'서울', rate_2019: 69.5, rate_2020: 71.8 },

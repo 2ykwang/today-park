@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { BarChart, Bar, Cell, XAxis, Line, ResponsiveContainer, LabelList, Tooltip, Legend, ComposedChart } from 'recharts';
+import { Bar, XAxis, ResponsiveContainer, Legend, ComposedChart } from 'recharts';
 
-const colors = ['#EA96A3','#E19153','#B89C49','#98A246','#60AE47','#4AAE8A','#4BABA4','#4FABBC','#6DAEE2','#B6A8EB','#DF8FE7','#E890C6']
+// const colors = ['#EA96A3','#E19153','#B89C49','#98A246','#60AE47','#4AAE8A','#4BABA4','#4FABBC','#6DAEE2','#B6A8EB','#DF8FE7','#E890C6']
 
 const data = [
   {name:'2020년', corona:514, deliver:2198020*0.0004},

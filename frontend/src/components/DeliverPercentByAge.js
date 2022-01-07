@@ -1,5 +1,5 @@
-import React, { PureComponent, useEffect, useState } from 'react';
-import { PieChart, Pie, Label, Sector, Cell, ResponsiveContainer, Tooltip, Legend, LabelList } from 'recharts';
+import React, { useEffect, useState } from 'react';
+import { PieChart, Pie, Label, Cell, Tooltip, } from 'recharts';
 
 const data = [
   { name: '20대', value: 32 },
