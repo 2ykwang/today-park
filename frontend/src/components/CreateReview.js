@@ -94,7 +94,7 @@ export function CreateReview({ parkId, reviewId, type, score, content }) {
               handleCreateReview();
             } else if (type === "PUT") {
               handleUpdateReview();
-              // window.location.replace("/mypage");
+              window.location.replace("/mypage");
             }
           }}
         >
