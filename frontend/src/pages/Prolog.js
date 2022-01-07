@@ -100,9 +100,10 @@ const Prolog = () => {
                           </p>
                           <p className="text2">
                             그렇기에 배달은 우리와 떨어질수 없는 각별한 사이가 됐죠.<br/>
-                            생활의 변화 중 '배달음식 주문 빈도 증가'(22.0%)' 가
+                            생활의 변화 중&nbsp;
+                            <span style={{fontWeight:'bold'}}>'배달음식 주문 빈도 증가'(22.0%)'</span> 가
                           </p>
-                          <p className="text2" style={{lineHeight:'1.3em', marginTop:'0'}}>1위로 뽑힌 만큼 사람들의 식습관에 가장 큰 변화가 일어났습니다.</p>
+                          <p className="text2" style={{lineHeight:'1.5em', marginTop:'0.5em'}}>1위로 뽑힌 만큼 사람들의 식습관에 가장 큰 변화가 일어났습니다.</p>
                           <p className="quotation" style={{textAlign:'left'}}>(한국건강증진개발원)</p>
                         </div>
                         <div className="chartDeliver" >
@@ -179,7 +180,7 @@ const Prolog = () => {
                             코로나 확진자 수가 증가세 일때 마다 <br />
                             건강/운동 키워드의 검색 건수가 증가하였습니다.
                           </p>
-                          <p className='text2'>
+                          <p className='text2' style={{fontWeight:'bold'}}>
                             코로나가 증가 추세에 따라  ‘건강’ 및 ‘운동’ 에 대한 <br />
                             관심이 높아짐을 알 수 있습니다.
                           </p>
@@ -201,9 +202,12 @@ const Prolog = () => {
                         </p>
                       </div>
                       <div className='eachContent4'>
-                        <p className='text1'>우리의공원은 왜 20대, 30대 선택했을까요?</p>
+                        <p className='text1'>
+                          <span style={{fontWeight:'bold', color:'#47c690'}}>오늘의 공원</span>
+                          은 왜 20대, 30대 선택했을까요?
+                        </p>
                         <p className='text4'>
-                          <span style={{fontWeight:'bold'}}>“우리의 공원”</span>은 코로나 시기 동안&nbsp;
+                          “오늘의 공원”은 코로나 시기 동안&nbsp;
                           <span style={{fontWeight:'bold'}}>“배달 서비스”</span>를 이용하여&nbsp;
                           <span style={{fontWeight:'bold'}}>“확찐자”</span>가 된 사람들을 위해서 서비스를 제공합니다.</p>
                         <p className='text4'>코로나19 이전 대비&nbsp;
@@ -244,7 +248,6 @@ const Prolog = () => {
                           <p className='text2'>
                             특히 <span style={{fontWeight:'bold'}}>관악구</span>는 40%로 광진구(34%), 영등포구(33%)에 비해서 <br />
                             <span style={{fontWeight:'bold'}}>압도적</span>인 수치를 보였습니다.
-                            
                           </p>
                         </div>
                       </div>

@@ -77,7 +77,6 @@
 /* 첫번째 페이지: 코로나와 배달의 상관관계 */
 .content .eachContent1 {
   display: flex;
-  height: 50vh;
   align-items: center;
 }
 .section .eachContent1 .text-content1 {
@@ -86,7 +85,7 @@
 .text1 {
   font-weight: bold;
   font-size: 25px;
-  margin: 1.5rem 0;
+  margin: 1rem 0;
 }
 .text2 {
   font-size: 20px;
@@ -122,8 +121,8 @@
 }
 .text4 {
   font-size: 20px;
-  margin-top: 2rem;
-  line-height: 2rem;
+  margin-top: 1em;
+  line-height: 2em;
 }
 .dietRate-content {
   display: flex;
@@ -166,6 +165,9 @@
 .content .eachContent5 {
   display: flex;
   align-items: center;
+}
+.chart2030 {
+  flex: 1;
 }
 .chart2030-text{
   flex: 1;

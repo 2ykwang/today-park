@@ -33,7 +33,7 @@ const Tip = ({ setShowTooltip, ...rest }) => {
         boxShadow: "0 1px 4px rgba(0,0,0,0.3)",
       }}
     >
-      {`${payload[0].value}%`}
+      {`${payload[0].name}: ${payload[0].value}%`}
     </div>
   ) : null;
 };
