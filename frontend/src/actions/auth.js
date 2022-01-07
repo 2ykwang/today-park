@@ -69,6 +69,31 @@ export async function checkAvailableUserFields(data) {
   }
 }
 
+export async function editUserInfo(data) {
+  try {
+    // editable fields
+    // username
+    // email
+    // -> {"username":"value"}, {"email","value"}
+    const response = await axios.put("/user", data);
+    return response;
+  } catch (error) {
+    return error.response;
+  }
+}
+
+export async function editUserPassword(data) {
+  try {
+    // editable fields
+    // username
+    // email
+    // -> {"username":"value"}, {"email","value"}
+    const response = await axios.put("/user/password", data);
+    return response;
+  } catch (error) {
+    return error.response;
+  }
+}
 // not implemented yet
 export async function userTokenVerify() {}
 
