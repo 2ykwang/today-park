@@ -83,9 +83,16 @@ function LogoutHeader() {
 
 export function Header() {
   const loginStore = useSelector((state) => state.login);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const updateScroll = () => {
+    setScrollPosition(window.scrollY || document.documentElement.scrollTop);
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", updateScroll);
+  });
   return (
     <>
-      <header className="mainHeader">
+      <header className={scrollPosition < 80 ? "mainHeader" : "ver2"}>
         <div className="logo">
           <BasicLink to="/">
             <img src={Logo} alt="오늘의 공원 로고" height="60" />
