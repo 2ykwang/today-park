@@ -39,7 +39,7 @@ function LoginHeader() {
             로그인
           </BasicLink>
           <BasicLink to="/signUp" className="userMenu">
-            회원 가입
+            회원가입
           </BasicLink>
         </nav>
       </div>

@@ -11,7 +11,7 @@ function Home() {
       <Header />
       <section className="home">
         <div className="video">
-          <video width="100%" height="700" muted loop>
+          <video width="100%" height="100%" muted autoPlay loop>
             <source src={video} type="video/mp4" />
           </video>
           <BasicLink to="/search" className="findPark">
