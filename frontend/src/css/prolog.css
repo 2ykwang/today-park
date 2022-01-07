@@ -17,6 +17,10 @@
   z-index: 999;
   margin-top: 120px;
 }
+#prolog .leftIndexBar ul {
+  padding-bottom: 100px;
+  border-right: 1px inset rgba(178,178,178,0.5);
+}
 #prolog .leftIndexBar li {
   line-height: 30px;
   font-size: large;
@@ -41,4 +45,59 @@
 
 #fp-nav ul li .fp-right {
   color: black;
+}
+
+/* 각 페이지 공통설정 */
+.content {
+  display: flex;
+  height:70vh;
+  width: 65em;
+  flex-direction: column;
+  margin:5px 10px;
+}
+.section .title-content{
+  height: 10vh;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  align-self: flex-start;
+}
+.section .title {
+  font-size: 50px;
+  font-weight: bold;
+  height: 30px;
+}
+.section .title-highlight {
+  color: #47c690;
+}
+.quotation {
+  font-size:10px;
+  color:#B2B2B2;
+}
+
+/* 첫번째 페이지: 코로나와 배달의 상관관계 */
+.section .eachContent1 {
+  display: flex;
+  height: 50vh;
+}
+.section .eachContent1 .text-content1 {
+  flex:1
+}
+.text1 {
+  font-weight: bold;
+  font-size: 25px;
+  margin: 1.5rem 0;
+}
+.text2 {
+  font-size: 20px;
+  margin-top: 3rem;
+  line-height: 3rem;
+}
+.chartDeliver {
+  height: 400px;
+  width:400px;
+}
+/* 두번째 페이지: 배달과 건강의 상관관계 */
+.gainWeight-content {
+  display: flex;
+  
 }

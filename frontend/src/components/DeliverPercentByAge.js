@@ -1,6 +1,5 @@
 import React, { PureComponent, useEffect, useState } from 'react';
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
-import styled from 'styled-components';
+import { PieChart, Pie, Label, Sector, Cell, ResponsiveContainer, Tooltip, Legend, LabelList } from 'recharts';
 
 const data = [
   { name: '20대', value: 32 },
@@ -29,7 +28,7 @@ const Tip = ({ setShowTooltip, ...rest }) => {
       style={{
         fontWeight: 'bold',
         background: "white",
-        padding: "0.1em",
+        padding: "0.3em",
         borderRadius: "4px",
         boxShadow: "0 1px 4px rgba(0,0,0,0.3)",
       }}
@@ -42,14 +41,14 @@ const Tip = ({ setShowTooltip, ...rest }) => {
 function ChartDeliverPercentByAge() {
   const [showTooltip, setShowTooltip] = useState(false);
 
-  return (
+  return ( 
     <PieChart width={500} height={300} onMouseLeave={() => setShowTooltip(false)}>
-      <text x={125} y={100} textAnchor="middle" dominantBaseline="middle" >
+      {/* <text x={125} y={100} textAnchor="middle" dominantBaseline="middle" >
         배달앱
       </text>
       <text x={125} y={120} textAnchor="middle" dominantBaseline="middle" >
         이용률
-      </text>
+      </text> */}
       <Pie
         onMouseEnter={() => setShowTooltip(true)}
         data={data}
@@ -62,6 +61,7 @@ function ChartDeliverPercentByAge() {
         dataKey="value"
         label = {(data)=>data.name}
       >
+        <Label value="배달앱 이용률" offset={10} position="center" />
         {data.map((entry, index) => (
           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
         ))}
@@ -80,22 +80,5 @@ function ChartDeliverPercentByAge() {
     </PieChart>
   );
 }
-
-// const CustomTooltip = ({ active, payload}) => {
-// 	if (active) {
-// 		return (
-// 			<div className='tooltip'>
-//         <TooltipText className='label'>{`${payload[0].value}%`}</TooltipText>
-        
-//       </div>
-// 		);
-// 	}
-
-// 	return null;
-// };
-
-// const TooltipText = styled.p`
-//   font-weight: bold;
-// `
 
 export default ChartDeliverPercentByAge;

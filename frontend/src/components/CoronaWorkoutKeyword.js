@@ -46,26 +46,7 @@ const data = [
   },
 ];
 
-// const getPath = (x, y, width, height) => `M${x},${y + height}
-//           C${x + width / 3},${y + height} ${x + width / 2},${y + height / 3} ${x + width / 2}, ${y}
-//           C${x + width / 2},${y + height / 3} ${x + (2 * width) / 3},${y + height} ${x + width}, ${y + height}
-//           Z`;
-
-// const TriangleBar = (props) => {
-//   const { fill, x, y, width, height } = props;
-
-//   return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
-// };
-
-// TriangleBar.propTypes = {
-//   fill: PropTypes.string,
-//   x: PropTypes.number,
-//   y: PropTypes.number,
-//   width: PropTypes.number,
-//   height: PropTypes.number,
-// };
-
-export default class KeywordChart extends PureComponent {
+export default class ChartKeyword extends PureComponent {
   static demoUrl = 'https://codesandbox.io/s/bar-chart-with-customized-shape-dusth';
   render() {
     return (
@@ -84,6 +65,7 @@ export default class KeywordChart extends PureComponent {
           {/* <CartesianGrid strokeDasharray="3 3" /> */}
           <XAxis dataKey="name" />
           <Tooltip />
+          <Legend />
           <Bar dataKey="corona" nameKey='percent' fill="#8884d8" >
             {/* <LabelList 
               dataKey="corona" 
@@ -99,7 +81,7 @@ export default class KeywordChart extends PureComponent {
             <Cell key={`cell-${3}`} fill={'#FF8042'} />
             <Cell key={`cell-${4}`} fill={"#d62728"} /> */}
           </Bar>
-          <Line type="monotone" dataKey="exercise" stroke="orange" />
+          {/* <Line type="monotone" dataKey="exercise" stroke="orange" /> */}
           <Line type="monotone" dataKey="health" stroke="green" />
         </ComposedChart>
       </ResponsiveContainer>
