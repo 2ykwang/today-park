@@ -15,6 +15,8 @@ function Search() {
   const [searchValue, setSearchValue] = useState("");
   const [sort, setSort] = useState("");
   const [pagination, setPagination] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [handlePageination, setHandlePagination] = useState([0, 5]);
 
   // 마운트시, 공원 정보 GET 요청 1페이지에 있는 공원 리스트 가져오기
   useEffect(() => {
@@ -51,7 +53,6 @@ function Search() {
     setParks(response.results);
   }
 
-  // TO DO
   //페이지네이션 생성, 클릭시 해당 페이지 이동
   useEffect(() => {
     let paginations = [];
@@ -63,6 +64,7 @@ function Search() {
             const page = Number(e.target.innerText);
             const response = await getParks("", "", "", page, 5);
             setParks(response.results);
+            setCurrentPage(page);
           }}
         >
           {i}
@@ -71,6 +73,8 @@ function Search() {
     }
     setPagination(paginations);
   }, [parksResponse]);
+
+  console.log(pagination.length);
 
   return (
     <>
@@ -105,9 +109,33 @@ function Search() {
             <div className="parkContainer">
               {parksResponse && parklist}
               <div className="pagination">
-                {/* <button>이전</button> */}
-                {pagination}
-                {/* <button>다음</button> */}
+                <button
+                  onClick={() => {
+                    setHandlePagination((current) => {
+                      let newArr = [...current];
+                      newArr[0] -= 5;
+                      newArr[1] -= 5;
+                      return newArr;
+                    });
+                  }}
+                >
+                  이전
+                </button>
+                {pagination.slice(handlePageination[0], handlePageination[1])}
+                <button
+                  onClick={() => {
+                    if (currentPage >= pagination.length - 4) return;
+                    else
+                      setHandlePagination((current) => {
+                        let newArr = [...current];
+                        newArr[0] += 5;
+                        newArr[1] += 5;
+                        return newArr;
+                      });
+                  }}
+                >
+                  다음
+                </button>
               </div>
             </div>
           </div>
