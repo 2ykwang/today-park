@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, Label, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const data = [
   {
@@ -28,7 +28,9 @@ export default class ChartGainWeightByAge extends PureComponent {
       <ResponsiveContainer width="100%" height="100%">
         <BarChart width={150} height={100} data={data}>
           <Tooltip content={<CustomTooltip />}/>
-          <XAxis dataKey='name'/>
+          <XAxis dataKey='name'>
+            <Label value='연령대별 체중 증가 비율' offset={150} position='top' />
+          </XAxis>
           <Bar dataKey="percent" fill="#47C690" />
         </BarChart>
       </ResponsiveContainer>

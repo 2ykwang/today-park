@@ -51,7 +51,7 @@
 .content {
   display: flex;
   height:70vh;
-  width: 65em;
+  width: 70em;
   flex-direction: column;
   margin:5px 10px;
 }
@@ -70,17 +70,18 @@
   color: #47c690;
 }
 .quotation {
-  font-size:10px;
+  font-size:12px;
   color:#B2B2B2;
 }
 
 /* 첫번째 페이지: 코로나와 배달의 상관관계 */
-.section .eachContent1 {
+.content .eachContent1 {
   display: flex;
   height: 50vh;
+  align-items: center;
 }
 .section .eachContent1 .text-content1 {
-  flex:1
+  flex:1;
 }
 .text1 {
   font-weight: bold;
@@ -93,11 +94,79 @@
   line-height: 3rem;
 }
 .chartDeliver {
+  /* flex: 0 0 500px; */
   height: 400px;
-  width:400px;
+  width: 500px;
 }
+
 /* 두번째 페이지: 배달과 건강의 상관관계 */
+.content .eachContent2 {
+  display: flex;
+  height: 50vh;
+  flex-direction: column;
+  justify-content: center;
+}
 .gainWeight-content {
   display: flex;
-  
+  align-items: center;
+}
+.gainWeight-text {
+  display: flex;
+  flex-direction: column;
+}
+.text3 {
+  font-weight: bold;
+  font-size: 25px;
+  /* align-self: flex-start; */
+  margin-bottom: 1em;
+}
+.text4 {
+  font-size: 20px;
+  margin-top: 2rem;
+  line-height: 2rem;
+}
+.dietRate-content {
+  display: flex;
+  margin-top: 2em;
+}
+.dietRate-text {
+  flex:1;
+}
+.dietRate {
+  flex: 1;
+}
+
+/* 세번째 페이지: 코로나와 운동/건강 상관관계 */
+.content .eachContent3 {
+  display: flex;
+  height: 50vh;
+  /* justify-content: center; */
+}
+.keyword-text {
+  display: block;
+  flex-direction: column;
+}
+.chartKeyword {
+  flex:1;
+}
+
+/* 네번째 페이지: 왜 관악구의 2030 */
+.content .eachContent4 {
+  height: 50vh;
+  /* justify-content: center; */
+}
+.gwanak-charts {
+  display: flex;
+  justify-content: space-evenly;
+  margin:4em;
+  height:400px;
+}
+
+/* 다섯번째 페이지: 왜 관악구의 2030 */
+.content .eachContent5 {
+  display: flex;
+  align-items: center;
+}
+.chart2030-text{
+  flex: 1;
 }
