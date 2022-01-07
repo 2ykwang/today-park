@@ -6,8 +6,20 @@
   position: absolute;
   top: 20px;
   right: 20px;
+  width: 20px;
   border-radius: 9999px;
   cursor: pointer;
+}
+.ModalContainer .closeBtn:hover {
+  animation: shake 0.1s infinite alternate;
+}
+@keyframes shake {
+  from {
+    transform: rotateZ(-4deg);
+  }
+  to {
+    transform: rotateZ(4deg);
+  }
 }
 .ModalContainer h2 {
   font-size: 32px;
