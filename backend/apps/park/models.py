@@ -8,7 +8,6 @@ from django.db.models.deletion import CASCADE, DO_NOTHING, SET_DEFAULT
 from django.db.models.fields.related import ForeignKey
 
 
-# Create your models here.
 class Park(models.Model):
     @property
     def average_rating(self) -> float:
