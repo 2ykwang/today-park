@@ -40,6 +40,20 @@ export async function userLogin(email, password, secure = false) {
   }
 }
 
+export async function userLogout() {
+  const data = { refresh: Cookies.get("refreshToken") };
+  try {
+    const response = await axios.post("/user/logout", data);
+
+    Cookies.remove("accessToken");
+    Cookies.remove("refreshToken");
+    _setAccessToken();
+    return response;
+  } catch (error) {
+    return error.response;
+  }
+}
+
 // 가입
 export async function registerUser(username, email, password) {
   try {

@@ -4,6 +4,7 @@ import { getLoginData } from "../store/loginSlice";
 import Logo from "../image/logo.png";
 import { BasicLink, LoginModal } from "../pages/LoginModal";
 import Cookies from "js-cookie";
+import { userLogout } from "../actions/auth";
 
 function LoginHeader() {
   const [showModal, setShowModal] = useState(false);
@@ -64,6 +65,9 @@ function LogoutHeader() {
     Cookies.remove("accessToken");
     Cookies.remove("refreshToken");
     window.location.replace("/");
+
+    // api call
+    userLogout();
   }
   return (
     <>

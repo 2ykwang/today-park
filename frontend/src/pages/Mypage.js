@@ -85,7 +85,7 @@ function Mypage() {
         <div className="mypageContainer">
           <div className="mainSide">
             <div className="image">
-              <ProfileImage src={GitLogo}></ProfileImage>
+              <ProfileImage></ProfileImage>
 
               <form method="post" action="#">
                 <input type="file" accept="image/*" />
