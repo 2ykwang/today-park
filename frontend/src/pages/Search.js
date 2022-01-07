@@ -15,8 +15,7 @@ function Search() {
   const [parklist, setParklist] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [sort, setSort] = useState("");
-  // const [pagination, setPagination] = useState([]);
-  const pagination = [];
+  const [pagination, setPagination] = useState([]);
 
   const { id } = useParams();
 
@@ -51,25 +50,32 @@ function Search() {
   async function handleSearchSubmit(searchValue, sort, e) {
     e.preventDefault();
     const response = await getParks("", searchValue, sort, 1, 5);
+    setparksResponse(response);
     setParks(response.results);
   }
 
   // TO DO
   //페이지네이션 생성, 클릭시 해당 페이지 이동
-  for (let i = 1; i <= Math.ceil(parksResponse.count / 5); i++) {
-    pagination.push(
-      <button
-        onClick={async (e) => {
-          e.preventDefault();
-          const page = Number(e.target.innerText);
-          const response = await getParks("", "", "", page, 5);
-          setParks(response.results);
-        }}
-      >
-        {i}
-      </button>
-    );
-  }
+  useEffect(() => {
+    let paginations = [];
+    for (let i = 1; i <= Math.ceil(parksResponse.count / 5); i++) {
+      paginations.push(
+        <button
+          onClick={async (e) => {
+            e.preventDefault();
+            const page = Number(e.target.innerText);
+            const response = await getParks("", "", "", page, 5);
+            setParks(response.results);
+          }}
+        >
+          {i}
+        </button>
+      );
+    }
+    setPagination(paginations);
+  }, [parksResponse]);
+
+  console.log(parksResponse);
 
   return (
     <>
