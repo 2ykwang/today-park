@@ -93,7 +93,7 @@ function SignUp() {
   return (
     <>
       <Header />
-      <div className="SignUpContainer">
+      <section className="SignUpContainer">
         <h1>회원가입</h1>
         <form>
           <div className="signUpItem">
@@ -170,7 +170,7 @@ function SignUp() {
             </button>
           </div>
         </form>
-      </div>
+      </section>
     </>
   );
 }
