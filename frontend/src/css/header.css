@@ -6,36 +6,31 @@ header.mainHeader {
   width: 100%;
   display: flex;
   align-items: center;
-  background-color: white;
+  /* background-color: white; */
   top: 0;
   left: 0;
 }
 header .logo {
-  /* border: 2px solid red; */
-  margin-left: 40px;
+  margin-left: 20px;
   font-size: 24px;
   font-weight: bold;
 }
 header .menuContainer {
-  font-size: 18px;
+  font-size: 22px;
   margin-right: 40px;
-  /* border: 2px solid blue; */
   display: flex;
   position: absolute;
   top: 50;
   right: 0;
 }
 header nav.mainMenu {
-  /* border: 2px solid orange; */
   margin-right: 220px;
 }
 header nav .menu {
-  margin-left: 16px;
-  /* border: 2px solid red; */
+  margin-left: 20px;
 }
 header nav.user {
   margin: 0px;
-  /* border: 2px solid cyan; */
 }
 header nav .userMenu {
   margin-left: 20px;
