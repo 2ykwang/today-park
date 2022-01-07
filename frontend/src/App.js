@@ -25,8 +25,6 @@ import "./css/prolog.css";
 function App() {
   axiosConfig();
 
-  console.log(process.env.REACT_APP_GOOGLE_SECRET_KEY);
-
   return (
     <>
       <Routes>
