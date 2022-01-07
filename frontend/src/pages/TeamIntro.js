@@ -1,7 +1,10 @@
 import React from "react";
 import { Header } from "../components/Header";
 import GitLogo from "../image/teamIntro/github-icon.png";
-import Martina from "../image/teamIntro/martina-pic.jpeg";
+import Martina from "../image/teamIntro/martina-pic.png";
+import Myeon from "../image/teamIntro/myeongu-pic.png";
+import Bmcho from "../image/teamIntro/bmcho-pic.png";
+import Min from "../image/teamIntro/minyoung-pic.png";
 import Heart from "../image/teamIntro/red-heart.png";
 import Plane from "../image/teamIntro/paper-plane.png";
 import Bubble from "../image/teamIntro/speech-bubble.png";
@@ -21,7 +24,12 @@ function TeamIntro() {
         <div className="member">
           <ul>
             <li>
-              <img className="profilePic" src={Martina} alt="profile-pic" />
+              <img
+                className="profilePic"
+                src={Bmcho}
+                alt="profile-pic"
+                width="200px"
+              />
               <h2>조병민</h2>
               <p>데이터분석</p>
               <div>
@@ -30,7 +38,7 @@ function TeamIntro() {
               </div>
             </li>
             <li>
-              <img className="profilePic" src={Martina} alt="profile-pic" />
+              <img className="profilePic" src={Myeon} alt="profile-pic" />
 
               <h2>강면구</h2>
               <p>데이터분석</p>
@@ -40,7 +48,7 @@ function TeamIntro() {
               </div>
             </li>
             <li>
-              <img className="profilePic" src={Martina} alt="profile-pic" />
+              <img className="profilePic" src={Min} alt="profile-pic" />
 
               <h2>이민영</h2>
               <p>프론트엔드</p>
