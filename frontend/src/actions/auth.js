@@ -72,8 +72,12 @@ export async function registerUser(username, email, password) {
 
 // 유저 정보를 불러옵니다.
 export async function getUserInfo() {
-  const response = await axios.get("/user");
-  return response;
+  try {
+    const response = await axios.get("/user");
+    return response;
+  } catch (error) {
+    return error.response;
+  }
 }
 
 // 사용 가능한 닉네임, 이메일인지 체크합니다.
@@ -172,4 +176,3 @@ export async function checkUserTokenAndRefresh(secure = false) {
   }
   return true;
 }
-export async function uploadUserImage() {}
