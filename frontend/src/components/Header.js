@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getLoginData } from "../store/loginSlice";
 import Logo from "../image/logo.png";
 import { BasicLink, LoginModal } from "../pages/LoginModal";
+import Cookies from "js-cookie";
 
 function LoginHeader() {
   const [showModal, setShowModal] = useState(false);
@@ -59,6 +60,9 @@ function LogoutHeader() {
   const loginStore = useSelector((state) => state.login);
   function handleLogout() {
     dispatch(getLoginData({ email: "", password: "" }));
+    // 쿠키 삭제
+    Cookies.remove("accessToken");
+    Cookies.remove("refreshToken");
   }
   return (
     <>

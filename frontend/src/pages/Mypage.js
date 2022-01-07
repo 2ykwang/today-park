@@ -3,6 +3,9 @@ import styled from "styled-components";
 import { Header } from "../components/Header";
 import { useSelector, useDispatch } from "react-redux";
 import { getLoginData } from "../store/loginSlice";
+import { onlyUserReview } from "../actions/index";
+import { ReactComponent as StarIcon } from "../image/star.svg";
+import { updateReview } from "../actions/index";
 
 const ProfileImage = styled.div`
   background-color: #e0e0e0;
@@ -21,6 +24,21 @@ function Mypage() {
   const [password, setPassword] = useState(loginStore.password);
   const [editEmail, setEditEmail] = useState(false);
   const [editUsername, setEditUsername] = useState(false);
+  const [editReview, setEditReview] = useState(false);
+  // const [reviewResponse, setReviewResponse]
+  const [reviewList, setReviewList] = useState([]);
+  const [clicked, setClicked] = useState([false, false, false, false, false]);
+  const [rating, setRating] = useState(0);
+  const [reviewContent, setreviewContent] = useState("");
+
+  useEffect(() => {
+    async function getReviews() {
+      const response = await onlyUserReview();
+      setReviewList(response.results);
+      console.log(response.results);
+    }
+    getReviews();
+  }, []);
 
   useEffect(() => {
     dispatch(
@@ -39,6 +57,21 @@ function Mypage() {
   }
   function handleEditNickname() {
     setEditUsername(false);
+  }
+  function handleStarClick(e, idx) {
+    e.preventDefault();
+    let clickStates = [...clicked];
+    for (let i = 1; i < 6; i++) {
+      if (i <= idx) clickStates[i] = true;
+      else clickStates[i] = false;
+    }
+    setClicked(clickStates);
+    setRating(idx);
+  }
+  async function handleUpdateReview(e) {
+    e.preventDefault();
+    // let response = await updateReview(id, rating, reviewContent);
+    // console.log(response);
   }
 
   return (
@@ -113,17 +146,67 @@ function Mypage() {
           <div className="reviewSide">
             <h3>내가 방문 했던 산스장</h3>
             <div className="reviewList">
-              <div className="review">
-                {/* 여기는 아마 리뷰 db에 get 보내서 받은 내용을 보여주는거겠지? */}
-                <h4>엘리스 공원</h4>
-                <p>2021.12.27</p>
-                <p>사람이 너무 많아요</p>
-              </div>
-              <div className="review">
-                <h4>엘리스 공원</h4>
-                <p>2021.12.27</p>
-                <p>사람이 너무 많아요</p>
-              </div>
+              {editReview ? (
+                <form className="createReview">
+                  <div className="rating">
+                    <StarIcon
+                      className={"star " + (clicked[1] ? "clicked" : null)}
+                      onClick={(e) => handleStarClick(e, 1)}
+                      width="24"
+                      height="24"
+                    />
+                    <StarIcon
+                      className={"star " + (clicked[2] ? "clicked" : null)}
+                      onClick={(e) => handleStarClick(e, 2)}
+                      width="24"
+                      height="24"
+                    />
+                    <StarIcon
+                      className={"star " + (clicked[3] ? "clicked" : null)}
+                      onClick={(e) => handleStarClick(e, 3)}
+                      width="24"
+                      height="24"
+                    />
+                    <StarIcon
+                      className={"star " + (clicked[4] ? "clicked" : null)}
+                      onClick={(e) => handleStarClick(e, 4)}
+                      width="24"
+                      height="24"
+                    />
+                    <StarIcon
+                      className={"star " + (clicked[5] ? "clicked" : null)}
+                      onClick={(e) => handleStarClick(e, 5)}
+                      width="24"
+                      height="24"
+                    />
+                  </div>
+                  <textarea
+                    placeholder="내용을 입력해주세요."
+                    value={reviewContent}
+                    onChange={(e) => {
+                      setreviewContent(e.target.value);
+                    }}
+                  />
+                  <br />
+                  <button type="submit" onClick={handleUpdateReview}>
+                    등록하기
+                  </button>
+                </form>
+              ) : (
+                reviewList.map((item, index) => {
+                  return (
+                    <div className="review" key={index}>
+                      <h4>{item.username}</h4>
+                      <p>{item.score}</p>
+                      <p>{item.content}</p>
+                      <div class="btns">
+                        <button>수정</button>
+                        <button>삭제</button>
+                      </div>
+                    </div>
+                  );
+                })
+              )}
             </div>
           </div>
         </div>
