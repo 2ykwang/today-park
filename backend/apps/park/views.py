@@ -150,7 +150,7 @@ class ParkReviewListView(APIView):
 
         공원(id)에 대한 리뷰 요청 - 삭제된 리뷰 제외
         """
-        review = Review.objects.filter(Q(park_id=park_id) & Q(is_deleted=False))
+        review = Review.objects.filter(Q(park_id=park_id) & Q(is_deleted=False)).order_by('-created_at')
         serializer = ParkReviewSerializer(review, many=True)
         return Response(serializer.data)
 
