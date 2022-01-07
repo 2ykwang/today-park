@@ -6,8 +6,10 @@ import { getLoginData } from "../store/loginSlice";
 import { onlyUserReview, deleteReview } from "../actions/index";
 import { ReactComponent as StarIcon } from "../image/star.svg";
 import { CreateReview } from "../components/CreateReview";
+import { editUserInfo, editUserPassword, getUserInfo } from "../actions/auth";
+import Cookies from "js-cookie";
 
-const ProfileImage = styled.div`
+const ProfileImage = styled.img`
   background-color: #e0e0e0;
   width: 120px;
   height: 120px;
@@ -17,56 +19,64 @@ const ProfileImage = styled.div`
 
 function Mypage() {
   const dispatch = useDispatch();
-  const loginStore = useSelector((state) => state.login);
+  // const loginStore = useSelector((state) => state.login);
 
-  const [email, setEmail] = useState(loginStore.email);
-  const [username, setUsername] = useState(loginStore.username);
-  const [password, setPassword] = useState(loginStore.password);
-  const [editEmail, setEditEmail] = useState(false);
-  const [editUsername, setEditUsername] = useState(false);
-  const [editPassword, setEditPassword] = useState(false);
-  const [editReview, setEditReview] = useState(false);
+  const [fields, setFields] = useState({
+    username: Cookies.get("username"),
+    oldPassword: "",
+    newPassword: "",
+    rePassword: "",
+  });
+  const [editToggle, setEditToggle] = useState({
+    username: false,
+    password: false,
+    review: false,
+  });
 
   const [reviewList, setReviewList] = useState([]);
   const [clickedReviewIdx, setClickedReviewIdx] = useState(0);
 
   // 내가 쓴 리뷰 불러오기
   useEffect(() => {
+    async function getProfileImage() {
+      const response = await getUserInfo();
+      console.log(response.data);
+    }
+
     async function getReviews() {
       const response = await onlyUserReview();
       setReviewList(response.results);
       console.log(response.results);
     }
     getReviews();
+    getProfileImage();
   }, []);
 
   // 수정시, 로그인 정보 리덕스에 저장
   useEffect(() => {
     dispatch(
-      getLoginData({ email: email, username: username, password: password })
+      getLoginData({
+        email: fields.email,
+        username: fields.username,
+        password: fields.password,
+      })
     );
-  }, [email, username, dispatch]);
+  }, [fields.email, fields.username, fields.password, dispatch]);
 
+  const handleFieldsChange = (e) => {
+    const { value, name } = e.target;
+    setFields({
+      ...fields,
+      [name]: value,
+    });
+  };
   // 유저 정보 변경을 위한 함수
-  function handleIdChange(e) {
-    setEmail(e.target.value);
-  }
-  function handleNicknameChange(e) {
-    setUsername(e.target.value);
-  }
-  function handlePasswordChange(e) {
-    setPassword(e.target.value);
-  }
-  function handleEditId() {
-    setEditEmail(false);
-  }
-  function handleEditNickname() {
-    setEditUsername(false);
-  }
-  function handleEditPassword() {
-    setEditPassword(false);
-  }
-
+  const toggleEditField = (name, editable) => {
+    setEditToggle({
+      ...editToggle,
+      [name]: editable,
+    });
+  };
   return (
     <>
       <Header />
@@ -75,57 +85,38 @@ function Mypage() {
         <div className="mypageContainer">
           <div className="mainSide">
             <div className="image">
-              <ProfileImage />
+              <ProfileImage src={GitLogo}></ProfileImage>
+
               <form method="post" action="#">
                 <input type="file" accept="image/*" />
               </form>
             </div>
             <div className="content">
-              <p>
-                아이디 :
-                {editEmail ? (
-                  <>
-                    <input
-                      type="text"
-                      value={email}
-                      onChange={handleIdChange}
-                    />
-                    <button
-                      className="edit"
-                      onClick={() => {
-                        if (username !== "") handleEditId();
-                      }}
-                    >
-                      확정
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    {email}
-                    <button
-                      onClick={() => {
-                        setEditEmail(true);
-                      }}
-                      className="edit"
-                    >
-                      수정
-                    </button>
-                  </>
-                )}
-              </p>
+              <p>아이디 : {Cookies.get("email")}</p>
               <p>
                 닉네임 :
-                {editUsername ? (
+                {editToggle.username ? (
                   <>
                     <input
                       type="text"
-                      value={username}
-                      onChange={handleNicknameChange}
+                      value={fields.username}
+                      onChange={handleFieldsChange}
+                      name="username"
                     />
                     <button
                       className="edit"
-                      onClick={() => {
-                        if (username !== "") handleEditNickname();
+                      onClick={async () => {
+                        if (fields.username !== "") {
+                          const response = await editUserInfo({
+                            username: fields.username,
+                          });
+                          console.log(response);
+                          if (response.status < 300) {
+                            //성공
+                            toggleEditField("username", false);
+                            Cookies.set("username", fields.username);
+                          }
+                        }
                       }}
                     >
                       확정
@@ -133,10 +124,10 @@ function Mypage() {
                   </>
                 ) : (
                   <>
-                    {username}
+                    {fields.username}
                     <button
                       onClick={() => {
-                        setEditUsername(true);
+                        toggleEditField("username", true);
                       }}
                       className="edit"
                     >
@@ -146,21 +137,48 @@ function Mypage() {
                 )}
               </p>
               <p>
-                {editPassword ? (
+                {editToggle.password ? (
                   <>
                     <p>
-                      기존 비밀번호 : <input type="text" value={password} />
+                      기존 비밀번호 :
+                      <input
+                        type="password"
+                        value={fields.oldPassword}
+                        name="oldPassword"
+                        onChange={handleFieldsChange}
+                      />
                     </p>
                     <p>
-                      새로운 비밀번호 : <input type="text" />
+                      새로운 비밀번호 :
+                      <input
+                        type="password"
+                        value={fields.newPassword}
+                        name="newPassword"
+                        onChange={handleFieldsChange}
+                      />
                     </p>
                     <p>
-                      비밀번호 확인 : <input type="text" />
+                      비밀번호 확인 :
+                      <input
+                        type="password"
+                        value={fields.rePassword}
+                        name="rePassword"
+                        onChange={handleFieldsChange}
+                      />
                     </p>
                     <button
                       className="edit"
-                      onClick={() => {
-                        if (username !== "") handleEditPassword();
+                      onClick={async () => {
+                        const response = await editUserPassword({
+                          old_password: fields.oldPassword,
+                          password: fields.newPassword,
+                          re_password: fields.rePassword,
+                        });
+                        console.log(response);
+                        if (response.status < 300) {
+                          //성공
+                          toggleEditField("password", false);
+                        }
                       }}
                     >
                       확정
@@ -168,10 +186,12 @@ function Mypage() {
                   </>
                 ) : (
                   <>
-                    비밀번호 : {password}
+                    {/* 비밀번호는 평문으로 표시해주지 않음 */}
+                    {/* 비밀번호 : {password} */}
+                    비밀번호 {fields.password}
                     <button
                       onClick={() => {
-                        setEditPassword(true);
+                        toggleEditField("password", true);
                       }}
                       className="edit"
                     >
@@ -190,7 +210,7 @@ function Mypage() {
           <div className="reviewSide">
             <h3>내가 방문 했던 공원</h3>
             <div className="reviewList">
-              {editReview ? (
+              {editToggle.review ? (
                 <CreateReview
                   parkId={reviewList[clickedReviewIdx].park_id}
                   reviewId={reviewList[clickedReviewIdx].id}
@@ -219,7 +239,6 @@ function Mypage() {
                       <div className="btns">
                         <button
                           onClick={() => {
-                            setEditReview(true);
                             setClickedReviewIdx(index);
                           }}
                         >
