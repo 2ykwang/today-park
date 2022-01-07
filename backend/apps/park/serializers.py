@@ -73,14 +73,18 @@ class ParkReviewSerializer(serializers.ModelSerializer):
     """
 
     username = serializers.CharField(source="user_id.username", read_only=True)
+    parkname = serializers.CharField(source="park_id.park_name", read_only=True)
 
     class Meta:
         model = Review
         fields = [
             "id",
+            "username",
+            "park_id",
+            "parkname",
             "score",
             "content",
-            "username",
+            "created_at",
         ]
         read_only_fields = ("id",)
         extra_kwargs = {

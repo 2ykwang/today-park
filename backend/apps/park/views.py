@@ -150,7 +150,7 @@ class ParkReviewListView(APIView):
 
         공원(id)에 대한 리뷰 요청 - 삭제된 리뷰 제외
         """
-        review = Review.objects.filter(Q(park_id=park_id) & Q(is_deleted=False))
+        review = Review.objects.filter(Q(park_id=park_id) & Q(is_deleted=False)).order_by('-created_at')
         serializer = ParkReviewSerializer(review, many=True)
         return Response(serializer.data)
 
@@ -257,7 +257,6 @@ class ParkReviewView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-# TODO: 유저별 리뷰
 class UserReviewListView(APIView, ParkListPagination):
     permission_classes = [IsOwner]
 
@@ -292,7 +291,7 @@ class UserReviewListView(APIView, ParkListPagination):
         사용자가 작성한 공원 리뷰 목록을 반환합니다.
         """
 
-        review = Review.objects.filter(Q(user_id=request.user.id) & Q(is_deleted=False))
+        review = Review.objects.filter(Q(user_id=request.user.id) & Q(is_deleted=False)).order_by('-created_at')
 
         reviews = self.paginate_queryset(review, request, view=self)
         serializer = ParkReviewSerializer(reviews, many=True)
