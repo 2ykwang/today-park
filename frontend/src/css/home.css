@@ -1,3 +1,7 @@
+section.home {
+  margin-top: 0;
+}
+
 .home .video {
   /* border: 2px solid red; */
   width: 100%;

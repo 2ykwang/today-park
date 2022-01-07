@@ -19,7 +19,7 @@ header .logo {
   font-weight: bold;
 }
 header .menuContainer {
-  font-size: 22px;
+  font-size: 20px;
   margin-right: 40px;
   display: flex;
   position: absolute;
@@ -44,4 +44,5 @@ header .menuContainer button {
   border: 0.5px solid #3a3a3a;
   border-radius: 9999px;
   padding: 3px 12px;
+  font-size: 16px;
 }
