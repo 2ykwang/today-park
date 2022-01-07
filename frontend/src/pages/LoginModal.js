@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ReactComponent as CloseButton } from "../image/closebutton.svg";
-import { userLogin, getUserInfo } from "../actions/index";
+import { userLogin, getUserInfo } from "../actions/auth";
 import Logo from "../image/logo.png";
 import { useSelector, useDispatch } from "react-redux";
 import { getLoginData } from "../store/loginSlice";
@@ -76,16 +76,18 @@ export function LoginModal({
               <button
                 type="submit"
                 onClick={async (e) => {
+                  const useSSL = process.env.REACT_APP_USE_SSL;
                   e.preventDefault();
                   let response = await userLogin(
                     loginStore.email,
-                    loginStore.password
+                    loginStore.password,
+                    useSSL
                   );
                   // 로그인이 성공한다면? -> 로컬 스토리지에 토큰이 저장됨.
                   // makeheaders() -> 헤더를 만들어줌.
                   response = await getUserInfo();
-                  console.log(response);
-                  const username = response.username;
+                  console.log(response.data);
+                  const username = response.data.username;
                   dispatch(
                     await getLoginData({
                       email: loginStore.email,
