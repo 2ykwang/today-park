@@ -126,7 +126,6 @@ function Mypage() {
                 {editToggle.username ? (
                   <>
                     <input
-                      hidden={true}
                       type="text"
                       value={fields.username}
                       onChange={handleFieldsChange}
