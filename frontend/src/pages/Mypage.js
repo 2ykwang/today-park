@@ -24,7 +24,9 @@ function Mypage() {
   const [password, setPassword] = useState(loginStore.password);
   const [editEmail, setEditEmail] = useState(false);
   const [editUsername, setEditUsername] = useState(false);
+  const [editPassword, setEditPassword] = useState(false);
   const [editReview, setEditReview] = useState(false);
+
   const [reviewList, setReviewList] = useState([]);
   const [clickedReviewIdx, setClickedReviewIdx] = useState(0);
 
@@ -38,24 +40,31 @@ function Mypage() {
     getReviews();
   }, []);
 
-  // 수정시, 로그인 정보 수정
+  // 수정시, 로그인 정보 리덕스에 저장
   useEffect(() => {
     dispatch(
       getLoginData({ email: email, username: username, password: password })
     );
   }, [email, username, dispatch]);
 
+  // 유저 정보 변경을 위한 함수
   function handleIdChange(e) {
     setEmail(e.target.value);
   }
   function handleNicknameChange(e) {
     setUsername(e.target.value);
   }
+  function handlePasswordChange(e) {
+    setPassword(e.target.value);
+  }
   function handleEditId() {
     setEditEmail(false);
   }
   function handleEditNickname() {
     setEditUsername(false);
+  }
+  function handleEditPassword() {
+    setEditPassword(false);
   }
 
   return (
@@ -128,6 +137,41 @@ function Mypage() {
                     <button
                       onClick={() => {
                         setEditUsername(true);
+                      }}
+                      className="edit"
+                    >
+                      수정
+                    </button>
+                  </>
+                )}
+              </p>
+              <p>
+                {editPassword ? (
+                  <>
+                    <p>
+                      기존 비밀번호 : <input type="text" value={password} />
+                    </p>
+                    <p>
+                      새로운 비밀번호 : <input type="text" />
+                    </p>
+                    <p>
+                      비밀번호 확인 : <input type="text" />
+                    </p>
+                    <button
+                      className="edit"
+                      onClick={() => {
+                        if (username !== "") handleEditPassword();
+                      }}
+                    >
+                      확정
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    비밀번호 : {password}
+                    <button
+                      onClick={() => {
+                        setEditPassword(true);
                       }}
                       className="edit"
                     >
