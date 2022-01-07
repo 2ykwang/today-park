@@ -36,6 +36,7 @@ export function CreateReview({ parkId, reviewId, type, score, content }) {
   async function handleCreateReview() {
     console.log(parkId, rating, reviewContent);
     let response = await postReviews(parkId, rating, reviewContent);
+    window.location.replace(`/search/${parkId}`);
   }
 
   // 리뷰 PUT 요청
