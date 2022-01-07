@@ -6,6 +6,7 @@ import { userLogin, getUserInfo } from "../actions/auth";
 import Logo from "../image/logo.png";
 import { useSelector, useDispatch } from "react-redux";
 import { getLoginData } from "../store/loginSlice";
+import Cookies from "js-cookie";
 
 export const BasicLink = styled(Link)`
   text-decoration: none;
@@ -83,8 +84,6 @@ export function LoginModal({
                     loginStore.password,
                     useSSL
                   );
-                  // 로그인이 성공한다면? -> 로컬 스토리지에 토큰이 저장됨.
-                  // makeheaders() -> 헤더를 만들어줌.
                   response = await getUserInfo();
                   console.log(response.data);
                   const username = response.data.username;
@@ -95,15 +94,16 @@ export function LoginModal({
                       password: loginStore.password,
                     })
                   );
-                  console.log(loginStore);
+                  Cookies.set("username", username);
+                  window.location.replace("/");
                 }}
               >
                 로그인
               </button>
               <br />
-              <LoginLink to="#">아이디 찾기</LoginLink>
-              <LoginLink to="#">비밀번호 찾기</LoginLink>
-              <LoginLink to="/signUp">회원가입</LoginLink>
+              <LoginLink to="/signUp" className="signup">
+                회원가입
+              </LoginLink>
             </form>
           </ModalContainer>
         </Background>

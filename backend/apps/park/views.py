@@ -105,7 +105,7 @@ class ParkListView(APIView, ParkListPagination):
                     {"detail": "일치하는 공원이 없습니다."}, status=status.HTTP_204_NO_CONTENT
                 )
 
-        if sort is not None:  # 정렬o
+        if sort is not None:
             park = sort_type(sort, park)
 
         parks = self.paginate_queryset(park, request, view=self)
@@ -154,7 +154,6 @@ class ParkReviewListView(APIView):
         serializer = ParkReviewSerializer(review, many=True)
         return Response(serializer.data)
 
-    # TODO: drf_yasg response scheme 실제 반환 되는 값과 다른 문제가 있음.
     @swagger_auto_schema(
         request_body=ParkReviewSerializer,
         responses={

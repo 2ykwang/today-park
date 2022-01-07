@@ -36,14 +36,15 @@ function Search() {
 
   // 공원 리스트로 보여주는 컴포넌트 생성
   useEffect(() => {
-    setParklist(
-      parks.map((item, idx) => {
-        let park_id = item.id;
-        return (
-          <ParkList key={park_id} item={item} idx={idx} park_id={park_id} />
-        );
-      })
-    );
+    parks &&
+      setParklist(
+        parks.map((item, idx) => {
+          let park_id = item.id;
+          return (
+            <ParkList key={park_id} item={item} idx={idx} park_id={park_id} />
+          );
+        })
+      );
   }, [parks]);
 
   // 공원 검색시, 검색한 공원 데이터만 요청

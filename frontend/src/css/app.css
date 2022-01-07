@@ -10,6 +10,7 @@ body {
 
 /* SECTION */
 section {
+  margin-top: 80px;
   position: relative;
   box-sizing: border-box;
 }

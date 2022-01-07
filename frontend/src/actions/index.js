@@ -38,7 +38,7 @@ export async function getReviews(parkId) {
 
 export async function postReviews(parkId, score, content) {
   try {
-    const data = { score: score, content: content };
+    const data = { park_id: parkId, score: score, content: content };
     const response = await axios.post(`/parks/${parkId}/reviews`, data);
     return response.data;
   } catch (error) {}
@@ -46,7 +46,7 @@ export async function postReviews(parkId, score, content) {
 
 export async function updateReview(parkId, reviewId, score, content) {
   try {
-    const data = { score: score, content: content };
+    const data = { park_id: parkId, score: score, content: content };
     const response = await axios.put(
       `/parks/${parkId}/reviews/${reviewId}`,
       data

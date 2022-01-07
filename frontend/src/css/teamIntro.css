@@ -4,6 +4,18 @@
   display: flex;
   flex-direction: column;
   margin: 140px auto auto auto;
+  animation-name: movingUp;
+  animation-duration: 0.5s;
+}
+@keyframes movingUp {
+  from {
+    opacity: 0;
+    margin-top: 150px;
+  }
+  to {
+    opacity: 1;
+    margin-top: 140px;
+  }
 }
 #teamIntro .header {
   border-bottom: 1px solid lightslategray;
