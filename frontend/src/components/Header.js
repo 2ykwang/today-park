@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getLoginData } from "../store/loginSlice";
 import Logo from "../image/logo.png";
 import { BasicLink, LoginModal } from "../pages/LoginModal";
+import Cookies from "js-cookie";
 
 function LoginHeader() {
   const [showModal, setShowModal] = useState(false);
@@ -38,7 +39,7 @@ function LoginHeader() {
             로그인
           </BasicLink>
           <BasicLink to="/signUp" className="userMenu">
-            회원 가입
+            회원가입
           </BasicLink>
         </nav>
       </div>
@@ -59,13 +60,17 @@ function LogoutHeader() {
   const loginStore = useSelector((state) => state.login);
   function handleLogout() {
     dispatch(getLoginData({ email: "", password: "" }));
+    // 쿠키 삭제
+    Cookies.remove("accessToken");
+    Cookies.remove("refreshToken");
+    window.location.replace("/");
   }
   return (
     <>
       <div className="menuContainer">
         <nav className="user">
           <BasicLink to="/mypage" className="userMenu">
-            {loginStore.username}님
+            {Cookies.get("username")}님
           </BasicLink>
           <button type="button" className="userMenu" onClick={handleLogout}>
             로그아웃
@@ -83,7 +88,7 @@ export function Header() {
       <header className="mainHeader">
         <div className="logo">
           <BasicLink to="/">
-            <img src={Logo} alt="오늘의 공원 로고" width="110" />
+            <img src={Logo} alt="오늘의 공원 로고" height="60" />
           </BasicLink>
         </div>
 
@@ -101,13 +106,7 @@ export function Header() {
           </nav>
         </div>
         {/* 로그인 성공하면  */}
-        {loginStore.email !== "" &&
-        loginStore.password !== "" &&
-        loginStore.username !== "" ? (
-          <LogoutHeader />
-        ) : (
-          <LoginHeader />
-        )}
+        {Cookies.get("accessToken") ? <LogoutHeader /> : <LoginHeader />}
       </header>
     </>
   );

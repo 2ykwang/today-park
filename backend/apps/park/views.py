@@ -105,7 +105,7 @@ class ParkListView(APIView, ParkListPagination):
                     {"detail": "일치하는 공원이 없습니다."}, status=status.HTTP_204_NO_CONTENT
                 )
 
-        if sort is not None:  # 정렬o
+        if sort is not None:
             park = sort_type(sort, park)
 
         parks = self.paginate_queryset(park, request, view=self)
@@ -150,11 +150,10 @@ class ParkReviewListView(APIView):
 
         공원(id)에 대한 리뷰 요청 - 삭제된 리뷰 제외
         """
-        review = Review.objects.filter(Q(park_id=park_id) & Q(is_deleted=False))
+        review = Review.objects.filter(Q(park_id=park_id) & Q(is_deleted=False)).order_by('-created_at')
         serializer = ParkReviewSerializer(review, many=True)
         return Response(serializer.data)
 
-    # TODO: drf_yasg response scheme 실제 반환 되는 값과 다른 문제가 있음.
     @swagger_auto_schema(
         request_body=ParkReviewSerializer,
         responses={
@@ -257,7 +256,6 @@ class ParkReviewView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
-# TODO: 유저별 리뷰
 class UserReviewListView(APIView, ParkListPagination):
     permission_classes = [IsOwner]
 
@@ -292,7 +290,7 @@ class UserReviewListView(APIView, ParkListPagination):
         사용자가 작성한 공원 리뷰 목록을 반환합니다.
         """
 
-        review = Review.objects.filter(Q(user_id=request.user.id) & Q(is_deleted=False))
+        review = Review.objects.filter(Q(user_id=request.user.id) & Q(is_deleted=False)).order_by('-created_at')
 
         reviews = self.paginate_queryset(review, request, view=self)
         serializer = ParkReviewSerializer(reviews, many=True)

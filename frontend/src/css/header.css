@@ -1,48 +1,48 @@
 header.mainHeader {
-  /* border: 2px solid #757575; */
   position: fixed;
   z-index: 99999;
   height: 80px;
   width: 100%;
   display: flex;
   align-items: center;
-  background-color: white;
   top: 0;
   left: 0;
+  transition-duration: 1s;
+}
+header.mainHeader:hover {
+  background-color: rgba(255, 255, 255, 0.767);
+  transition: background-color 1s;
 }
 header .logo {
-  /* border: 2px solid red; */
-  margin-left: 40px;
+  margin-left: 20px;
   font-size: 24px;
   font-weight: bold;
 }
 header .menuContainer {
-  font-size: 18px;
+  font-size: 20px;
   margin-right: 40px;
-  /* border: 2px solid blue; */
   display: flex;
   position: absolute;
   top: 50;
   right: 0;
 }
 header nav.mainMenu {
-  /* border: 2px solid orange; */
   margin-right: 220px;
 }
 header nav .menu {
-  margin-left: 16px;
-  /* border: 2px solid red; */
+  margin-left: 20px;
 }
 header nav.user {
   margin: 0px;
-  /* border: 2px solid cyan; */
 }
 header nav .userMenu {
   margin-left: 20px;
+  font-size: 18px;
 }
 header .menuContainer button {
   background-color: #fff;
   border: 0.5px solid #3a3a3a;
   border-radius: 9999px;
   padding: 3px 12px;
+  font-size: 16px;
 }

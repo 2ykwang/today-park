@@ -2,10 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ReactComponent as CloseButton } from "../image/closebutton.svg";
-import { userLogin, getUserInfo } from "../actions/index";
+import { userLogin, getUserInfo } from "../actions/auth";
 import Logo from "../image/logo.png";
 import { useSelector, useDispatch } from "react-redux";
 import { getLoginData } from "../store/loginSlice";
+import Cookies from "js-cookie";
 
 export const BasicLink = styled(Link)`
   text-decoration: none;
@@ -76,16 +77,16 @@ export function LoginModal({
               <button
                 type="submit"
                 onClick={async (e) => {
+                  const useSSL = process.env.REACT_APP_USE_SSL;
                   e.preventDefault();
                   let response = await userLogin(
                     loginStore.email,
-                    loginStore.password
+                    loginStore.password,
+                    useSSL
                   );
-                  // 로그인이 성공한다면? -> 로컬 스토리지에 토큰이 저장됨.
-                  // makeheaders() -> 헤더를 만들어줌.
                   response = await getUserInfo();
-                  console.log(response);
-                  const username = response.username;
+                  console.log(response.data);
+                  const username = response.data.username;
                   dispatch(
                     await getLoginData({
                       email: loginStore.email,
@@ -93,15 +94,16 @@ export function LoginModal({
                       password: loginStore.password,
                     })
                   );
-                  console.log(loginStore);
+                  Cookies.set("username", username);
+                  window.location.replace("/");
                 }}
               >
                 로그인
               </button>
               <br />
-              <LoginLink to="#">아이디 찾기</LoginLink>
-              <LoginLink to="#">비밀번호 찾기</LoginLink>
-              <LoginLink to="/signUp">회원가입</LoginLink>
+              <LoginLink to="/signUp" className="signup">
+                회원가입
+              </LoginLink>
             </form>
           </ModalContainer>
         </Background>

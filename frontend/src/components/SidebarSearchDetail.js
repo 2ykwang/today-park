@@ -10,6 +10,7 @@ import { getParkDetail, getReviews } from "../actions/index";
 import { DetailList } from "./DetailList";
 import { SimpleMap } from "./GoolgleMap";
 import { Review } from "./Review";
+import { CreateReview } from "./CreateReview";
 
 export function SidebarSearchDetail() {
   const [content, setContent] = useState("");
@@ -28,7 +29,6 @@ export function SidebarSearchDetail() {
       try {
         setDetailData(response);
         setEquitments(response.equipments);
-        console.log(response);
       } catch (error) {
         console.log("공원 정보 get요청 실패");
       }
@@ -74,12 +74,10 @@ export function SidebarSearchDetail() {
           <div className="mapAPI">{detailData && simplemap}</div>
           <div className="parkDetailContainer">
             <div className="parkDetail">{detailData && detailList}</div>
-
-            <form className="createReview">
-              <textarea placeholder="내용을 입력해주세요." />
-              <br />
-              <button type="submit">등록하기</button>
-            </form>
+            <div className="totalReviews">
+              <h4>리뷰({detailData && detailData.total_reviews})</h4>
+              <CreateReview parkId={id} type={"POST"} />
+            </div>
             <div className="reviews">
               {reviewList &&
                 reviewList.map((item, idx) => {

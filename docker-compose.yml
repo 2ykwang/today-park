@@ -1,10 +1,20 @@
-version: '3'
+version: "3.2"
 
 # networks:
 #   app:
 #     driver: bridge
  
-services:
+services: 
+  client:
+    container_name: "client"
+    build:
+      context: ./frontend
+    # volumes:
+      # - ./frontend:/srv/client/
+      # - "/srv/client/node_modules" 
+    expose:
+      - "3000" 
+
   app:
     container_name: "backend"
     build:
@@ -16,19 +26,9 @@ services:
     restart: always
     expose:
       - "8000"
-
-  client:
-    container_name: "client"
-    build:
-      context: ./frontend
-    volumes:
-      - ./frontend:/srv/client/
-      - "/srv/client/node_modules"
     depends_on:
-      - app
-    expose:
-      - "3000"
-
+      - client
+  
   nginx:
     container_name: "nginx"
     image: nginx:latest
