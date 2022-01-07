@@ -24,13 +24,14 @@ export async function userLogin(email, password, secure = false) {
   try {
     const response = await axios.post("/user/login", data);
 
+    const expire = 1 / 24;
     // 쿠키에 refresh token, access token 을 저장해준다.
     Cookies.set("accessToken", response.data["access"], {
-      expires: 1,
+      expires: expire,
       secure: secure,
     });
     Cookies.set("refreshToken", response.data["refresh"], {
-      expires: 1,
+      expires: 7,
       secure: secure,
     });
     _setAccessToken();
@@ -42,11 +43,14 @@ export async function userLogin(email, password, secure = false) {
 
 export async function userLogout() {
   const data = { refresh: Cookies.get("refreshToken") };
+
+  Cookies.remove("accessToken");
+  Cookies.remove("refreshToken");
+  Cookies.remove("username");
+  Cookies.remove("email");
   try {
     const response = await axios.post("/user/logout", data);
 
-    Cookies.remove("accessToken");
-    Cookies.remove("refreshToken");
     _setAccessToken();
     return response;
   } catch (error) {
@@ -58,7 +62,7 @@ export async function userLogout() {
 export async function registerUser(username, email, password) {
   try {
     const data = { username: username, email: email, password: password };
-    const response = await axios.post(`/user/register`, data);
+    const response = await axios.post("/user/register", data);
 
     return response;
   } catch (error) {
@@ -68,14 +72,14 @@ export async function registerUser(username, email, password) {
 
 // 유저 정보를 불러옵니다.
 export async function getUserInfo() {
-  const response = await axios.get(`/user`);
+  const response = await axios.get("/user");
   return response;
 }
 
 // 사용 가능한 닉네임, 이메일인지 체크합니다.
 export async function checkAvailableUserFields(data) {
   try {
-    const response = await axios.post(`/user/check`, data);
+    const response = await axios.post("/user/check", data);
 
     return response;
   } catch (error) {
@@ -108,8 +112,64 @@ export async function editUserPassword(data) {
     return error.response;
   }
 }
-// not implemented yet
-export async function userTokenVerify() {}
 
-// not implemented yet
-export async function userTokenRefresh() {}
+export async function userTokenVerify(accessToken) {
+  try {
+    const response = await axios.post("/user/token/verify", {
+      token: accessToken,
+    });
+    return response;
+  } catch (error) {
+    return error.response;
+  }
+}
+
+export async function userTokenRefresh(refreshToken, secure = false) {
+  try {
+    const response = await axios.post("/user/token/refresh", {
+      refresh: refreshToken,
+    });
+
+    const expire = 1 / 24;
+
+    Cookies.set("accessToken", response.data["access"], {
+      expires: expire,
+      secure: secure,
+    });
+    _setAccessToken();
+    return response;
+  } catch (error) {
+    return error.response;
+  }
+}
+
+export async function checkUserTokenAndRefresh(secure = false) {
+  const accessToken = Cookies.get("accessToken");
+  const refreshToken = Cookies.get("refreshToken");
+
+  // 로그인 된 상태라면
+  if (refreshToken) {
+    // 토큰이 유효한지 검증한다.
+    let response = await userTokenVerify(accessToken);
+
+    // access token이 토큰이 만료 되었다면
+    if (response.status >= 300) {
+      //refresh 를 시도한다.
+      response = await userTokenRefresh(refreshToken, secure);
+
+      // refresh 가 안된다면
+      if (response.status >= 300) {
+        // refresh 토큰도 만료된 것
+        // 로그아웃 처리
+        Cookies.remove("accessToken");
+        Cookies.remove("refreshToken");
+        Cookies.remove("username");
+        Cookies.remove("email");
+        return false;
+      }
+    }
+    return true;
+  }
+  return true;
+}
+export async function uploadUserImage() {}
