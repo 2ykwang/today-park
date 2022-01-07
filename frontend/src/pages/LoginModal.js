@@ -95,6 +95,7 @@ export function LoginModal({
                     })
                   );
                   Cookies.set("username", username);
+                  window.location.replace("/");
                 }}
               >
                 로그인

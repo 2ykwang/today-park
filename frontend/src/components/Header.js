@@ -63,6 +63,7 @@ function LogoutHeader() {
     // 쿠키 삭제
     Cookies.remove("accessToken");
     Cookies.remove("refreshToken");
+    window.location.replace("/");
   }
   return (
     <>
