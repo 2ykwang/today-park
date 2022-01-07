@@ -3,7 +3,6 @@ import styled from "styled-components";
 // import { Link } from "react-router-dom";
 import { Header } from "../components/Header";
 import video from "../video/mainVideo.mp4";
-import video2 from "../video/mainVideoSmall.mp4";
 import { BasicLink } from "../components/BasicLink";
 import underScroll from "../image/scrollDown.png";
 import cloud from "../image/cloud3.png";
@@ -56,7 +55,7 @@ function Home() {
         <section className="home">
           <div className="video">
             <video muted autoPlay loop>
-              <source src={video2} type="video/mp4" />
+              <source src={video} type="video/mp4" />
             </video>
             <BasicLink to="/search" className="findPark">
               공원 찾으러 가기 →
