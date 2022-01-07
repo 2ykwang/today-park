@@ -69,7 +69,7 @@ function LogoutHeader() {
       <div className="menuContainer">
         <nav className="user">
           <BasicLink to="/mypage" className="userMenu">
-            {loginStore.username}님
+            {Cookies.get("username")}님
           </BasicLink>
           <button type="button" className="userMenu" onClick={handleLogout}>
             로그아웃
@@ -105,13 +105,7 @@ export function Header() {
           </nav>
         </div>
         {/* 로그인 성공하면  */}
-        {loginStore.email !== "" &&
-        loginStore.password !== "" &&
-        loginStore.username !== "" ? (
-          <LogoutHeader />
-        ) : (
-          <LoginHeader />
-        )}
+        {Cookies.get("accessToken") ? <LogoutHeader /> : <LoginHeader />}
       </header>
     </>
   );
