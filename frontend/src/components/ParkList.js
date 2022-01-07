@@ -20,7 +20,7 @@ export function ParkList({ item, idx, park_id }) {
           운동기구: {item.total_equipments} / 리뷰: {item.total_reviews}
         </p>
       </BasicLink>
-      {true ? (
+      {/* {true ? (
         <BookmarkIconEmpty
           className={`bookmark id-${idx + 1}`}
           width="24"
@@ -34,7 +34,7 @@ export function ParkList({ item, idx, park_id }) {
           height="24"
           checked={false}
         />
-      )}
+      )} */}
     </div>
   );
 }

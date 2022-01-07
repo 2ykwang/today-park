@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { ReactComponent as StarIcon } from "../image/star.svg";
+import { ReactComponent as BookmarkIcon } from "../image/bookmark-maked.svg";
 import { ReactComponent as BookmarkIconEmpty } from "../image/bookmark-empty.svg";
+import { postBookmark, deleteBookmark } from "../actions/index";
 
 export function DetailList({ detailData, equitments }) {
+  const [click, setClick] = useState(false);
+
+  async function addbookmark() {
+    const response = await postBookmark(detailData.id);
+    setClick(true);
+    console.log(response);
+  }
+  async function deletebookmark() {
+    await deleteBookmark();
+    setClick(false);
+  }
   return (
     <div>
       <div className="park">
@@ -14,7 +27,21 @@ export function DetailList({ detailData, equitments }) {
               {detailData.avg_score}
             </div>
           </h3>
-          <BookmarkIconEmpty className="bookmark" width="24" height="24" />
+          {click ? (
+            <BookmarkIcon
+              className="bookmark"
+              width="24"
+              height="24"
+              onClick={deletebookmark}
+            />
+          ) : (
+            <BookmarkIconEmpty
+              className="bookmark"
+              width="24"
+              height="24"
+              onClick={addbookmark}
+            />
+          )}
           <p>{detailData.full_address}</p>
         </div>
         <div className="equipments">

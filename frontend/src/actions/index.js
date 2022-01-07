@@ -19,7 +19,9 @@ export async function getParks(guId, keyword, sort, page, size) {
     const response = await axios.get(
       `/parks/search?guId=${guId}&keyword=${keyword}&sort=${sort}&page=${page}&size=${size}`
     );
-    return response.data;
+    if (response.status === 200) return response.data;
+    else if (response.status === 400) console.log("해당 검색 결과가 없습니다.");
+    else return "잘못된 요청입니다.";
   } catch (error) {}
 }
 
@@ -65,5 +67,27 @@ export async function onlyUserReview() {
   try {
     const response = await axios.get(`/parks/user-reviews`);
     return response.data;
+  } catch (error) {}
+}
+
+export async function getBookmarks() {
+  try {
+    const response = await axios.get(`/bookmarks`);
+    return response.data;
+  } catch (error) {}
+}
+
+export async function postBookmark(parkId) {
+  try {
+    const data = { park_id: parkId };
+    const response = await axios.post(`/bookmarks`, data);
+    return response.data;
+  } catch (error) {}
+}
+
+export async function deleteBookmark(bookmarkId) {
+  try {
+    const data = { bookmark_id: bookmarkId };
+    const response = await axios.delete(`/bookmarks/${bookmarkId}`);
   } catch (error) {}
 }

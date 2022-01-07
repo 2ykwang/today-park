@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { Header } from "../components/Header";
 import Map from "../components/Map";
 import ReactTooltip from "react-tooltip";
 import { ReactComponent as SearchIcon } from "../image/search.svg";
 import { SidebarMenu } from "../components/SidebarMenu";
-import { useParams } from "react-router-dom";
 import { getParks } from "../actions/index";
 import { ParkList } from "../components/ParkList";
 
@@ -16,8 +15,6 @@ function Search() {
   const [searchValue, setSearchValue] = useState("");
   const [sort, setSort] = useState("");
   const [pagination, setPagination] = useState([]);
-
-  const { id } = useParams();
 
   // 마운트시, 공원 정보 GET 요청 1페이지에 있는 공원 리스트 가져오기
   useEffect(() => {
@@ -74,8 +71,6 @@ function Search() {
     }
     setPagination(paginations);
   }, [parksResponse]);
-
-  console.log(parksResponse);
 
   return (
     <>
