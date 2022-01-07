@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Header } from "../components/Header";
 import { useSelector, useDispatch } from "react-redux";
 import { getLoginData } from "../store/loginSlice";
-import { onlyUserReview } from "../actions/index";
+import { onlyUserReview, deleteReview } from "../actions/index";
 import { ReactComponent as StarIcon } from "../image/star.svg";
 import { CreateReview } from "../components/CreateReview";
 
@@ -181,7 +181,18 @@ function Mypage() {
                         >
                           수정
                         </button>
-                        <button>삭제</button>
+                        <button
+                          onClick={() => {
+                            setClickedReviewIdx(index);
+                            deleteReview(
+                              reviewList[clickedReviewIdx].park_id,
+                              reviewList[clickedReviewIdx].id
+                            );
+                            window.location.replace("/mypage");
+                          }}
+                        >
+                          삭제
+                        </button>
                       </div>
                     </div>
                   );
