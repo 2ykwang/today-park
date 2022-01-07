@@ -9,10 +9,9 @@ from core import *
 from utill import *
 
 # import os
-# from sqlalchemy import create_engine
+from sqlalchemy import create_engine
 # dir = os.path.dirname(os.path.realpath(__file__))
-# engine = create_engine('mysql+pymysql://root:root@127.0.0.1:3306/test_db')
-
+engine = create_engine('mysql+pymysql://root:root@127.0.0.1:3306/test_db')
 
 class Park_Equipment_Gwanak:
     def __init__(self, engine, file_path, table_name):
