@@ -4,7 +4,7 @@ import os
 설정 값 
 이 곳에
 """
-CUSTOM_DATABASE_URI = ""
+CUSTOM_DATABASE_URI = "mysql+pymysql://root:root@127.0.0.1:3306/emptycart"
 
 
 """
