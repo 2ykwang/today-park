@@ -7,8 +7,9 @@ import underScroll from "../image/scrollDown.png";
 import cloud from "../image/cloud3.png";
 import sun from "../image/sun.png";
 import backgroundMountain from "../image/backgroundMountain.png";
-import { DefualtPieChart } from "../components/Prolog/DefualtPieChart";
-import { DefualtBarChart } from "../components/Prolog/DefualtBarChart";
+import reasonFirstPic from "../image/main/reason1-pic1.png";
+import { DefaultPieChart } from "../components/DefaultPieChart";
+import { DefaultBarChart } from "../components/DefaultBarChart";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
@@ -61,9 +62,6 @@ function Home() {
             <video muted autoPlay loop>
               <source src={video} type="video/mp4" />
             </video>
-            <BasicLink to="/search/1" className="findPark">
-              공원 찾으러 가기 →
-            </BasicLink>
           </div>
           <div className="underScroll">
             <img src={underScroll} alt="underScroll" />

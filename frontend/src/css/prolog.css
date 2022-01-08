@@ -1,5 +1,6 @@
 #prolog {
   display: flex;
+  margin-top: 20px;
 }
 /* #prolog .greenBar {
   position: fixed;
@@ -50,7 +51,7 @@
 }
 
 /* 각 페이지 공통설정 */
-.content {
+#prolog .content {
   display: flex;
   height: 70vh;
   width: 1100px;

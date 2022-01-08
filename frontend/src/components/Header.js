@@ -93,7 +93,7 @@ export function Header() {
   };
   useEffect(() => {
     window.addEventListener("scroll", updateScroll);
-  });
+  }, [scrollPosition]);
   return (
     <>
       <header className={scrollPosition < 80 ? "mainHeader" : "ver2"}>
