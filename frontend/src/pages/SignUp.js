@@ -76,6 +76,7 @@ function SignUp() {
     );
     if (response.status < 400) {
       //가입 성공 했을 때
+      window.location.replace("/");
     } else {
       //가입 실패 했을 때
     }
