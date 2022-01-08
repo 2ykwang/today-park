@@ -4,40 +4,13 @@ import { Header } from "../components/Header";
 import video from "../video/mainVideo.mp4";
 import { BasicLink } from "../components/BasicLink";
 import underScroll from "../image/scrollDown.png";
-import cloud from "../image/cloud3.png";
-import sun from "../image/sun.png";
+import cloud from "../image/main/cloud3.png";
+import sun from "../image/main/sun.png";
 import Tree from "../image/main/tree.png";
-import { DefaultPieChart } from "../components/DefaultPieChart";
+import Mountain from "../image/main/mountain.png";
 import { DefaultBarChart } from "../components/DefaultBarChart";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
-
-const RADIAN = Math.PI / 176;
-const renderCustomizedLabel = ({
-  cx,
-  cy,
-  midAngle,
-  innerRadius,
-  outerRadius,
-  percent,
-  index,
-}) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.4;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-  return (
-    <text
-      x={x}
-      y={y}
-      fill="white"
-      textAnchor={x > cx ? "start" : "end"}
-      dominantBaseline="central"
-    >
-      {`${(percent * 100).toFixed(0)}%`}
-    </text>
-  );
-};
 
 function Home() {
   return (
@@ -53,7 +26,7 @@ function Home() {
             <div className="introText2">
               <p>"오늘의 공원"이 도와드릴게요:)</p>
             </div>
-            <BasicLink to="/search" className="findPark">
+            <BasicLink to="/search/1" className="findPark">
               공원 찾으러 가기 →
             </BasicLink>
           </div>
@@ -91,22 +64,6 @@ function Home() {
                 </div>
               </div>
               <div className="reason1-statisticswrapper">
-                {/* <div className="reason1Box">
-                <div className="reason1-statistics-back"></div>
-                <div className="reason1Contents">
-                  <p>"성인 46%, 코로나 이후, 체중 증가해"</p>
-                  <div className="reason1Chart1">
-                    <DefaultPieChart
-                      data={[
-                        { name: "체중이 증가했다", value: 46 },
-                        { name: "체중이 증가하지 않았다", value: 54 },
-                      ]}
-                      colors={COLORS}
-                    ></DefaultPieChart>
-                  </div>
-                  <p>(대한비만협회)</p>
-                </div>
-              </div> */}
                 <div className="reason1Box">
                   <div className="reason1-statistics-back">
                     <div className="reason1Contents">
@@ -152,7 +109,6 @@ function Home() {
           <div className="intro">
             <div className="introBackgroundWrapper">
               <div className="introBackground1"></div>
-              {/* <div className="introBackground2"></div> */}
             </div>
             <div className="intro-cloud-1">
               <img src={cloud} alt="cloud1" />
@@ -166,8 +122,34 @@ function Home() {
             <div className="intro-sun">
               <img src={sun} alt="sun" />
             </div>
-            <div className="tree">
-              <img src={Tree} alt="backgroundMountain" />
+            <div className="thirdContentsWrapper">
+              <div className="thirdTitle">
+                <p>
+                  성공적인 건강 라이프를 위한 첫걸음,
+                  <br />
+                  지금 바로 시작해 보세요!
+                </p>
+              </div>
+              <div className="thirdButton">
+                <BasicLink to="/search/1" className="findPark">
+                  <p>산스장 찾으러 GO!</p>
+                </BasicLink>
+              </div>
+            </div>
+
+            <div className="bottomImages">
+              <div className="mountain">
+                <img src={Mountain} alt="background mountain" />
+              </div>
+              <div className="tree1">
+                <img src={Tree} alt="background tree" />
+              </div>
+              <div className="tree2">
+                <img src={Tree} alt="background tree" />
+              </div>
+              <div className="tree3">
+                <img src={Tree} alt="background tree" />
+              </div>
             </div>
           </div>
         </section>

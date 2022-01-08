@@ -242,7 +242,7 @@ section.home {
 .intro {
   position: relative;
   margin-top: 40px;
-  width: 99vw;
+  width: 100vw;
   height: 100vh;
 }
 
@@ -260,42 +260,90 @@ section.home {
   height: 100%;
   /* border-bottom-left-radius: 70%; */
 }
-
-.intro .introBackground2 {
-  background-color: #5bc691;
-  width: 50%;
-  height: 100%;
+.intro .thirdContentsWrapper {
+  position: relative;
+  top: 35%;
 }
-
+.intro .thirdTitle {
+  left: 5vw;
+  top: 30vh;
+  font-size: 2.5vw;
+  font-weight: bold;
+  text-align: center;
+}
+.intro .thirdButton {
+  position: relative;
+  padding: 0.5vw;
+  background-color: #5bc691;
+  border-radius: 20px;
+  text-align: center;
+  width: 20%;
+  height: 5vh;
+  margin-top: 7vh;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.intro .thirdButton p {
+  /* display: inline-block; */
+  color: white;
+  font-size: 1.5vw;
+  font-weight: bold;
+  line-height: 5vh;
+  vertical-align: middle;
+}
 .intro .intro-cloud-1 {
   position: absolute;
-  left: 10vw;
   top: 30vh;
+  animation: 15s slidein linear alternate infinite;
 }
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+  }
 
+  to {
+    margin-left: -10%;
+  }
+}
 .intro .intro-cloud-1 img {
-  width: 130px;
-  /* height: 130px; */
+  width: 9vw;
 }
 
 .intro .intro-cloud-2 {
   position: absolute;
-  right: 20vw;
+  /* right: 20vw; */
   top: 15vh;
+  animation: 25s slidein2 linear alternate infinite;
 }
+@keyframes slidein2 {
+  from {
+    margin-left: -15%;
+  }
 
+  to {
+    margin-left: 100%;
+  }
+}
 .intro .intro-cloud-2 img {
-  width: 160px;
+  width: 13vw;
 }
 
 .intro .intro-cloud-3 {
   position: absolute;
-  right: 8vw;
   top: 25vh;
+  animation: 15s slidein3 linear alternate infinite;
 }
+@keyframes slidein3 {
+  from {
+    margin-right: -15%;
+  }
 
+  to {
+    margin-left: 100%;
+  }
+}
 .intro .intro-cloud-3 img {
-  width: 145px;
+  width: 10vw;
 }
 
 .intro .intro-sun {
@@ -306,4 +354,52 @@ section.home {
 
 .intro .intro-sun img {
   width: 120px;
+  animation: rotate_image 10s linear infinite;
+  transform-origin: 50% 50%;
+}
+@keyframes rotate_image {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.intro .bottomImages {
+  position: relative;
+  width: 100vw;
+  height: 40vh;
+  top: 50%;
+}
+.intro .mountain {
+  position: absolute;
+  width: 70vw;
+  bottom: 10vh;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+.intro .mountain img {
+  width: 70vw;
+}
+.intro .tree1 {
+  position: absolute;
+  bottom: 10.2vh;
+  left: 14vw;
+}
+.intro .tree1 img {
+  width: 6vw;
+}
+.intro .tree2 {
+  position: absolute;
+  bottom: 10.2vh;
+  left: 23vw;
+}
+.intro .tree2 img {
+  width: 4.5vw;
+}
+.intro .tree3 {
+  position: absolute;
+  bottom: 10.2vh;
+  right: 20vw;
+}
+.intro .tree3 img {
+  width: 7vw;
 }
