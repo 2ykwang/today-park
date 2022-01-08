@@ -108,7 +108,7 @@ export function Header() {
             <BasicLink to="/prolog" className="menu">
               프롤로그
             </BasicLink>
-            <BasicLink to="/search" className="menu">
+            <BasicLink to="/search/1" className="menu">
               공원 찾아보기
             </BasicLink>
             <BasicLink to="/teamIntro" className="menu">
