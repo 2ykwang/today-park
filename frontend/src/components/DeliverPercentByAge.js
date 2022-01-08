@@ -1,5 +1,5 @@
-import React, { PureComponent, useEffect, useState } from 'react';
-import { PieChart, Pie, Label, Sector, Cell, ResponsiveContainer, Tooltip, Legend, LabelList } from 'recharts';
+import React, { useEffect, useState } from 'react';
+import { PieChart, Pie, Label, Cell, Tooltip, Legend, } from 'recharts';
 
 const data = [
   { name: '20대', value: 32 },
@@ -42,13 +42,14 @@ function ChartDeliverPercentByAge() {
   const [showTooltip, setShowTooltip] = useState(false);
 
   return ( 
-    <PieChart width={500} height={300} onMouseLeave={() => setShowTooltip(false)}>
+    <PieChart width={420} height={220} onMouseLeave={() => setShowTooltip(false)}>
       {/* <text x={125} y={100} textAnchor="middle" dominantBaseline="middle" >
         배달앱
       </text>
       <text x={125} y={120} textAnchor="middle" dominantBaseline="middle" >
         이용률
       </text> */}
+      <Legend />
       <Pie
         onMouseEnter={() => setShowTooltip(true)}
         data={data}
@@ -59,12 +60,12 @@ function ChartDeliverPercentByAge() {
         fill="#8884d8"
         paddingAngle={5}
         dataKey="value"
-        label = {(data)=>data.name}
+        // label = {(data)=>data.name}
       >
         <Label value="배달앱 이용률" offset={10} position="center" />
         {data.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-        ))}
+          <Cell key={`cell-${index}`} fill={COLORS[index]} />
+          ))}
       </Pie>
       {showTooltip && (
         <Tooltip
@@ -76,7 +77,6 @@ function ChartDeliverPercentByAge() {
           wrapperStyle={{ visibility: "visible", pointerEvents: "auto" }}
         />
       )}
-      {/* <Tooltip content={<CustomTooltip />} wrapperStyle={{ visibility: "visible", pointerEvents: "auto" }} /> */}
     </PieChart>
   );
 }

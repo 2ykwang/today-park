@@ -1,10 +1,6 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { BarChart, Bar, Cell, XAxis, Line, ResponsiveContainer, LabelList, Tooltip, Legend, ComposedChart } from 'recharts';
-// import { scaleOrdinal } from 'd3-scale';
-// import { schemeCategory20 } from 'd3-scale-chromatic';
+import { Bar, Cell, XAxis, Line, ResponsiveContainer, Tooltip, Legend, ComposedChart } from 'recharts';
 
-// const colors = scaleOrdinal(schemeCategory20).range();
 const colors = ['#EA96A3','#E19153','#B89C49','#98A246','#60AE47','#4AAE8A','#4BABA4','#4FABBC','#6DAEE2','#B6A8EB','#DF8FE7','#E890C6']
 
 const data = [
@@ -75,13 +71,7 @@ export default class ChartKeyword extends PureComponent {
             {data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={colors[index]} />
             ))}
-            {/* <Cell key={`cell-${0}`} fill={'#0088FE'} />
-            <Cell key={`cell-${1}`} fill={'#00C49F'} />
-            <Cell key={`cell-${2}`} fill={'#FFBB28'} />
-            <Cell key={`cell-${3}`} fill={'#FF8042'} />
-            <Cell key={`cell-${4}`} fill={"#d62728"} /> */}
           </Bar>
-          {/* <Line type="monotone" dataKey="exercise" stroke="orange" /> */}
           <Line type="monotone" dataKey="health" stroke="green" />
         </ComposedChart>
       </ResponsiveContainer>

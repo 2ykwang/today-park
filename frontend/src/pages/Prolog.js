@@ -14,7 +14,8 @@ const anchors = [
   "코로나와배달",
   "배달과건강",
   "건강과운동",
-  "'관악구'인-이유?",
+  "'2030'인-이유?",
+  "'관악구'인-이유?"
 ];
 
 const Prolog = () => {
@@ -23,8 +24,10 @@ const Prolog = () => {
   function clickHandler(page, e) {
     let prev = document.getElementById(`${currentClick}`);
     prev.style.fontWeight = "normal";
+    prev.style.borderLeft = 'none'
     let cur = document.getElementById(e.target.id);
     cur.style.fontWeight = "bold";
+    cur.style.borderLeft = '5px solid #47c690'
     window.fullpage_api.moveTo(page);
     setCurrentClick(e.target.id);
   }
@@ -65,7 +68,15 @@ const Prolog = () => {
                 clickHandler(4, e);
               }}
             >
-              '관악구'인 이유?
+              왜 '2030'?
+            </li>
+            <li
+              id="list-5"
+              onClick={(e) => {
+                clickHandler(5, e);
+              }}
+            >
+              '관악구'인 이유
             </li>
           </ul>
         </div>
@@ -73,12 +84,20 @@ const Prolog = () => {
           anchors={anchors}
           navigation
           navigationTooltips={anchors}
-          sectionsColor={["white", "white", "white", "white"]}
+          sectionsColor={["white", "white", "white", "white","white"]}
           onLeave={(origin, destination, direction) => {
-            console.log("onLeave event", { origin, destination, direction });
+            // console.log("onLeave event", { origin, destination, direction });
+            let prev = document.getElementById(`${currentClick}`);
+            prev.style.fontWeight = "normal";
+            prev.style.borderLeft = 'none'
+            let curList = `list-${destination.index+1}`;
+            let cur = document.getElementById(curList);
+            cur.style.fontWeight = "bold";
+            cur.style.borderLeft = '5px solid #47c690'
+            setCurrentClick(curList);
           }}
           render={({ state, fullpageApi }) => {
-            console.log("render prop change", state, fullpageApi); // eslint-disable-line no-console
+            // console.log("render prop change", state, fullpageApi); // eslint-disable-line no-console
             return (
               <>
                 <div className="contents">
@@ -103,7 +122,7 @@ const Prolog = () => {
                             생활의 변화 중&nbsp;
                             <span style={{fontWeight:'bold'}}>'배달음식 주문 빈도 증가'(22.0%)'</span> 가
                           </p>
-                          <p className="text2" style={{lineHeight:'1.5em', marginTop:'0.5em'}}>1위로 뽑힌 만큼 사람들의 식습관에 가장 큰 변화가 일어났습니다.</p>
+                          <p className="text2" style={{lineHeight:'1em', marginTop:'0.5em'}}>1위로 뽑힌 만큼 사람들의 식습관에 가장 큰 변화가 일어났습니다.</p>
                           <p className="quotation" style={{textAlign:'left'}}>(한국건강증진개발원)</p>
                         </div>
                         <div className="chartDeliver" >
@@ -185,7 +204,7 @@ const Prolog = () => {
                             관심이 높아짐을 알 수 있습니다.
                           </p>
                         </div>
-                        <div className="chartKeyword" style={{width:'550px', height:'450px'}}>
+                        <div className="chartKeyword" style={{width:'600px', height:'400px'}}>
                           <ChartKeyword />
                         </div>
                       </div>
@@ -197,31 +216,30 @@ const Prolog = () => {
                       <div className='title-content'>
                         <p className='title'>
                           왜&nbsp;
-                          <span className='title-highlight'>관악구</span>의 
-                          <span className='title-highlight'>2030</span>을 선택했나
+                          <span className='title-highlight'>'2030'</span>을 선택했나
                         </p>
                       </div>
                       <div className='eachContent4'>
-                        <p className='text1'>
-                          <span style={{fontWeight:'bold', color:'#47c690'}}>오늘의 공원</span>
+                        <p className='text3' style={{marginBottom:'40px'}}>
+                          <span style={{fontWeight:'bold', fontSize:'35px'}}>오늘의 공원</span>
                           은 왜 20대, 30대 선택했을까요?
                         </p>
-                        <p className='text4'>
-                          “오늘의 공원”은 코로나 시기 동안&nbsp;
+                        <p className='text5'>
+                          오늘의 공원은 코로나 시기 동안&nbsp;
                           <span style={{fontWeight:'bold'}}>“배달 서비스”</span>를 이용하여&nbsp;
                           <span style={{fontWeight:'bold'}}>“확찐자”</span>가 된 사람들을 위해서 서비스를 제공합니다.</p>
-                        <p className='text4'>코로나19 이전 대비&nbsp;
+                        <p className='text5'>코로나19 이전 대비&nbsp;
                           <span style={{fontWeight:'bold'}}>체중 증가</span>를 가장 많이 겪은 연령대는 30대이며, 근소한 차이로 40대와 20대가 위치합니다.
                         </p>
                         <p className='quotation'>(대한비만학회)</p>
-                        <p className='text4' style={{fontWeight:'bold'}}>
+                        <p className='text5' style={{fontWeight:'bold'}}>
                           배달 서비스를 가장 많이 이용하고 코로나 시기 동안 체중 증가를 가장 많이 겪은 20대, 30대를 기준으로 서비스를 제공하기로 했습니다.
                         </p>
                         <div className='gwanak-charts'>
-                          <div className="chartGainWeightByAge" style={{width:'300px', height:'200px', marginBottom:'30px'}}>
+                          <div className="chartGainWeightByAge">
                             <ChartGainWeightByAge />
                           </div>
-                          <div className="chartDeliverPercentByAge" style={{width:'300px', height:'300px', marginBottom:'30px'}}>
+                          <div className="chartDeliverPercentByAge" style={{width:'400px', height:'200px', marginBottom:'30px'}}>
                             <ChartDeliverPercentByAge />
                           </div>
                         </div>
@@ -232,23 +250,30 @@ const Prolog = () => {
                   <div className="section">
                     <div className='content'>
                       <div className='title-content'>
-                        <p className='title'>'관악구'인 이유?</p>
+                        <p className='title'>
+                        <span className='title-highlight'>'관악구'</span>
+                          인 이유?</p>
                       </div>
-                      <p className="text1">우리의 공원은 왜 관악구를 첫번째 서비스 지역구로 선택했을까요?</p>
-                      <div className='eachContent5'>
-                        <div className="chart2030" style={{width:'400px', height:'300px'}}>
-                          <Chart2030 />
-                        </div>
-                        <div className='chart2030-text'>
-                          <p className='text2'>
-                            서울시 연령대별 인구 조사를 바탕으로<br />
-                            구별 20대, 30대 비율을 분석한 결과<br />
-                            <span style={{fontWeight:'bold'}}>관악구, 광진구, 영등포구</span> 순으로 높은 것을 확인했습니다.
-                          </p>
-                          <p className='text2'>
-                            특히 <span style={{fontWeight:'bold'}}>관악구</span>는 40%로 광진구(34%), 영등포구(33%)에 비해서 <br />
-                            <span style={{fontWeight:'bold'}}>압도적</span>인 수치를 보였습니다.
-                          </p>
+                      <div className=''>
+                        <p className="text1">
+                          <span style={{fontWeight:'bold' ,fontSize:'35px'}}>오늘의 공원</span>
+                          은 왜 관악구를 첫번째 서비스 지역구로 선택했을까요?
+                        </p>
+                        <div className='eachContent5'>
+                          <div className="chart2030">
+                            <Chart2030 />
+                          </div>
+                          <div className='chart2030-text'>
+                            <p className='text4'>
+                              서울시 연령대별 인구 조사를 바탕으로<br />
+                              구별 20대, 30대 비율을 분석한 결과<br />
+                              <span style={{fontWeight:'bold'}}>관악구, 광진구, 영등포구</span> 순으로 높은 것을 확인했습니다.
+                            </p>
+                            <p className='text4'>
+                              특히 <span style={{fontWeight:'bold'}}>관악구</span>는 40%로 광진구(34%), 영등포구(33%)에 비해서 <br />
+                              <span style={{fontWeight:'bold'}}>압도적</span>인 수치를 보였습니다.
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </div>
