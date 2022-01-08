@@ -8,9 +8,10 @@ import sun from "../image/main/sun.png";
 import Tree from "../image/main/tree.png";
 import Mountain from "../image/main/mountain.png";
 import Pageimage from "../image/main/pageimage.png";
+import Delivery from "../image/main/delivery.png";
 import { DefaultBarChart } from "../components/DefaultBarChart";
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+const COLORS = ["#5bc691", "#FFBB28", "#FFBB28", "#FF8042"];
 
 function Home() {
   return (
@@ -55,13 +56,10 @@ function Home() {
                   </p>
                 </div>
                 <div className="reason1Contents">
-                  <p>
-                    코로나 이후 우리가 자주 먹게된 배달 음식.
-                    <br />
-                    그런데 배달 음식 “한 끼”는 <br />
-                    성인 "하루" 권장 섭취 칼로리(2500kcal)의 <br />
-                    80%에 달한답니다.
-                  </p>
+                  <p>코로나 이후 우리가 자주 먹게된 배달 음식.</p>
+                  <p>그런데 배달 음식 “한 끼”는</p>
+                  <p>성인 "하루" 권장 섭취 칼로리(2500kcal)의</p>
+                  <p>80%에 달한답니다.</p>
                 </div>
               </div>
               <div className="reason1-statisticswrapper">
@@ -74,9 +72,10 @@ function Home() {
                       </p>
                       <div className="reason1Chart2">
                         <div className="reason1CardRank">
-                          <p>1위 : 배달앱</p>
+                          {/* <p>1위 : 배달앱</p>
                           <p>2위 : 아울렛</p>
-                          <p>3위 : 취미시설</p>
+                          <p>3위 : 취미시설</p> */}
+                          <img src={Delivery} alt="delivery rank"></img>
                         </div>
                       </div>
                     </div>
