@@ -95,7 +95,9 @@ class UserView(APIView):
         유저 정보를 반환 합니다.
         """
         self.user = self.get_object()
-        serializer = self.serializer_class(self.user)
+
+        # request 를 보내줘야 absolute uri가 생성된다.
+        serializer = self.serializer_class(self.user, context={"request": request})
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
     @swagger_auto_schema(

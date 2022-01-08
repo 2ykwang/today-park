@@ -12,18 +12,18 @@ section.home {
   position: relative;
   /* border: 2px solid red; */
 }
-.home .video {
+.firstPage .video {
   /* border: 2px solid red; */
   width: 100%;
   display: block;
   position: relative;
 }
-.home .video video {
+.firstPage .video video {
   width: 100%;
   height: 100%;
   object-fit: fill;
 }
-.home .video::before {
+.firstPage .video::before {
   content: "";
   top: 0;
   left: 0;
@@ -44,29 +44,29 @@ section.home {
 }
 
 .introTextWrapper P {
-  padding: 10px;
+  padding: 0.5vw;
   color: rgb(224, 224, 224);
 }
 
 .introTextWrapper .introText1 {
-  font-size: 45px;
+  font-size: 2.5vw;
   font-weight: bold;
 }
 
 .introTextWrapper .introText2 {
-  font-size: 25px;
+  font-size: 1.5vw;
 }
-.home .findPark {
+.firstPage .findPark {
   position: absolute;
-  bottom: 40%;
-  right: 6vw;
-  font-size: 28px;
+  bottom: -50%;
+  right: 1.5vw;
+  font-size: 1.5vw;
   color: rgb(224, 224, 224);
   border: 2px solid white;
   padding: 10px 20px;
 }
 
-.home .underScroll {
+.firstPage .underScroll {
   display: block;
   position: absolute;
   text-align: center;
@@ -85,7 +85,7 @@ section.home {
   }
 }
 
-.home .underScroll img {
+.firstPage .underScroll img {
   width: 5vw;
 }
 
@@ -160,90 +160,89 @@ section.home {
   width: 250px;
 }
 
-.reason .reason1 {
+.reason1 {
+  display: flex;
   position: relative;
-  margin-top: 40px;
-  width: 99vw;
+  width: 100%;
   height: 100vh;
 }
 
-.reason .reason1 .reason1-background {
+.reason1 .reason1-background {
   position: absolute;
   width: 100%;
   bottom: 0;
 }
 
-.reason .reason1 .reason1-background img {
+.reason1 .reason1-background img {
   width: 100%;
   height: 40vh;
   z-index: -1;
 }
 
-.reason .reason1 .reason1-textwrapper {
-  width: 100%;
+.reason1 .reason1Textwrapper {
   /* background-color: yellow; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 5%;
+  width: 50%;
+  text-align: left;
+  color: #546176;
 }
-.reason .reason1 .reason1-textwrapper > div {
-  margin-top: 20px;
-  margin-bottom: 50px;
+.reason1 .reason1Textwrapper > div {
+  position: absolute;
 }
-.reason .reason1 .reason1-textwrapper .reason1-text1 {
-  text-align: center;
-  font-size: 50px;
+.reason1 .reason1Textwrapper .reason1Title {
+  left: 5vw;
+  top: 30vh;
+  font-size: 2.5vw;
+  font-weight: bold;
 }
-.reason .reason1 .reason1-textwrapper .reason1-text1 span {
+.reason1 .reason1Textwrapper .reason1Title span {
   color: #5bc691;
 }
 
-.reason .reason1 .reason1-textwrapper .reason1-text2 {
-  text-align: center;
-  font-size: 28px;
+.reason1 .reason1Textwrapper .reason1Contents {
+  left: 5vw;
+  top: 37vh;
+  font-size: 1.3vw;
 }
 
-.reason .reason1 .reason1-textwrapper .reason1-text2 > p {
-  padding: 3px;
-}
-.reason .reason1 .reason1-textwrapper .reason1-text2 span {
-  font-weight: bold;
-}
-
-.reason .reason1 .reason1-statisticswrapper {
+.reason1 .reason1-statisticswrapper {
+  /* background-color: yellow; */
   width: 100%;
-  position: relative;
   display: flex;
   justify-content: center;
   box-sizing: border-box;
-  padding: 10px;
 }
 
-.reason .reason1 .reason1-statisticswrapper .reason1-statistics {
+.reason1 .reason1-statisticswrapper .reason1-statistics {
   position: relative;
   box-sizing: border-box;
   padding: 10px;
-  margin: 10px 20px 0 20px;
-  width: 20%;
+  margin: 0 3vw;
+  top: 27vh;
+  width: 50%;
   height: 50vh;
 }
 
-.reason
-  .reason1
+.reason1
   .reason1-statisticswrapper
   .reason1-statistics
   .reason1-statistics-back {
   position: absolute;
-  opacity: 0.3;
-  background-color: yellowgreen;
   width: 100%;
   height: 100%;
-  border-radius: 5%;
+  background-color: #536075;
+  border-radius: 10%;
+}
+.reason1
+  .reason1-statisticswrapper
+  .reason1-statistics
+  .reason1-statistics-back
+  img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10%;
 }
 
-.reason
-  .reason1
+.reason1
   .reason1-statisticswrapper
   .reason1-statistics
   .reason1-statistics-contents {
@@ -252,35 +251,21 @@ section.home {
   box-sizing: border-box;
   top: 3%;
   height: 100%;
+  width: 100%;
+  color: white;
 }
 
-.reason
-  .reason1
+.reason1
   .reason1-statisticswrapper
   .reason1-statistics
   .reason1-statistics-contents
   > p:first-child {
-  font-size: 2rem;
   text-align: center;
+  font-size: 2vw;
   font-weight: bold;
 }
 
-.reason
-  .reason1
-  .reason1-statisticswrapper
-  .reason1-statistics
-  .reason1-statistics-contents
-  > p:last-child {
-  font-size: 0.5rem;
-  position: absolute;
-  bottom: 3vh;
-  right: 1vw;
-  font-size: 0.9rem;
-  opacity: 0.8;
-}
-
-.reason
-  .reason1
+.reason1
   .reason1-statisticswrapper
   .reason1-statistics
   .reason1-statistics-contents
@@ -295,34 +280,30 @@ section.home {
   font-size: 2rem;
 }
 
-.reason
-  .reason1
+.reason1
   .reason1-statisticswrapper
   .reason1-statistics
   .reason1-statistics-contents
-  .reason1-chart2
-  .reason1-card-rank {
+  .reason1Chart2
+  .reason1CardRank {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 3vh;
 }
 
-.reason
-  .reason1
+.reason1
   .reason1-statisticswrapper
   .reason1-statistics
   .reason1-statistics-contents
-  .reason1-chart2
-  .reason1-card-rank
+  .reason1Chart2
+  .reason1CardRank
   p {
-  padding: 1rem;
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 1.5vw;
+  line-height: 2vw;
 }
 
-.reason
-  .reason1
+.reason1
   .reason1-statisticswrapper
   .reason1-statistics
   .reason1-statistics-contents
