@@ -16,11 +16,23 @@ import Cookies from "js-cookie";
 
 const ProfileImage = styled.img`
   background-color: #e0e0e0;
+  cursor: pointer;
   width: 120px;
   height: 120px;
   border: 1px solid #e0e0e0;
   border-radius: 9999px;
   margin: 0 auto 24px auto;
+`;
+const InputField = styled.input`
+  width: 50%;
+  margin-left: 8px;
+  margin-top: 3px;
+  padding: 12px 20px;
+  height: 12px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 `;
 
 function Mypage() {
@@ -121,7 +133,7 @@ function Mypage() {
                 닉네임 :
                 {editToggle.username ? (
                   <>
-                    <input
+                    <InputField
                       type="text"
                       value={fields.username}
                       onChange={handleFieldsChange}
@@ -164,8 +176,8 @@ function Mypage() {
                 {editToggle.password ? (
                   <>
                     <p>
-                      기존 비밀번호 :
-                      <input
+                      기존 비밀번호
+                      <InputField
                         type="password"
                         value={fields.oldPassword}
                         name="oldPassword"
@@ -173,8 +185,8 @@ function Mypage() {
                       />
                     </p>
                     <p>
-                      새로운 비밀번호 :
-                      <input
+                      새로운 비밀번호
+                      <InputField
                         type="password"
                         value={fields.newPassword}
                         name="newPassword"
@@ -182,8 +194,8 @@ function Mypage() {
                       />
                     </p>
                     <p>
-                      비밀번호 확인 :
-                      <input
+                      비밀번호 확인
+                      <InputField
                         type="password"
                         value={fields.rePassword}
                         name="rePassword"
