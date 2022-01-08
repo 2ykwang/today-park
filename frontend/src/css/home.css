@@ -362,16 +362,11 @@ section.home {
     transform: rotate(360deg);
   }
 }
-.intro .bottomImages {
-  position: relative;
-  width: 100vw;
-  height: 40vh;
-  top: 50%;
-}
+
 .intro .mountain {
   position: absolute;
   width: 70vw;
-  bottom: 10vh;
+  bottom: 0;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -381,7 +376,7 @@ section.home {
 }
 .intro .tree1 {
   position: absolute;
-  bottom: 10.2vh;
+  bottom: 0vh;
   left: 14vw;
 }
 .intro .tree1 img {
@@ -389,7 +384,7 @@ section.home {
 }
 .intro .tree2 {
   position: absolute;
-  bottom: 10.2vh;
+  bottom: 0vh;
   left: 23vw;
 }
 .intro .tree2 img {
@@ -397,7 +392,7 @@ section.home {
 }
 .intro .tree3 {
   position: absolute;
-  bottom: 10.2vh;
+  bottom: 0vh;
   right: 20vw;
 }
 .intro .tree3 img {
