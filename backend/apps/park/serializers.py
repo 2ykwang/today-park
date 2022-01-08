@@ -66,6 +66,22 @@ class ParkSerializer(serializers.ModelSerializer):
         ]
 
 
+class ParkNearbyListSerializer(serializers.ModelSerializer):
+    """
+    공원 정보
+    """
+
+    parks = ParkSerializer(source="nearby_parks", many=True)
+
+    class Meta:
+        model = Park
+        fields = [
+            "id",
+            "park_name",
+            "parks",
+        ]
+
+
 class ParkReviewSerializer(serializers.ModelSerializer):
 
     """
