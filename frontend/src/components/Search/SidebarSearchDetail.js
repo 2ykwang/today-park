@@ -6,10 +6,10 @@ import ReactTooltip from "react-tooltip";
 import { ReactComponent as BackIcon } from "../../image/back.svg";
 import { SidebarMenu } from "./SidebarMenu";
 import { getParkDetail, getReviews } from "../../actions/index";
-import { DetailList } from "../DetailList";
+import { DetailList } from "./DetailList";
 import { SimpleMap } from "./GoolgleMap";
 import { Review } from "./Review";
-import { CreateReview } from "../CreateReview";
+import { CreateReview } from "./CreateReview";
 
 export function SidebarSearchDetail() {
   const [content, setContent] = useState("");

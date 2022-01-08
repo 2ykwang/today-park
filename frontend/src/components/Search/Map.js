@@ -6,7 +6,7 @@ import {
   Geography,
   Marker,
 } from "react-simple-maps";
-import GwanakMap from "../../json/gwanak.json";
+import GwanakMap from "../../data/gwanak.json";
 
 const geoUrl = GwanakMap;
 const markerOff = 2;

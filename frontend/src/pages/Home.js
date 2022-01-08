@@ -8,8 +8,8 @@ import underScroll from "../image/scrollDown.png";
 import cloud from "../image/cloud3.png";
 import sun from "../image/sun.png";
 import backgroundMountain from "../image/backgroundMountain.png";
-import { DefualtPieChart } from "../components/DefualtPieChart";
-import { DefualtBarChart } from "../components/DefualtBarChart";
+import { DefualtPieChart } from "../components/Prolog/DefualtPieChart";
+import { DefualtBarChart } from "../components/Prolog/DefualtBarChart";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 

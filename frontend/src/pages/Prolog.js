@@ -2,13 +2,13 @@ import { React, useState } from "react";
 import { Header } from "../components/Header";
 import ReactFullpage from "@fullpage/react-fullpage";
 
-import { ReactComponent as GainWeight } from "../components/Group 70.svg";
-import Chart2030 from "../components/Seoul2030.js";
+import { ReactComponent as GainWeight } from "../image/Group 70.svg";
+import Chart2030 from "../components/Prolog/Seoul2030.js";
 import ChartKeyword from "../components/Prolog/CoronaWorkoutKeyword";
-import ChartDeliverPercentByAge from "../components/DeliverPercentByAge";
-import ChartGainWeightByAge from "../components/GainWeightByAge";
-import ChartDeliverIncrease from "../components/CoronaDeliver";
-import ChartDietRate from "../components/DietAttempt";
+import ChartDeliverPercentByAge from "../components/Prolog/DeliverPercentByAge";
+import ChartGainWeightByAge from "../components/Prolog/GainWeightByAge";
+import ChartDeliverIncrease from "../components/Prolog/CoronaDeliver";
+import ChartDietRate from "../components/Prolog/DietAttempt";
 
 const anchors = [
   "코로나와배달",

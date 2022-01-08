@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { ReactComponent as StarIcon } from "../image/star.svg";
-import { ReactComponent as BookmarkIcon } from "../image/bookmark-maked.svg";
-import { ReactComponent as BookmarkIconEmpty } from "../image/bookmark-empty.svg";
-import { postBookmark, deleteBookmark, getBookmarks } from "../actions/index";
+import { ReactComponent as StarIcon } from "../../image/star.svg";
+import { ReactComponent as BookmarkIcon } from "../../image/bookmark-maked.svg";
+import { ReactComponent as BookmarkIconEmpty } from "../../image/bookmark-empty.svg";
+import {
+  postBookmark,
+  deleteBookmark,
+  getBookmarks,
+} from "../../actions/index";
 
 export function DetailList({ detailData }) {
   const [click, setClick] = useState(false);
