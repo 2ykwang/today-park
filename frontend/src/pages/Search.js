@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { Header } from "../components/Header";
-import Map from "../components/Map";
+import Map from "../components/Search/Map";
 import ReactTooltip from "react-tooltip";
 import { ReactComponent as SearchIcon } from "../image/search.svg";
-import { SidebarMenu } from "../components/SidebarMenu";
+import { SidebarMenu } from "../components/Search/SidebarMenu";
 import { getParks } from "../actions/index";
-import { ParkList } from "../components/ParkList";
+import { ParkList } from "../components/Search/ParkList";
 
 function Search() {
+  const navigate = useNavigate();
   const [content, setContent] = useState("");
   const [parksResponse, setparksResponse] = useState({});
   const [parks, setParks] = useState([]);
@@ -51,6 +53,7 @@ function Search() {
     const response = await getParks("", searchValue, sort, 1, 5);
     setparksResponse(response);
     setParks(response.results);
+    navigate("/search/1");
   }
 
   //페이지네이션 생성, 클릭시 해당 페이지 이동
@@ -75,6 +78,21 @@ function Search() {
     }
     setPagination(paginations);
   }, [parksResponse]);
+
+  // pagination 클릭하면 해당 페이지로 가는 로직
+  const params = useParams();
+  let page = Number(params.page);
+  let page_count = 1;
+  let pagination_count = 0;
+
+  const paginations = pagination.filter((item) => {
+    pagination_count += 1;
+    if (pagination_count === 1) page_count = 1;
+    else if (pagination_count % 5 === 1) {
+      page_count += 1;
+    }
+    return page === page_count;
+  });
 
   return (
     <>
@@ -109,18 +127,19 @@ function Search() {
             <div className="parkContainer">
               {parksResponse && parklist}
               <div className="pagination">
-                <button>이전</button>
-                {pagination}
                 <button
                   onClick={() => {
-                    if (currentPage >= pagination.length - 4) return;
-                    else
-                      setHandlePagination((current) => {
-                        let newArr = [...current];
-                        newArr[0] += 5;
-                        newArr[1] += 5;
-                        return newArr;
-                      });
+                    if (page === 1) return;
+                    navigate(`/search/${page - 1}`);
+                  }}
+                >
+                  이전
+                </button>
+                {paginations}
+                <button
+                  onClick={() => {
+                    if (page === Math.ceil(pagination.length / 5)) return;
+                    navigate(`/search/${page + 1}`);
                   }}
                 >
                   다음

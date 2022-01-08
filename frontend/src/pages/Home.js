@@ -66,7 +66,7 @@ function Home() {
             <video muted autoPlay loop>
               <source src={video} type="video/mp4" />
             </video>
-            <BasicLink to="/search" className="findPark">
+            <BasicLink to="/search/1" className="findPark">
               공원 찾으러 가기 →
             </BasicLink>
           </div>
