@@ -1,9 +1,7 @@
 import React from "react";
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend} from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from "recharts";
 
-
-export function DefualtPieChart({data, colors}) {
-  
+export function DefaultPieChart({ data, colors }) {
   const RADIAN = Math.PI / 176;
   const renderCustomizedLabel = ({
     cx,
@@ -12,7 +10,7 @@ export function DefualtPieChart({data, colors}) {
     innerRadius,
     outerRadius,
     percent,
-    index
+    index,
   }) => {
     const radius = innerRadius + (outerRadius - innerRadius) * 0.4;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
@@ -35,7 +33,7 @@ export function DefualtPieChart({data, colors}) {
     top: "-3vh",
     left: "0",
     lineHeight: "1rem",
-    fontSize:"0.9rem",
+    fontSize: "0.9rem",
   };
 
   return (
@@ -64,5 +62,5 @@ export function DefualtPieChart({data, colors}) {
         />
       </PieChart>
     </ResponsiveContainer>
-  )
+  );
 }
