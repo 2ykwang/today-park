@@ -1,0 +1,143 @@
+.search {
+  background-color: #f5f5f5;
+  position: relative;
+}
+.search .sidebar-menu {
+  width: 80px;
+  height: 100%;
+  background-color: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-left: none;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+}
+.search .sidebar-menu.item {
+  box-sizing: border-box;
+  height: 80px;
+  border-top: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.search .sidebar-menu.item.clicked-item {
+  background-color: #5bc691;
+}
+.search .sidebar-menu.item:nth-child(2) {
+  top: 80px;
+}
+.search .sidebar-menu .icon {
+  fill: #757575;
+}
+.search .sidebar-menu .icon.clicked-icon {
+  fill: #fff;
+  background-color: #5bc691;
+}
+.search .sidebar {
+  width: 560px;
+  height: 100%;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  overflow-y: scroll;
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none
+}
+.search .sidebar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+.search .sidebar form {
+  border-bottom: 1px solid #e0e0e0;
+}
+.search .sidebar .searchIcon {
+  position: absolute;
+  top: 40px;
+  left: 134px;
+  z-index: 2;
+  fill: #5bc691;
+}
+.search .sidebar input[type="text"] {
+  width: 320px;
+  height: 48px;
+  border: 2px solid #5bc691;
+  border-radius: 9999px;
+  margin: 28px 0 28px 28px;
+  font-size: 16px;
+  padding-left: 60px;
+  box-sizing: border-box;
+}
+.search form select {
+  height: 48px;
+  color: #757575;
+  padding-right: 10px;
+  box-sizing: border-box;
+  font-size: 15px;
+  cursor: pointer;
+}
+.search .searchContainer {
+  margin-left: 80px;
+  margin-bottom: 100px;
+  /* border: 2px solid red; */
+}
+.search .parkContainer {
+  position: relative;
+}
+.search .park {
+  border-bottom: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+}
+.search .park .parklink {
+  padding: 28px 0 28px 48px;
+  display: block;
+}
+.search .park h3 {
+  font-weight: bold;
+  margin-bottom: 8px;
+  position: relative;
+}
+.search .park p {
+  margin-bottom: 5px;
+}
+.search .park h3 .rate {
+  display: inline-block;
+  margin-left: 34px;
+  position: relative;
+}
+.search .park h3 .rate .star {
+  position: absolute;
+  top: -5px;
+  left: -24px;
+  fill: #ffd464;
+}
+.search .bookmark {
+  position: absolute;
+  top: 28px;
+  right: 60px;
+  fill: #3a3a3a;
+  cursor: pointer;
+}
+.search .pagination {
+  width: 360px;
+  font-size: 15px;
+  text-align: center;
+  position: absolute;
+  bottom: -56px;
+  right: 60px;
+  /* border: 2px solid red; */
+}
+.search .pagination button {
+  border: none;
+  background-color: #fff;
+  margin-right: 4px;
+  color: #757575;
+}

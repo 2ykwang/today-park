@@ -1,7 +1,7 @@
 .mypage {
   width: 1000px;
   margin: 0 auto;
-  margin-top: 60px;
+  margin-top: 100px;
 }
 .mypage h2 {
   font-size: 20px;
@@ -90,13 +90,80 @@
   border: 2px solid #e0e0e0;
   margin-bottom: 20px;
   border-radius: 16px;
-  padding: 20px 20px;
+  padding: 12px 20px;
+  position: relative;
 }
 .mypage .reviewSide .review h4 {
+  display: flex;
   font-size: 17px;
   font-weight: bold;
-  margin-bottom: 12px;
+  margin-bottom: 4px;
+  position: relative;
+  align-items: center;
+  box-sizing: border-box;
+}
+.mypage .reviewSide .review p.rate {
+  padding-top: 6px;
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
 }
 .mypage .reviewSide .review p {
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+}
+.mypage .review .btns {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+}
+.mypage .review .btns button {
+  border: none;
+  text-decoration: underline;
+  margin-left: 1px;
+  background-color: #fff;
+  color: #757575;
+}
+.mypage .createReview {
+  padding-top: 40px;
+  position: relative;
+}
+.mypage .createReview .rating {
+  border: none;
+  position: absolute;
+  top: 4px;
+  left: 0px;
+}
+.mypage .createReview .rating .star {
+  fill: #bdbdbd;
+  cursor: pointer;
+}
+.mypage .createReview .rating .star.clicked {
+  fill: #ffd464;
+  cursor: pointer;
+}
+.mypage .createReview .rating .star:hover {
+  opacity: 0.7;
+}
+.mypage .parkDetailContainer form.createReview {
+  border-bottom: none;
+}
+.mypage .createReview textarea {
+  width: 360px;
+  height: 100px;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+.mypage .createReview button {
+  width: 84px;
+  height: 28px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  background-color: #5bc691;
+  color: #fff;
+}
+.mypage .createReview .reviews {
+  border: 2px solid;
 }

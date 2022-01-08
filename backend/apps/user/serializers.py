@@ -1,4 +1,4 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, password_validation
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 
@@ -13,6 +13,10 @@ class UserRegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
         required=True, style={"input_type": "password"}, label="비밀번호", write_only=True
     )
+
+    def validate_password(self, value):
+        password_validation.validate_password(value, self.instance)
+        return value
 
     def create(self, validated_data):
         password = validated_data["password"]
@@ -95,3 +99,57 @@ class UserResetPasswordSerializer(serializers.Serializer):
         # password 형식 체크
         validate_password(data["password"])
         return data
+
+
+class UserCheckAvailableSerializer(serializers.ModelSerializer):
+    """
+    유저 유효성 체크
+
+    아이디, 닉네임이 가입가능한 값인지 유효성을 체크합니다.
+    """
+
+    class Meta:
+        model = get_user_model()
+        fields = ["username", "email"]
+        extra_kwargs = {
+            "username": {"required": False, "write_only": True},
+            "email": {"required": False, "write_only": True},
+        }
+
+
+# simplejwt drf-yasg integration
+class TokenObtainPairResponseSerializer(serializers.Serializer):
+    access = serializers.CharField()
+    refresh = serializers.CharField()
+
+    def create(self, validated_data):
+        raise NotImplementedError()
+
+    def update(self, instance, validated_data):
+        raise NotImplementedError()
+
+
+class TokenRefreshResponseSerializer(serializers.Serializer):
+    access = serializers.CharField()
+
+    def create(self, validated_data):
+        raise NotImplementedError()
+
+    def update(self, instance, validated_data):
+        raise NotImplementedError()
+
+
+class TokenVerifyResponseSerializer(serializers.Serializer):
+    def create(self, validated_data):
+        raise NotImplementedError()
+
+    def update(self, instance, validated_data):
+        raise NotImplementedError()
+
+
+class TokenBlacklistResponseSerializer(serializers.Serializer):
+    def create(self, validated_data):
+        raise NotImplementedError()
+
+    def update(self, instance, validated_data):
+        raise NotImplementedError()

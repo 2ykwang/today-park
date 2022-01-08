@@ -10,15 +10,18 @@ body {
 
 /* SECTION */
 section {
+  margin-top: 80px;
   position: relative;
+  box-sizing: border-box;
 }
-section .inner {
+
+/* section .inner {
   border: 2px solid red;
   width: 980px;
   margin: 0 auto;
   position: relative;
   box-sizing: border-box;
-}
+} */
 
 /* BTN */
 /* .btn{
@@ -54,4 +57,21 @@ input[type="text"] {
   height: 40px;
   border: 1px solid #e0e0e0;
   margin-left: 4px;
+}
+button {
+  font-family: "Elice Digital Baeum", sans-serif;
+  cursor: pointer;
+}
+select {
+  border: none;
+  font-size: 16px;
+  font-family: "Elice Digital Baeum", sans-serif;
+  padding: 12px;
+  box-sizing: border-box;
+}
+textarea {
+  font-family: "Elice Digital Baeum", sans-serif;
+  padding: 12px;
+  box-sizing: border-box;
+  font-size: 15px;
 }

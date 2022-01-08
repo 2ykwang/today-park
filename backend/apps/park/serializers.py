@@ -1,10 +1,14 @@
-from django.db.models import Sum, fields
+from django.db.models import Sum
 from rest_framework import serializers
 
-from .models import Equipment, Park, ParkEquipment
+from .models import Equipment, Park, ParkEquipment, Review
 
 
 class EquipmentSerializer(serializers.ModelSerializer):
+    """
+    공원 시설
+    """
+
     class Meta:
         model = Equipment
         fields = ["equipment_name", "equipment_type"]
@@ -18,30 +22,28 @@ class ParkEquipmentSerializer(serializers.ModelSerializer):
         fields = ["equipment_name", "quantity"]
 
 
-# TODO: 코드 리팩토링 가능할지
 class ParkSerializer(serializers.ModelSerializer):
+    """
+    공원 정보
+    """
+
     total_equipments = serializers.SerializerMethodField()
-    equipments = serializers.SerializerMethodField()
-    eq_list = EquipmentSerializer(many=True, read_only=True)
+    equipments = ParkEquipmentSerializer(source="park_equipments", many=True)
     avg_score = serializers.SerializerMethodField()
     total_reviews = serializers.SerializerMethodField()
 
-    def get_total_equipments(self, obj):
-        # 참고: https://docs.djangoproject.com/en/4.0/ref/models/database-functions/#coalesce
+    # MEMO: SerializerMethodField를 구현한 경우 메소드에
+    # 반환 타입힌트를 명시해야 swagger 에서 정상적으로 타입이 표시됩니다
+    def get_total_equipments(self, obj) -> int:
         sum_of_quantity = ParkEquipment.objects.filter(park_id=obj.id).aggregate(
             Sum("quantity", default=0)
         )["quantity__sum"]
         return sum_of_quantity
 
-    def get_equipments(self, obj):
-        # 참고: https://gaussian37.github.io/python-rest-nested-serializer/
-        park_equipment = ParkEquipment.objects.filter(park_id=obj.id)
-        return ParkEquipmentSerializer(park_equipment, many=True).data
-
-    def get_avg_score(self, obj):
+    def get_avg_score(self, obj) -> float:
         return obj.average_rating
 
-    def get_total_reviews(self, obj):
+    def get_total_reviews(self, obj) -> float:
         return obj.count_reviews
 
     class Meta:
@@ -59,23 +61,33 @@ class ParkSerializer(serializers.ModelSerializer):
             "park_image",
             "total_equipments",
             "equipments",
-            "eq_list",
             "total_reviews",
             "avg_score",
         ]
 
 
-class ParkRequestSerializer(serializers.Serializer):
-    guId = serializers.CharField(help_text="구 이름(required)")
-    keyword = serializers.CharField(help_text="검색어(optional)")
-    sort = serializers.ChoiceField(
-        help_text="정렬방식(optional)",
-        choices=(
-            "score_asc",
-            "score_desc",
-            "review_more",
-            "review_less",
-            "dict_asc",
-            "dict_desc",
-        ),
-    )
+class ParkReviewSerializer(serializers.ModelSerializer):
+
+    """
+    공원 리뷰 조회, 생성, 수정
+    """
+
+    username = serializers.CharField(source="user_id.username", read_only=True)
+    parkname = serializers.CharField(source="park_id.park_name", read_only=True)
+
+    class Meta:
+        model = Review
+        fields = [
+            "id",
+            "username",
+            "park_id",
+            "parkname",
+            "score",
+            "content",
+            "created_at",
+        ]
+        read_only_fields = ("id",)
+        extra_kwargs = {
+            # "user_id": {"write_only": True},
+            # "park_id": {"write_only": True},
+        }

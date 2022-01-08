@@ -1,4 +1,4 @@
-version: "3"
+version: "3.2"
 
 # 개발 환경
 
@@ -12,9 +12,15 @@ services:
 
   # FRONTEND
   client:
-    command: "npm run start"
-    environment: 
+    command: "yarn start"
+    environment:
       CHOKIDAR_USEPOLLING: "true"
+      NODE_ENV: "development"
+      REACT_APP_BASE_URL: "http://localhost"
+      REACT_APP_USE_SSL: "false"
+    volumes:
+      - ./frontend/src:/srv/client/src
+      - ./frontend/public:/srv/client/public
 
   # WEB SERVER
   nginx:
@@ -26,7 +32,6 @@ services:
   # DATABASE ( 개발 환경에서만 사용)
   database:
     image: mysql:8.0
-    container_name: mysql
     restart: unless-stopped
     ports:
       - "13306:3306"

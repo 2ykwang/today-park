@@ -1,61 +1,101 @@
-.SignUpContainer{
-    width: 540px;
-    height: 540px;
-    border: 1px solid #e0e0e0;
-    box-sizing: border-box;
+.SignUpContainer {
+  display: flex;
+  margin: 60px auto 0 auto;
+  justify-content: center;
+  background-color: white;
 }
-.SignUpContainer button{
-    height: 40px;
-    background-color: #47C690;
-    border: none;
-    border-radius: 9999px;
-    color: #fff;
+.MiniContainer {
+  position: relative;
+  width: 450px;
+  height: 540px;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
 }
-.SignUpContainer h1{
-    font-size: 20px;
-    font-weight: bold;
-    padding: 40px 0 40px 40px;
-    /* border: 2px solid blue; */
+.MiniContainer .runIcon {
+  position: absolute;
+  top: 50px;
+  left: 20%;
+  width: 40%;
+  z-index: 2;
+  animation: moveRight 0.5s infinite alternate;
 }
-.SignUpContainer form{
-    /* border: 2px solid orange; */
-    margin: 0 40px 0 40px;
+@keyframes moveRight {
+  from {
+    transform: rotateZ(-2deg);
+  }
+  to {
+    transform: rotateZ(2deg);
+  }
 }
-.SignUpContainer .signUpItem .checkBtn{
-    width: 90px;
-    margin-left: 12px;
-    cursor: pointer;
+.MiniContainer .background {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-.SignUpContainer .signUpItem{
-    display: flex;
-    /* border: 2px solid cyan; */
-    align-items: center;
+.MiniContainer .ImagePhrase {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 40px;
+  color: white;
 }
-.SignUpContainer .list{
-    width: 6px;
-    height: 6px;
-    background-color: #e0e0e0;
-    margin-right: 8px;
-    border-radius: 9999px;
+.MiniContainer button {
+  height: 40px;
+  background-color: #47c690;
+  border: none;
+  border-radius: 9999px;
+  color: #fff;
 }
-.SignUpContainer .text{
-    width: 100px;
+.MiniContainer h1 {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 40px 0 40px 40px;
+  /* border: 2px solid blue; */
 }
-.SignUpContainer input{
-    width: 220px;
-    height: 44px;
-    border: 1px solid #e0e0e0;
+.MiniContainer form {
+  /* border: 2px solid orange; */
+  margin: 0 40px 0 40px;
 }
-.SignUpContainer .caution{
-    margin: 12px 0 28px 115px;
-    color: #757575;
+.MiniContainer .signUpItem .checkBtn {
+  width: 90px;
+  margin-left: 12px;
+  cursor: pointer;
 }
-.SignUpContainer .signUpBtn-container{
-    text-align: center;
-    margin-top: 28px;
+.MiniContainer .signUpItem {
+  display: flex;
+  /* border: 2px solid cyan; */
+  align-items: center;
 }
-.SignUpContainer .signUpBtn{
-    width: 120px;
-    height: 48px;
-    font-size: 16px;
+.MiniContainer .list {
+  width: 6px;
+  height: 6px;
+  background-color: #e0e0e0;
+  margin-right: 8px;
+  border-radius: 9999px;
+}
+.MiniContainer .text {
+  width: 100px;
+}
+.MiniContainer input {
+  width: 220px;
+  height: 44px;
+  border: 1px solid #e0e0e0;
+}
+.MiniContainer .caution {
+  margin: 6px 0 12px 115px;
+  color: #f5a0a0;
+}
+.MiniContainer .signUpBtn-container {
+  position: absolute;
+  bottom: 10%;
+  transform: translateX(100%);
+  text-align: center;
+}
+.MiniContainer .signUpBtn {
+  width: 120px;
+  height: 48px;
+  font-size: 16px;
 }

@@ -72,15 +72,17 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework_simplejwt.token_blacklist",  # token blacklist
+    "corsheaders",
     "drf_yasg",
 ]
 
-LOCAL_APPS = ["apps.user", "apps.core", "apps.park", "apps.review", "apps.bookmark"]
+LOCAL_APPS = ["apps.user", "apps.core", "apps.park", "apps.bookmark"]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # ---------------------------------------------------------------------
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -171,17 +173,21 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # ---------------------------------------------------------------------
 # Third-Party Settings
 
+# DJANGO_REST_FRAMEWORK 설정
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
+    "EXCEPTION_HANDLER": "apps.core.exceptions.custom_exception_handler",
 }
+# 후행 슬래시 비활성화
+APPEND_SLASH = False
 
 # DRF simplejwt 설정
 # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(hours=1),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=12),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
     "ROTATE_REFRESH_TOKENS": False,
     "BLACKLIST_AFTER_ROTATION": True,
     "ALGORITHM": "HS256",
@@ -211,3 +217,7 @@ SWAGGER_SETTINGS = {
         }
     },
 }
+
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True

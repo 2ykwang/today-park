@@ -1,11 +1,11 @@
-'''
+"""
 equipment master Data ETL
-'''
-from utill import *
-from core import *
+"""
+import re
 
 import pandas as pd
-import re
+from core import *
+from utill import *
 
 # import os
 # from sqlalcemy import create_engine
@@ -13,77 +13,85 @@ import re
 # engine = create_engine('mysql+pymysql://root:root@127.0.0.1:3306/test_db')
 # conn = engine.connect()
 
-class Equipment_Gwanak() :
+
+class Equipment_Gwanak:
 
     # connection info, filePath
-    def __init__(self, engine, filePath) :
+    def __init__(self, engine, file_path, table_name):
         self.engine = engine
-        self.filePath = filePath
+        self.file_path = file_path
+        self.table_name = table_name
         self.set_equip = set()
 
-    #운동기구 나누기
-    def split_re_for_gwanak(self, x) :
-    
-        #([ㄱ-ㅎㅏ-ㅣ-가-힣\s\(\)0-9]+)\S?(\([0-9]개\)) <-- 운동기구 수량 구할떄 필요 여기서 필요없음
+    # 운동기구 나누기
+    def split_re_for_gwanak(self, x):
 
-        #워킹머신 (4개) 처럼 수량이 적혀있는 entity patten
+        # ([ㄱ-ㅎㅏ-ㅣ-가-힣\s\(\)0-9]+)\S?(\([0-9]개\)) <-- 운동기구 수량 구할떄 필요 여기서 필요없음
+
+        # 워킹머신 (4개) 처럼 수량이 적혀있는 entity patten
         # return 워킹머신
         # 개수가 적혀져있는 머신들도 머신+머신이 있을수 있기때문에 패턴 변경
         # p1 = re.compile('([ㄱ-ㅎㅏ-ㅣ-가-힣\s\(\)0-9]+)(?=\([0-9]개\))')
-        p1 = re.compile('([ㄱ-ㅎㅏ-ㅣ-가-힣\s0-9\(\)]+)[\+]?\s?([ㄱ-ㅎㅏ-ㅣ-가-힣\s0-9\(\)]+)?(?=\([0-9]개\))')
-        #p1 외 모든 entity patten
+        p1 = re.compile(
+            "([ㄱ-ㅎㅏ-ㅣ-가-힣\s0-9\(\)]+)[\+]?\s?([ㄱ-ㅎㅏ-ㅣ-가-힣\s0-9\(\)]+)?(?=\([0-9]개\))"
+        )
+        # p1 외 모든 entity patten
         # 워킹머신 , 워킹머신+사이클  등등
-        p2 = re.compile('([ㄱ-ㅎㅏ-ㅣ-가-힣\s0-9\(\)]+)[\+]?\s?([ㄱ-ㅎㅏ-ㅣ-가-힣\s0-9\(\)]+)?')
+        p2 = re.compile("([ㄱ-ㅎㅏ-ㅣ-가-힣\s0-9\(\)]+)[\+]?\s?([ㄱ-ㅎㅏ-ㅣ-가-힣\s0-9\(\)]+)?")
 
-        spl = x.split(',')
-        for s in spl :
-            # p1의 패턴 매칭 
+        spl = x.split(",")
+        for s in spl:
+            # p1의 패턴 매칭
             regexStr = p1.match(s)
 
-            # 매칭된 패턴이 없으면 
-            if regexStr is None :
+            # 매칭된 패턴이 없으면
+            if regexStr is None:
                 regexStr = p2.match(s)
                 # 0 : 원천 text
                 # 1~ : 그룹 1~
                 # p2 저장
                 self.set_equip.add(str(regexStr.group(1)).strip())
                 # + 로 두개의 운동기가 엮이는 경우가 있음 그런 경우
-                if regexStr.group(2) is not None :
+                if regexStr.group(2) is not None:
                     self.set_equip.add(str(regexStr.group(2)).strip())
-            else :
-                #p1저장
+            else:
+                # p1저장
                 self.set_equip.add(str(regexStr.group(1)).strip())
-                if regexStr.group(2) is not None :
+                if regexStr.group(2) is not None:
                     self.set_equip.add(str(regexStr.group(2)).strip())
 
-    def etl_data(self) :
+    def etl_data(self):
 
-        #운동기구 master Data 넣기
-        df = pd.read_csv(self.filePath, encoding='cp949')
+        # 운동기구 master Data 넣기
+        df = pd.read_csv(self.file_path, encoding="cp949")
 
-        df_park = df[['설치기구종류','운동기구 총계']]
-        df_park['설치기구종류'].apply(self.split_re_for_gwanak)
+        df_park = df[["설치기구종류", "운동기구 총계"]]
+        df_park["설치기구종류"].apply(self.split_re_for_gwanak)
 
-        lst_equip = {'before_equipment_name': list(self.set_equip)}
+        lst_equip = {"before_equipment_name": list(self.set_equip)}
 
-        #운동기구 list dataframe
+        # 운동기구 list dataframe
         df_equip = pd.DataFrame(data=lst_equip)
 
-        df_equip['equipment_name'] = df_equip['before_equipment_name'].replace(fitness_equipment)
+        df_equip["equipment_name"] = df_equip["before_equipment_name"].replace(
+            fitness_equipment
+        )
 
         # 상체, 하체, 기타 나누기
-        df_equip['equipment_type'] = df_equip['equipment_name'].apply(lambda x : weight_type[x])
+        df_equip["equipment_type"] = df_equip["equipment_name"].apply(
+            lambda x: weight_type[x]
+        )
 
-        #columns 맞춰주기
-        #첫번째 컬럼 삭제
-        df_equip.drop(columns=['before_equipment_name'], inplace=True)
+        # columns 맞춰주기
+        # 첫번째 컬럼 삭제
+        df_equip.drop(columns=["before_equipment_name"], inplace=True)
 
-        #중복제거
-        df_equip = df_equip.drop_duplicates('equipment_name').reset_index(drop=True)
+        # 중복제거
+        df_equip = df_equip.drop_duplicates("equipment_name").reset_index(drop=True)
 
         # DB 처리
-        return load_data(self.engine, 'equipment','equipment_name', df_equip)
-        
+        return load_data(self.engine, self.table_name, "equipment_name", df_equip)
+
         # try :
         #     conn = self.engine.connect()
 
@@ -98,7 +106,7 @@ class Equipment_Gwanak() :
         #     df_concat = pd.concat([df_sql, df_transforma]).reset_index(drop=True)
 
         #     # equipment_name 그룹핑
-        #     df_grp = df_concat.groupby(by='equipment_name') 
+        #     df_grp = df_concat.groupby(by='equipment_name')
         #     # 그룹핑 결과 dict 만들기
         #     df_eq = df_grp.groups
 
@@ -117,3 +125,6 @@ class Equipment_Gwanak() :
         #     conn.close()
 
         # return None,True
+
+
+# flake8: noqa

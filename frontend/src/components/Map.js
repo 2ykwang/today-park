@@ -1,121 +1,135 @@
-import React, { useState } from "react";
-import { Header } from "./Header";
+import React from "react";
 import {
   ComposableMap,
+  ZoomableGroup,
   Geographies,
   Geography,
-  ZoomableGroup,
+  Marker,
+  Markers,
 } from "react-simple-maps";
-import { Spring, config } from "react-spring";
-import { geoCentroid } from "d3-geo";
-
-// 관악 지도 데이터
 import GwanakMap from "../json/gwanak.json";
-// 서울 전체 지도 데이터
-import SeoulMap from "../json/seoul.json";
-/*
-  "code": "구역 코드",
-  "name": "구역 이름",
-  "name_eng": "구역 영문이름",
-*/
 
-// 지도 캔버스 사이즈
-const mapWidth = 600;
-const mapHeight = 300;
-
-// 구역을 클릭했을 때 줌 배율
-const MAX_ZOOM = 5;
-
-// 맨 처음 지도가 렌더링 됐을때 센터 값
-const DEFAULT_COORDINATION = [126.98820917938465, 37.55105648528907];
-
+//const geoUrl ="https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
+const geoUrl = GwanakMap;
+const markerOff = 2;
+const markers = [
+  {
+    markerOffset: markerOff,
+    name: "도림천",
+    coordinates: [126.9474365, 37.45922056],
+  },
+  {
+    markerOffset: markerOff,
+    name: "관악산 야외식물원",
+    coordinates: [126.948224, 37.46117532],
+  },
+  {
+    markerOffset: markerOff,
+    name: "관악산 샘말공원",
+    coordinates: [126.9384872, 37.46490032],
+  },
+  {
+    markerOffset: markerOff,
+    name: "맨발공원",
+    coordinates: [126.944350815504, 37.4665302234076],
+  },
+  {
+    markerOffset: markerOff,
+    name: "제2구민운동장",
+    coordinates: [126.933653774099, 37.4581915973847],
+  },
+];
 const Map = ({ setTooltipContent }) => {
-  //
-  const [map, setMap] = useState(SeoulMap);
-  // 줌 상태인지 check
-  const [isZoom, setIsZoom] = useState(false);
-  // FIXME: 현재 작동 안됨.
-  const [zoomLevel, setZoomLevel] = useState(1);
-  // 지도 중심 좌표
-  const [center, setCenter] = useState(DEFAULT_COORDINATION);
-
   return (
-    <>
-      <Header />
-      <div className="jido">
-        <Spring
-          from={{ zoom: 1 }}
-          to={{ zoom: zoomLevel }}
-          config={config.slow}
+    <div>
+      {/*
+      width, height = 캔버스 사이즈
+      projection
+      projectionConfig - > 그대로 두면 됨
+      */}
+      <ComposableMap
+        width={800}
+        height={500}
+        projection="geoMercator"
+        projectionConfig={{ rotate: [-60, 0, 5], scale: 35000 }}
+        data-tip=""
+      >
+        {/* 
+            줌 컴포넌트 ( 확대 축소 ) 
+            center = 중심좌표
+            zoom = 확대
+          */}
+        <ZoomableGroup
+          center={[126.93213889807498, 37.46122474964353]}
+          zoom={7}
         >
-          {(styles) => (
-            <ComposableMap
-              width={mapWidth}
-              height={mapHeight}
-              projection="geoMercator"
-              projectionConfig={{ rotate: [-60, 0, 5], scale: 35000 }}
-              data-tip=""
-            >
-              <ZoomableGroup center={center} zoom={styles.zoom}>
-                <Geographies geography={map}>
-                  {({ geographies }) =>
-                    geographies.map((geo, i) => {
-                      return (
-                        <Geography
-                          key={geo.rsmKey}
-                          geography={geo}
-                          style={{
-                            default: {
-                              fill: "#fff",
-                              stroke: "#aaa",
-                              strokeWidth: 0.15,
-                              outline: "none",
-                            },
-                            hover: {
-                              fill: "#B1D6AE",
-                              outline: "none",
-                            },
-                            pressed: {
-                              fill: "fff",
-                              outline: "#333",
-                            },
-                          }}
-                          onMouseEnter={() => {
-                            const { name, code } = geo.properties;
-                            setTooltipContent(`${name} : ${code}`);
-                          }}
-                          onMouseLeave={() => {
-                            setTooltipContent("");
-                          }}
-                          onClick={() => {
-                            // 관악 code
-                            if (!isZoom && geo.properties.code !== "11210")
-                              return;
-
-                            if (!isZoom) {
-                              const centroid = geoCentroid(geo);
-                              setMap(GwanakMap);
-                              setCenter(centroid);
-                              setIsZoom(!isZoom);
-                              setZoomLevel(MAX_ZOOM);
-                            } else {
-                              setIsZoom(!isZoom);
-                              setMap(SeoulMap);
-                              setCenter(DEFAULT_COORDINATION);
-                              setZoomLevel(1);
-                            }
-                          }}
-                        />
-                      );
-                    })
-                  }
-                </Geographies>
-              </ZoomableGroup>
-            </ComposableMap>
-          )}
-        </Spring>
-      </div>
-    </>
+          <Geographies geography={geoUrl}>
+            {({ geographies }) =>
+              geographies.map((geo) => (
+                <Geography
+                  onMouseEnter={() => {
+                    const { name, code } = geo.properties;
+                    setTooltipContent(`${name} : ${code}`);
+                  }}
+                  onMouseLeave={() => {
+                    setTooltipContent("");
+                  }}
+                  key={geo.rsmKey}
+                  geography={geo}
+                  style={{
+                    default: {
+                      fill: "#fff",
+                      stroke: "#aaa",
+                      strokeWidth: 0.15,
+                      outline: "none",
+                    },
+                    hover: {
+                      fill: "#B1D6AE",
+                      outline: "none",
+                    },
+                    pressed: {
+                      fill: "fff",
+                      outline: "#333",
+                    },
+                  }}
+                />
+              ))
+            }
+          </Geographies>
+          {markers.map(({ name, coordinates, markerOffset }, i) => {
+            return (
+              <Marker key={i} coordinates={coordinates}>
+                <g
+                  fill="none"
+                  stroke="#5BC691"
+                  strokeWidth="1"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  transform="translate(-12, 5)"
+                >
+                  <circle cx="15" cy="-2" r={3 / 35000} scale="0.001" />
+                  <svg viewBox="0 0 645.698 136.753">
+                    <path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z" />
+                  </svg>
+                </g>
+                <text
+                  textAnchor="middle"
+                  y={markerOffset}
+                  x={markerOff}
+                  style={{
+                    fontFamily: "system-ui",
+                    fill: "#5D5A6D",
+                    fontSize: 1,
+                  }}
+                >
+                  {name}
+                </text>
+              </Marker>
+            );
+          })}
+        </ZoomableGroup>
+      </ComposableMap>
+    </div>
   );
 };
 
