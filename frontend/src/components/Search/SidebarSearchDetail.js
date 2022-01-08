@@ -10,6 +10,7 @@ import { DetailList } from "./DetailList";
 import { SimpleMap } from "./GoolgleMap";
 import { Review } from "./Review";
 import { CreateReview } from "./CreateReview";
+import Cookies from "js-cookie";
 
 export function SidebarSearchDetail() {
   const [content, setContent] = useState("");
@@ -83,7 +84,9 @@ export function SidebarSearchDetail() {
             <div className="parkDetail">{detailData && detailList}</div>
             <div className="totalReviews">
               <h4>리뷰({detailData && detailData.total_reviews})</h4>
-              <CreateReview parkId={id} type={"POST"} />
+              {Cookies.get("username") && (
+                <CreateReview parkId={id} type={"POST"} />
+              )}
             </div>
             <div className="reviews">
               {reviewList &&

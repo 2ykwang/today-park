@@ -58,7 +58,6 @@ function LoginHeader() {
 
 function LogoutHeader() {
   const dispatch = useDispatch();
-  const loginStore = useSelector((state) => state.login);
   function handleLogout() {
     dispatch(getLoginData({ email: "", password: "" }));
     // 쿠키 삭제
@@ -86,7 +85,6 @@ function LogoutHeader() {
 }
 
 export function Header() {
-  const loginStore = useSelector((state) => state.login);
   const [scrollPosition, setScrollPosition] = useState(0);
   const updateScroll = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);

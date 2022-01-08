@@ -7,8 +7,6 @@ export function CreateReview({ parkId, reviewId, type, score, content }) {
   const [rating, setRating] = useState(0);
   const [reviewContent, setreviewContent] = useState("");
 
-  // console.log(parkId,reviewId,type,)
-
   // 클릭시 별점 등록
   function handleStarClick(e, idx) {
     e.preventDefault();
@@ -34,14 +32,20 @@ export function CreateReview({ parkId, reviewId, type, score, content }) {
 
   // 리뷰 POST 요청
   async function handleCreateReview() {
-    console.log(parkId, rating, reviewContent);
-    let response = await postReviews(parkId, rating, reviewContent);
-    window.location.replace(`/search/${parkId}`);
+    const response = await postReviews(parkId, rating, reviewContent);
+    window.location.replace(`/search/detail/${parkId}`);
   }
 
   // 리뷰 PUT 요청
   async function handleUpdateReview() {
-    let response = await updateReview(parkId, reviewId, rating, reviewContent);
+    const response = await updateReview(
+      parkId,
+      reviewId,
+      rating,
+      reviewContent
+    );
+    window.location.replace("/mypage");
+    return response;
   }
 
   return (
@@ -89,13 +93,12 @@ export function CreateReview({ parkId, reviewId, type, score, content }) {
         <br />
         <button
           type="submit"
-          onClick={(e) => {
+          onClick={async (e) => {
             e.preventDefault();
             if (type === "POST") {
-              handleCreateReview();
+              await handleCreateReview();
             } else if (type === "PUT") {
-              handleUpdateReview();
-              window.location.replace("/mypage");
+              await handleUpdateReview();
             }
           }}
         >

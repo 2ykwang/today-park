@@ -4,15 +4,12 @@ import Map from "./Map";
 import ReactTooltip from "react-tooltip";
 import { SidebarMenu } from "./SidebarMenu";
 import { ReactComponent as StarIcon } from "../../image/star.svg";
-import { ReactComponent as BookmarkIconEmpty } from "../../image/bookmark-empty.svg";
-import { ReactComponent as BookmarkIcon } from "../../image/bookmark-maked.svg";
 import { ReactComponent as FlagIcon } from "../../image/flag.svg";
 import { BasicLink } from "../BasicLink";
 import { getBookmarks } from "../../actions/index";
 
 export function SidebarBookmark() {
   const [content, setContent] = useState("");
-  // const [clicked, setClicked] = useState(true);
   const [bookmarks, setBookmarks] = useState([]);
 
   useEffect(() => {
@@ -22,12 +19,6 @@ export function SidebarBookmark() {
     }
     getBookmarklist();
   }, []);
-
-  // TO DO
-  // function clickBookmark() {
-  //   if (clicked) setClicked(false);
-  //   else setClicked(true);
-  // }
 
   let bookmarkList =
     bookmarks &&

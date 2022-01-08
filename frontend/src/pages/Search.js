@@ -17,8 +17,6 @@ function Search() {
   const [searchValue, setSearchValue] = useState("");
   const [sort, setSort] = useState("");
   const [pagination, setPagination] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [handlePageination, setHandlePagination] = useState([0, 5]);
 
   // 마운트시, 공원 정보 GET 요청 1페이지에 있는 공원 리스트 가져오기
   useEffect(() => {
@@ -67,7 +65,6 @@ function Search() {
             const page = Number(e.target.innerText);
             const response = await getParks("", "", "", page, 5);
             setParks(response.results);
-            setCurrentPage(page);
             var location = document.querySelector("body").offsetTop;
             window.scrollTo({ top: location, behavior: "auto" });
           }}

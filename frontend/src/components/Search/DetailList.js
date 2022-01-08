@@ -7,6 +7,7 @@ import {
   deleteBookmark,
   getBookmarks,
 } from "../../actions/index";
+import Cookies from "js-cookie";
 
 export function DetailList({ detailData, nearbyParks }) {
   const [click, setClick] = useState(false);
@@ -27,7 +28,8 @@ export function DetailList({ detailData, nearbyParks }) {
   useEffect(() => {
     async function getbookmarks() {
       const response = await getBookmarks();
-      detailData &&
+      Cookies.get("username") &&
+        detailData &&
         response.forEach((item) => {
           if (item.parks.id === detailData.id) {
             setClick(true);
@@ -58,21 +60,22 @@ export function DetailList({ detailData, nearbyParks }) {
               {detailData.avg_score}
             </div>
           </h3>
-          {click ? (
-            <BookmarkIcon
-              className="bookmark"
-              width="24"
-              height="24"
-              onClick={deletebookmark}
-            />
-          ) : (
-            <BookmarkIconEmpty
-              className="bookmark"
-              width="24"
-              height="24"
-              onClick={addbookmark}
-            />
-          )}
+          {Cookies.get("username") &&
+            (click ? (
+              <BookmarkIcon
+                className="bookmark"
+                width="24"
+                height="24"
+                onClick={deletebookmark}
+              />
+            ) : (
+              <BookmarkIconEmpty
+                className="bookmark"
+                width="24"
+                height="24"
+                onClick={addbookmark}
+              />
+            ))}
           <p>{detailData.full_address}</p>
         </div>
         <div className="equipments">

@@ -25,7 +25,6 @@ const ProfileImage = styled.img`
 
 function Mypage() {
   const dispatch = useDispatch();
-  // const loginStore = useSelector((state) => state.login);
 
   const [fields, setFields] = useState({
     username: Cookies.get("username"),
@@ -38,7 +37,6 @@ function Mypage() {
     password: false,
     review: false,
   });
-
   const [reviewList, setReviewList] = useState([]);
   const [clickedReviewIdx, setClickedReviewIdx] = useState(0);
   const [profileImage, setProfileImage] = useState("");
@@ -48,7 +46,6 @@ function Mypage() {
   useEffect(() => {
     async function getProfileImage() {
       const response = await getUserInfo();
-      console.log(response.data.profile_image);
       if (response.data.profile_image)
         setProfileImage(response.data.profile_image);
       else setProfileImage(defaultProfile);
@@ -57,7 +54,6 @@ function Mypage() {
     async function getReviews() {
       const response = await onlyUserReview();
       setReviewList(response.results);
-      console.log(response.results);
     }
     getReviews();
     getProfileImage();
@@ -228,11 +224,6 @@ function Mypage() {
                   </>
                 )}
               </p>
-              {/* <div className="sns">
-                <h3>소셜 계정 연동하기</h3>
-                <button>네이버</button>
-                <button className="kakao">카카오</button>
-              </div> */}
             </div>
           </div>
           <div className="reviewSide">
@@ -267,6 +258,7 @@ function Mypage() {
                       <div className="btns">
                         <button
                           onClick={() => {
+                            toggleEditField("review", true);
                             setClickedReviewIdx(index);
                           }}
                         >
