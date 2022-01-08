@@ -10,7 +10,7 @@ from rest_framework_simplejwt.tokens import AccessToken
 
 from .models import Park, Review
 from .pagination import ParkListPagination
-from .serializers import ParkReviewSerializer, ParkSerializer
+from .serializers import ParkNearbyListSerializer, ParkReviewSerializer, ParkSerializer
 
 
 class ParkListView(APIView, ParkListPagination):
@@ -150,7 +150,8 @@ class ParkReviewListView(APIView):
 
         공원(id)에 대한 리뷰 요청 - 삭제된 리뷰 제외
         """
-        # review = Review.objects.filter(Q(park_id=park_id) & Q(is_deleted=False)).order_by('-created_at')
+        # review = Review.objects.filter(Q(park_id=park_id) &
+        # Q(is_deleted=False)).order_by('-created_at')
         # deletedmanager 가 filter 해준결과를 보여줌
         review = Review.objects.filter(park_id=park_id).order_by("-created_at")
         serializer = ParkReviewSerializer(review, many=True)
@@ -188,6 +189,36 @@ class ParkReviewListView(APIView):
         review.save()
 
         return Response({"detail": "리뷰가 생성되었습니다."}, status=status.HTTP_201_CREATED)
+
+
+class ParkNearbyListView(APIView):
+
+    permission_classes = [permissions.AllowAny]
+
+    park_id = openapi.Parameter(
+        "park_id",
+        openapi.IN_QUERY,
+        description="공원ID",
+        required=True,
+        type=openapi.TYPE_STRING,
+    )
+
+    @swagger_auto_schema(
+        manual_parameters=[park_id],
+        responses={
+            status.HTTP_200_OK: ParkNearbyListSerializer,
+            status.HTTP_404_NOT_FOUND: "존재하지 않는 공원",
+        },
+    )
+    def get(self, request, park_id, format=None):
+        """
+        공원 인접 공원 조회
+
+        기준 공원에서 인접한 공원 목록을 표시합니다.
+        """
+        park = get_object_or_404(Park, pk=park_id)
+        serializer = ParkNearbyListSerializer(park)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class ParkReviewView(APIView):
