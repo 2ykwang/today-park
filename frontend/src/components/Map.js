@@ -21,7 +21,7 @@ const Map = ({ setTooltipContent, parks }) => {
     };
   });
   return (
-    <div>
+    <div className="mapContainer">
       {/*
       width, height = 캔버스 사이즈
       projection
@@ -40,7 +40,10 @@ const Map = ({ setTooltipContent, parks }) => {
             zoom = 확대
           */}
         <ZoomableGroup
-          center={[126.93213889807498, 37.46122474964353]}
+          // 37.46960327664691, 126.90416449722613
+          // 37.46859326334399, 126.91197508981351
+          // 37.46876704347777, 126.90934765068693
+          center={[126.91197508981351, 37.46122474964353]}
           zoom={7}
         >
           <Geographies geography={geoUrl}>
@@ -79,7 +82,6 @@ const Map = ({ setTooltipContent, parks }) => {
           {markers.map(({ name, coordinates, markerOffset }, i) => {
             return (
               <Marker key={i} coordinates={coordinates}>
-                {/* <svg viewBox="0 0 1000 600"> */}
                 <g
                   fill="#5BC691"
                   stroke="#5BC691"
@@ -88,13 +90,10 @@ const Map = ({ setTooltipContent, parks }) => {
                   strokeLinejoin="round"
                   transform="translate(0, -1.5)"
                 >
-                  {/* <circle cx="0.12" cy="0.10" r="0.30" /> */}
-                  {/* <circle r={0.6} scale="0.5" fill="#5BC691" /> */}
                   <svg width="10px" height="10px" viewBox="0 0 100 100">
                     <path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z" />
                   </svg>
                 </g>
-                {/* </svg> */}
                 <text
                   textAnchor="middle"
                   y={markerOffset}
