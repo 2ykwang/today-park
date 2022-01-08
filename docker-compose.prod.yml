@@ -3,17 +3,19 @@ version: "3.2"
 # networks:
 #   app:
 #     driver: bridge
- 
+
 services:
   app:
-  
-  client: 
-  
+    command: sh -c "python3 manage.py migrate --noinput && python manage.py
+      collectstatic --noinput && gunicorn -c config/gunicorn.conf.py"
+
+  client:
+    command: "yarn build"
+    volumes:
+      - client_volume:/srv/client/build
   nginx:
     volumes:
-      - ./nginx/nginx-release.conf:/etc/nginx/conf.d/default.conf  
+      - ./nginx/nginx-release.conf:/etc/nginx/conf.d/default.conf
 
 volumes:
-  static_volume:
-  client_volume:
-  
+  client_volume: null
