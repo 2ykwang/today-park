@@ -1,6 +1,15 @@
+.SignUp {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
 .SignUpContainer {
+  position: absolute;
   display: flex;
   margin: 60px auto 0 auto;
+  top:40%;
+  left: 50%;
+  transform: translate(-50%,-50%);
   justify-content: center;
   background-color: white;
 }

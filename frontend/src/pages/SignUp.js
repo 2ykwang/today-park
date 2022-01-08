@@ -96,93 +96,95 @@ function SignUp() {
   return (
     <>
       <Header />
-      <div className="SignUpContainer">
-        <section className="MiniContainer Images">
-          <img src={RunIcon} className="runIcon" alt="run icon"></img>
-          <img
-            src={RegisterLeft}
-            className="background"
-            alt="register banner"
-          ></img>
-          <p className="ImagePhrase">
-            나에게 딱 맞는 야외에서 <br />
-            건강 챙기자!
-          </p>
-        </section>
-        <section className="MiniContainer">
-          <h1>회원가입</h1>
-          <form>
-            <div className="signUpItem">
-              <div className="list"></div>
-              <p className="text">아이디</p>
-              <input
-                type="text"
-                placeholder="이메일을 입력해주세요"
-                value={email}
-                onChange={handleId}
-                onBlur={validSignupFields}
-              />
-              {/* 버튼 온클릭 사용할려면 preventDefault 해주기. 리랜더링 방지 */}
-            </div>
-            <p className="caution" style={{ fontSize: "12px" }}>
-              {email !== "" && !regExpId.test(email)
-                ? "이메일 형식으로 입력해주세요."
-                : checkDuplicateEmailMessage()}
+      <div className="SignUp">
+        <div className="SignUpContainer">
+          <section className="MiniContainer Images">
+            <img src={RunIcon} className="runIcon" alt="run icon"></img>
+            <img
+              src={RegisterLeft}
+              className="background"
+              alt="register banner"
+            ></img>
+            <p className="ImagePhrase">
+              나에게 딱 맞는 야외에서 <br />
+              건강 챙기자!
             </p>
-            <div className="signUpItem">
-              <div className="list"></div>
-              <p className="text">닉네임</p>
-              <input
-                type="text"
-                placeholder="닉네임을 입력해주세요"
-                value={username}
-                onChange={handleNickname}
-                onBlur={validSignupFields}
-              />
-            </div>
-            <p className="caution" style={{ fontSize: "12px" }}>
-              {username !== "" && !regExpNickname.test(username)
-                ? "특수문자 제외 영어, 숫자, 한글로 2자 이상 20자 미만 입력해주세요."
-                : checkDuplicateUsernameMessage()}
-            </p>
-            <div className="signUpItem">
-              <div className="list"></div>
-              <p className="text">비밀번호</p>
-              <input
-                type="password"
-                value={password}
-                onChange={handlePassword}
-                placeholder="영어 대/소문자, 숫자, 특수문자 8글자"
-              />
-            </div>
-            <p className="caution" style={{ fontSize: "12px" }}>
-              {password !== "" && !regExpPw.test(password)
-                ? "형식에 맞지 않는 비밀번호 입니다."
-                : undefined}
-            </p>
-            <div className="signUpItem">
-              <div className="list"></div>
-              <p className="text">비밀번호 확인</p>
-              <input type="password" value={pwCheck} onChange={checkPassword} />
-            </div>
-            {pwCheck ? (
+          </section>
+          <section className="MiniContainer">
+            <h1>회원가입</h1>
+            <form>
+              <div className="signUpItem">
+                <div className="list"></div>
+                <p className="text">아이디</p>
+                <input
+                  type="text"
+                  placeholder="이메일을 입력해주세요"
+                  value={email}
+                  onChange={handleId}
+                  onBlur={validSignupFields}
+                />
+                {/* 버튼 온클릭 사용할려면 preventDefault 해주기. 리랜더링 방지 */}
+              </div>
               <p className="caution" style={{ fontSize: "12px" }}>
-                {pwCheck !== "" && password === pwCheck
-                  ? "비밀번호가 일치합니다"
-                  : "비밀번호가 일치하지 않습니다"}
+                {email !== "" && !regExpId.test(email)
+                  ? "이메일 형식으로 입력해주세요."
+                  : checkDuplicateEmailMessage()}
               </p>
-            ) : undefined}
-            <div className="signUpBtn-container">
-              <button
-                type="submit"
-                className="signUpBtn"
-                onClick={handleClickSignup}
-              >
-                가입하기
-              </button>
-            </div>
-          </form>
-        </section>
+              <div className="signUpItem">
+                <div className="list"></div>
+                <p className="text">닉네임</p>
+                <input
+                  type="text"
+                  placeholder="닉네임을 입력해주세요"
+                  value={username}
+                  onChange={handleNickname}
+                  onBlur={validSignupFields}
+                />
+              </div>
+              <p className="caution" style={{ fontSize: "12px" }}>
+                {username !== "" && !regExpNickname.test(username)
+                  ? "특수문자 제외 영어, 숫자, 한글로 2자 이상 20자 미만 입력해주세요."
+                  : checkDuplicateUsernameMessage()}
+              </p>
+              <div className="signUpItem">
+                <div className="list"></div>
+                <p className="text">비밀번호</p>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={handlePassword}
+                  placeholder="영어 대/소문자, 숫자, 특수문자 8글자"
+                />
+              </div>
+              <p className="caution" style={{ fontSize: "12px" }}>
+                {password !== "" && !regExpPw.test(password)
+                  ? "형식에 맞지 않는 비밀번호 입니다."
+                  : undefined}
+              </p>
+              <div className="signUpItem">
+                <div className="list"></div>
+                <p className="text">비밀번호 확인</p>
+                <input type="password" value={pwCheck} onChange={checkPassword} />
+              </div>
+              {pwCheck ? (
+                <p className="caution" style={{ fontSize: "12px" }}>
+                  {pwCheck !== "" && password === pwCheck
+                    ? "비밀번호가 일치합니다"
+                    : "비밀번호가 일치하지 않습니다"}
+                </p>
+              ) : undefined}
+              <div className="signUpBtn-container">
+                <button
+                  type="submit"
+                  className="signUpBtn"
+                  onClick={handleClickSignup}
+                >
+                  가입하기
+                </button>
+              </div>
+            </form>
+          </section>
+        </div>
       </div>
     </>
   );
