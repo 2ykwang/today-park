@@ -31,6 +31,8 @@ class Park(models.Model):
     )
     park_image = models.ImageField(blank=True, verbose_name="공원사진")
 
+    nearby_parks = models.ManyToManyField("self")
+
     class Meta:
         ordering = ["park_name"]
 
