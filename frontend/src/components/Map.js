@@ -5,41 +5,21 @@ import {
   Geographies,
   Geography,
   Marker,
-  Markers,
 } from "react-simple-maps";
 import GwanakMap from "../json/gwanak.json";
 
 //const geoUrl ="https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 const geoUrl = GwanakMap;
 const markerOff = 2;
-const markers = [
-  {
-    markerOffset: markerOff,
-    name: "도림천",
-    coordinates: [126.9474365, 37.45922056],
-  },
-  {
-    markerOffset: markerOff,
-    name: "관악산 야외식물원",
-    coordinates: [126.948224, 37.46117532],
-  },
-  {
-    markerOffset: markerOff,
-    name: "관악산 샘말공원",
-    coordinates: [126.9384872, 37.46490032],
-  },
-  {
-    markerOffset: markerOff,
-    name: "맨발공원",
-    coordinates: [126.944350815504, 37.4665302234076],
-  },
-  {
-    markerOffset: markerOff,
-    name: "제2구민운동장",
-    coordinates: [126.933653774099, 37.4581915973847],
-  },
-];
-const Map = ({ setTooltipContent }) => {
+const Map = ({ setTooltipContent, parks }) => {
+  const parklist = parks ? parks : [];
+  const markers = parklist.map((item) => {
+    return {
+      markerOffset: markerOff,
+      name: item.park_name,
+      coordinates: [Number(item.longitude), Number(item.latitude)],
+    };
+  });
   return (
     <div>
       {/*
@@ -99,19 +79,22 @@ const Map = ({ setTooltipContent }) => {
           {markers.map(({ name, coordinates, markerOffset }, i) => {
             return (
               <Marker key={i} coordinates={coordinates}>
+                {/* <svg viewBox="0 0 1000 600"> */}
                 <g
-                  fill="none"
+                  fill="#5BC691"
                   stroke="#5BC691"
-                  strokeWidth="1"
+                  strokeWidth="0.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  transform="translate(-12, 5)"
+                  transform="translate(0, -1.5)"
                 >
-                  <circle cx="15" cy="-2" r={3 / 35000} scale="0.001" />
-                  <svg viewBox="0 0 645.698 136.753">
+                  {/* <circle cx="0.12" cy="0.10" r="0.30" /> */}
+                  {/* <circle r={0.6} scale="0.5" fill="#5BC691" /> */}
+                  <svg width="10px" height="10px" viewBox="0 0 100 100">
                     <path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z" />
                   </svg>
                 </g>
+                {/* </svg> */}
                 <text
                   textAnchor="middle"
                   y={markerOffset}

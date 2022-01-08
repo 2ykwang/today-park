@@ -22,7 +22,7 @@ export function SidebarBookmark() {
     }
     getBookmarklist();
   }, []);
-
+  // TO DO
   // function clickBookmark() {
   //   if (clicked) setClicked(false);
   //   else setClicked(true);
@@ -86,7 +86,12 @@ export function SidebarBookmark() {
             <div>{bookmarkList}</div>
           </div>
         </div>
-        <Map setTooltipContent={setContent} />
+        <Map
+          setTooltipContent={setContent}
+          parks={bookmarks.map((item) => {
+            return item.parks;
+          })}
+        />
         <ReactTooltip>{content}</ReactTooltip>
       </section>
     </>
