@@ -1,5 +1,4 @@
 import React from "react";
-// import { Link } from "react-router-dom";
 import { Header } from "../components/Header";
 import video from "../video/mainVideo.mp4";
 import { BasicLink } from "../components/BasicLink";
@@ -8,6 +7,7 @@ import cloud from "../image/main/cloud3.png";
 import sun from "../image/main/sun.png";
 import Tree from "../image/main/tree.png";
 import Mountain from "../image/main/mountain.png";
+import Pageimage from "../image/main/pageimage.png";
 import { DefaultBarChart } from "../components/DefaultBarChart";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
@@ -101,6 +101,24 @@ function Home() {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="secondhalfPage">
+          <div className="secondhalfPageContainer">
+            <div className="pageimage">
+              <img src={Pageimage} alt="background tree" />
+            </div>
+            <div class="textcontent">
+              <p className="green bold mini">다시 ‘초록불’</p>
+              <div className="titles">
+                <p className="bold title">신발끈 단단히 묶고 </p>
+                <span className="green bold title">오늘의 공원</span>
+                <span className="bold subtitle">으로</span>
+              </div>
+              <p>공원별 운동기구 현황부터 리뷰 기능까지,</p>
+              <p>나만의 최애 공원을 즐겨찾기에 담아보세요.</p>
             </div>
           </div>
         </section>
