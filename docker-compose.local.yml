@@ -27,18 +27,8 @@ services:
   nginx:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-
-  # DATABASE ( 개발 환경에서만 사용)
+      
   database:
-    image: mysql:8.0
-    restart: unless-stopped
-    ports:
-      - "13306:3306"
     environment:
       MYSQL_DATABASE: "emptycart"
       MYSQL_ROOT_PASSWORD: "1234"
-    command:
-      - --character-set-server=utf8mb4
-      - --collation-server=utf8mb4_unicode_ci
-    volumes:
-      - ./.mysql/:/var/lib/mysql/
