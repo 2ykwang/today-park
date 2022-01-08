@@ -10,7 +10,7 @@ import {
   uploadUserImage,
 } from "../actions/index";
 import { ReactComponent as StarIcon } from "../image/star.svg";
-import { CreateReview } from "../components/CreateReview";
+import { CreateReview } from "../components/Search/CreateReview";
 import { editUserInfo, editUserPassword, getUserInfo } from "../actions/auth";
 import Cookies from "js-cookie";
 

@@ -24,8 +24,8 @@ export function DefaultBarChart({ data, colors }) {
           bottom: 5,
         }}
       >
-        <XAxis dataKey="name" stroke="#fff" tick={{ fontSize: "1vw" }} />
-        <YAxis stroke="#fff" tick={{ fontSize: "1.2vw" }} />
+        <XAxis dataKey="name" stroke="#000" tick={{ fontSize: "1vw" }} />
+        <YAxis stroke="#000" tick={{ fontSize: "1.2vw" }} />
         <Tooltip content={<CustomTooltip />} cursor={{ fill: "transparent" }} />
         <Bar dataKey="value" fill="#82ca9d" />
       </BarChart>
@@ -39,7 +39,7 @@ const CustomTooltip = ({ active, payload }) => {
       <div className="tooltip">
         <p
           className="label"
-          style={{ fontWeight: "bold", color: "#FCF6F5" }}
+          style={{ fontWeight: "bold", color: "000" }}
         >{`${payload[0].value}kcal`}</p>
       </div>
     );

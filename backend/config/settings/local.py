@@ -3,6 +3,8 @@ from .base import BASE_DIR, get_env
 
 DEBUG = True
 
+USE_SWAGGER = True
+
 ALLOWED_HOSTS = ["*"]
 
 # debug toolbar
@@ -16,4 +18,3 @@ if get_env("USE_SQLITE3") == "1":
             "NAME": BASE_DIR / "db.sqlite3",
         }
     }
-  

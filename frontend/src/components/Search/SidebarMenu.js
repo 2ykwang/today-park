@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ReactComponent as SearchBtn } from "../image/search.svg";
-import { ReactComponent as BookmarkBtnFilled } from "../image/bookmark-maked.svg";
+import { ReactComponent as SearchBtn } from "../../image/search.svg";
+import { ReactComponent as BookmarkBtnFilled } from "../../image/bookmark-maked.svg";
 
 export function SidebarMenu(props) {
   let clicked = props.item;
@@ -9,7 +9,7 @@ export function SidebarMenu(props) {
     <>
       <div className="sidebar-menu">
         <Link
-          to="/search"
+          to="/search/1"
           className={
             "sidebar-menu item " + (clicked === "search" && "clicked-item")
           }

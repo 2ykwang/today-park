@@ -7,7 +7,7 @@
 .mainContainer::-webkit-scrollbar {
   display: none; /* Chrome , Safari , Opera */
 }
-section.firstPage {
+section.home {
   margin-top: 0;
   position: relative;
   /* border: 2px solid red; */
@@ -89,77 +89,7 @@ section.firstPage {
   width: 5vw;
 }
 
-.intro {
-  position: relative;
-  margin-top: 40px;
-  width: 99vw;
-  height: 100vh;
-}
-
-.intro .introBackgroundWrapper {
-  position: absolute;
-  display: flex;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-}
-
-.intro .introBackground1 {
-  background-color: #5bc691;
-  width: 50%;
-  height: 100%;
-  border-bottom-left-radius: 70%;
-}
-
-.intro .introBackground2 {
-  background-color: #5bc691;
-  width: 50%;
-  height: 100%;
-}
-
-.intro .intro-cloud-1 {
-  position: absolute;
-  left: 180px;
-  top: 350px;
-}
-
-.intro .intro-cloud-1 img {
-  width: 220px;
-  height: 130px;
-}
-
-.intro .intro-cloud-2 {
-  position: absolute;
-  right: 310px;
-  top: 200px;
-}
-
-.intro .intro-cloud-2 img {
-  width: 280px;
-  height: 150px;
-}
-
-.intro .intro-cloud-3 {
-  position: absolute;
-  right: 50px;
-  top: 430px;
-}
-
-.intro .intro-cloud-3 img {
-  width: 230px;
-  height: 135px;
-}
-
-.intro .intro-sun {
-  position: absolute;
-  left: 250px;
-  top: 80px;
-}
-
-.intro .intro-sun img {
-  width: 250px;
-}
-
+/* second page */
 .reason1 {
   display: flex;
   position: relative;
@@ -167,13 +97,13 @@ section.firstPage {
   height: 100vh;
 }
 
-.reason1 .reason1-background {
+.reason1 .tree {
   position: absolute;
   width: 100%;
   bottom: 0;
 }
 
-.reason1 .reason1-background img {
+.reason1 .tree img {
   width: 100%;
   height: 40vh;
   z-index: -1;
@@ -212,53 +142,43 @@ section.firstPage {
   box-sizing: border-box;
 }
 
-.reason1 .reason1-statisticswrapper .reason1-statistics {
+.reason1 .reason1-statisticswrapper .reason1Box {
   position: relative;
   box-sizing: border-box;
   padding: 10px;
   margin: 0 3vw;
   top: 27vh;
   width: 50%;
-  height: 50vh;
+  height: 50%;
 }
 
-.reason1
-  .reason1-statisticswrapper
-  .reason1-statistics
-  .reason1-statistics-back {
+.reason1 .reason1-statisticswrapper .reason1Box .reason1-statistics-back {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: #536075;
+  background-color: #f2f2f6;
   border-radius: 10%;
 }
-.reason1
-  .reason1-statisticswrapper
-  .reason1-statistics
-  .reason1-statistics-back
-  img {
+.reason1 .reason1-statisticswrapper .reason1Box .reason1-statistics-back img {
   width: 100%;
   height: 100%;
   border-radius: 10%;
 }
 
-.reason1
-  .reason1-statisticswrapper
-  .reason1-statistics
-  .reason1-statistics-contents {
+.reason1 .reason1-statisticswrapper .reason1Box .reason1Contents {
   position: absolute;
   padding: 10%;
   box-sizing: border-box;
   top: 3%;
   height: 100%;
   width: 100%;
-  color: white;
+  color: black;
 }
 
 .reason1
   .reason1-statisticswrapper
-  .reason1-statistics
-  .reason1-statistics-contents
+  .reason1Box
+  .reason1Contents
   > p:first-child {
   text-align: center;
   font-size: 2vw;
@@ -267,9 +187,9 @@ section.firstPage {
 
 .reason1
   .reason1-statisticswrapper
-  .reason1-statistics
-  .reason1-statistics-contents
-  .reason1-chart1 {
+  .reason1Box
+  .reason1Contents
+  .reason1Chart1 {
   width: 100%;
   height: 70%;
   margin: 5vh 0 0;
@@ -282,8 +202,8 @@ section.firstPage {
 
 .reason1
   .reason1-statisticswrapper
-  .reason1-statistics
-  .reason1-statistics-contents
+  .reason1Box
+  .reason1Contents
   .reason1Chart2
   .reason1CardRank {
   display: flex;
@@ -294,8 +214,8 @@ section.firstPage {
 
 .reason1
   .reason1-statisticswrapper
-  .reason1-statistics
-  .reason1-statistics-contents
+  .reason1Box
+  .reason1Contents
   .reason1Chart2
   .reason1CardRank
   p {
@@ -305,9 +225,9 @@ section.firstPage {
 
 .reason1
   .reason1-statisticswrapper
-  .reason1-statistics
-  .reason1-statistics-contents
-  .reason1-chart3 {
+  .reason1Box
+  .reason1Contents
+  .reason1Chart3 {
   width: 100%;
   height: 70%;
   margin: 5vh 0 0;
@@ -316,4 +236,74 @@ section.firstPage {
   align-items: center;
   justify-content: center;
   font-size: 1.3rem;
+}
+
+/* third page */
+.intro {
+  position: relative;
+  margin-top: 40px;
+  width: 99vw;
+  height: 100vh;
+}
+
+.intro .introBackgroundWrapper {
+  position: absolute;
+  display: flex;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+
+.intro .introBackground1 {
+  background-color: #e5f4ec;
+  width: 100%;
+  height: 100%;
+  /* border-bottom-left-radius: 70%; */
+}
+
+.intro .introBackground2 {
+  background-color: #5bc691;
+  width: 50%;
+  height: 100%;
+}
+
+.intro .intro-cloud-1 {
+  position: absolute;
+  left: 10vw;
+  top: 30vh;
+}
+
+.intro .intro-cloud-1 img {
+  width: 130px;
+  /* height: 130px; */
+}
+
+.intro .intro-cloud-2 {
+  position: absolute;
+  right: 20vw;
+  top: 15vh;
+}
+
+.intro .intro-cloud-2 img {
+  width: 160px;
+}
+
+.intro .intro-cloud-3 {
+  position: absolute;
+  right: 8vw;
+  top: 25vh;
+}
+
+.intro .intro-cloud-3 img {
+  width: 145px;
+}
+
+.intro .intro-sun {
+  position: absolute;
+  left: 8vw;
+  top: 13vh;
+}
+
+.intro .intro-sun img {
+  width: 120px;
 }
