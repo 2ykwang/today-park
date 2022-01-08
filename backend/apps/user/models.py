@@ -69,8 +69,8 @@ class User(TimeStampModel, AbstractBaseUser, PermissionsMixin):
         if self.profile_image:
             temp_image = Image.open(self.profile_image.path)
 
-            temp_image = temp_image.convert("RGB").resize((500, 500))
-            temp_image.save(self.profile_image.path, format="JPEG", quality=100)
+            temp_image = temp_image.resize((500, 500))
+            temp_image.save(self.profile_image.path)
 
     # admin 페이지 프로필 사진 미리보기
     def _profile_image(self, size=50):
