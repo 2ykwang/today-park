@@ -1,4 +1,5 @@
 .mainContainer {
+  color: #3a3a3a;
   overflow-x: hidden;
   overflow-y: auto;
   scrollbar-width: none;
@@ -115,7 +116,6 @@ section.home {
   /* background-color: yellow; */
   width: 50%;
   text-align: left;
-  color: #546176;
 }
 .reason1 .reason1Textwrapper > div {
   position: absolute;
@@ -129,12 +129,19 @@ section.home {
 .reason1 .reason1Textwrapper .reason1Title span {
   color: #5bc691;
 }
-
+.reason1 .reason1Textwrapper .reason1Title span.subTitle {
+  font-size: 1.3vw;
+}
+.reason1 .reason1Textwrapper .reason1Title .title {
+  padding: 1.5vh 0;
+}
 .reason1 .reason1Textwrapper .reason1Contents {
   left: 5vw;
   top: 37vh;
   font-size: 1.3vw;
   line-height: 1.3;
+  color: #3a3a3a;
+  padding: 5vh 0;
 }
 
 .reason1 .reason1-statisticswrapper {
@@ -175,7 +182,7 @@ section.home {
   top: 3%;
   height: 100%;
   width: 100%;
-  color: black;
+  color: #3a3a3a;
 }
 
 .reason1
@@ -244,22 +251,23 @@ section.home {
 /* second half page */
 .secondhalfPageContainer {
   height: 100vh;
-  max-width: 1200px;
+  /* max-width: 1200px; */
   margin: auto auto;
   /* border: 2px solid red; */
   display: flex;
   padding-top: 120px;
+  margin-left: 100px;
   /* align-items: center; */
   /* flex-direction: column; */
   box-sizing: border-box;
 }
 .secondhalfPage .pageimage img {
-  width: 700px;
+  width: 50vw;
 }
 .secondhalfPage .textcontent {
   margin-left: 60px;
   /* border: 2px solid orange; */
-  font-size: 18px;
+  font-size: 1.3vw;
   padding-top: 60px;
 }
 .secondhalfPage .textcontent p {
@@ -272,7 +280,7 @@ section.home {
   font-weight: bold;
 }
 .secondhalfPage .textcontent .title {
-  font-size: 36px;
+  font-size: 2.5vw;
 }
 .secondhalfPage .textcontent .titles {
   margin-bottom: 24px;
@@ -281,7 +289,7 @@ section.home {
   margin-bottom: 8px;
 }
 .secondhalfPage .textcontent .subtitle {
-  font-size: 32px;
+  font-size: 2.4vw;
 }
 
 /* third page */

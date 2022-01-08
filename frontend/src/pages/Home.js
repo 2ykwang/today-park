@@ -49,7 +49,8 @@ function Home() {
             <div className="reason1">
               <div className="reason1Textwrapper">
                 <div className="reason1Title">
-                  <p>
+                  <span className="subTitle">건강 ’빨간불’</span>
+                  <p className="title">
                     혹시 나도 <span>건강 침체기?</span>
                   </p>
                 </div>
