@@ -3,7 +3,7 @@ import {
   XAxis,
   YAxis,
   ResponsiveContainer,
-  Legend,
+  Cell,
   Bar,
   Tooltip,
   BarChart,
@@ -27,7 +27,11 @@ export function DefaultBarChart({ data, colors }) {
         <XAxis dataKey="name" stroke="#000" tick={{ fontSize: "1vw" }} />
         <YAxis stroke="#000" tick={{ fontSize: "1.2vw" }} />
         <Tooltip content={<CustomTooltip />} cursor={{ fill: "transparent" }} />
-        <Bar dataKey="value" fill="#82ca9d" />
+        <Bar dataKey="value" fill="#82ca9c">
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={colors[index % 20]} />
+          ))}
+        </Bar>
       </BarChart>
     </ResponsiveContainer>
   );
