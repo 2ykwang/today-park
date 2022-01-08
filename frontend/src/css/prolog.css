@@ -83,12 +83,12 @@
 }
 .section .eachContent1 .text-content1 {
   flex:1;
-  align-self: flex-start;
+  /* align-self: flex-start; */
 }
 .text1 {
   font-weight: bold;
   font-size: 25px;
-  margin-bottom: 1rem;
+  margin: 2rem 0;
 }
 .text2 {
   font-size: 20px;
@@ -119,6 +119,7 @@
   font-weight: bold;
   font-size: 25px;
   /* align-self: flex-start; */
+  margin-top: 1rem;
   margin-bottom: 1em;
 }
 .text4 {
@@ -156,20 +157,23 @@
 /* 네번째 페이지: 왜 관악구의 2030 */
 .content .eachContent4 {
   height: 50vh;
-  /* justify-content: center; */
+}
+.text5 {
+  font-size: 20px;
+  margin-top: 1.5em;
+  line-height: 1em;
 }
 .gwanak-charts {
   display: flex;
   justify-content: space-evenly;
   margin:2em;
-  height:400px;
 }
 .chartGainWeightByAge {
   width:400px;
   height:200px; 
   margin-bottom:30px;
   margin-right:150px;
-  margin-left:150px;
+  margin-left:50px;
 }
 
 /* 다섯번째 페이지: 왜 관악구의 2030 */
