@@ -134,10 +134,7 @@ const Prolog = () => {
                             </span>{" "}
                             가
                           </p>
-                          <p
-                            className="text2"
-                            style={{ lineHeight: "1.5em", marginTop: "0.5em" }}
-                          >
+                          <p className="text2">
                             1위로 뽑힌 만큼 사람들의 식습관에 가장 큰 변화가
                             일어났습니다.
                           </p>
@@ -170,7 +167,7 @@ const Prolog = () => {
                             className="gainWeight"
                             style={{ width: "200px", height: "200px" }}
                           >
-                            <GainWeight />
+                            <GainWeight className="gainWeightImg" />
                           </div>
                           <div className="gainWeight-text">
                             <p className="text3">

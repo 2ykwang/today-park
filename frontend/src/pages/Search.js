@@ -85,6 +85,7 @@ function Search() {
   let page_count = 1;
   let pagination_count = 0;
 
+  //  페이지네이션 5개당 한 페이지 만드는 로직
   const paginations = pagination.filter((item) => {
     pagination_count += 1;
     if (pagination_count === 1) page_count = 1;

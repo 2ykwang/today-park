@@ -49,7 +49,7 @@
   overflow-y: scroll;
 
   -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none
+  scrollbar-width: none;
 }
 .search .sidebar::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera*/
@@ -95,6 +95,8 @@
   box-sizing: border-box;
   position: relative;
   display: block;
+  padding-right: 60px;
+  box-sizing: border-box;
 }
 .search .park .parklink {
   padding: 28px 0 28px 48px;
@@ -106,7 +108,9 @@
   position: relative;
 }
 .search .park p {
-  margin-bottom: 5px;
+  margin-bottom: 2px;
+  line-height: 1.5;
+  word-break: keep-all;
 }
 .search .park h3 .rate {
   display: inline-block;
