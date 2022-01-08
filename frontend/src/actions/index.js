@@ -122,7 +122,6 @@ export async function postBookmark(parkId) {
     // else if (response.status === 406) return "이미 추가된 공원입니다.";
     // else if (response.status === 401) return "인증이 필요합니다.";
     // else return "잘못된 요청입니다.";
-    else window.location.replace("/");
   } catch (error) {}
 }
 
