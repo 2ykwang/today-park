@@ -8,7 +8,7 @@ import {
   getBookmarks,
 } from "../../actions/index";
 
-export function DetailList({ detailData }) {
+export function DetailList({ detailData, nearbyParks }) {
   const [click, setClick] = useState(false);
   const [bookmarkId, setBookmarkId] = useState("");
 
@@ -21,6 +21,8 @@ export function DetailList({ detailData }) {
         </li>
       );
     });
+
+  const nearbyparkList = nearbyParks.parks;
 
   useEffect(() => {
     async function getbookmarks() {
@@ -80,8 +82,10 @@ export function DetailList({ detailData }) {
         <div className="nearbyParks">
           <h4>인근 공원</h4>
           <ul>
-            <li>- 토끼 공원</li>
-            <li>- 거북이 공원</li>
+            {nearbyparkList &&
+              nearbyparkList.map((item, idx) => {
+                return <li ket={idx}> - {item.park_name}</li>;
+              })}
           </ul>
         </div>
       </div>
