@@ -74,7 +74,6 @@ export default class Chart2030 extends PureComponent {
 
 const CustomTooltip = ({ active, payload}) => {
 	if (active) {
-    console.log(payload)
 		return (
 			<div className='tooltip'>
         <p className='label' style={{fontWeight:'bold', color:'rgba(50,50,50,0.8)'}} >

@@ -1,15 +1,15 @@
 #prolog {
   display: flex;
 }
-#prolog .greenBar {
+/* #prolog .greenBar {
   position: fixed;
   z-index: 1000;
   width: 5px;
-  height: 120px;
+  height: 150px;
   background-color: #47c690;
   margin-left: 10px;
   margin-top: 120px;
-}
+} */
 #prolog .leftIndexBar {
   width: 200px;
   height: 100%;
@@ -24,7 +24,8 @@
 #prolog .leftIndexBar li {
   line-height: 30px;
   font-size: large;
-  padding-left: 25px;
+  margin-left: 25px;
+  padding-left: 5px;
   cursor: pointer;
 }
 #prolog .leftIndexBar li a {
@@ -33,6 +34,7 @@
 }
 #prolog .leftIndexBar #list-1 {
   font-weight: bold;
+  border-left: 5px solid #47c690;
 }
 
 #prolog #fullpage {
@@ -58,7 +60,7 @@
 .section .title-content{
   height: 10vh;
   margin-top: 10px;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
   align-self: flex-start;
 }
 .section .title {
@@ -81,11 +83,12 @@
 }
 .section .eachContent1 .text-content1 {
   flex:1;
+  align-self: flex-start;
 }
 .text1 {
   font-weight: bold;
   font-size: 25px;
-  margin: 1rem 0;
+  margin-bottom: 1rem;
 }
 .text2 {
   font-size: 20px;
@@ -95,7 +98,7 @@
 .chartDeliver {
   /* flex: 0 0 500px; */
   height: 400px;
-  width: 450px;
+  width: 500px;
 }
 
 /* 두번째 페이지: 배달과 건강의 상관관계 */
@@ -103,7 +106,6 @@
   display: flex;
   height: 50vh;
   flex-direction: column;
-  justify-content: center;
 }
 .gainWeight-content {
   display: flex;
@@ -159,7 +161,7 @@
 .gwanak-charts {
   display: flex;
   justify-content: space-evenly;
-  margin:4em;
+  margin:2em;
   height:400px;
 }
 .chartGainWeightByAge {
@@ -175,14 +177,14 @@
   display: flex;
   align-items: center;
   justify-self: center;
-
-  padding:30px;
+  margin-top: 30px;
 }
 .chart2030 {
   flex: 1;
-  width:'400px';
-  height:'300px';
+  width:400px;
+  height:300px;
 }
 .chart2030-text{
   flex: 1;
+  align-self: flex-start;
 }

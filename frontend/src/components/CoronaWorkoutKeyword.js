@@ -71,13 +71,7 @@ export default class ChartKeyword extends PureComponent {
             {data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={colors[index]} />
             ))}
-            {/* <Cell key={`cell-${0}`} fill={'#0088FE'} />
-            <Cell key={`cell-${1}`} fill={'#00C49F'} />
-            <Cell key={`cell-${2}`} fill={'#FFBB28'} />
-            <Cell key={`cell-${3}`} fill={'#FF8042'} />
-            <Cell key={`cell-${4}`} fill={"#d62728"} /> */}
           </Bar>
-          {/* <Line type="monotone" dataKey="exercise" stroke="orange" /> */}
           <Line type="monotone" dataKey="health" stroke="green" />
         </ComposedChart>
       </ResponsiveContainer>
