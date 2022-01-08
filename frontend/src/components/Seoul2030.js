@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { BarChart, Bar, Cell, XAxis, ResponsiveContainer, LabelList } from 'recharts';
+import { BarChart, Bar, Cell, XAxis, Label, ResponsiveContainer, LabelList, Tooltip } from 'recharts';
 
 const data = [
   {
@@ -31,25 +31,6 @@ const data = [
   }
 ];
 
-const getPath = (x, y, width, height) => `M${x},${y + height}
-          C${x + width / 3},${y + height} ${x + width / 2},${y + height / 3} ${x + width / 2}, ${y}
-          C${x + width / 2},${y + height / 3} ${x + (2 * width) / 3},${y + height} ${x + width}, ${y + height}
-          Z`;
-
-const TriangleBar = (props) => {
-  const { fill, x, y, width, height } = props;
-
-  return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
-};
-
-TriangleBar.propTypes = {
-  fill: PropTypes.string,
-  x: PropTypes.number,
-  y: PropTypes.number,
-  width: PropTypes.number,
-  height: PropTypes.number,
-};
-
 export default class Chart2030 extends PureComponent {
   static demoUrl = 'https://codesandbox.io/s/bar-chart-with-customized-shape-dusth';
   render() {
@@ -67,13 +48,18 @@ export default class Chart2030 extends PureComponent {
           }}
         >
           {/* <CartesianGrid strokeDasharray="3 3" /> */}
-          <XAxis dataKey="name" />
+          <XAxis dataKey="name" >
+            <Label value="관악구 구별 20,30대 비율" offset={240} position='top'></Label>
+          </XAxis>
+          <Tooltip 
+            content={<CustomTooltip />}
+          />
           <Bar dataKey="value" nameKey='percent' fill="#8884d8" >
-            <LabelList 
+            {/* <LabelList 
               dataKey="percent" 
               position="top" 
               style={{ fill: "#07553B", fontWeight:'bold' }} 
-            />
+            /> */}
             <Cell key={`cell-${0}`} fill={'#B89C49'} />
             <Cell key={`cell-${1}`} fill={'#4AAE8A'} />
             <Cell key={`cell-${2}`} fill={'#4FABBC'} />
@@ -85,3 +71,18 @@ export default class Chart2030 extends PureComponent {
     );
   }
 }
+
+const CustomTooltip = ({ active, payload}) => {
+	if (active) {
+    console.log(payload)
+		return (
+			<div className='tooltip'>
+        <p className='label' style={{fontWeight:'bold', color:'rgba(50,50,50,0.8)'}} >
+          {`${payload[0].payload.name}: ${payload[0].payload.percent}`}
+        </p>
+      </div>
+		);
+	}
+
+	return null;
+};

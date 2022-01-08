@@ -90,12 +90,12 @@
 .text2 {
   font-size: 20px;
   margin-top: 3rem;
-  line-height: 3rem;
+  line-height: 2em;
 }
 .chartDeliver {
   /* flex: 0 0 500px; */
   height: 400px;
-  width: 500px;
+  width: 450px;
 }
 
 /* 두번째 페이지: 배달과 건강의 상관관계 */
@@ -146,7 +146,9 @@
   flex-direction: column;
 }
 .chartKeyword {
-  flex:1;
+  /* flex:1;/ */
+ margin-left: 50px;
+  
 }
 
 /* 네번째 페이지: 왜 관악구의 2030 */
@@ -160,14 +162,26 @@
   margin:4em;
   height:400px;
 }
+.chartGainWeightByAge {
+  width:400px;
+  height:200px; 
+  margin-bottom:30px;
+  margin-right:150px;
+  margin-left:150px;
+}
 
 /* 다섯번째 페이지: 왜 관악구의 2030 */
 .content .eachContent5 {
   display: flex;
   align-items: center;
+  justify-self: center;
+
+  padding:30px;
 }
 .chart2030 {
   flex: 1;
+  width:'400px';
+  height:'300px';
 }
 .chart2030-text{
   flex: 1;

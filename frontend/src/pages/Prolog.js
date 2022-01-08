@@ -103,7 +103,7 @@ const Prolog = () => {
                             생활의 변화 중&nbsp;
                             <span style={{fontWeight:'bold'}}>'배달음식 주문 빈도 증가'(22.0%)'</span> 가
                           </p>
-                          <p className="text2" style={{lineHeight:'1.5em', marginTop:'0.5em'}}>1위로 뽑힌 만큼 사람들의 식습관에 가장 큰 변화가 일어났습니다.</p>
+                          <p className="text2" style={{lineHeight:'1em', marginTop:'0.5em'}}>1위로 뽑힌 만큼 사람들의 식습관에 가장 큰 변화가 일어났습니다.</p>
                           <p className="quotation" style={{textAlign:'left'}}>(한국건강증진개발원)</p>
                         </div>
                         <div className="chartDeliver" >
@@ -185,7 +185,7 @@ const Prolog = () => {
                             관심이 높아짐을 알 수 있습니다.
                           </p>
                         </div>
-                        <div className="chartKeyword" style={{width:'550px', height:'450px'}}>
+                        <div className="chartKeyword" style={{width:'600px', height:'400px'}}>
                           <ChartKeyword />
                         </div>
                       </div>
@@ -218,10 +218,10 @@ const Prolog = () => {
                           배달 서비스를 가장 많이 이용하고 코로나 시기 동안 체중 증가를 가장 많이 겪은 20대, 30대를 기준으로 서비스를 제공하기로 했습니다.
                         </p>
                         <div className='gwanak-charts'>
-                          <div className="chartGainWeightByAge" style={{width:'300px', height:'200px', marginBottom:'30px'}}>
+                          <div className="chartGainWeightByAge">
                             <ChartGainWeightByAge />
                           </div>
-                          <div className="chartDeliverPercentByAge" style={{width:'300px', height:'300px', marginBottom:'30px'}}>
+                          <div className="chartDeliverPercentByAge" style={{width:'400px', height:'300px', marginBottom:'30px'}}>
                             <ChartDeliverPercentByAge />
                           </div>
                         </div>
@@ -236,7 +236,7 @@ const Prolog = () => {
                       </div>
                       <p className="text1">우리의 공원은 왜 관악구를 첫번째 서비스 지역구로 선택했을까요?</p>
                       <div className='eachContent5'>
-                        <div className="chart2030" style={{width:'400px', height:'300px'}}>
+                        <div className="chart2030">
                           <Chart2030 />
                         </div>
                         <div className='chart2030-text'>

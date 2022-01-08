@@ -42,8 +42,9 @@ const CustomTooltip = ({ active, payload}) => {
 	if (active) {
 		return (
 			<div className='tooltip'>
-        <p className='label' style={{fontWeight:'bold', color:'#07553B'}} >{`${payload[0].value}%`}</p>
-        
+        <p className='label' style={{fontWeight:'bold', color:'#07553B'}} >
+          {`${payload[0].value}%`}
+        </p>
       </div>
 		);
 	}
