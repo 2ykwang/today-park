@@ -8,7 +8,6 @@ import {
 } from "react-simple-maps";
 import GwanakMap from "../json/gwanak.json";
 
-//const geoUrl ="https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 const geoUrl = GwanakMap;
 const markerOff = 2;
 const Map = ({ setTooltipContent, parks }) => {
@@ -40,9 +39,6 @@ const Map = ({ setTooltipContent, parks }) => {
             zoom = 확대
           */}
         <ZoomableGroup
-          // 37.46960327664691, 126.90416449722613
-          // 37.46859326334399, 126.91197508981351
-          // 37.46876704347777, 126.90934765068693
           center={[126.91197508981351, 37.46122474964353]}
           zoom={7}
         >
@@ -51,8 +47,8 @@ const Map = ({ setTooltipContent, parks }) => {
               geographies.map((geo) => (
                 <Geography
                   onMouseEnter={() => {
-                    const { name, code } = geo.properties;
-                    setTooltipContent(`${name} : ${code}`);
+                    const { name } = geo.properties;
+                    setTooltipContent(`${name}`);
                   }}
                   onMouseLeave={() => {
                     setTooltipContent("");
@@ -63,7 +59,7 @@ const Map = ({ setTooltipContent, parks }) => {
                     default: {
                       fill: "#fff",
                       stroke: "#aaa",
-                      strokeWidth: 0.15,
+                      strokeWidth: 0.06,
                       outline: "none",
                     },
                     hover: {
@@ -81,32 +77,44 @@ const Map = ({ setTooltipContent, parks }) => {
           </Geographies>
           {markers.map(({ name, coordinates, markerOffset }, i) => {
             return (
-              <Marker key={i} coordinates={coordinates}>
-                <g
-                  fill="#5BC691"
-                  stroke="#5BC691"
-                  strokeWidth="0.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  transform="translate(0, -1.5)"
-                >
-                  <svg width="10px" height="10px" viewBox="0 0 100 100">
-                    <path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z" />
-                  </svg>
-                </g>
-                <text
-                  textAnchor="middle"
-                  y={markerOffset}
-                  x={markerOff}
-                  style={{
-                    fontFamily: "system-ui",
-                    fill: "#5D5A6D",
-                    fontSize: 1,
+              <>
+                <Marker
+                  key={i}
+                  coordinates={coordinates}
+                  onMouseEnter={() => {
+                    setTooltipContent(name);
+                  }}
+                  onMouseLeave={() => {
+                    setTooltipContent("");
                   }}
                 >
-                  {name}
-                </text>
-              </Marker>
+                  <g
+                    fill="#5BC691"
+                    stroke="#5BC691"
+                    strokeWidth="0.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    transform="translate(0, -1.5)"
+                  >
+                    <svg width="10px" height="10px" viewBox="0 0 100 100">
+                      <path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z" />
+                    </svg>
+                  </g>
+                  <text
+                    textAnchor="middle"
+                    y={markerOffset}
+                    x={markerOff}
+                    style={{
+                      fontFamily: "system-ui",
+                      fill: "#5D5A6D",
+                      fontSize: 1,
+                      fontWeight: "500",
+                    }}
+                  >
+                    {name}
+                  </text>
+                </Marker>
+              </>
             );
           })}
         </ZoomableGroup>

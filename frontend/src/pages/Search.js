@@ -65,6 +65,8 @@ function Search() {
             const response = await getParks("", "", "", page, 5);
             setParks(response.results);
             setCurrentPage(page);
+            var location = document.querySelector("body").offsetTop;
+            window.scrollTo({ top: location, behavior: "auto" });
           }}
         >
           {i}
@@ -73,8 +75,6 @@ function Search() {
     }
     setPagination(paginations);
   }, [parksResponse]);
-
-  console.log(pagination.length);
 
   return (
     <>
@@ -109,19 +109,8 @@ function Search() {
             <div className="parkContainer">
               {parksResponse && parklist}
               <div className="pagination">
-                <button
-                  onClick={() => {
-                    setHandlePagination((current) => {
-                      let newArr = [...current];
-                      newArr[0] -= 5;
-                      newArr[1] -= 5;
-                      return newArr;
-                    });
-                  }}
-                >
-                  이전
-                </button>
-                {pagination.slice(handlePageination[0], handlePageination[1])}
+                <button>이전</button>
+                {pagination}
                 <button
                   onClick={() => {
                     if (currentPage >= pagination.length - 4) return;
@@ -140,7 +129,7 @@ function Search() {
             </div>
           </div>
         </div>
-        <Map setTooltipContent={setContent} />
+        <Map setTooltipContent={setContent} parks={parks} />
         <ReactTooltip>{content}</ReactTooltip>
       </section>
     </>

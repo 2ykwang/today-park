@@ -20,8 +20,6 @@ export function SidebarSearchDetail() {
 
   const { id } = useParams();
 
-  console.log(detailData);
-
   // 마운트시, 공원 상세 정보 GET 요청, 리뷰 정보 GET요청
   useEffect(() => {
     async function getParkdetail() {
