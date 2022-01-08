@@ -6,8 +6,8 @@ import Search from "./pages/Search";
 import TeamIntro from "./pages/TeamIntro";
 import SignUp from "./pages/SignUp";
 import Mypage from "./pages/Mypage";
-import { SidebarBookmark } from "./components/SidebarBookmark";
-import { SidebarSearchDetail } from "./components/SidebarSearchDetail";
+import { SidebarBookmark } from "./components/Search/SidebarBookmark";
+import { SidebarSearchDetail } from "./components/Search/SidebarSearchDetail";
 import { axiosConfig, checkUserTokenAndRefresh } from "./actions/auth";
 import "./css/reset.css";
 import "./css/app.css";
@@ -35,8 +35,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="prolog" element={<Prolog />} />
-        <Route path="search" element={<Search />} />
-        <Route path="search/:id" element={<SidebarSearchDetail />} />
+        <Route path="search/:page" element={<Search />} />
+        <Route path="search/detail/:id" element={<SidebarSearchDetail />} />
         <Route path="search/bookmark" element={<SidebarBookmark />} />
         <Route path="teamIntro" element={<TeamIntro />} />
         <Route path="signUp" element={<SignUp />} />

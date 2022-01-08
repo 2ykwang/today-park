@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { ReactComponent as StarIcon } from "../image/star.svg";
-import { postReviews, updateReview } from "../actions/index";
+import { ReactComponent as StarIcon } from "../../image/star.svg";
+import { postReviews, updateReview } from "../../actions/index";
 
 export function CreateReview({ parkId, reviewId, type, score, content }) {
   const [clicked, setClicked] = useState([false, false, false, false, false]);

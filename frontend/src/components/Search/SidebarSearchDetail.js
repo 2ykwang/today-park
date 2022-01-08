@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Header } from "./Header";
+import { Header } from "../Header";
 import Map from "./Map";
 import ReactTooltip from "react-tooltip";
-import { ReactComponent as BackIcon } from "../image/back.svg";
-import { ReactComponent as BookmarkIcon } from "../image/bookmark-maked.svg";
+import { ReactComponent as BackIcon } from "../../image/back.svg";
 import { SidebarMenu } from "./SidebarMenu";
-import { getParkDetail, getReviews } from "../actions/index";
+import { getParkDetail, getReviews, getNearbyParks } from "../../actions/index";
 import { DetailList } from "./DetailList";
 import { SimpleMap } from "./GoolgleMap";
 import { Review } from "./Review";
@@ -16,9 +15,9 @@ export function SidebarSearchDetail() {
   const [content, setContent] = useState("");
   const [detailData, setDetailData] = useState("");
   const [detailList, setDetailList] = useState("");
-  const [equitments, setEquitments] = useState([]);
   const [simplemap, setSimplemap] = useState("");
   const [reviewList, setreviewList] = useState("");
+  const [nearbyParks, setNearByParks] = useState([]);
 
   const { id } = useParams();
 
@@ -28,9 +27,8 @@ export function SidebarSearchDetail() {
       const response = await getParkDetail(id);
       try {
         setDetailData(response);
-        setEquitments(response.equipments);
       } catch (error) {
-        console.log("공원 정보 get요청 실패");
+        console.log("공원 정보 GET요청 실패");
       }
     }
     async function getreviews() {
@@ -38,17 +36,26 @@ export function SidebarSearchDetail() {
       try {
         setreviewList(response);
       } catch (error) {
-        console.log("리뷰 정보 get 요청 실패");
+        console.log("리뷰 정보 GET요청 실패");
+      }
+    }
+    async function getnearbyParks() {
+      const response = await getNearbyParks(id);
+      try {
+        setNearByParks(response);
+      } catch (error) {
+        console.log("인근 공원 GET요청 실패");
       }
     }
     getParkdetail();
     getreviews();
+    getnearbyParks();
   }, []);
 
   // GET 요청 후, 상세 페이지, 구글맵 UI
   useEffect(() => {
     setDetailList(
-      <DetailList detailData={detailData} equitments={equitments} />
+      <DetailList detailData={detailData} nearbyParks={nearbyParks} />
     );
     detailData &&
       setSimplemap(
@@ -60,7 +67,7 @@ export function SidebarSearchDetail() {
           zoom={15}
         />
       );
-  }, [detailData, equitments]);
+  }, [detailData, nearbyParks]);
 
   return (
     <>
@@ -68,7 +75,7 @@ export function SidebarSearchDetail() {
       <section className="search">
         <SidebarMenu item={"search"} />
         <div className="sidebar">
-          <Link to="/search">
+          <Link to="/search/1">
             <BackIcon width="24" height="24" className="backIcon" />
           </Link>
           <div className="mapAPI">{detailData && simplemap}</div>
@@ -86,7 +93,7 @@ export function SidebarSearchDetail() {
             </div>
           </div>
         </div>
-        <Map setTooltipContent={setContent} />
+        <Map setTooltipContent={setContent} parks={[detailData]} />
         <ReactTooltip>{content}</ReactTooltip>
       </section>
     </>

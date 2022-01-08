@@ -7,7 +7,7 @@
 .mainContainer::-webkit-scrollbar {
   display: none; /* Chrome , Safari , Opera */
 }
-section.firstPage {
+section.home {
   margin-top: 0;
   position: relative;
   /* border: 2px solid red; */
