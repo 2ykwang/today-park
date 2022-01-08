@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { ReactComponent as CloseButton } from "../image/closebutton.svg";
+import { ReactComponent as CloseButton } from "../image/x-symbol.svg";
 import { userLogin, getUserInfo } from "../actions/auth";
 import Logo from "../image/logo.png";
 import { useSelector, useDispatch } from "react-redux";
@@ -36,9 +36,10 @@ const ModalContainer = styled.div`
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  min-width: 480px;
-  height: 540px;
+  min-width: 450px;
+  height: 450px;
   background-color: #fff;
+  border-radius: 5%;
 `;
 
 export function LoginModal({
@@ -56,7 +57,7 @@ export function LoginModal({
         <Background>
           <ModalContainer>
             <h2>
-              <img src={Logo} alt="logo" width="200" />
+              <img src={Logo} alt="logo" width="150" />
             </h2>
             <CloseButton className="closeBtn" onClick={handleClose} />
             <form>
@@ -87,6 +88,7 @@ export function LoginModal({
                   response = await getUserInfo();
                   console.log(response.data);
                   const username = response.data.username;
+                  const email = response.data.email;
                   dispatch(
                     await getLoginData({
                       email: loginStore.email,
@@ -95,6 +97,7 @@ export function LoginModal({
                     })
                   );
                   Cookies.set("username", username);
+                  Cookies.set("email", email);
                   window.location.replace("/");
                 }}
               >

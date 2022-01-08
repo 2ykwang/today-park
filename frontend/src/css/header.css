@@ -8,10 +8,24 @@ header.mainHeader {
   top: 0;
   left: 0;
   transition-duration: 1s;
+  border-bottom: 1px solid gray;
 }
 header.mainHeader:hover {
   background-color: rgba(255, 255, 255, 0.767);
   transition: background-color 1s;
+}
+header.ver2 {
+  position: fixed;
+  z-index: 99999;
+  height: 80px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.767);
+  transition: background-color 1s;
+  border-bottom: 1px solid gray;
 }
 header .logo {
   margin-left: 20px;

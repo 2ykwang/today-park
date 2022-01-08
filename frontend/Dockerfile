@@ -5,4 +5,4 @@ WORKDIR /srv/client
 COPY package*.json ./
 COPY .env* ./
 
-RUN yarn
+RUN yarn --production

@@ -228,5 +228,3 @@ weight_type = {
     "허리돌리기/윗몸일으키기": "upper",
     "등허리지압/양팔줄당기기": "upper",
 }
-
-# flake8: noqa

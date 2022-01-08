@@ -65,25 +65,12 @@ class User(TimeStampModel, AbstractBaseUser, PermissionsMixin):
 
     def save(self, *args, **kwargs):
 
-        if self.profile_image:
-            temp_image = Image.open(self.profile_image)
-
-            outputIoStream = BytesIO()
-
-            resized_image = temp_image.resize((500, 500))
-            resized_image.save(outputIoStream, format="JPEG", quality=100)
-
-            outputIoStream.seek(0)
-
-            self.profile_image = InMemoryUploadedFile(
-                outputIoStream,
-                "ImageField",
-                "%s.jpg" % self.profile_image.name.split(".")[0],
-                "image/jpeg",
-                sys.getsizeof(outputIoStream),
-                None,
-            )
         super().save(*args, **kwargs)
+        if self.profile_image:
+            temp_image = Image.open(self.profile_image.path)
+
+            temp_image = temp_image.convert("RGB").resize((500, 500))
+            temp_image.save(self.profile_image.path, format="JPEG", quality=100)
 
     # admin 페이지 프로필 사진 미리보기
     def _profile_image(self, size=50):
