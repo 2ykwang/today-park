@@ -150,7 +150,9 @@ class ParkReviewListView(APIView):
 
         공원(id)에 대한 리뷰 요청 - 삭제된 리뷰 제외
         """
-        review = Review.objects.filter(Q(park_id=park_id) & Q(is_deleted=False)).order_by('-created_at')
+        # review = Review.objects.filter(Q(park_id=park_id) & Q(is_deleted=False)).order_by('-created_at')
+        # deletedmanager 가 filter 해준결과를 보여줌
+        review = Review.objects.filter(park_id=park_id).order_by("-created_at")
         serializer = ParkReviewSerializer(review, many=True)
         return Response(serializer.data)
 
@@ -290,8 +292,10 @@ class UserReviewListView(APIView, ParkListPagination):
         사용자가 작성한 공원 리뷰 목록을 반환합니다.
         """
 
-        review = Review.objects.filter(Q(user_id=request.user.id) & Q(is_deleted=False)).order_by('-created_at')
-
+        # review = Review.objects.filter(
+        #     Q(user_id=request.user.id) & Q(is_deleted=False)
+        # ).order_by("-created_at")
+        review = Review.objects.filter(user_id=request.user.id).order_by("-created_at")
         reviews = self.paginate_queryset(review, request, view=self)
         serializer = ParkReviewSerializer(reviews, many=True)
         return self.get_paginated_response(serializer.data)

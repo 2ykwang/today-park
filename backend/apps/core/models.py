@@ -31,7 +31,7 @@ class DeletableModel(models.Model):
     is_deleted = models.BooleanField(verbose_name="삭제 여부", default=False)
     deleted_at = models.DateTimeField(verbose_name="삭제된 날짜", null=True, blank=True)
 
-    objects = DeletedManager
+    objects = DeletedManager()
 
     # 오버라이딩해서 실제로 삭제되는게 아닌 is_deleted=True 해줌.
 
