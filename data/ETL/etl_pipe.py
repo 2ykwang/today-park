@@ -11,6 +11,7 @@ import dotenv
 import etl_equipment as equip
 import etl_park as park
 import etl_prak_equipment as park_equip
+import etl_nearby_park as nearby_park
 import pymysql
 import settings
 from sqlalchemy import create_engine
@@ -86,6 +87,13 @@ def main():
                 engine=engine,
                 file_path=f"{base_dir}/etl_files/{file}",
             ).etl_data()
+            if ex is not None:
+                # error logging
+                break
+
+            ex = nearby_park.Nearby_Park(
+                engine=engine
+            ).load_nearby_park()
             if ex is not None:
                 # error logging
                 break

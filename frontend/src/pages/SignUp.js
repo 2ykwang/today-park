@@ -65,7 +65,7 @@ function SignUp() {
 
     // 프론트에서 validation
     const valid = await validSignupFields();
-    if (valid) {
+    if (!valid) {
       return;
     }
 

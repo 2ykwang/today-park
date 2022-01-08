@@ -4,6 +4,7 @@ import { getLoginData } from "../store/loginSlice";
 import Logo from "../image/logo.png";
 import { BasicLink, LoginModal } from "../pages/LoginModal";
 import Cookies from "js-cookie";
+import { userLogout } from "../actions/auth";
 
 function LoginHeader() {
   const [showModal, setShowModal] = useState(false);
@@ -64,6 +65,9 @@ function LogoutHeader() {
     Cookies.remove("accessToken");
     Cookies.remove("refreshToken");
     window.location.replace("/");
+
+    // api call
+    userLogout();
   }
   return (
     <>
@@ -83,9 +87,16 @@ function LogoutHeader() {
 
 export function Header() {
   const loginStore = useSelector((state) => state.login);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const updateScroll = () => {
+    setScrollPosition(window.scrollY || document.documentElement.scrollTop);
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", updateScroll);
+  });
   return (
     <>
-      <header className="mainHeader">
+      <header className={scrollPosition < 80 ? "mainHeader" : "ver2"}>
         <div className="logo">
           <BasicLink to="/">
             <img src={Logo} alt="오늘의 공원 로고" height="60" />
@@ -106,7 +117,7 @@ export function Header() {
           </nav>
         </div>
         {/* 로그인 성공하면  */}
-        {Cookies.get("accessToken") ? <LogoutHeader /> : <LoginHeader />}
+        {Cookies.get("username") ? <LogoutHeader /> : <LoginHeader />}
       </header>
     </>
   );

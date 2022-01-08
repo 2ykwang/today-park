@@ -2,7 +2,6 @@
 import axios from "axios";
 
 export async function registerUser(username, email, password) {
-  // const config = makeHeaders();
   try {
     const data = { username: username, email: email, password: password };
     const response = await axios.post(`/user/register`, data);
@@ -66,4 +65,20 @@ export async function onlyUserReview() {
     const response = await axios.get(`/parks/user-reviews`);
     return response.data;
   } catch (error) {}
+}
+
+export async function uploadUserImage(image, filename) {
+  try {
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
+    const formData = new FormData();
+    formData.append("profile_image", image, filename);
+    const response = await axios.post("/user/upload-image", formData, config);
+    return response;
+  } catch (error) {
+    return error.response;
+  }
 }

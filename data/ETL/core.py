@@ -7,7 +7,7 @@ import pandas as pd
 def load_data(engine, table_name, group_column, df_trans):
     with engine.connect() as conn:
         try:
-            print("load start")
+            print(f"load start:{table_name}")
             # 기존 data search
             query = f"SELECT * FROM {table_name}"
             df_sql = pd.read_sql(query, con=conn)
@@ -29,20 +29,39 @@ def load_data(engine, table_name, group_column, df_trans):
                 )
 
         except Exception as ex:
-            print(f"load Exception {ex}")
             conn.close()
+            print(f"load Exception {ex}")
             return ex
         finally:
-            print("load end")
             conn.close()
+            print(f"load end:{table_name}")
 
     return None
 
+def delete_load_data(engine, table_name, df_trans):
+    
+    with engine.connect() as conn:
+        try:
+            conn.execute(f"DELETE FROM {table_name}")
+            df_trans.to_sql(
+                    name=table_name, con=engine, if_exists="append", index=False
+                )
+
+        except Exception as ex:
+            conn.close()
+            print(f"load Exception {ex}")
+            return ex
+        finally:
+            conn.close()
+            print(f"delete and load end:{table_name}")
+
+    return None
 
 def search_table(engine, table_name, id_delete=True, option=None):
     with engine.connect() as conn:
 
         try:
+            print(f"{table_name} seach start!")
             # 기존 data search
             query = f"SELECT * FROM {table_name}"
 
@@ -57,6 +76,7 @@ def search_table(engine, table_name, id_delete=True, option=None):
             if id_delete:
                 df_sql.drop(columns=["id"], inplace=True)
 
+            print(f"{table_name} seach done!")
             return df_sql, None
         except Exception as ex:
             conn.close()
@@ -64,5 +84,3 @@ def search_table(engine, table_name, id_delete=True, option=None):
         finally:
             conn.close()
 
-
-# flake8: noqa

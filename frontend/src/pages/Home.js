@@ -2,8 +2,7 @@ import React from "react";
 import styled from "styled-components";
 // import { Link } from "react-router-dom";
 import { Header } from "../components/Header";
-import video2 from "../video/mainVideo.mp4";
-// import video2 from "../video/mainVideoSmall.mp4";
+import video from "../video/mainVideo.mp4";
 import { BasicLink } from "../components/BasicLink";
 import underScroll from "../image/scrollDown.png";
 import cloud from "../image/cloud3.png";
@@ -54,15 +53,24 @@ function Home() {
       <Header />
       <div className="mainContainer">
         <section className="home">
+          <div className="introTextWrapper">
+            <div className="introText1">
+              <p>포스트 코로나,</p>
+              <p>당신의 일상에 건강을 되찾을 시간.</p>
+            </div>
+            <div className="introText2">
+              <p>"오늘의 공원"이 도와드릴게요:)</p>
+            </div>
+          </div>
           <div className="video">
             <video muted autoPlay loop>
-              <source src={video2} type="video/mp4" />
+              <source src={video} type="video/mp4" />
             </video>
             <BasicLink to="/search" className="findPark">
               공원 찾으러 가기 →
             </BasicLink>
           </div>
-          <div className="under-scroll">
+          <div className="underScroll">
             <img src={underScroll} alt="underScroll" />
             <p>
               scroll <br />
@@ -70,10 +78,11 @@ function Home() {
             </p>
           </div>
         </section>
+
         <div className="intro">
-          <div className="intro-background-wrapper">
-            <div className="intro-background-1"></div>
-            <div className="intro-background-2"></div>
+          <div className="introBackgroundWrapper">
+            <div className="introBackground1"></div>
+            <div className="introBackground2"></div>
           </div>
           <div className="intro-cloud-1">
             <img src={cloud} alt="cloud1" />
@@ -86,15 +95,6 @@ function Home() {
           </div>
           <div className="intro-sun">
             <img src={sun} alt="sun" />
-          </div>
-          <div className="intro-textwrapper">
-            <div className="intro-text-1">
-              <p>포스트 코로나,</p>
-              <p>당신의 일상에 건강을 되찾을 시간.</p>
-            </div>
-            <div className="intro-text-2">
-              <p>"오늘의 공원"이 도와드릴게요:)</p>
-            </div>
           </div>
         </div>
         <div className="reason">

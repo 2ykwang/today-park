@@ -8,7 +8,7 @@ import SignUp from "./pages/SignUp";
 import Mypage from "./pages/Mypage";
 import { SidebarBookmark } from "./components/SidebarBookmark";
 import { SidebarSearchDetail } from "./components/SidebarSearchDetail";
-import { axiosConfig } from "./actions/auth";
+import { axiosConfig, checkUserTokenAndRefresh } from "./actions/auth";
 import "./css/reset.css";
 import "./css/app.css";
 import "./css/header.css";
@@ -23,7 +23,12 @@ import "./css/home.css";
 import "./css/prolog.css";
 
 function App() {
+  //axios 전역 설정
   axiosConfig();
+
+  // Access Token 체크하고 만료되었다면 갱신해준다
+  const useSSL = process.env.REACT_APP_USE_SSL;
+  checkUserTokenAndRefresh(useSSL);
 
   return (
     <>
