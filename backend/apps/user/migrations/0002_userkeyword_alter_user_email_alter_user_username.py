@@ -2,32 +2,58 @@
 
 import apps.user.validators
 import django.core.validators
-from django.db import migrations, models
 import django.db.models.deletion
+from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('user', '0001_initial'),
+        ("user", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='UserKeyword',
+            name="UserKeyword",
             fields=[
-                ('user_id', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, serialize=False, to='user.user')),
-                ('keyword', models.CharField(max_length=50)),
+                (
+                    "user_id",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        primary_key=True,
+                        serialize=False,
+                        to="user.user",
+                    ),
+                ),
+                ("keyword", models.CharField(max_length=50)),
             ],
         ),
         migrations.AlterField(
-            model_name='user',
-            name='email',
-            field=models.EmailField(error_messages={'unique': '이미 사용중인 이메일 입니다.'}, max_length=60, unique=True, validators=[django.core.validators.MinLengthValidator(8)], verbose_name='이메일'),
+            model_name="user",
+            name="email",
+            field=models.EmailField(
+                error_messages={"unique": "이미 사용중인 이메일 입니다."},
+                max_length=60,
+                unique=True,
+                validators=[django.core.validators.MinLengthValidator(8)],
+                verbose_name="이메일",
+            ),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='username',
-            field=models.CharField(error_messages={'unique': '이미 사용중인 닉네임 입니다.'}, max_length=30, unique=True, validators=[apps.user.validators.UserNameValidator(), django.core.validators.MinLengthValidator(2)], verbose_name='닉네임'),
+            model_name="user",
+            name="username",
+            field=models.CharField(
+                error_messages={"unique": "이미 사용중인 닉네임 입니다."},
+                max_length=30,
+                unique=True,
+                validators=[
+                    apps.user.validators.UserNameValidator(),
+                    django.core.validators.MinLengthValidator(2),
+                ],
+                verbose_name="닉네임",
+            ),
         ),
     ]
+
+
+# flake8:noqa
