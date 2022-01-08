@@ -5,6 +5,7 @@ import Logo from "../image/logo.png";
 import { BasicLink, LoginModal } from "../pages/LoginModal";
 import Cookies from "js-cookie";
 import { userLogout } from "../actions/auth";
+import { throttle } from "lodash"
 
 function LoginHeader() {
   const [showModal, setShowModal] = useState(false);
@@ -92,8 +93,11 @@ export function Header() {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
   };
   useEffect(() => {
-    window.addEventListener("scroll", updateScroll);
-  }, [scrollPosition]);
+    window.addEventListener("scroll", throttle(updateScroll, 300));
+    return() => {
+      window.removeEventListener("scroll", _.throttle(updateScroll, 300));
+    }
+  }, []);
   return (
     <>
       <header className={scrollPosition < 80 ? "mainHeader" : "ver2"}>
