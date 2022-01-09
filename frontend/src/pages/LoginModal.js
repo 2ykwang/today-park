@@ -85,20 +85,23 @@ export function LoginModal({
                     loginStore.password,
                     useSSL
                   );
-                  response = await getUserInfo();
-                  console.log(response.data);
-                  const username = response.data.username;
-                  const email = response.data.email;
-                  dispatch(
-                    await getLoginData({
-                      email: loginStore.email,
-                      username: username,
-                      password: loginStore.password,
-                    })
-                  );
-                  Cookies.set("username", username);
-                  Cookies.set("email", email);
-                  window.location.replace("/");
+
+                  if (response.status < 400) {
+                    response = await getUserInfo();
+                    console.log(response.data);
+                    const username = response.data.username;
+                    const email = response.data.email;
+                    dispatch(
+                      await getLoginData({
+                        email: loginStore.email,
+                        username: username,
+                        password: loginStore.password,
+                      })
+                    );
+                    Cookies.set("username", username);
+                    Cookies.set("email", email);
+                    window.location.replace("/");
+                  }
                 }}
               >
                 로그인

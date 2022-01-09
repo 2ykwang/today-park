@@ -8,7 +8,8 @@ header.mainHeader {
   top: 0;
   left: 0;
   transition-duration: 1s;
-  border-bottom: 1px solid gray;
+  /* background-color: none; */
+  box-shadow: 1px 1px 4px 1px rgba(117, 117, 117, 0.1);
 }
 header.mainHeader:hover {
   background-color: rgba(255, 255, 255, 0.767);
@@ -23,9 +24,8 @@ header.ver2 {
   align-items: center;
   top: 0;
   left: 0;
-  background-color: rgba(255, 255, 255, 0.767);
+  background-color: rgba(255, 255, 255, 1);
   transition: background-color 1s;
-  border-bottom: 1px solid gray;
 }
 header .logo {
   margin-left: 20px;

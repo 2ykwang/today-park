@@ -10,22 +10,33 @@ import {
   uploadUserImage,
 } from "../actions/index";
 import { ReactComponent as StarIcon } from "../image/star.svg";
-import { CreateReview } from "../components/CreateReview";
+import { CreateReview } from "../components/Search/CreateReview";
 import { editUserInfo, editUserPassword, getUserInfo } from "../actions/auth";
 import Cookies from "js-cookie";
 
 const ProfileImage = styled.img`
   background-color: #e0e0e0;
+  cursor: pointer;
   width: 120px;
   height: 120px;
   border: 1px solid #e0e0e0;
   border-radius: 9999px;
   margin: 0 auto 24px auto;
 `;
+const InputField = styled.input`
+  width: 50%;
+  margin-left: 8px;
+  margin-top: 3px;
+  padding: 12px 20px;
+  height: 12px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+`;
 
 function Mypage() {
   const dispatch = useDispatch();
-  // const loginStore = useSelector((state) => state.login);
 
   const [fields, setFields] = useState({
     username: Cookies.get("username"),
@@ -38,7 +49,6 @@ function Mypage() {
     password: false,
     review: false,
   });
-
   const [reviewList, setReviewList] = useState([]);
   const [clickedReviewIdx, setClickedReviewIdx] = useState(0);
   const [profileImage, setProfileImage] = useState("");
@@ -48,7 +58,6 @@ function Mypage() {
   useEffect(() => {
     async function getProfileImage() {
       const response = await getUserInfo();
-      console.log(response.data.profile_image);
       if (response.data.profile_image)
         setProfileImage(response.data.profile_image);
       else setProfileImage(defaultProfile);
@@ -57,7 +66,6 @@ function Mypage() {
     async function getReviews() {
       const response = await onlyUserReview();
       setReviewList(response.results);
-      console.log(response.results);
     }
     getReviews();
     getProfileImage();
@@ -125,7 +133,7 @@ function Mypage() {
                 닉네임 :
                 {editToggle.username ? (
                   <>
-                    <input
+                    <InputField
                       type="text"
                       value={fields.username}
                       onChange={handleFieldsChange}
@@ -168,8 +176,8 @@ function Mypage() {
                 {editToggle.password ? (
                   <>
                     <p>
-                      기존 비밀번호 :
-                      <input
+                      기존 비밀번호
+                      <InputField
                         type="password"
                         value={fields.oldPassword}
                         name="oldPassword"
@@ -177,8 +185,8 @@ function Mypage() {
                       />
                     </p>
                     <p>
-                      새로운 비밀번호 :
-                      <input
+                      새로운 비밀번호
+                      <InputField
                         type="password"
                         value={fields.newPassword}
                         name="newPassword"
@@ -186,8 +194,8 @@ function Mypage() {
                       />
                     </p>
                     <p>
-                      비밀번호 확인 :
-                      <input
+                      비밀번호 확인
+                      <InputField
                         type="password"
                         value={fields.rePassword}
                         name="rePassword"
@@ -228,11 +236,6 @@ function Mypage() {
                   </>
                 )}
               </p>
-              {/* <div className="sns">
-                <h3>소셜 계정 연동하기</h3>
-                <button>네이버</button>
-                <button className="kakao">카카오</button>
-              </div> */}
             </div>
           </div>
           <div className="reviewSide">
@@ -267,6 +270,7 @@ function Mypage() {
                       <div className="btns">
                         <button
                           onClick={() => {
+                            toggleEditField("review", true);
                             setClickedReviewIdx(index);
                           }}
                         >

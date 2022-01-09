@@ -6,51 +6,17 @@ body {
   font-family: "Elice Digital Baeum", sans-serif;
   color: #293845;
   font-size: 16px;
+  -ms-overflow-style: none;
+  word-break: keep-all;
+}
+::-webkit-scrollbar {
+  display: none;
 }
 
 /* SECTION */
 section {
-  margin-top: 80px;
   position: relative;
   box-sizing: border-box;
-}
-
-/* section .inner {
-  border: 2px solid red;
-  width: 980px;
-  margin: 0 auto;
-  position: relative;
-  box-sizing: border-box;
-} */
-
-/* BTN */
-/* .btn{
-  height: 34px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 12px;
-  border: 1px solid #B2ACFA;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #6B5EF5;
-  line-height: 1.5;
-  text-align: center;
-  cursor: pointer;
-  box-sizing: border-box;
-  position: relative;
-  text-decoration: none;
-  background-color: #f5f5f5;
-}
-.btn:hover{
-  opacity: 0.8;
-} */
-
-/* ACTIVATE BUTTON */
-.disabledBtn {
-  opacity: 0.6;
-  cursor: not-allowed;
 }
 
 input[type="text"] {
@@ -74,4 +40,12 @@ textarea {
   padding: 12px;
   box-sizing: border-box;
   font-size: 15px;
+}
+
+textarea:focus,
+button:focus,
+input:focus,
+select:focus,
+svg:focus {
+  outline: none;
 }

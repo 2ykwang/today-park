@@ -38,14 +38,15 @@ def load_data(engine, table_name, group_column, df_trans):
 
     return None
 
+
 def delete_load_data(engine, table_name, df_trans):
-    
+
     with engine.connect() as conn:
         try:
             conn.execute(f"DELETE FROM {table_name}")
             df_trans.to_sql(
-                    name=table_name, con=engine, if_exists="append", index=False
-                )
+                name=table_name, con=engine, if_exists="append", index=False
+            )
 
         except Exception as ex:
             conn.close()
@@ -56,6 +57,7 @@ def delete_load_data(engine, table_name, df_trans):
             print(f"delete and load end:{table_name}")
 
     return None
+
 
 def search_table(engine, table_name, id_delete=True, option=None):
     with engine.connect() as conn:
@@ -83,4 +85,3 @@ def search_table(engine, table_name, id_delete=True, option=None):
             return None, ex
         finally:
             conn.close()
-

@@ -1,6 +1,15 @@
+.SignUp {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
 .SignUpContainer {
+  position: absolute;
   display: flex;
   margin: 60px auto 0 auto;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   justify-content: center;
   background-color: white;
 }
@@ -53,10 +62,8 @@
   font-size: 20px;
   font-weight: bold;
   padding: 40px 0 40px 40px;
-  /* border: 2px solid blue; */
 }
 .MiniContainer form {
-  /* border: 2px solid orange; */
   margin: 0 40px 0 40px;
 }
 .MiniContainer .signUpItem .checkBtn {
@@ -66,7 +73,6 @@
 }
 .MiniContainer .signUpItem {
   display: flex;
-  /* border: 2px solid cyan; */
   align-items: center;
 }
 .MiniContainer .list {

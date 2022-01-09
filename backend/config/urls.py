@@ -47,7 +47,7 @@ urlpatterns = [
 ]
 
 # (개발환경) debug 모드 경우에만 라우팅
-if settings.DEBUG:
+if settings.DEBUG or settings.USE_SWAGGER:
     urlpatterns += [
         path("admin/", admin.site.urls),
         re_path(

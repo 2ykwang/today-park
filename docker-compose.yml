@@ -8,11 +8,9 @@ services:
   client:
     build:
       context: ./frontend
-    # volumes:
-    # - ./frontend:/srv/client/
-    # - "/srv/client/node_modules"
-    expose:
-      - "3000"
+    volumes:
+      - ./frontend/src:/srv/client/src
+      - ./frontend/public:/srv/client/public
 
   app:
     build:
@@ -20,12 +18,12 @@ services:
     volumes:
       - static_volume:/srv/app/.static
       - ./backend/.media:/srv/app/.media
-      - ./backend:/srv/app/
     restart: always
     expose:
       - "8000"
     depends_on:
       - client
+      - database
 
   nginx:
     image: nginx:latest
@@ -43,7 +41,17 @@ services:
     depends_on:
       - app
       - client
+      
+  database:
+    image: mysql:8.0
+    restart: unless-stopped
+    ports:
+      - "13306:3306"
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./.mysql/:/var/lib/mysql/
 
 volumes:
   static_volume: null
-  client_volume: null

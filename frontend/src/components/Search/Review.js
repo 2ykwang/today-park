@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as StarIcon } from "../image/star.svg";
+import { ReactComponent as StarIcon } from "../../image/star.svg";
 
 export function Review({ item, idx }) {
   return (

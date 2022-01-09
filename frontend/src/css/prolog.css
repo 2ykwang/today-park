@@ -1,5 +1,6 @@
 #prolog {
   display: flex;
+  margin-top: 20px;
 }
 /* #prolog .greenBar {
   position: fixed;
@@ -19,7 +20,7 @@
 }
 #prolog .leftIndexBar ul {
   padding-bottom: 100px;
-  border-right: 1px inset rgba(178,178,178,0.5);
+  border-right: 1px inset rgba(178, 178, 178, 0.5);
 }
 #prolog .leftIndexBar li {
   line-height: 30px;
@@ -38,7 +39,7 @@
 }
 
 #prolog #fullpage {
-  /* margin-left: 200px; */
+  margin-left: 20px;
   z-index: 1;
 }
 #prolog .contents {
@@ -50,21 +51,22 @@
 }
 
 /* 각 페이지 공통설정 */
-.content {
+#prolog .content {
   display: flex;
-  height:70vh;
-  width: 70em;
+  height: 70vh;
+  width: 1000px;
   flex-direction: column;
-  margin:5px 10px;
+  margin: 0 auto;
+  margin-top: 20px;
 }
-.section .title-content{
+.section .title-content {
   height: 10vh;
   margin-top: 10px;
   /* margin-bottom: 30px; */
   align-self: flex-start;
 }
 .section .title {
-  font-size: 50px;
+  font-size: 36px;
   font-weight: bold;
   height: 30px;
 }
@@ -72,8 +74,8 @@
   color: #47c690;
 }
 .quotation {
-  font-size:12px;
-  color:#B2B2B2;
+  font-size: 12px;
+  color: #b2b2b2;
 }
 
 /* 첫번째 페이지: 코로나와 배달의 상관관계 */
@@ -82,18 +84,18 @@
   align-items: center;
 }
 .section .eachContent1 .text-content1 {
-  flex:1;
+  flex: 1;
   /* align-self: flex-start; */
 }
 .text1 {
   font-weight: bold;
-  font-size: 25px;
-  margin: 2rem 0;
+  font-size: 20px;
+  line-height: 1.4;
 }
 .text2 {
-  font-size: 20px;
-  margin-top: 3rem;
-  line-height: 2em;
+  font-size: 18px;
+  margin-top: 24px;
+  line-height: 1.7;
 }
 .chartDeliver {
   /* flex: 0 0 500px; */
@@ -103,7 +105,7 @@
 
 /* 두번째 페이지: 배달과 건강의 상관관계 */
 .content .eachContent2 {
-  display: flex;
+  /* display: flex; */
   height: 50vh;
   flex-direction: column;
 }
@@ -115,24 +117,27 @@
   display: flex;
   flex-direction: column;
 }
+.gainWeightImg {
+  width: 180px;
+  display: inline-block;
+}
 .text3 {
   font-weight: bold;
-  font-size: 25px;
-  /* align-self: flex-start; */
-  margin-top: 1rem;
-  margin-bottom: 1em;
+  font-size: 20px;
+  margin-bottom: 24px;
 }
 .text4 {
   font-size: 20px;
-  margin-top: 1em;
-  line-height: 2em;
+  line-height: 1.5;
+  /* border: 2px solid red; */
+  margin-top: 12px;
 }
 .dietRate-content {
   display: flex;
-  margin-top: 2em;
+  margin-top: 20px;
 }
 .dietRate-text {
-  flex:1;
+  flex: 1;
 }
 .dietRate {
   flex: 1;
@@ -150,8 +155,7 @@
 }
 .chartKeyword {
   /* flex:1;/ */
- margin-left: 50px;
-  
+  margin-left: 50px;
 }
 
 /* 네번째 페이지: 왜 관악구의 2030 */
@@ -166,14 +170,14 @@
 .gwanak-charts {
   display: flex;
   justify-content: space-evenly;
-  margin:2em;
+  margin: 2em;
 }
 .chartGainWeightByAge {
-  width:400px;
-  height:200px; 
-  margin-bottom:30px;
-  margin-right:150px;
-  margin-left:50px;
+  width: 400px;
+  height: 200px;
+  margin-bottom: 30px;
+  margin-right: 150px;
+  margin-left: 50px;
 }
 
 /* 다섯번째 페이지: 왜 관악구의 2030 */
@@ -185,10 +189,10 @@
 }
 .chart2030 {
   flex: 1;
-  width:400px;
-  height:300px;
+  width: 400px;
+  height: 300px;
 }
-.chart2030-text{
+.chart2030-text {
   flex: 1;
   align-self: flex-start;
 }

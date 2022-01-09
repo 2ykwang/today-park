@@ -5,6 +5,7 @@ import Logo from "../image/logo.png";
 import { BasicLink, LoginModal } from "../pages/LoginModal";
 import Cookies from "js-cookie";
 import { userLogout } from "../actions/auth";
+import { throttle } from "lodash";
 
 function LoginHeader() {
   const [showModal, setShowModal] = useState(false);
@@ -58,7 +59,6 @@ function LoginHeader() {
 
 function LogoutHeader() {
   const dispatch = useDispatch();
-  const loginStore = useSelector((state) => state.login);
   function handleLogout() {
     dispatch(getLoginData({ email: "", password: "" }));
     // 쿠키 삭제
@@ -86,14 +86,16 @@ function LogoutHeader() {
 }
 
 export function Header() {
-  const loginStore = useSelector((state) => state.login);
   const [scrollPosition, setScrollPosition] = useState(0);
   const updateScroll = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
   };
   useEffect(() => {
-    window.addEventListener("scroll", updateScroll);
-  });
+    window.addEventListener("scroll", throttle(updateScroll, 300));
+    return () => {
+      window.removeEventListener("scroll", throttle(updateScroll, 300));
+    };
+  }, []);
   return (
     <>
       <header className={scrollPosition < 80 ? "mainHeader" : "ver2"}>
@@ -108,7 +110,7 @@ export function Header() {
             <BasicLink to="/prolog" className="menu">
               프롤로그
             </BasicLink>
-            <BasicLink to="/search" className="menu">
+            <BasicLink to="/search/1" className="menu">
               공원 찾아보기
             </BasicLink>
             <BasicLink to="/teamIntro" className="menu">
