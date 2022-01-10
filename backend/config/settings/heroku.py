@@ -10,8 +10,7 @@ MIDDLEWARE += [
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 STATIC_URL = "/static/"
-
-USE_SWAGGER = True
+ 
 ALLOWED_HOSTS = get_env("ALLOWED_HOSTS").split(",")
 
 DEBUG = False

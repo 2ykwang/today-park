@@ -3,8 +3,6 @@ from .base import BASE_DIR, get_env
 
 DEBUG = True
 
-USE_SWAGGER = True
-
 ALLOWED_HOSTS = ["*"]
 
 # debug toolbar

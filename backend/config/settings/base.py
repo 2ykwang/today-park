@@ -229,3 +229,10 @@ SWAGGER_SETTINGS = {
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
+
+
+# --- CUSTOM SETTINGS ---
+
+USE_SWAGGER = True
+# root path 접근시 redoc 으로 redirection
+REDIRECT_TO_REDOC = True
