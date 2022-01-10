@@ -1,1 +1,1 @@
-web: gunicorn -c ./config/gunicorn.config.py
+web: gunicorn --bind :$PORT --workers 6 --threads 2 config.wsgi:application

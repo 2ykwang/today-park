@@ -14,8 +14,10 @@ import dotenv
 from django.core.wsgi import get_wsgi_application
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+env_path = os.path.join(BASE_DIR, ".env")
 
-dotenv.read_dotenv(os.path.join(BASE_DIR, ".env"))
+if os.path.exists(env_path):
+    dotenv.read_dotenv(env_path)
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.production")
 
