@@ -1,1 +1,1 @@
-web: gunicorn -c ./backend/gunicorn.config.py
+web: gunicorn -c ./config/gunicorn.config.py
