@@ -41,7 +41,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, ".media")
 # static
 # django-admin collectstatic 생성 파일 저장 경로
 STATIC_URL = "/staticfiles/"
-STATIC_ROOT = os.path.join(BASE_DIR, ".static")
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 
 # ---------------------------------------------------------------------
@@ -115,17 +115,25 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": get_env("MYSQL_DATABASE"),
-        "USER": get_env("MYSQL_USER"),
-        "PASSWORD": get_env("MYSQL_PASSWORD"),
-        "HOST": get_env("MYSQL_HOST"),
-        "PORT": get_env("MYSQL_PORT"),
+# SQLITE3 사용
+if get_env("USE_SQLITE3") == "1":
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.mysql",
+            "NAME": get_env("MYSQL_DATABASE"),
+            "USER": get_env("MYSQL_USER"),
+            "PASSWORD": get_env("MYSQL_PASSWORD"),
+            "HOST": get_env("MYSQL_HOST"),
+            "PORT": get_env("MYSQL_PORT"),
+        }
+    }
 
 
 # Password validation
