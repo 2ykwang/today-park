@@ -150,7 +150,7 @@ function Home() {
               </div>
               <div className="thirdButton">
                 <BasicLink to="/search/1" className="findPark">
-                  <p>공원 찾으러 고!</p>
+                  <p>공원 찾으러 GO!</p>
                 </BasicLink>
               </div>
             </div>
