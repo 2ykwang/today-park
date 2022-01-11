@@ -1,31 +1,33 @@
 version: "3.2"
 
-# networks:
-#   app:
-#     driver: bridge
-
 services:
+  # BACKEND
   app:
-    command: sh -c "python3 manage.py migrate --noinput && python manage.py
-      collectstatic --noinput && gunicorn -c config/gunicorn.conf.py"
+    command: sh -c "python3 manage.py migrate --noinput &&
+      python manage.py collectstatic --noinput &&
+      gunicorn -c config/gunicorn.conf.py"
 
+  # FRONTEND
   client:
     command: "yarn build"
     volumes:
       - client_volume:/srv/client/build
     environment:
-      CHOKIDAR_USEPOLLING: "true"
       NODE_ENV: "production"
-      
+
+  # WEB SERVER
   nginx:
     volumes:
       - ./nginx/nginx-release.conf:/etc/nginx/conf.d/default.conf
       - client_volume:/srv/client/build
 
+  # DATABASE
   database:
     env_file:
       - ./backend/.env.database
+      # .env.database
+      # MYSQL_DATABASE="db_name"
+      # MYSQL_ROOT_PASSWORD="root_password"
 
 volumes:
-  client_volume: null 
- 
+  client_volume: null

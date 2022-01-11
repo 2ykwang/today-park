@@ -5,25 +5,25 @@ version: "3.2"
 #     driver: bridge
 
 services:
-  client:
-    build:
-      context: ./frontend
-    volumes:
-      - ./frontend/src:/srv/client/src
-      - ./frontend/public:/srv/client/public
-
   app:
     build:
       context: ./backend
     volumes:
       - static_volume:/srv/app/.static
       - ./backend/.media:/srv/app/.media
-    restart: always
     expose:
       - "8000"
     depends_on:
       - client
       - database
+    restart: always
+
+  client:
+    build:
+      context: ./frontend
+    volumes:
+      - ./frontend/src:/srv/client/src
+      - ./frontend/public:/srv/client/public
 
   nginx:
     image: nginx:latest
@@ -36,15 +36,12 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    # networks:
-    #   - app
     depends_on:
       - app
       - client
-      
+
   database:
     image: mysql:8.0
-    restart: unless-stopped
     ports:
       - "13306:3306"
     command:
@@ -52,6 +49,7 @@ services:
       - --collation-server=utf8mb4_unicode_ci
     volumes:
       - ./.mysql/:/var/lib/mysql/
+    restart: unless-stopped
 
 volumes:
   static_volume: null
