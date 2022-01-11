@@ -3,16 +3,18 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to today-park's documentation!
+오늘의 공원 ☀️
 ======================================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+   introduce
+   install
 
 
-Indices and tables
+목차
 ==================
 
 * :ref:`genindex`
