@@ -82,6 +82,7 @@
   box-sizing: border-box;
   font-size: 15px;
   cursor: pointer;
+  text-align: center;
 }
 .search .searchContainer {
   margin-left: 80px;
