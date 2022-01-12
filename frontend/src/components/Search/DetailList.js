@@ -37,7 +37,7 @@ export function DetailList({ detailData, nearbyParks }) {
           }
         });
     }
-    getbookmarks();
+    Cookies.get("username") && getbookmarks();
   }, [detailData, click]);
 
   async function addbookmark() {
@@ -87,7 +87,7 @@ export function DetailList({ detailData, nearbyParks }) {
           <ul>
             {nearbyparkList &&
               nearbyparkList.map((item, idx) => {
-                return <li ket={idx}> - {item.park_name}</li>;
+                return <li key={idx}> - {item.park_name}</li>;
               })}
           </ul>
         </div>
