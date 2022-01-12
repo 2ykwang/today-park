@@ -8,10 +8,11 @@
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: TOC:
 
    introduce
    install
+   testing
 
 
 목차
