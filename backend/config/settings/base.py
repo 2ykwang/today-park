@@ -27,8 +27,10 @@ def get_env(key_name):
     try:
         return os.environ[key_name]
     except KeyError:
-        error_message = f"환경변수 {key_name}이 설정되어 있지 않습니다."
-        raise ImproperlyConfigured(error_message)
+        if not os.environ["DJANGO_SETTINGS_MODULE"] == "config.settings.test":
+            error_message = f"환경변수 {key_name}이 설정되어 있지 않습니다."
+            print(error_message)
+        # raise ImproperlyConfigured(error_message)
 
 
 # ---------------------------------------------------------------------
