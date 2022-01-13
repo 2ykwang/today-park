@@ -1,14 +1,14 @@
 .. installation:
 
 =======================
-설치
+설치 / 실행
 =======================
  
 -----------------------
-백엔드 (Django)
+백엔드
 -----------------------
 
-의존성 설치
+의존성 관리
 ===================
 
 의존성 관리는 `Poetry`_ 를 통해 관리됩니다. ``/backend`` 디렉터리에서 아래 명령어를 입력합니다.
@@ -21,15 +21,17 @@
 실행
 ===================
 
-
-
 .. code-block:: bash
 
     $ python manage.py migrate
     $ python manage.py runserver
 
-환경변수
+서버 환경변수
 ===================
+
+``export`` 명령을 이용하여 직접 환경변수를 설정하거나 ``/backend`` 디렉터리에서 ``.env`` 파일을 생성하여 환경변수를 설정할 수 있습니다.
+
+
 .. code-block:: bash
     
     # 기본
@@ -37,19 +39,40 @@
     ALLOWED_HOSTS="*"
 
     # 데이터 베이스
-    MYSQL_DATABASE="database"
+    MYSQL_DATABASE="database" 
     MYSQL_USER="root"
-    MYSQL_HOST="host" # local docker mysql 사용시 host를 `database` 으로 입력
+    MYSQL_HOST="host" # docker를 사용하여 운용시 docker 컨테이너 이름을 입력. > `database`
     MYSQL_PORT="3306"
-    MYSQL_PASSWORD="1234" 
+    MYSQL_PASSWORD="1234"
 
     # local 환경에서만 적용
     USE_SQLITE3=1
 
-도커를 통한 실행 
-===================
+    # config.settings.local or config.settings.production
+    DJANGO_SETTINGS_MODULE="config.settings.local"
 
-`도커 설치하기`_ 안내에 따라 도커 설치합니다. 그 후 프로젝트 root 디렉터리에서 아래 명령어를 입력합니다.
+-----------------------
+도커
+-----------------------
+
+`도커 설치하기`_ 
+
+도커가 설치 되어있을경우 프로젝트 root 디렉터리에서 아래 명령어를 입력합니다.
+
+도커 환경변수
+=======================
+
+``/backend`` 디렉터리에서 ``.env.database`` 파일을 생성합니다
+
+.. code-block:: bash
+
+    # 데이터 베이스 이름
+    MYSQL_DATABASE="database"
+    # root 패스워드
+    MYSQL_ROOT_PASSWORD="password"
+
+도커 실행
+=======================
 
 .. code-block:: bash
 

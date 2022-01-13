@@ -20,7 +20,7 @@ import sys
 sys.path.insert(0, os.path.abspath(".."))
 # -- Project information -----------------------------------------------------
 
-project = "today-park"
+project = "오늘의 공원"
 copyright = "2022, emptycart"
 author = "yeonggwang yang, youngsook lee"
 
@@ -30,7 +30,21 @@ author = "yeonggwang yang, youngsook lee"
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ["sphinx.ext.todo", "sphinx.ext.viewcode", "sphinx.ext.autodoc"]
+extensions = [
+    # Sphinx's own extensions
+    "sphinx.ext.autodoc",
+    "sphinx.ext.extlinks",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.mathjax",
+    "sphinx.ext.todo",
+    "sphinx.ext.viewcode",
+    # theme
+    "furo.sphinxext",
+    # External stuff
+    "sphinx_copybutton",
+    "sphinx_design",
+    "sphinx_inline_tabs",
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
@@ -53,7 +67,9 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = "sphinx_rtd_theme"
+html_theme = "furo"
+pygments_style = "monokai"
+
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
