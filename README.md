@@ -1,5 +1,7 @@
 # 오늘의 공원
 
+[![Documentation Status](https://readthedocs.org/projects/today-park/badge/?version=latest)](https://today-park.readthedocs.io/ko/latest/?badge=latest) [![Frontend Status](https://img.shields.io/website?label=frontend&logo=react&url=https%3A%2F%2Ftoday-park.vercel.app%2F)](https://today-park.vercel.app/) [![Backend Status](https://img.shields.io/website?label=backend&logo=django&url=https%3A%2F%2Ftoday-park.herokuapp.com%2F)](https://today-park.herokuapp.com/)
+
 🌐프론트엔드: [demo](https://today-park.vercel.app/)
 
 💻백엔드: [swagger](https://today-park.herokuapp.com/swagger/) / [redoc](https://today-park.herokuapp.com/redoc/)
