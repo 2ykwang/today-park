@@ -17,10 +17,44 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath(".."))
+sys.path.insert(0, os.path.abspath("../backend"))
+
+
+def django_configure():
+    from django.conf import settings
+
+    settings.configure(
+        SECRET_KEY="a random key to use",
+        INSTALLED_APPS=(
+            "django.contrib.admin",
+            "django.contrib.auth",
+            "django.contrib.contenttypes",
+            "django.contrib.sessions",
+            "django.contrib.sites",
+            "django.contrib.staticfiles",
+            "rest_framework",
+            "apps",
+            "apps.core",
+            "apps.park",
+            "apps.bookmark",
+        ),
+    )
+
+    try:
+        import django
+
+        django.setup()
+    except AttributeError:
+        pass
+
+
+django_configure()
+
 # -- Project information -----------------------------------------------------
 
-project = "오늘의 공원"
+release = "1.0"
+
+project = "today-park"
 copyright = "2022, emptycart"
 author = "yeonggwang yang, youngsook lee"
 

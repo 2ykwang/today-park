@@ -20,8 +20,9 @@
 -----------------------
 
 * 발표 자료 :download:`pdf <_static/220109.pdf>`
+* 소스코드: `download ZIP`_
 * 백엔드: `swagger`_ \/ `redoc`_
-* 프론트엔드: `demo`_
+* 프론트엔드: `demo`_ 
 
 .. note::
     프로젝트 최종 배포는 PaaS (Heroku, Vercel)에서 진행됐습니다.
@@ -77,15 +78,16 @@
 .. _redoc: https://today-park.herokuapp.com/redoc/
 .. _demo: https://todaypark.vercel.app
 .. _filesystem: https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem
+.. _Download ZIP: https://github.com/2ykwang/today-park/archive/refs/heads/develop.zip
 
 .. |architecture| image:: _static/architecture.jpg
 .. |bmcho| image:: _static/member/bmcho.png 
            :target: https://github.com/bmcho
-.. |kwang| image:: _static/member/kwang.png 
-           :target: https://github.com/myeongu
-.. |martina| image:: _static/member/martina.png 
-             :target: https://github.com/minyopi
-.. |minyoung| image:: _static/member/minyoung.png 
+.. |kwang| image:: _static/member/kwang.png
              :target: https://github.com/2ykwang
-.. |myeongu| image:: _static/member/myeongu.png 
+.. |martina| image:: _static/member/martina.png 
              :target: https://github.com/martinalee94
+.. |minyoung| image:: _static/member/minyoung.png
+             :target: https://github.com/minyopi
+.. |myeongu| image:: _static/member/myeongu.png 
+             :target: https://github.com/myeongu 

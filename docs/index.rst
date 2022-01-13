@@ -14,4 +14,10 @@
    install
    testing
    retrospect
+   backend
  
+
+Indices and tables
+------------------
+* :ref:`genindex`
+* :ref:`modindex`
