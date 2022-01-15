@@ -5,7 +5,7 @@ from rest_framework import exceptions
 def test_1():
 
     test = 1
-    assert test == 2
+    assert test == 1
 
     # serializer = ExampleSerializer(data={"number": 1, "text": "Hello world"})
     # assert serializer.is_valid()
