@@ -1,17 +1,17 @@
 """
 Django settings for today-park project.
- 
+
 environment variables:
     SECRET_KEY = "secret key"
-    
+
     MYSQL_DATABASE = "db name"
     MYSQL_USER = "db user"
     MYSQL_PASSWORD = "db password"
     MYSQL_HOST = "db host"
     MYSQL_PORT = 3306
-    
+
     ALLOWED_HOSTS = https://aaa.com,https://bbb.com # 접속 허용할 hosts
-    
+
     USE_SQLITE3 = 0 # SQLITE 사용 여부
 """
 

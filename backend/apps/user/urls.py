@@ -12,7 +12,7 @@ from . import views
     GET, PUT    /api/user
     POST        /api/user/upload-image
     PUT         /api/user/password
-    
+
     POST         /api/user/check
 """
 
