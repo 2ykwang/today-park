@@ -76,7 +76,7 @@
  
 .. _swagger: https://today-park.herokuapp.com/swagger/
 .. _redoc: https://today-park.herokuapp.com/redoc/
-.. _demo: https://todaypark.vercel.app
+.. _demo: https://today-park.vercel.app
 .. _filesystem: https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem
 .. _Download ZIP: https://github.com/2ykwang/today-park/archive/refs/heads/develop.zip
 

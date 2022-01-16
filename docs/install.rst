@@ -16,6 +16,7 @@
 .. code-block:: bash
 
     $ poetry install
+    $ poetry install -E mysql
     $ poetry shell
 
 실행

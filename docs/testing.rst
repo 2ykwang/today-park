@@ -8,6 +8,7 @@
 라이브러리
 -----------------------
 
+- 테스트 자동화 도구 `tox`_
 - 테스트 프레임워크 `pytest`_
 - django pytest 플러그인 `pytest-django`_
 - 테스트 커버리지 툴 `pytest-cov`_
@@ -16,13 +17,15 @@
 실행
 -----------------------
 
-테스트를 실행하기 전 pytest, pytest-django, pytest-cov 패키지가 설치되어 있어야합니다. `backend` 디렉터리에서 `poetry install` 명령을 입력하여 설치해주세요.
- 
-아래 명령어로 테스트를 실행할 수 있습니다.
+`backend` 디렉터리에서 `poetry install -E tests` 명령어를 입력하여 테스트를 하기위한 의존성을 설치해주세요.
+
+그 후 아래 명령어로 테스트를 실행할 수 있습니다.
 
 .. code-block:: bash
 
-    $ pytest
+    $ tox
+
+tox 도구는 테스트, 포멧팅, 린트를 실행합니다.
 
 테스트 커버리지
 -----------------------
@@ -52,6 +55,7 @@
     Wrote HTML report to htmlcov/index.html 
 
 .. _coverage: https://coverage.readthedocs.io/
+.. _tox: https://tox.wiki/en/latest/
 .. _pytest: https://docs.pytest.org/
 .. _pytest-django: https://pytest-django.readthedocs.io/en/latest/
 .. _pytest-cov: https://pytest-cov.readthedocs.io/en/latest
