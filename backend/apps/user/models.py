@@ -1,12 +1,9 @@
 import os
-import sys
 import uuid
-from io import BytesIO
 
 from apps.core.models import TimeStampModel
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.core import validators
-from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.db import models
 from django.utils.html import mark_safe
 from PIL import Image

@@ -1,4 +1,3 @@
-from apps.park.models import Park
 from apps.park.serializers import ParkSerializer
 from drf_yasg.utils import swagger_serializer_method
 from rest_framework import serializers
