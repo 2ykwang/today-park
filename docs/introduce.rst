@@ -83,6 +83,7 @@
 .. |architecture| image:: _static/architecture.jpg
 .. |bmcho| image:: _static/member/bmcho.png 
            :target: https://github.com/bmcho
+           :scale: 50 %
 .. |kwang| image:: _static/member/kwang.png
              :target: https://github.com/2ykwang
 .. |martina| image:: _static/member/martina.png 
