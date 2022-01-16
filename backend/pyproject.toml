@@ -1,42 +1,66 @@
 [tool.poetry]
-name = "backend"
-version = "0.1.0"
-description = ""
+name = "today-park"
+version = "0.2.0"
+description = "todaypark"
 authors = ["Yeonggwang <immutable000@gmail.com>"]
 
+packages = [{ include = "apps" }]
+
 [tool.poetry.dependencies]
-python = "3.8.12"
-Django = "^4.0"
+python = "^3.8"
+Django = "^3.1 || ^3.2 || ^4.0"
 djangorestframework = "^3.13.1"
 djangorestframework-simplejwt = "^5.0.0"
 django-dotenv = "^1.4.2"
 django-cors-headers = "^3.10.1"
 drf-yasg = "^1.20.0"  
 Pillow = "^8.4.0"  
-gunicorn = "^20.1.0"
-mysqlclient = "^2.1.0"
+gunicorn = "^20.1.0" 
 whitenoise = "^5.3.0"
+
+# extras 는 필요에따라 설치
 
 # poetry install -E docs
 Sphinx = { version = "^4.3.2", optional = true }  
 sphinx-rtd-theme = { version =  "^1.0.0", optional = true } 
 
+# poetry install -E tests
+pytest = { version =  "^6.2.5", optional = true } 
+pytest-django = { version =  "^4.5.2", optional = true }
+pytest-cov = { version =  "^3.0.0", optional = true }  
+tox =  { version =  "^3.24.5", optional = true } 
+
+# poetry install -E mysql
+mysqlclient = { version = "^2.1.0", optional = true }
+
 [tool.poetry.dev-dependencies]
 flake8 = "^4.0.1"
 isort = "^5.10.1"
-black = "^21.12b0"
-pytest = "^6.2.5"
-pytest-django = "^4.5.2"
-pytest-cov = "^3.0.0" 
-tox = "^3.24.5"
+black = "^21.12b0"  
 
 [tool.poetry.extras]
 docs = [
     "Sphinx",
     "sphinx-rtd-theme"
 ]
+tests = [
+    "pytest",
+    "pytest-django",
+    "pytest-cov",
+    "tox"
+]
+mysql = ["mysqlclient"]
+
+
+[tool.black]
+line-length = 88 
+include = '\.pyi?$'
+# regex
+extend-exclude = '''
+     migrations
+'''
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry_core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
- 
+
