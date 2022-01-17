@@ -16,38 +16,35 @@ from . import views
     POST         /api/user/check
 """
 
+app_name = "user"
 urlpatterns = [
-    path("/register", views.UserRegisterView.as_view(), name="register"),
-    path("/login", views.DecoratedTokenObtainPairView.as_view(), name="login"),
-    path("/logout", views.DecoratedTokenBlacklistView.as_view(), name="logout"),
+    path("/register", name="register", view=views.UserRegisterView.as_view()),
+    path("/login", name="login", view=views.DecoratedTokenObtainPairView.as_view()),
+    path("/logout", name="logout", view=views.DecoratedTokenBlacklistView.as_view()),
     path(
         "/token/refresh",
-        views.DecoratedTokenRefreshView.as_view(),
-        name="token_refresh",
+        name="token-refresh",
+        view=views.DecoratedTokenRefreshView.as_view(),
     ),
     path(
         "/token/verify",
-        views.DecoratedTokenVerifyView.as_view(),
-        name="token_verify",
+        name="token-verify",
+        view=views.DecoratedTokenVerifyView.as_view(),
     ),
     path(
         "",
-        views.UserView.as_view(),
-        name="user",
+        name="info",
+        view=views.UserView.as_view(),
     ),
     path(
         "/upload-image",
-        views.UserImageUploadView.as_view(),
-        name="user_upload_image",
+        name="upload-image",
+        view=views.UserImageUploadView.as_view(),
     ),
     path(
         "/password",
-        views.UserResetPasswordView.as_view(),
-        name="change_password",
+        name="change-password",
+        view=views.UserResetPasswordView.as_view(),
     ),
-    path(
-        "/check",
-        views.UserCheckAvailableView.as_view(),
-        name="check",
-    ),
+    path("/check", name="check", view=views.UserCheckAvailableView.as_view()),
 ]
