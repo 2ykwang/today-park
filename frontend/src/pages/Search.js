@@ -112,6 +112,7 @@ function Search() {
                 name="sort"
                 onChange={(e) => {
                   setSort(e.target.value);
+                  handleSearchSubmit(searchValue, e.target.value, e);
                 }}
               >
                 <option value="">정렬 순</option>
