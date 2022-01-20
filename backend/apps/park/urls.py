@@ -1,5 +1,4 @@
-from django.urls import include, path
-from rest_framework.urlpatterns import format_suffix_patterns
+from django.urls import path
 
 from . import views
 
@@ -13,11 +12,24 @@ from . import views
     GET /api/parks/user-reviews
 """
 
+app_name = "park"
 urlpatterns = [
-    path("/search", views.ParkListView.as_view()),
-    path("/detail/<int:park_id>", views.ParkDetailView.as_view()),
-    path("/<int:park_id>/reviews", views.ParkReviewListView.as_view()),
-    path("/<int:park_id>/nearby", views.ParkNearbyListView.as_view()),
-    path("/<int:park_id>/reviews/<int:review_id>", views.ParkReviewView.as_view()),
-    path("/user-reviews", views.UserReviewListView.as_view()),
+    path("/search", name="search", view=views.ParkListView.as_view()),
+    path("/detail/<int:park_id>", name="detail", view=views.ParkDetailView.as_view()),
+    path(
+        "/<int:park_id>/reviews",
+        name="reviews",
+        view=views.ParkReviewListView.as_view(),
+    ),
+    path(
+        "/<int:park_id>/nearby",
+        name="nearby-parks",
+        view=views.ParkNearbyListView.as_view(),
+    ),
+    path(
+        "/<int:park_id>/reviews/<int:review_id>",
+        name="reviews-detail",
+        view=views.ParkReviewView.as_view(),
+    ),
+    path("/user-reviews", name="user-reviews", view=views.UserReviewListView.as_view()),
 ]

@@ -5,8 +5,9 @@ version: "3.2"
 services:
   # BACKEND
   app:
-    command: sh -c "python3 manage.py migrate --noinput && python manage.py
-      collectstatic --noinput && python3 manage.py runserver 0:8000"
+    command: sh -c "python3 manage.py migrate --noinput &&
+      python3 manage.py collectstatic --noinput &&
+      python3 manage.py runserver 0:8000"
     volumes:
       - ./backend:/srv/app/
     depends_on:
@@ -27,7 +28,8 @@ services:
   nginx:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-      
+
+  # DATABASE
   database:
     environment:
       MYSQL_DATABASE: "emptycart"

@@ -1,10 +1,8 @@
-import datetime
-
 from apps.core.models import DeletableModel, TimeStampModel
 from apps.user.models import User
 from django.db import models
-from django.db.models import Avg, Sum
-from django.db.models.deletion import CASCADE, DO_NOTHING, SET_DEFAULT
+from django.db.models import Avg
+from django.db.models.deletion import CASCADE, DO_NOTHING
 from django.db.models.fields.related import ForeignKey
 
 

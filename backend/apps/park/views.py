@@ -6,7 +6,6 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework import permissions, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework_simplejwt.tokens import AccessToken
 
 from .models import Park, Review
 from .pagination import ParkListPagination
