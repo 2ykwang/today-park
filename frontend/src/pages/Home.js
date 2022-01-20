@@ -110,7 +110,7 @@ function Home() {
             <div className="pageimage">
               <img src={Pageimage} alt="background tree" />
             </div>
-            <div class="textcontent">
+            <div className="textcontent">
               <p className="green bold mini">다시 ‘초록불’</p>
               <div className="titles">
                 <p className="bold title">신발끈 단단히 묶고 </p>
